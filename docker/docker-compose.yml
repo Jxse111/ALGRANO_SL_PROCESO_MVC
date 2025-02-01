@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: algrano  # Nombre de la base de datos por defecto
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"  # Permitir contraseñas vacías
+    volumes:
+      - ./mysql-data:/var/lib/mysql  # Persistencia de los datos en tu máquina local
+    ports:
+      - "3306:3306"  # Exponer el puerto 3306 de MySQL
+    networks:
+      - app-network
+
+  php:
+    image: php:8.0-apache  
+    container_name: php
+    volumes:
+      - ./src:/var/www/html  # El código fuente de tu proyecto PHP
+    ports:
+      - "8080:80"  # Exponer el puerto 80 del contenedor al puerto 8080 en tu máquina local
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: mysql  # Nombre del contenedor MySQL
+      MYSQL_ROOT_PASSWORD: ""  # Sin contraseña para root (si es el caso)
+    ports:
+      - "8081:80"  # Acceder a phpMyAdmin desde http://localhost:8081
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
