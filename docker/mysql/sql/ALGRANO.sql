@@ -1,16 +1,75 @@
 CREATE DATABASE IF NOT EXISTS algrano;
 USE algrano;
-/*FALTA INFORMACIÓN EN LA TABLA CLIENTE*/
-CREATE TABLE IF NOT EXISTS `cliente` (
-    `codigo` char(9) NOT NULL,
-    `usuario` varchar(30) DEFAULT NULL,
-    `contraseña` char(255) DEFAULT NULL,
-    `dirección` varchar(30) DEFAULT NULL,
-    `correo` varchar(30) DEFAULT NULL,
-    `fec_nac` date DEFAULT NULL,
-    PRIMARY KEY (`codigo`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci
-/*INSERCIÓN DE REGISTROS DE EJEMPLO*/
+
+-- Tabla Cliente
+CREATE TABLE IF NOT EXISTS cliente (
+    codigo CHAR(9) NOT NULL PRIMARY KEY,
+    usuario VARCHAR(30) NOT NULL,
+    contraseña CHAR(255) NOT NULL,
+    direccion VARCHAR(100) NOT NULL,
+    correo VARCHAR(50) UNIQUE NOT NULL,
+    fec_nac DATE NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+-- Tabla Empleado
+CREATE TABLE IF NOT EXISTS empleado (
+    DNI CHAR(9) NOT NULL PRIMARY KEY,
+    usuario VARCHAR(30) NOT NULL,
+    contraseña CHAR(255) NOT NULL,
+    direccion VARCHAR(100) NOT NULL,
+    telefono VARCHAR(15) NOT NULL,
+    correo VARCHAR(50) UNIQUE NOT NULL,
+    fec_alta DATE NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+-- Tabla Productos
+CREATE TABLE IF NOT EXISTS productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    descripcion TEXT,
+    tipo ENUM('Grano', 'Molido') NOT NULL,
+    origen VARCHAR(100),
+    precio DECIMAL(10,2) NOT NULL,
+    stock INT NOT NULL DEFAULT 0,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+-- Tabla Pedido
+CREATE TABLE IF NOT EXISTS pedido (
+    codigo VARCHAR(30) NOT NULL PRIMARY KEY,
+    codigo_cliente CHAR(9) NOT NULL,
+    nombre VARCHAR(30) NOT NULL,
+    tipo ENUM('Grano', 'Molido') NOT NULL,
+    precio_total DECIMAL(10,2) NOT NULL,
+    fecha_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    estado ENUM('Pendiente', 'Pagado', 'Enviado', 'Entregado', 'Cancelado') DEFAULT 'Pendiente',
+    FOREIGN KEY (codigo_cliente) REFERENCES cliente(codigo) ON DELETE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+-- Tabla Detalles Pedido (relación entre pedido y productos)
+CREATE TABLE IF NOT EXISTS detalle_pedido (
+    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
+    codigo_pedido VARCHAR(30) NOT NULL,
+    id_producto INT NOT NULL,
+    cantidad INT NOT NULL,
+    precio_unitario DECIMAL(10,2) NOT NULL,
+    subtotal DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (codigo_pedido) REFERENCES pedido(codigo) ON DELETE CASCADE,
+    FOREIGN KEY (id_producto) REFERENCES productos(id) ON DELETE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+-- Tabla Envios
+CREATE TABLE IF NOT EXISTS envios (
+    id_envio INT AUTO_INCREMENT PRIMARY KEY,
+    codigo_pedido VARCHAR(30) NOT NULL,
+    direccion_envio VARCHAR(255) NOT NULL,
+    transportista VARCHAR(50),
+    estado_envio ENUM('En preparación', 'Enviado', 'Entregado') DEFAULT 'En preparación',
+    fecha_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (codigo_pedido) REFERENCES pedido(codigo) ON DELETE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+
 INSERT INTO Cliente
 VALUES(
         "CL1",
@@ -18,7 +77,7 @@ VALUES(
         "soyclientedealgrano1",
         "Camino de la goleta,21",
         "josemartinez@gmail.com",
-        '28/06/2003'
+        '2003-06-28'
     );
 INSERT INTO Cliente
 VALUES (
@@ -56,26 +115,7 @@ VALUES (
         'danielblanco@gmail.com',
         '2000-01-02'
     );
-/*FALTA INFORMACIÓN EN LA TABLA EMPLEADO*/
-CREATE TABLE `empleado` (
-    `DNI` char(9) NOT NULL,
-    `usuario` varchar(30) DEFAULT NULL,
-    `contraseña` char(255) DEFAULT NULL,
-    `dirección` varchar(30) DEFAULT NULL,
-    `teléfono` int DEFAULT NULL,
-    `correo` varchar(30) DEFAULT NULL,
-    `fec_alta` date DEFAULT NULL,
-    PRIMARY KEY (`DNI`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
-/*FALTA INFORMACIÓN EN LA TABLA PEDIDO*/
-CREATE TABLE `pedido` (
-    `codigo_cliente` char(9) DEFAULT NULL,
-    `codigo` varchar(30) NOT NULL,
-    `nombre` varchar(30) DEFAULT NULL,
-    `tipo` enum('Grano', 'Molido') DEFAULT NULL,
-    `precio_total` int(11) DEFAULT NULL,
-    PRIMARY KEY (`codigo`),
-    KEY `fk_codigo_cliente` (`codigo_cliente`),
-    CONSTRAINT `fk_codigo_cliente` FOREIGN KEY (`codigo_cliente`) REFERENCES `cliente` (`codigo`)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci
+
+
+
