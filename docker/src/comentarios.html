@@ -42,17 +42,19 @@
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto p-4">
                     <a href="index.html" class="nav-item nav-link active">Inicio</a>
-                    <a href="about.html" class="nav-item nav-link">Sobre nosotros</a>
-                    <a href="service.html" class="nav-item nav-link">Servicios</a>
+                    <a href="sobreNosotros.html" class="nav-item nav-link">Sobre nosotros</a>
+                    <a href="servicios.html" class="nav-item nav-link">Servicios</a>
                     <a href="menu.html" class="nav-item nav-link">Carta</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Páginas</a>
                         <div class="dropdown-menu text-capitalize">
-                            <a href="reservation.html" class="dropdown-item">Reservas</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonio</a>
+                            <a href="reservas.html" class="dropdown-item">Reservas</a>
+                            <a href="comentarios.html" class="dropdown-item">Testimonio</a>
                         </div>
                     </div>
-                    <a href="contact.html" class="nav-item nav-link">Contacto</a>
+                    <a href="contacto.html" class="nav-item nav-link">Contacto</a>
+                    <a href="login.html" class="nav-item nav-link">Iniciar Sesión</a>
+                    <a href="registro.html" class="nav-item nav-link">Regístrate</a>
                 </div>
             </div>
         </nav>
@@ -64,98 +66,70 @@
     <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
         <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
             style="min-height: 400px">
-            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Reservas</h1>
+            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Comentarios</h1>
             <div class="d-inline-flex mb-lg-5">
                 <p class="m-0 text-white"><a class="text-white" href="index.html">Inicio</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Reservas</p>
+                <p class="m-0 text-white">Comentarios</p>
             </div>
         </div>
     </div>
     <!-- Page Header End -->
 
 
-    <!-- Reservation Start -->
-    <div class="container-fluid my-5">
+    <!-- Testimonial Start -->
+    <div class="container-fluid py-5">
         <div class="container">
-            <div class="reservation position-relative overlay-top overlay-bottom">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 my-5 my-lg-0">
-                        <div class="p-5">
-                            <div class="mb-4">
-                                <h1 class="display-3 text-primary">30% de descuento</h1>
-                                <h1 class="text-white">Por reservar online</h1>
-                            </div>
-                            <p class="text-white">Ventajas de hacer una reserva online de nuestro café:
-                            </p>
-                            <ul class="list-inline text-white m-0">
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Garantizas la
-                                    disponibilidad de tus productos favoritos.
-                                </li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Personalizas tu pedido
-                                    según tus gustos y necesidades.
-                                </li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Realizas tu compra
-                                    cómodamente desde casa.
-                                </li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Programas envíos
-                                    recurrentes para no quedarte sin café.
-                                </li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Accedes a promociones
-                                    exclusivas para clientes en línea.
-                                </li>
-                            </ul>
+            <div class="section-title">
+                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Comentarios</h4>
+                <h1 class="display-4">Nuestros clientes quedaron satisfechos</h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel">
+                <div class="testimonial-item">
+                    <div class="d-flex align-items-center mb-3">
+                        <img class="img-fluid" src="img/testimonial-1.jpg" alt="">
+                        <div class="ml-3">
+                            <h4>Ana Belén</h4>
+                            <i>Abogada</i>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
-                            <h1 class="text-white mb-4 mt-5">BOLETÍN DE RESERVA</h1>
-                            <form class="mb-5">
-                                <div class="form-group">
-                                    <input type="text" class="form-control bg-transparent border-primary p-4"
-                                        placeholder="Nombre" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control bg-transparent border-primary p-4"
-                                        placeholder="Correo" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <div class="date" id="date" data-target-input="nearest">
-                                        <input type="text"
-                                            class="form-control bg-transparent border-primary p-4 datetimepicker-input"
-                                            placeholder="Fecha" data-target="#date" data-toggle="datetimepicker" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="time" id="time" data-target-input="nearest">
-                                        <input type="text"
-                                            class="form-control bg-transparent border-primary p-4 datetimepicker-input"
-                                            placeholder="Hora" data-target="#time" data-toggle="datetimepicker" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <select class="custom-select bg-transparent border-primary px-4"
-                                        style="height: 49px;">
-                                        <option selected>Cantidad</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="3">4</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <button class="btn btn-primary btn-block font-weight-bold py-3"
-                                        type="submit">Reservar</button>
-                                </div>
-                            </form>
+                    <p class="m-0">El mejor café que he probado en años</p>
+                </div>
+                <div class="testimonial-item">
+                    <div class="d-flex align-items-center mb-3">
+                        <img class="img-fluid" src="img/testimonial-2.jpg" alt="">
+                        <div class="ml-3">
+                            <h4>Pablo</h4>
+                            <i>Oficinista</i>
                         </div>
                     </div>
+                    <p class="m-0">Como buen catador de café que soy (ya que trabajo en una oficina y me paso el dia
+                        bebiendo café),este café sin duda es de los mejores del mercado</p>
+                </div>
+                <div class="testimonial-item">
+                    <div class="d-flex align-items-center mb-3">
+                        <img class="img-fluid" src="img/testimonial-3.jpg" alt="">
+                        <div class="ml-3">
+                            <h4>Minerva</h4>
+                            <i>Psicóloga</i>
+                        </div>
+                    </div>
+                    <p class="m-0">Realmente muy bueno y fresco</p>
+                </div>
+                <div class="testimonial-item">
+                    <div class="d-flex align-items-center mb-3">
+                        <img class="img-fluid" src="img/testimonial-4.jpg" alt="">
+                        <div class="ml-3">
+                            <h4>Miguel</h4>
+                            <i>Asesor financiero</i>
+                        </div>
+                    </div>
+                    <p class="m-0">Es un café espléndido con un sabor único y autentico</p>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Reservation End -->
+    <!-- Testimonial End -->
 
 
     <!-- Footer Start -->
