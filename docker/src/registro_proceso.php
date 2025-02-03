@@ -9,13 +9,14 @@
     <?php
     require_once './funcionesValidacion.php';
     require_once './funcionesBaseDeDatos.php';
+    require_once './conexión/Algrano.php';
     //creación de la conexión
     $conexionBD = new mysqli();
     $mensajeError = "Mensajes de error: ";
     $mensajeExito = "Mensajes de exito: ";
 
     try {
-        $conexionBD->connect("localhost", "root", "", "algrano");
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
     } catch (Exception $ex) {
         $mensajeError .= "ERROR: " . $ex->getMessage();
     }
