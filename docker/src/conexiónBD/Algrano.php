@@ -22,7 +22,7 @@ class Algrano
             Algrano::$conexionBD = new mysqli();
             self::$conexionBD->connect($host, $usuario, $contrasena, $bd);
         }
-        return Algrano::$conexionBD;
+        return self::$conexionBD;
     }
 
     /**
@@ -40,6 +40,6 @@ class Algrano
             Algrano::$conexionBD = new PDO("$driver:host=$host;dbname=$bd", $usuario, $contrasena);
             Algrano::$conexionBD->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
-        return Algrano::$conexionBD;
+        return self::$conexionBD;
     }
 }
