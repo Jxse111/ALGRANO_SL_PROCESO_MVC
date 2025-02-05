@@ -17,7 +17,7 @@ services:
   php:
     build:
       context: .
-      dockerfile: ./php.dockerfile # El Dockerfile de PHP
+      dockerfile: ./php.dev # El Dockerfile de PHP
     container_name: php
     volumes:
       - ./src:/var/www/html # El código fuente de tu proyecto PHP
