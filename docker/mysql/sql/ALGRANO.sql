@@ -18,18 +18,19 @@ CREATE TABLE IF NOT EXISTS rol(
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 -- Tabla Cliente
 CREATE TABLE IF NOT EXISTS cliente (
-    DNI CHAR(9) NOT NULL,
+    DNI_Cliente CHAR(9) NOT NULL,
     codigo CHAR(9) NOT NULL,
     usuario VARCHAR(30) NOT NULL,
     contraseña CHAR(255) NOT NULL,
     direccion VARCHAR(100) NOT NULL,
     correo VARCHAR(50) UNIQUE NOT NULL,
     fec_nac DATE NOT NULL,
-    PRIMARY KEY (DNI, codigo)
+    PRIMARY KEY (DNI_Cliente, codigo),
+    FOREIGN KEY (DNI_Cliente) REFERENCES usuario(DNI) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 -- Tabla Empleado
 CREATE TABLE IF NOT EXISTS empleado (
-    DNI CHAR(9) NOT NULL PRIMARY KEY,
+    DNI_Empleado CHAR(9) NOT NULL PRIMARY KEY,
     usuario VARCHAR(30) NOT NULL,
     contraseña CHAR(255) NOT NULL,
     direccion VARCHAR(100) NOT NULL,
@@ -37,7 +38,7 @@ CREATE TABLE IF NOT EXISTS empleado (
     correo VARCHAR(50) UNIQUE NOT NULL,
     fec_alta DATE NOT NULL,
     puesto VARCHAR(30),
-    departamento VARCHAR(30)
+    departamento VARCHAR(30) FOREIGN KEY (DNI_Empleado) REFERENCES usuario(DNI) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 -- Tabla Productos
 CREATE TABLE IF NOT EXISTS productos (
