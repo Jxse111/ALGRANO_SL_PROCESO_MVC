@@ -61,6 +61,39 @@ class Usuario
     }
 
     //Métodos de la estáticos
+    public static function eliminarUsuario($dniUsuario)
+    {
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
+        $esValido = false;
+        if (!noExisteUsuario($dniUsuario, $conexionBD)) {
+            $consultaEliminacionUsuario = $conexionBD->prepare('DELETE FROM usuario WHERE dni = ?');
+            $consultaEliminacionUsuario->bind_param('s', $dniUsuario);
+            if ($consultaEliminacionUsuario->execute()) {
+                $esValido = true;
+            }
+        }
+        return $esValido ? true : false;
+    }
+
+    //Método de búsqueda de usuario, devuelve los datos del usuario encontrado en formato de array.
+    public static function buscarUsuario($dniUsuario)
+    {
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
+        $esValido = false;
+        if (!noExisteUsuario($dniUsuario, $conexionBD)) {
+            $consultaBusquedaUsuario = $conexionBD->prepare('SELECT * FROM usuario WHERE dni = ?');
+            $consultaBusquedaUsuario->bind_param('s', $dniUsuario);
+            if ($consultaBusquedaUsuario->execute()) {
+                $datosUsuario = $consultaBusquedaUsuario->fetch_all();
+                $esValido = true;
+            }
+        }
+        return $esValido ? $datosUsuario : false;
+    }
+
+
+
+    //Método que guarda un Usuario, lo inserta o lo actualiza.
     public function guardarUsuario()
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -86,4 +119,6 @@ class Usuario
         }
         return $esValido ? true : false;
     }
+
+
 }
