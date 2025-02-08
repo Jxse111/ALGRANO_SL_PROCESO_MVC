@@ -61,7 +61,10 @@ class Usuario
     }
 
     //Métodos de la estáticos
+<<<<<<<<< Temporary merge branch 1
+=========
     //Método que elimina el usuario existente de la base de datos
+>>>>>>>>> Temporary merge branch 2
     public static function eliminarUsuario($dniUsuario)
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
