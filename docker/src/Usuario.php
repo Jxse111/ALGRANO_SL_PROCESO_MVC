@@ -7,6 +7,7 @@ require_once('conexiónBD/Algrano.php');
  */
 class Usuario
 {
+    private $dni;
     private $nombre;
     private $contrasena;
     private $direccion;
