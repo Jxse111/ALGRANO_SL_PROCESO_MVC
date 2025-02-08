@@ -71,7 +71,7 @@ class Usuario
         $direccionUsuario = $this->direccion;
         $correoUsuario = $this->correo;
         $fechaNacUsuario = $this->fechaNacimiento;
-        if (noExisteUsuario($dni, $conexionBD)) {
+        if (noExisteUsuario($dniUsuario, $conexionBD)) {
             $consultaInsercionUsuario = $conexionBD->prepare('INSERT INTO usuario VALUES (?,?,?,?,?,?)');
             $consultaInsercionUsuario->bind_param('ssssss', $dniUsuario, $nombreUsuario, $contraseñaUsuario, $direccionUsuario, $correoUsuario, $fechaNacUsuario);
             if ($consultaInsercionUsuario->execute()) {

@@ -16,13 +16,13 @@ function noExisteCodigo($codigo, $conexionBD)
     return $codigoNoExiste ? true : false;
 }
 
-function noExisteUsuario($usuario, $conexionBD)
+function noExisteUsuario($dni, $conexionBD)
 {
     $usuarioNoExiste = false;
-    $consultaUsuariosExistentes = $conexionBD->query("SELECT login FROM cliente");
+    $consultaUsuariosExistentes = $conexionBD->query("SELECT dni FROM usuario");
     $usuarios = $consultaUsuariosExistentes->fetch_all(MYSQLI_ASSOC);
     foreach ($usuarios as $usuarioExistente) {
-        if ($usuarioExistente['login'] != $usuario) {
+        if ($usuarioExistente['dni'] != $dni) {
             $usuarioNoExiste = true;
         }
     }
