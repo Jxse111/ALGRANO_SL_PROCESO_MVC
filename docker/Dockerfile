@@ -16,8 +16,9 @@ COPY ./src /var/www/html
 # Establecer el directorio de trabajo
 WORKDIR /var/www/html
 
-# Exponer el puerto 8000
-EXPOSE 8000
+# Exponer el puerto 8080
+EXPOSE 8080
 
-# Ejecutar el servidor web de PHP
-CMD ["php", "-S", "0.0.0.0:8000", "-t", "/var/www/html"]
+# Ejecutar el servidor web de PHP en el puerto 8080
+CMD ["php", "-S", "0.0.0.0:8080", "-t", "/var/www/html"]
+
