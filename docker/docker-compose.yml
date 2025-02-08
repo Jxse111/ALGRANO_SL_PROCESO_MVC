@@ -15,17 +15,16 @@ services:
       - app-network
 
   php:
-  build:
-    context: .
-    dockerfile: Dockerfile # El Dockerfile de PHP
-  container_name: php
-  volumes:
-    - ./src:/var/www/html # El código fuente de tu proyecto PHP
-  ports:
-    - "8080:8000" # Cambiado a 8080 para acceder al servidor PHP
-  networks:
-    - app-network
-
+    build:
+      context: .
+      dockerfile: Dockerfile # El Dockerfile de PHP
+    container_name: php
+    volumes:
+      - ./src:/var/www/html # El código fuente de tu proyecto PHP
+    ports:
+      - "8080:8000" # Cambiado a 8080 para acceder al servidor PHP
+    networks:
+      - app-network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
