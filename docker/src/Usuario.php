@@ -61,7 +61,7 @@ class Usuario
     }
 
     //Métodos de la estáticos
-    //Método que elimina el usuario existente de la base de datos
+    //Método que elimina el usuario existente de la base de dato
     public static function eliminarUsuario($dniUsuario)
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
