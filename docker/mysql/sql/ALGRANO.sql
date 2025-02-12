@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS algrano;
 
 USE algrano;
---Tabla Rol
+-- Tabla Rol
 CREATE TABLE IF NOT EXISTS rol (
     id_rol CHAR(9) NOT NULL PRIMARY KEY,
     rol VARCHAR(30)
