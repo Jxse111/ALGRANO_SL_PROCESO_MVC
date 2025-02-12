@@ -1,5 +1,11 @@
 CREATE DATABASE IF NOT EXISTS algrano;
+
 USE algrano;
+--Tabla Rol
+CREATE TABLE IF NOT EXISTS rol (
+    id_rol CHAR(9) NOT NULL PRIMARY KEY,
+    rol VARCHAR(30)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 -- Tabla Usuario
 CREATE TABLE IF NOT EXISTS usuario (
     DNI CHAR(9) NOT NULL PRIMARY KEY,
@@ -8,52 +14,48 @@ CREATE TABLE IF NOT EXISTS usuario (
     direccion VARCHAR(100) NOT NULL,
     correo VARCHAR(50) UNIQUE NOT NULL,
     fec_nac DATE NOT NULL,
-    codigo_rol CHAR(9) NOT NULL,
-    FOREIGN KEY (codigo_rol) REFERENCES rol(id_rol) ON DELETE CASCADE
+    id_rol_usuario CHAR(9) NOT NULL,
+    FOREIGN KEY (id_rol_usuario) REFERENCES rol (id_rol) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
---Tabla Rol
-CREATE TABLE IF NOT EXISTS rol(
-    id_rol CHAR(9) NOT NULL PRIMARY KEY,
-    rol VARCHAR(30)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
 -- Tabla Cliente
 CREATE TABLE IF NOT EXISTS cliente (
-    DNI_Cliente CHAR(9) NOT NULL,
-    codigo CHAR(9) NOT NULL,
-    usuario VARCHAR(30) NOT NULL,
-    contraseña CHAR(255) NOT NULL,
-    direccion VARCHAR(100) NOT NULL,
-    correo VARCHAR(50) UNIQUE NOT NULL,
-    fec_nac DATE NOT NULL,
+    DNI_cliente CHAR(9) NOT NULL,
+    codigo_cliente CHAR(9) NOT NULL,
     PRIMARY KEY (DNI_Cliente, codigo),
-    FOREIGN KEY (DNI_Cliente) REFERENCES usuario(DNI) ON DELETE CASCADE
+    FOREIGN KEY (DNI_Cliente) REFERENCES usuario (DNI) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 -- Tabla Empleado
 CREATE TABLE IF NOT EXISTS empleado (
     DNI_Empleado CHAR(9) NOT NULL PRIMARY KEY,
-    usuario VARCHAR(30) NOT NULL,
-    contraseña CHAR(255) NOT NULL,
-    direccion VARCHAR(100) NOT NULL,
-    telefono VARCHAR(15) NOT NULL,
-    correo VARCHAR(50) UNIQUE NOT NULL,
-    fec_alta DATE NOT NULL,
     puesto VARCHAR(30),
-    departamento VARCHAR(30) FOREIGN KEY (DNI_Empleado) REFERENCES usuario(DNI) ON DELETE CASCADE
+    departamento VARCHAR(30),
+    FOREIGN KEY (DNI_Empleado) REFERENCES usuario (DNI) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
 -- Tabla Productos
-CREATE TABLE IF NOT EXISTS productos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS producto (
+    id_producto CHAR(9) PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
-    descripcion TEXT,
     tipo ENUM('Grano', 'Molido') NOT NULL,
-    origen VARCHAR(100),
-    precio DECIMAL(10, 2) NOT NULL,
+    descripcion TEXT,
     stock INT NOT NULL DEFAULT 0,
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP origen VARCHAR(100),
+    precio_ud DECIMAL(10, 2) NOT NULL,
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+--Tabla Realiza
+CREATE TABLE IF NOT EXISTS realiza{
+    DNI_usuario CHAR(9) NOT NULL,
+    id_producto_compra CHAR(9) NOT NULL,
+    PRIMARY KEY(DNI_usuario,id_producto_compra),
+    FOREIGN KEY (DNI_usuario) REFERENCES usuario (DNI) ON DELETE CASCADE,
+    FOREIGN KEY (id_producto_compra) REFERENCES producto (id_producto) ON DELETE CASCADE
+}
+
 -- Tabla Pedido
 CREATE TABLE IF NOT EXISTS pedido (
-    codigo VARCHAR(30) NOT NULL PRIMARY KEY,
+    codigo_pedido VARCHAR(30) NOT NULL PRIMARY KEY,
     codigo_cliente CHAR(9) NOT NULL,
     nombre VARCHAR(30) NOT NULL,
     tipo ENUM('Grano', 'Molido') NOT NULL,
@@ -66,26 +68,25 @@ CREATE TABLE IF NOT EXISTS pedido (
         'Entregado',
         'Cancelado'
     ) DEFAULT 'Pendiente',
-    FOREIGN KEY (codigo_cliente) REFERENCES cliente(codigo) ON DELETE CASCADE
+    FOREIGN KEY (codigo_cliente) REFERENCES cliente (codigo) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
--- Tabla Detalles Pedido (relación entre pedido y productos)
-CREATE TABLE IF NOT EXISTS detalle_pedido (
-    id_detalle INT AUTO_INCREMENT PRIMARY KEY,
-    codigo_pedido VARCHAR(30) NOT NULL,
-    id_producto INT NOT NULL,
-    cantidad INT NOT NULL,
-    precio_unitario DECIMAL(10, 2) NOT NULL,
+
+--Tabla Compone
+CREATE TABLE IF NOT EXISTS compone{
+    id_producto_pedido CHAR(9) NOT NULL,
+    codigo_pedido_compone CHAR(9) NOT NULL,
+    PRIMARY KEY(id_producto_pedido,codigo_pedido_compone),
+    FOREIGN KEY (id_producto_pedido) 
+    REFERENCES producto (id_producto) ON DELETE CASCADE,
+    FOREIGN KEY (codigo_pedido_compone) 
+    REFERENCES pedido (codigo_pedido) ON DELETE CASCADE
+}
+
+-- Tabla Detalles Pedido
+CREATE TABLE IF NOT EXISTS detalle (
+    codigo_detalle CHAR(9) PRIMARY KEY NOT NULL,
     subtotal DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (codigo_pedido) REFERENCES pedido(codigo) ON DELETE CASCADE,
-    FOREIGN KEY (id_producto) REFERENCES productos(id) ON DELETE CASCADE
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
--- Tabla Envios
-CREATE TABLE IF NOT EXISTS envios (
-    id_envio INT AUTO_INCREMENT PRIMARY KEY,
-    codigo_pedido VARCHAR(30) NOT NULL,
-    direccion_envio VARCHAR(255) NOT NULL,
-    transportista VARCHAR(50),
-    estado_envio ENUM('En preparación', 'Enviado', 'Entregado') DEFAULT 'En preparación',
-    fecha_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (codigo_pedido) REFERENCES pedido(codigo) ON DELETE CASCADE
+    cantidad_descrita INT NOT NULL,
+    codigo_pedido CHAR(9) NOT NULL,
+    FOREIGN KEY (codigo_pedido) REFERENCES pedido (codigo) ON DELETE CASCADE,
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
