@@ -40,18 +40,19 @@ CREATE TABLE IF NOT EXISTS producto (
     tipo ENUM('Grano', 'Molido') NOT NULL,
     descripcion TEXT,
     stock INT NOT NULL DEFAULT 0,
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP origen VARCHAR(100),
-    precio_ud DECIMAL(10, 2) NOT NULL,
+    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    origen VARCHAR(100),
+    precio_ud DECIMAL(10, 2) NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
---Tabla Realiza
-CREATE TABLE IF NOT EXISTS realiza{
+-- Tabla Realiza
+CREATE TABLE IF NOT EXISTS realiza (
     DNI_usuario CHAR(9) NOT NULL,
     id_producto_compra CHAR(9) NOT NULL,
     PRIMARY KEY(DNI_usuario,id_producto_compra),
     FOREIGN KEY (DNI_usuario) REFERENCES usuario (DNI) ON DELETE CASCADE,
     FOREIGN KEY (id_producto_compra) REFERENCES producto (id_producto) ON DELETE CASCADE
-}
+)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 -- Tabla Pedido
 CREATE TABLE IF NOT EXISTS pedido (
@@ -71,8 +72,8 @@ CREATE TABLE IF NOT EXISTS pedido (
     FOREIGN KEY (codigo_cliente) REFERENCES cliente (codigo) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
---Tabla Compone
-CREATE TABLE IF NOT EXISTS compone{
+-- Tabla Compone
+CREATE TABLE IF NOT EXISTS compone(
     id_producto_pedido CHAR(9) NOT NULL,
     codigo_pedido_compone CHAR(9) NOT NULL,
     PRIMARY KEY(id_producto_pedido,codigo_pedido_compone),
@@ -80,7 +81,7 @@ CREATE TABLE IF NOT EXISTS compone{
     REFERENCES producto (id_producto) ON DELETE CASCADE,
     FOREIGN KEY (codigo_pedido_compone) 
     REFERENCES pedido (codigo_pedido) ON DELETE CASCADE
-}
+)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 -- Tabla Detalles Pedido
 CREATE TABLE IF NOT EXISTS detalle (
@@ -88,5 +89,5 @@ CREATE TABLE IF NOT EXISTS detalle (
     subtotal DECIMAL(10, 2) NOT NULL,
     cantidad_descrita INT NOT NULL,
     codigo_pedido CHAR(9) NOT NULL,
-    FOREIGN KEY (codigo_pedido) REFERENCES pedido (codigo) ON DELETE CASCADE,
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+    FOREIGN KEY (codigo_pedido) REFERENCES pedido (codigo) ON DELETE CASCADE
+)ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
