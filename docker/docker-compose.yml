@@ -6,7 +6,9 @@ services:
     container_name: mysql
     environment:
       MYSQL_DATABASE: algrano # Nombre de la base de datos por defecto
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes" # Permitir contraseñas vacías
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_USER: "empleadodb"
+      MYSQL_PASSWORD: "algranodb"
     volumes:
       - ./mysql-data:/var/lib/mysql # Persistencia de los datos en tu máquina local
     ports:
@@ -29,7 +31,9 @@ services:
     container_name: phpmyadmin
     environment:
       PMA_HOST: mysql # Nombre del contenedor MySQL
-      MYSQL_ROOT_PASSWORD: "" # Sin contraseña para root (si es el caso)
+      MYSQL_ROOT_PASSWORD: "root"
+      PMA_USER: "empleadodb"
+      PMA_PASSWORD: "algranodb"
     ports:
       - "8081:80" # Acceder a phpMyAdmin desde http://localhost:8081
     networks:
