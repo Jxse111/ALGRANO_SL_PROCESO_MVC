@@ -8,8 +8,8 @@
 <body>
     <?php
     require_once './funcionesValidacion.php';
-    require_once './funcionesBaseDeDatos.php';
-    require_once './conexión/Algrano.php';
+    require_once '../Modelo/funcionesBaseDeDatos.php';
+    require_once '../Modelo/Algrano.php';
     //creación de la conexión
     $conexionBD = new mysqli();
     $mensajeError = "Mensajes de error: ";

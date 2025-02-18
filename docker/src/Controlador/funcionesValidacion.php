@@ -1,7 +1,7 @@
 <?php
 
-require_once './patrones.php';
-require_once './funcionesBaseDeDatos.php';
+require_once '../Modelo/patrones.php';
+require_once '../Modelo/funcionesBaseDeDatos.php';
 
 // Funcion de validacion de nombre
 function validarCadena($cadena)

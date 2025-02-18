@@ -1,7 +1,7 @@
 <?php
 require_once './funcionesValidacion.php';
-require_once './funcionesBaseDeDatos.php';
-require_once './conexión/Algrano.php';
+require_once '../Modelo/funcionesBaseDeDatos.php';
+require_once '../Modelo/Algrano.php';
 $mensajeError = "Mensajes de error : ";
 $mensajeExito = "Mensajes de éxito: ";
 /* En el caso de que se pulse el boton Crear cuenta del formulario de inicio de sesión,

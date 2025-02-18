@@ -1,5 +1,5 @@
 <?php
-require_once('conexiónBD/Algrano.php');
+require_once('./Algrano.php');
 /**
  * Clase que implementa un objeto de tipo Usuario para el acceso a la web.
  *
