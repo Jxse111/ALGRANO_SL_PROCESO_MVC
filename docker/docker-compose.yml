@@ -30,8 +30,6 @@ services:
     environment:
       PMA_HOST: mysql # Nombre del contenedor MySQL
       MYSQL_ROOT_PASSWORD: "root"
-      PMA_USER: "empleadodb"
-      PMA_PASSWORD: "algranodb"
     ports:
       - "8081:80" # Acceder a phpMyAdmin desde http://localhost:8081
     networks:
