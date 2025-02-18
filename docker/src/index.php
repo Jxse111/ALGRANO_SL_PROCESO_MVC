@@ -1,2 +1,2 @@
 <?php
-header(header: "Location: ../src/Vista/index.html");
+header(header: "Location: ../Vista/index.html");
