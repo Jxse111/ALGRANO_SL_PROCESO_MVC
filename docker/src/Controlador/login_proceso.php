@@ -8,27 +8,19 @@ $mensajeExito = "Mensajes de éxito: ";
  *  serás redirigido al formulario de registro
  */
 if (filter_has_var(INPUT_POST, "Registrarse")) {
-    header("Location: registro.html");
+    header("Location: ../Vista/registro.html");
     die();
 } elseif (filter_has_var(INPUT_POST, "Entrar")) {
     //Comprobamos que exista la sesión
     if (isset($_SESSION['usuario'])) {
         $mensajeSesion .= "El usuario registrado tiene una sesión activa";
     } else {
-        // Creación de la conexión
-        $conexionBD = new mysqli();
-
-        //Intento de conexión a la base de datos
-        try {
-            $conexionBD = Algrano::conectarAlgranoMySQLi();
-        } catch (Exception $ex) {
-            $mensajeError .= "ERROR: " . $ex->getMessage();
-        }
+    $conexionBD = Algrano::conectarAlgranoMySQLi();
         //Sino existe la sesión Iniciamos la sesión
         //Nose como aplicar lo del tiempo
         session_start();
         $_SESSION['usuario'] = validarUsuarioExistente(filter_input(INPUT_POST, "usuarioExistente"), $conexionBD);
-        $conexionBD->close(); //Cierro la conexión a la base de datos
+        Algrano::desconectar(); //Cierro la conexión a la base de datos
     }
     ?>
     <html>
@@ -41,14 +33,7 @@ if (filter_has_var(INPUT_POST, "Registrarse")) {
     <body>
         <?php
         // Creación de la conexión
-        $conexionBD = new mysqli();
-
-        //Intento de conexión a la base de datos
-        try {
-            $conexionBD->connect("localhost", "root", "", "espectaculos");
-        } catch (Exception $ex) {
-            $mensajeError .= "ERROR: " . $ex->getMessage();
-        }
+        $conexionBD = Algrano::conectarAlgranoMySQLi();       
         //Si el boton entrar  del formulario de inicio de sesión se pulsa, realiza las siguientes operaciones.
         if (filter_has_var(INPUT_POST, "Entrar")) {
             try {

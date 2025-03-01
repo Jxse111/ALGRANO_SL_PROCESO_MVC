@@ -1,8 +1,5 @@
 <?php
-
 require_once 'patrones.php';
-require_once 'Algrano.php';
-$conexionBD = Algrano::conectarAlgranoMySQLi();
 
 function noExisteCodigo($codigo, $conexionBD)
 {

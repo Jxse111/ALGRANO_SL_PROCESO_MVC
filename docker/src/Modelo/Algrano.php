@@ -23,7 +23,7 @@ class Algrano
     {
         $host = "localhost";
         $usuario = "root";
-        $contrasena = " ";
+        $contrasena = "";
         $bd = "algrano";
 
         if (is_null(self::$conexionBD)) {
