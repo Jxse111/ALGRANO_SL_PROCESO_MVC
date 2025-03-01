@@ -16,7 +16,6 @@ services:
 
   php:
     image: php:8.2-apache # Imagen oficial de PHP con Apache
-    context: . # Directorio con el Dockerfile personalizado
     container_name: php
     volumes:
       - ./src:/var/www/html # El código fuente de tu proyecto PHP
