@@ -1,26 +1,30 @@
+version: '3.8'
+
 services:
   mysql:
     image: mysql:8
     container_name: mysql
     environment:
-      MYSQL_DATABASE: algrano # Nombre de la base de datos por defecto
+      MYSQL_DATABASE: algrano  # Nombre de la base de datos por defecto
       MYSQL_ROOT_PASSWORD: "root"
       MYSQL_USER: "empleadodb"
       MYSQL_PASSWORD: "algranodb"
     volumes:
-      - ./mysql-data:/var/lib/mysql # Persistencia de los datos en tu máquina local
+      - ./mysql-data:/var/lib/mysql  # Persistencia de los datos en tu máquina local
     ports:
-      - "3306:3306" # Exponer el puerto 3306 de MySQL
+      - "3306:3306"  # Exponer el puerto 3306 de MySQL
     networks:
       - app-network
 
   php:
-    image: php:8.2-apache # Imagen oficial de PHP con Apache
+    build:
+      context: .  # El directorio con el Dockerfile personalizado (esto es necesario para la construcción)
+    image: php:8.2-apache  # Imagen oficial de PHP con Apache
     container_name: php
     volumes:
-      - ./src:/var/www/html # El código fuente de tu proyecto PHP
+      - ./src:/var/www/html  # El código fuente de tu proyecto PHP
     ports:
-      - "8080:80" # Acceder al servidor PHP en el puerto 8080
+      - "8080:80"  # Exponer el servidor PHP en el puerto 8080
     networks:
       - app-network
 
@@ -28,10 +32,10 @@ services:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
     environment:
-      PMA_HOST: mysql # Nombre del contenedor MySQL
+      PMA_HOST: mysql  # Nombre del contenedor MySQL
       MYSQL_ROOT_PASSWORD: "root"
     ports:
-      - "8081:80" # Acceder a phpMyAdmin desde http://localhost:8081
+      - "8081:80"  # Acceder a phpMyAdmin desde http://localhost:8081
     networks:
       - app-network
 
@@ -44,17 +48,19 @@ services:
       - TS_STATE_DIR=/var/lib/tailscale
       - TS_USERSPACE=false
     volumes:
-      - ${PWD}/tailscale-nginx/state:/var/lib/tailscale
+      - ./tailscale-nginx/state:/var/lib/tailscale
     devices:
       - /dev/net/tun:/dev/net/tun
     cap_add:
       - net_admin
     restart: unless-stopped
+
   nginx:
     image: nginx
     depends_on:
       - tailscale-nginx
-    network_mode: service:tailscale-nginx
+    networks:
+      - app-network
 
 networks:
   app-network:

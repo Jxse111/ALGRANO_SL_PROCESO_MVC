@@ -1,12 +1,10 @@
+# Usamos la imagen base de PHP con Apache
 FROM php:8.2-apache
 
-# Install dependencies and the mysqli extension
+# Instalamos las dependencias necesarias para MySQLi
 RUN apt-get update && apt-get install -y \
     libmariadb-dev-compat libmariadb-dev && \
     docker-php-ext-install mysqli
 
-# Enable mod_rewrite (optional, if needed)
+# Habilitamos mod_rewrite (opcional, si lo necesitas)
 RUN a2enmod rewrite
-
-# Ensure that the mysqli extension is enabled
-RUN php -m | grep mysqli || echo "mysqli not found"
