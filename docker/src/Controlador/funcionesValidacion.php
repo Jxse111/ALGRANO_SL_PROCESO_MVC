@@ -6,12 +6,14 @@ require_once '../Modelo/funcionesBaseDeDatos.php';
 // Funcion de validacion de nombre
 function validarCadena($cadena)
 {
-    $cadena = trim($cadena);
-    $cadena = stripcslashes($cadena);
-    $cadena = strip_tags($cadena);
+    if ($cadena === null) {
+        $cadena = '';
+    }
+
     $cadena = htmlspecialchars($cadena);
     return $cadena;
 }
+
 
 function validarDni($dni)
 {

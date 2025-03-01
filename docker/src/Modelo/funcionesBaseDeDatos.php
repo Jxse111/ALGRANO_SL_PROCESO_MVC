@@ -1,7 +1,8 @@
 <?php
 
 require_once 'patrones.php';
-
+require_once 'Algrano.php';
+$conexionBD = Algrano::conectarAlgranoMySQLi();
 
 function noExisteCodigo($codigo, $conexionBD)
 {
@@ -19,7 +20,7 @@ function noExisteCodigo($codigo, $conexionBD)
 function noExisteUsuario($dni, $conexionBD)
 {
     $usuarioNoExiste = false;
-    $consultaUsuariosExistentes = $conexionBD->query("SELECT dni FROM usuario");
+    $consultaUsuariosExistentes = $conexionBD->query("SELECT DNI FROM usuario");
     $usuarios = $consultaUsuariosExistentes->fetch_all(MYSQLI_ASSOC);
     foreach ($usuarios as $usuarioExistente) {
         if ($usuarioExistente['dni'] != $dni) {
@@ -28,6 +29,7 @@ function noExisteUsuario($dni, $conexionBD)
     }
     return $usuarioNoExiste ? true : false;
 }
+
 
 function noExisteContraseña($contraseña, $conexionBD)
 {
