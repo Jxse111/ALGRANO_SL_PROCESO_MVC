@@ -14,6 +14,7 @@ class Usuario
     private $correo;
     private $fechaNacimiento;
 
+    private $idRolUsuario;
     /**
      * Constructor que crea un usuario.
      * @param mixed $nombre nombre del usuario
@@ -22,7 +23,7 @@ class Usuario
      * @param mixed $correo correo electrónico del usuario
      * @param mixed $fechaNacimiento fehca de nacimiento del usuario
      */
-    public function __construct($dni, $nombre, $contrasena, $direccion, $correo, $fechaNacimiento)
+    public function __construct($dni, $nombre, $contrasena, $direccion, $correo, $fechaNacimiento, $idRolUsuario = '02')
     {
         $this->dni = $dni;
         $this->nombre = $nombre;
@@ -105,15 +106,16 @@ class Usuario
         $direccionUsuario = $this->direccion;
         $correoUsuario = $this->correo;
         $fechaNacUsuario = $this->fechaNacimiento;
+        $idRolUsuario = $this->idRolUsuario;
         if (noExisteUsuario($dniUsuario, $conexionBD)) {
-            $consultaInsercionUsuario = $conexionBD->prepare('INSERT INTO usuario VALUES (?,?,?,?,?,?)');
-            $consultaInsercionUsuario->bind_param('ssssss', $dniUsuario, $nombreUsuario, $contraseñaUsuario, $direccionUsuario, $correoUsuario, $fechaNacUsuario);
+            $consultaInsercionUsuario = $conexionBD->prepare('INSERT INTO usuario VALUES (?,?,?,?,?,?,?)');
+            $consultaInsercionUsuario->bind_param('sssssss', $dniUsuario, $nombreUsuario, $contraseñaUsuario, $direccionUsuario, $correoUsuario, $fechaNacUsuario, $idRolUsuario);
             if ($consultaInsercionUsuario->execute()) {
                 $esValido = true;
             }
         } else {
-            $consultaInsercionUsuario = $conexionBD->prepare('UPDATE usuario SET nombre = ? , contraseña = ?, direccion = ?, correo = ?, fecha_nac = ? WHERE DNI = ?');
-            $consultaInsercionUsuario->bind_param('ssssss', $nombreUsuario, $contraseñaUsuario, $direccionUsuario, $correoUsuario, $fechaNacUsuario, $dniUsuario);
+            $consultaInsercionUsuario = $conexionBD->prepare('UPDATE usuario SET nombre = ? , contraseña = ?, direccion = ?, correo = ?, fecha_nac = ?, id_rol_usuario = ?  WHERE DNI = ?');
+            $consultaInsercionUsuario->bind_param('ssssss', $nombreUsuario, $contraseñaUsuario, $direccionUsuario, $correoUsuario, $fechaNacUsuario, $idRolUsuario, $dniUsuario);
             if ($consultaInsercionUsuario->execute()) {
                 $esValido = true;
             }

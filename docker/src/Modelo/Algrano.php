@@ -1,4 +1,10 @@
 <?php
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/PHPClass.php to edit this template
+ */
+
 /**
  * Clase que implementa métodos de conexión a la base de datos Algrano.
  *
@@ -6,28 +12,34 @@
  */
 class Algrano
 {
+
     private static $conexionBD = null;
 
     /**
      * Método que establece  una conexión con la base de datos mediante MySQLi
-     * @return Algrano::conexionBD el objeto con la conexión establecida
+     * @return object Devuelve el objeto con la conexión establecida
      */
     public static function conectarAlgranoMySQLi()
     {
         $host = "localhost";
         $usuario = "root";
-        $contrasena = "";
+        $contrasena = " ";
         $bd = "algrano";
-        if (is_null(Algrano::$conexionBD)) {
-            Algrano::$conexionBD = new mysqli();
-            self::$conexionBD->connect($host, $usuario, $contrasena, $bd);
+
+        if (is_null(self::$conexionBD)) {
+            try {
+                self::$conexionBD = new mysqli($host, $usuario, $contrasena, $bd);
+            } catch (Exception $ex) {
+                // Verificar si la conexión falló
+                echo "ERROR: " . $ex->getMessage();
+            }
         }
         return self::$conexionBD;
     }
 
     /**
      * Método que establece una coneión con la base de datos mediante PDO
-     * @return Algrano::conexionBD el objeto con la conexión establecida
+     * @return object el objeto con la conexión establecida
      */
     public static function conectarAlgranoPDO()
     {
@@ -37,9 +49,44 @@ class Algrano
         $contrasena = "";
         $bd = "algrano";
         if (is_null(Algrano::$conexionBD)) {
-            Algrano::$conexionBD = new PDO("$driver:host=$host;dbname=$bd", $usuario, $contrasena);
-            Algrano::$conexionBD->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            try {
+                Algrano::$conexionBD = new PDO("$driver:host=$host;dbname=$bd", $usuario, $contrasena);
+                Algrano::$conexionBD->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (Exception $ex) {
+                self::$conexionBD = null;
+                echo "ERROR:" . $ex->getMessage();
+            }
         }
-        return self::$conexionBD;
+        return Algrano::$conexionBD;
+    }
+
+    /**
+     * Método que cierra la conexión con la base de datos mediante MySQLi
+     */
+    public static function desconectarAlgranoMySQLi()
+    {
+        if (!is_null(self::$conexionBD)) {
+            self::$conexionBD->close();
+            self::$conexionBD = null;
+        }
+    }
+
+    /**
+     * Método que cierra la conexión con la base de datos mediante PDO
+     */
+    public static function desconectarAlgranoPDO()
+    {
+        if (!is_null(Algrano::$conexionBD)) {
+            Algrano::$conexionBD = null;
+        }
+    }
+
+    /**
+     * Método que cierra la conexión con la base de datos si está abierta
+     */
+    public static function desconectar()
+    {
+        self::desconectarAlgranoMySQLi();
+        self::desconectarAlgranoPDO();
     }
 }

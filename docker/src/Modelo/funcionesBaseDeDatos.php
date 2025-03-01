@@ -1,6 +1,6 @@
 <?php
 
-require_once './patrones.php';
+require_once 'patrones.php';
 
 
 function noExisteCodigo($codigo, $conexionBD)

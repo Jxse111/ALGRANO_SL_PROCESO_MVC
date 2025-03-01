@@ -1,0 +1,10 @@
+# Usamos la imagen oficial de PHP con Apache
+FROM php:8.2-apache
+
+# Instalamos las dependencias necesarias para MySQLi
+RUN apt-get update && apt-get install -y \
+    libmariadb-dev-compat libmariadb-dev && \
+    docker-php-ext-install mysqli
+
+# Habilitamos mod_rewrite (opcional, si lo necesitas)
+RUN a2enmod rewrite
