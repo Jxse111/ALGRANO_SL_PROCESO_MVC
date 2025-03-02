@@ -105,3 +105,16 @@ function existeContraseña($contraseña, $conexionBD)
     }
     return $contraseñaNoExiste ? true : false;
 }
+
+function noExisteProducto($idProducto, $conexionBD)
+{
+    $productoNoExiste = false;
+    $consultaProductosExistentes = $conexionBD->query("SELECT id_producto FROM producto");
+    $productos = $consultaProductosExistentes->fetch_all(MYSQLI_ASSOC);
+    foreach ($productos as $productoExistente) {
+        if ($productoExistente['id_producto'] != $idProducto) {
+            $productoNoExiste = true;
+        }
+    }
+    return $productoNoExiste ? true : false;
+}
