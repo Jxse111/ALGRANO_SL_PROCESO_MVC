@@ -62,6 +62,18 @@ if (filter_has_var(INPUT_POST, "Registrarse")) {
                                         $mensajeExito .= "Tipo de rol encontrado.\n";
                                         $rol = $buscarTipoRolUsuarioRegistrado->fetch_column();
                                         $_SESSION['rol'] = $rol;
+                                            // Redirección según el rol del usuario
+                            switch ($_SESSION['rol']) {
+                                case "Cliente":
+                                    header("Location: ./Vista/indexLogin.php");
+                                    exit();
+                                case "Empleado":
+                                    header("Location: ./Vista/areaTrabajo.php");
+                                    exit();
+                                case "invitado":
+                                    header("Location: ./Vista/index.html");
+                                    exit();
+                                }
                                     } else {
                                         $mensajeError .= "Tipo de rol no encontrado.\n";
                                     }
