@@ -22,7 +22,7 @@ services:
     image: php:8.2-apache  # Imagen oficial de PHP con Apache
     container_name: php
     volumes:
-      - ./src:/var/www/html  # El código fuente de tu proyecto PHP
+      - .:/var/www/html  # Montar el directorio raíz del proyecto directamente
     ports:
       - "8080:80"  # Exponer el servidor PHP en el puerto 8080
     networks:
