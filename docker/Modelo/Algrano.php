@@ -23,12 +23,12 @@ class Algrano
     {
         $host = "localhost";
         $usuario = "root";
-        $contrasena = "";
+        $contrasena = " ";
         $bd = "algrano";
 
         if (is_null(self::$conexionBD)) {
             try {
-                self::$conexionBD = new mysqli($host, $usuario, $contrasena, $bd);
+                self::$conexionBD = new mysqli("localhost", "root", " ", "algrano");
             } catch (Exception $ex) {
                 // Verificar si la conexión falló
                 echo "ERROR: " . $ex->getMessage();

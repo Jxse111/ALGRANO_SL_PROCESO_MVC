@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+echo "a";
 require_once './funcionesValidacion.php';
 require_once '../Modelo/funcionesBaseDeDatos.php';
 require_once '../Modelo/Algrano.php';
@@ -10,7 +13,7 @@ $mensajeExito = "Mensajes de éxito: ";
 if (filter_has_var(INPUT_POST, "Registrarse")) {
     header("Location: ../Vista/registro.html");
     die();
-} elseif (filter_has_var(INPUT_POST, "Entrar")) {
+} elseif (filter_has_var(INPUT_POST, "entrar")) {
     //Comprobamos que exista la sesión
     if (isset($_SESSION['usuario'])) {
         $mensajeSesion .= "El usuario registrado tiene una sesión activa";
