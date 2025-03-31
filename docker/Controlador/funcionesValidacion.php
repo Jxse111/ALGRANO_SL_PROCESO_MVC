@@ -406,12 +406,23 @@ function validarFechaNacimiento($fecha, $conexionBD)
 
 function validarUsuarioExistente($usuario, $conexionBD)
 {
-    $esValido = false;
-    $usuario = validarCadena($usuario);
-    if (existeUsuario($usuario, $conexionBD)) {
-        $esValido = true;
+    if (!$conexionBD) {
+        return false;
     }
-    return $esValido ? $usuario : false;
+    
+    $usuario = validarCadena($usuario);
+    
+    // If the username is empty after validation, return false
+    if (empty($usuario)) {
+        return false;
+    }
+    
+    // Check if the user exists in the database
+    if (existeUsuario($usuario, $conexionBD)) {
+        return $usuario;
+    } else {
+        return false;
+    }
 }
 
 function validarContraseñaExistente($contraseña, $conexionBD)
