@@ -19,8 +19,6 @@ if (filter_has_var(INPUT_POST, "Registrarse")) {
         $mensajeSesion .= "El usuario registrado tiene una sesión activa";
     } else {
     $conexionBD = Algrano::conectarAlgranoMySQLi();
-        //Sino existe la sesión Iniciamos la sesión
-        //Nose como aplicar lo del tiempo
         session_start();
         $_SESSION['usuario'] = validarUsuarioExistente(filter_input(INPUT_POST, "usuarioExistente"), $conexionBD);
         Algrano::desconectar(); //Cierro la conexión a la base de datos
