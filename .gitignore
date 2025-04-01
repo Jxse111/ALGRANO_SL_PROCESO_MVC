@@ -1,3 +1,4 @@
 docker/mysql-data/
-docker/tailscale-nginx/state
+docker/tailscale-nginx/state/tailscale.log1.txt
+docker/tailscale-nginx/state/tailscale.log2.txt
 .env

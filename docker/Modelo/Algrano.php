@@ -23,12 +23,12 @@ class Algrano
     {
         $host = "localhost";
         $usuario = "root";
-        $contrasena = " ";
+        $contrasena = "root";
         $bd = "algrano";
 
         if (is_null(self::$conexionBD)) {
             try {
-                self::$conexionBD = new mysqli("localhost", "root", " ", "algrano");
+                self::$conexionBD = new mysqli("localhost", "root", "root", "algrano");
             } catch (Exception $ex) {
                 // Verificar si la conexión falló
                 echo "ERROR: " . $ex->getMessage();
@@ -46,7 +46,7 @@ class Algrano
         $driver = "mysql";
         $host = "localhost";
         $usuario = "root";
-        $contrasena = "";
+        $contrasena = "root";
         $bd = "algrano";
         if (is_null(Algrano::$conexionBD)) {
             try {
