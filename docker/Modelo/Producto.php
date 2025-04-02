@@ -128,6 +128,22 @@ class Producto
         }
         return $esValido ? $datosProducto : false;
     }
+
+    //Método que devuelve todos los productos de la base de datos en formato de array.
+    public static function listarProductos(){
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
+        $esValido = false;
+        try{
+            $consultaBusquedaProductos = $conexionBD->prepare('SELECT * FROM producto');
+            if ($consultaBusquedaProductos->num_rows > 0) {
+                $datosProducto = $consultaBusquedaProductos->fetch_all();
+                $esValido = true;
+            }
+        }catch(Exception $ex){
+            echo "Error: ".$ex->getMessage();
+        }
+        return $esValido ? $datosProducto : false;
+    }
     //Método que guarda un Usuario, lo inserta o lo actualiza.
     public function crearProducto()
     {
