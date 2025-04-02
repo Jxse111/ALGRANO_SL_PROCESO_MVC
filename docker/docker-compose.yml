@@ -1,36 +1,31 @@
 version: '3.8'
 
 services:
-mysql:
-  image: mysql:8
-  container_name: mysql
-  environment:
-    MYSQL_DATABASE: algrano
-    MYSQL_ROOT_PASSWORD: "root"
-    MYSQL_USER: "empleadodb"
-    MYSQL_PASSWORD: "algranodb"
-  volumes:
-    - ./mysql-data:/var/lib/mysql
-  ports:
-    - "3306:3306"
-  networks:
-    - app-network
-  healthcheck:
-    test: [ "CMD", "mysqladmin", "ping", "--silent" ]
-    interval: 30s
-    retries: 5
-    start_period: 10s
-    timeout: 10s
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # Contraseña para el usuario root
+      MYSQL_DATABASE: algrano
+      MYSQL_USER: empleadodb
+      MYSQL_PASSWORD: algranodb
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+    restart: always
 
   php:
     build:
-      context: . # El directorio con el Dockerfile personalizado (esto es necesario para la construcción)
-    image: php:8.2-apache # Imagen oficial de PHP con Apache
+      context: .
+    image: php:8.2-apache
     container_name: php
     volumes:
-      - .:/var/www/html # Montar el directorio raíz del proyecto directamente
+      - .:/var/www/html
     ports:
-      - "8080:80" # Exponer el servidor PHP en el puerto 8080
+      - "8080:80"
     networks:
       - app-network
 
@@ -38,10 +33,10 @@ mysql:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
     environment:
-      PMA_HOST: mysql # Nombre del contenedor MySQL
-      MYSQL_ROOT_PASSWORD: "root"
+      PMA_HOST: mysql  # Conectar a MySQL a través del nombre del contenedor 'mysql'
+      MYSQL_ROOT_PASSWORD: root  # La misma contraseña para el usuario root de MySQL
     ports:
-      - "8081:80" # Acceder a phpMyAdmin desde http://localhost:8081
+      - "8081:80"  # Acceder a phpMyAdmin desde http://localhost:8081
     networks:
       - app-network
 
@@ -71,3 +66,8 @@ mysql:
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local
+

@@ -82,7 +82,7 @@ if (filter_has_var(INPUT_POST, "Registrarse")) {
                                                     header("Location: ../Vista/areaTrabajo.php");
                                                     exit();
                                                 case "invitado":
-                                                    header("Location: ../Vista/index.html");
+                                                    header("Location: ../Vista/index.php");
                                                     exit();
                                             }
                                         } else {
@@ -141,7 +141,7 @@ if (filter_has_var(INPUT_POST, "Registrarse")) {
             <button type="submit" name="Acceder">Acceder</button>
         </form>
     <?php } else { ?>
-        <a href="../index.php">Volver al inicio</a>
+        <a href="../Vista/index.php">Volver al inicio</a>
     <?php } ?>
 </body>
 </html>
