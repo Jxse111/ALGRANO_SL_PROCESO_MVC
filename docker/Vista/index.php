@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['cliente']) && !isset($_SESSION['administrador']) && !isset($_SESSION['empleado'])) {
+    $_SESSION['rol'] = 0; // 0 represents an unauthenticated visitor
+}W
+?>
 <!DOCTYPE html>
 <html lang="en">
 
