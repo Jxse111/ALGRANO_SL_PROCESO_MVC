@@ -25,7 +25,7 @@
             //echo var_dump(códigoValidado,$usuarioValidado, $contraseñaValidada,direcciónValidada,$correoValidado,fechaNacimientoValidada);
             if ($camposValidados) {
                 $mensajeExito .= "Datos recibidos y validados correctamente. ";
-                $usuarioRegistro = new Usuario($codigoClienteValidado, $usuarioValidado, $contraseñaValidada, $direcciónValidada, $correoValidado, $fechaNacimientoValidada);
+                $usuarioRegistro = new Usuario($codigoClienteValidado, $usuarioValidado, $contraseñaValidada, $direcciónValidada, $correoValidado, $fechaNacimientoValidada,'1');
                 if ($usuarioRegistro->guardarUsuario()) {
                     header(header: "Location: ../Vista/login.html");
                 } else {

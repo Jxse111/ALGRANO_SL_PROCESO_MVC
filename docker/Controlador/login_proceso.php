@@ -13,12 +13,6 @@ $mensajeError = "Mensajes de error : ";
 $mensajeExito = "Mensajes de éxito: ";
 $registroExistoso = false;
 
-/* En el caso de que se pulse el boton Crear cuenta del formulario de inicio de sesión,
- *  serás redirigido al formulario de registro
- */
-// if (filter_has_var(input_post, "registrarse")) {
-//     header("location: ../vista/registro.html");
-//     die();
 if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")) {
     // Check if user is already logged in
     if (isset($_SESSION['cliente'])) {
@@ -83,10 +77,7 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
                                                     header("Location: ../Vista/index.php");
                                                     exit();
                                                 case "Empleado":
-                                                    header("Location: ../Vista/areaTrabajo.php");
-                                                    exit();
-                                                case "invitado":
-                                                    header("Location: ../Vista/index.php");
+                                                    header("Location: ../Vista/areaEmpleado.php");
                                                     exit();
                                             }
                                         } else {
