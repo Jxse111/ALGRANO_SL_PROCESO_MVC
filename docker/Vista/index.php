@@ -38,7 +38,7 @@
     <!-- Navbar Start -->
     <div class="container-fluid p-0 nav-bar">
         <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
-            <a href="index.html" class="navbar-brand px-lg-4 m-0">
+            <a href="index.php" class="navbar-brand px-lg-4 m-0">
                 <h1 class="m-0 display-4 text-uppercase text-white"><img src="../img/ALGRANO.png" alt="" height="80"
                         width="80"></h1>
             </a>
@@ -47,7 +47,7 @@
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto p-4">
-                    <a href="index.html" class="nav-item nav-link active">Inicio</a>
+                    <a href="index.php" class="nav-item nav-link active">Inicio</a>
                     <a href="sobreNosotros.html" class="nav-item nav-link">Sobre nosotros</a>
                     <a href="servicios.html" class="nav-item nav-link">Servicios</a>
                     <a href="menu.html" class="nav-item nav-link">Carta</a>
