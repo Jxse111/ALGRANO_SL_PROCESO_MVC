@@ -29,25 +29,26 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
             try {
                 // Get the username from the form
                 $usuarioLogin = filter_input(INPUT_POST, "usuarioExistente");
-                echo var_dump($usuarioLogin);
+                //echo var_dump($usuarioLogin);
                 // Validate the user exists
                 if (empty($usuarioLogin)) {
                     $mensajeError .= "El nombre de usuario no puede estar vacío.\n";
                 } else {
                     // Validate the user with the database
                     $usuarioLogin = validarUsuarioExistente($usuarioLogin, $conexionBD);
-
                     if ($usuarioLogin) {
                         // Extract the password of the registered user
                         $conexionBD->autocommit(false);
-                        $consultaSesiones = $conexionBD->query("SELECT contraseña FROM usuario WHERE login='$usuarioLogin'");
+                        $consultaSesiones = $conexionBD->query("SELECT contraseña FROM usuario WHERE usuario='$usuarioLogin'");
 
                         if ($consultaSesiones && $consultaSesiones->num_rows > 0) {
                             $contraseña = $consultaSesiones->fetch_all(MYSQLI_ASSOC);
 
                             foreach ($contraseña as $contraseñaExistente) {
+                                //echo var_dump($contraseñaExistente['contraseña']);
                                 // If the two encrypted passwords are exact, the session login is successful.
                                 $contraseñaEncriptada = hash("sha512", filter_input(INPUT_POST, "contraseñaExistente"));
+                                //echo var_dump(value: $contraseñaEncriptada);
                                 $esValida = $contraseñaEncriptada === $contraseñaExistente['contraseña'];
                                 $registroExistoso = $consultaSesiones->num_rows > 0 && $esValida;
 
@@ -56,7 +57,7 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
                                     $_SESSION['usuario'] = $usuarioLogin;
 
                                     $mensajeExito .= "Inicio de Sesión realizado con éxito. \n";
-                                    $buscarRolUsuarioRegistrado = $conexionBD->query("SELECT id_rol FROM usuario WHERE login='$usuarioLogin'");
+                                    $buscarRolUsuarioRegistrado = $conexionBD->query("SELECT id_rol_usuario FROM usuario WHERE usuario='$usuarioLogin'");
 
                                     if ($buscarRolUsuarioRegistrado) {
                                         $mensajeExito .= "Rol recuperado con éxito.\n";
@@ -74,9 +75,6 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
                                                     header("Location: ../Vista/index.php");
                                                     exit();
                                                 case "cliente":
-                                                    header("Location: ../Vista/index.php");
-                                                    exit();
-                                                case "empleado":
                                                     header("Location: ../Vista/index.php");
                                                     exit();
                                             }

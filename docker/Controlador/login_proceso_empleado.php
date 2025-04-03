@@ -29,7 +29,8 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
             try {
                 // Get the username from the form
                 $dniEmpleado = filter_input(INPUT_POST, "DNI");
-                echo var_dump($dniEmpleado);
+                $claveFormulario = filter_input(INPUT_POST, "ClaveUnica");
+                //echo var_dump($dniEmpleado,$claveFormulario);
                 // Validate the user exists
                 if (empty($dniEmpleado)) {
                     $mensajeError .= "El DNI no puede estar vacío.\n";
@@ -37,18 +38,17 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
                     if ($dniEmpleado) {
                         // Extract the password of the registered user
                         $conexionBD->autocommit(false);
-                        $consultaSesiones = $conexionBD->query("SELECT Clave FROM empleado WHERE DNI='$dniEmpleado'");
+                        $consultaSesiones = $conexionBD->query("SELECT Clave FROM empleado WHERE DNI_empleado='$dniEmpleado'");
                         if ($consultaSesiones && $consultaSesiones->num_rows > 0) {
                             $clave = $consultaSesiones->fetch_all(MYSQLI_ASSOC);
 
                             foreach ($clave as $claveUnica) {
                                 // If the two encrypted passwords are exact, the session login is successful.
-                                $claveFormulario = filter_input(INPUT_POST, "clave");
                                 $esValida = $claveFormulario === $claveUnica['Clave'];
                                 $registroExistoso = $consultaSesiones->num_rows > 0 && $esValida;
                                 if ($esValida) {
                                     $mensajeExito .= "Inicio de Sesión realizado con éxito. \n";
-                                    $buscarRolUsuarioRegistrado = $conexionBD->query("SELECT id_rol FROM usuario WHERE login='$dniEmpleado'");
+                                    $buscarRolUsuarioRegistrado = $conexionBD->query("SELECT id_rol_usuario FROM usuario WHERE DNI='$dniEmpleado'");
                                     if ($buscarRolUsuarioRegistrado) {
                                         $mensajeExito .= "Rol recuperado con éxito.\n";
                                         $rolUsuarioRegistrado = $buscarRolUsuarioRegistrado->fetch_column();
@@ -68,7 +68,7 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
                                         $mensajeError .= "No se ha podido recuperar el rol.\n";
                                     }
                                 } else {
-                                    $mensajeError .= "No se ha podido iniciar sesión, la contraseña o el usuario no son correctos.\n";
+                                    $mensajeError .= "No se ha podido iniciar sesión, la clave o el DNI no son correctos.\n";
                                 }
                             }
                         } else {
@@ -114,12 +114,10 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
     <?php } ?>
 
     <br><br>
-    <?php if ($registroExistoso) { ?>
-        <form action="sesionUsuario.php" method="post">
-            <button type="submit" name="Acceder">Acceder</button>
+    <?php if (!$registroExistoso) { ?>
+        <form action="../Vista/index.php" method="post">
+            <button type="submit" name="Volver">Volver al inicio</button>
         </form>
-    <?php } else { ?>
-        <a href="../Vista/index.php">Volver al inicio</a>
     <?php } ?>
 </body>
 

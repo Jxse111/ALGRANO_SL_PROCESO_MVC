@@ -1,7 +1,7 @@
 <?php
 require_once 'patrones.php';
 
-function noExisteCodigo($codigo, $conexionBD)
+function noExisteCodigoCliente($codigo, $conexionBD)
 {
     $codigoNoExiste = false;
     $consultaCodigosExistentes = $conexionBD->query('SELECT codigo FROM cliente');
@@ -31,7 +31,7 @@ function noExisteUsuario($dni, $conexionBD)
 function noExisteContraseña($contraseña, $conexionBD)
 {
     $contraseñaNoExiste = false;
-    $consultaContraseñasExistentes = $conexionBD->query("SELECT contraseña FROM cliente");
+    $consultaContraseñasExistentes = $conexionBD->query("SELECT contraseña FROM usuario");
     $contraseñas = $consultaContraseñasExistentes->fetch_all(MYSQLI_ASSOC);
     foreach ($contraseñas as $constraseñasExistentes) {
         if ($constraseñasExistentes['contraseña'] != $contraseña) {
@@ -44,7 +44,7 @@ function noExisteContraseña($contraseña, $conexionBD)
 function noExisteCorreo($correo, $conexionBD)
 {
     $correoNoExiste = false;
-    $consultaCorreosExistentes = $conexionBD->query('SELECT correo FROM cliente');
+    $consultaCorreosExistentes = $conexionBD->query('SELECT correo FROM usuario');
     $correos = $consultaCorreosExistentes->fetch_all(MYSQLI_ASSOC);
     foreach ($correos as $correoExistente) {
         if ($correoExistente['correo'] != $correo) {
@@ -57,7 +57,7 @@ function noExisteCorreo($correo, $conexionBD)
 function noExisteDireccion($direccion, $conexionBD)
 {
     $direccionNoExiste = false;
-    $consultaDireccionesExistentes = $conexionBD->query('SELECT direccion FROM cliente');
+    $consultaDireccionesExistentes = $conexionBD->query('SELECT direccion FROM usuario');
     $direcciones = $consultaDireccionesExistentes->fetch_all(MYSQLI_ASSOC);
     foreach ($direcciones as $direccionExistente) {
         if ($direccionExistente['fec_nac'] != $direccion) {
@@ -70,7 +70,7 @@ function noExisteDireccion($direccion, $conexionBD)
 function noExisteFechaNacimiento($fecha, $conexionBD)
 {
     $fechaNoExiste = false;
-    $consultaFechasExistentes = $conexionBD->query('SELECT correo FROM cliente');
+    $consultaFechasExistentes = $conexionBD->query('SELECT correo FROM usuario');
     $fechas = $consultaFechasExistentes->fetch_all(MYSQLI_ASSOC);
     foreach ($fechas as $fechaExistente) {
         if ($fechaExistente['fec_nac'] != $fecha) {
@@ -83,7 +83,7 @@ function noExisteFechaNacimiento($fecha, $conexionBD)
 function existeUsuario($usuario, $conexionBD)
 {
     $usuarioNoExiste = false;
-    $consultaUsuariosExistentes = $conexionBD->query("SELECT usuario FROM cliente");
+    $consultaUsuariosExistentes = $conexionBD->query("SELECT usuario FROM usuario");
     $usuarios = $consultaUsuariosExistentes->fetch_all(MYSQLI_ASSOC);
     foreach ($usuarios as $usuarioExistente) {
         if ($usuarioExistente['usuario'] == $usuario) {
@@ -96,7 +96,7 @@ function existeUsuario($usuario, $conexionBD)
 function existeContraseña($contraseña, $conexionBD)
 {
     $contraseñaNoExiste = false;
-    $consultaContraseñasExistentes = $conexionBD->query("SELECT contraseña FROM cliente");
+    $consultaContraseñasExistentes = $conexionBD->query("SELECT contraseña FROM usuario");
     $contraseñas = $consultaContraseñasExistentes->fetch_all(MYSQLI_ASSOC);
     foreach ($contraseñas as $constraseñasExistentes) {
         if ($constraseñasExistentes['contraseña'] == $contraseña) {
