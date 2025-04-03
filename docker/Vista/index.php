@@ -68,6 +68,9 @@
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Mi Cuenta</a>
                             <div class="dropdown-menu text-capitalize" style="background-color: #33211d; border: none;">
                                 <a href="perfil.html" class="dropdown-item" style="color: #DA9F5B;">Perfil</a>
+                                <?php if (isset($_SESSION['administrador'])): ?>
+                                    <a href="areaAdmin.php" class="dropdown-item" style="color: #DA9F5B" ;>Administrar</a>
+                                <?php endif; ?>
                                 <a href="cerrarSesion.html" class="dropdown-item" style="color: #DA9F5B;">Cerrar sesión</a>
                             </div>
                         </div>
