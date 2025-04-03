@@ -28,7 +28,7 @@ class Algrano
 
         if (is_null(self::$conexionBD)) {
             try {
-                self::$conexionBD = new mysqli("localhost", "root", "root", "algrano");
+                self::$conexionBD = new mysqli("mysql", "root", "root", "algrano");
             } catch (Exception $ex) {
                 // Verificar si la conexión falló
                 echo "ERROR: " . $ex->getMessage();

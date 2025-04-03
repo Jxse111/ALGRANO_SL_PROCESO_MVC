@@ -1,8 +1,5 @@
 <?php
 session_start();
-if (!isset($_SESSION['cliente']) && !isset($_SESSION['administrador']) && !isset($_SESSION['empleado'])) {
-    $_SESSION['rol'] = 0; // 0 represents an unauthenticated visitor
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +33,19 @@ if (!isset($_SESSION['cliente']) && !isset($_SESSION['administrador']) && !isset
 </head>
 
 <body>
+    <?php if (!isset($_SESSION['cliente']) && !isset($_SESSION['administrador']) && !isset($_SESSION['empleado'])) { ?>
+        <!-- Alert para modo invitado -->
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>¡MODO INVITADO!</strong> Para acceder a todas las funcionalidades, por favor inicia sesión o regístrate.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <!-- Banner modo invitado -->
+        <div class="bg-warning text-center py-2">
+            <h4 class="text-dark m-0"><i class="fas fa-user-clock mr-2"></i>MODO INVITADO</h4>
+        </div>
+    <?php } ?>
     <div id="loaderPagina" class="section_loader">
         <div class="loader"></div>
         <div class="loader_1"></div>
@@ -84,8 +94,6 @@ if (!isset($_SESSION['cliente']) && !isset($_SESSION['administrador']) && !isset
                 </div>
         </nav>
     </div>
-    <!-- Navbar End -->
-
     <!-- Carousel Start -->
     <div class="container-fluid p-0 mb-5">
         <div id="blog-carousel" class="carousel slide overlay-bottom" data-ride="carousel">
@@ -116,8 +124,6 @@ if (!isset($_SESSION['cliente']) && !isset($_SESSION['administrador']) && !isset
         </div>
     </div>
     <!-- Carousel End -->
-
-
     <!-- About Start -->
     <div class="container-fluid py-5">
         <div class="container">
@@ -432,7 +438,7 @@ if (!isset($_SESSION['cliente']) && !isset($_SESSION['administrador']) && !isset
                 </div>
                 <div class="testimonial-item">
                     <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid" src="img/testimonial-2.jpg" alt="">
+                        <img class="img-fluid" src="../img/testimonial-2.jpg" alt="">
                         <div class="ml-3">
                             <h4>Pablo</h4>
                             <i>Oficinista</i>

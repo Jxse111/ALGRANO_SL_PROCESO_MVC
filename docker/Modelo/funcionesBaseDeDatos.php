@@ -20,7 +20,7 @@ function noExisteUsuario($dni, $conexionBD)
     $consultaUsuariosExistentes = $conexionBD->query("SELECT DNI FROM usuario");
     $usuarios = $consultaUsuariosExistentes->fetch_all(MYSQLI_ASSOC);
     foreach ($usuarios as $usuarioExistente) {
-        if ($usuarioExistente['dni'] != $dni) {
+        if ($usuarioExistente['DNI'] != $dni) {
             $usuarioNoExiste = true;
         }
     }

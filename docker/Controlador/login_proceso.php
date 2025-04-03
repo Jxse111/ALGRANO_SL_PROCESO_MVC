@@ -29,7 +29,7 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
             try {
                 // Get the username from the form
                 $usuarioLogin = filter_input(INPUT_POST, "usuarioExistente");
-
+                echo var_dump($usuarioLogin);
                 // Validate the user exists
                 if (empty($usuarioLogin)) {
                     $mensajeError .= "El nombre de usuario no puede estar vacío.\n";
@@ -40,7 +40,7 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
                     if ($usuarioLogin) {
                         // Extract the password of the registered user
                         $conexionBD->autocommit(false);
-                        $consultaSesiones = $conexionBD->query("SELECT contraseña FROM usuarios WHERE login='$usuarioLogin'");
+                        $consultaSesiones = $conexionBD->query("SELECT contraseña FROM usuario WHERE login='$usuarioLogin'");
 
                         if ($consultaSesiones && $consultaSesiones->num_rows > 0) {
                             $contraseña = $consultaSesiones->fetch_all(MYSQLI_ASSOC);
