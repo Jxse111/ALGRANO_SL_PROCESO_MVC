@@ -13,5 +13,28 @@ class Empleado extends Usuario
         $this->puesto = $puesto;
         $this->departamento = $departamento;
     }
+
+    public function getPuesto()
+    {
+        return $this->puesto;
+    }
+
+
+    public function getDepartamento()
+    {
+        return $this->departamento;
+    }
+
+    public static function listarEmpleados()
+    {
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
+        $empleados = [];
+
+        $consultaListadoEmpleados = $conexionBD->prepare('SELECT * FROM empleado');
+        if ($consultaListadoEmpleados->execute()) {
+            $empleados = $consultaListadoEmpleados->get_result()->fetch_all(MYSQLI_ASSOC);
+        }
+
+        return $empleados;
+    }
 }
-?>

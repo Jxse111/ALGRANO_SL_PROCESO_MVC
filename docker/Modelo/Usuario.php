@@ -1,5 +1,5 @@
 <?php
-require_once('./Algrano.php');
+require_once('Algrano.php');
 /**
  * Clase que implementa un objeto de tipo Usuario para el acceso a la web.
  *
@@ -91,6 +91,20 @@ class Usuario
             }
         }
         return $esValido ? $datosUsuario : false;
+    }
+
+    //Método que lista todos los usuarios de la base de datos
+    public static function listarUsuarios()
+    {
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
+        $usuarios = [];
+        
+        $consultaListadoUsuarios = $conexionBD->prepare('SELECT * FROM usuario');
+        if ($consultaListadoUsuarios->execute()) {
+            $usuarios = $consultaListadoUsuarios->get_result()->fetch_all(MYSQLI_ASSOC);
+        }
+        
+        return $usuarios;
     }
 
 
