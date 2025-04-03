@@ -15,7 +15,7 @@ $registroExistoso = false;
 
 if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")) {
     // Check if user is already logged in
-    if (isset($_SESSION['cliente'])) {
+    if (isset($_SESSION['empleado'])) {
         header("Location: ../Vista/index.php");
         exit();
     } else {
@@ -28,57 +28,38 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
         } else {
             try {
                 // Get the username from the form
-                $usuarioLogin = filter_input(INPUT_POST, "usuarioExistente");
-                echo var_dump($usuarioLogin);
+                $dniEmpleado = filter_input(INPUT_POST, "DNI");
+                echo var_dump($dniEmpleado);
                 // Validate the user exists
-                if (empty($usuarioLogin)) {
-                    $mensajeError .= "El nombre de usuario no puede estar vacío.\n";
+                if (empty($dniEmpleado)) {
+                    $mensajeError .= "El DNI no puede estar vacío.\n";
                 } else {
-                    // Validate the user with the database
-                    $usuarioLogin = validarUsuarioExistente($usuarioLogin, $conexionBD);
-
-                    if ($usuarioLogin) {
+                    if ($dniEmpleado) {
                         // Extract the password of the registered user
                         $conexionBD->autocommit(false);
-                        $consultaSesiones = $conexionBD->query("SELECT contraseña FROM usuario WHERE login='$usuarioLogin'");
-
+                        $consultaSesiones = $conexionBD->query("SELECT Clave FROM empleado WHERE DNI='$dniEmpleado'");
                         if ($consultaSesiones && $consultaSesiones->num_rows > 0) {
-                            $contraseña = $consultaSesiones->fetch_all(MYSQLI_ASSOC);
+                            $clave = $consultaSesiones->fetch_all(MYSQLI_ASSOC);
 
-                            foreach ($contraseña as $contraseñaExistente) {
+                            foreach ($clave as $claveUnica) {
                                 // If the two encrypted passwords are exact, the session login is successful.
-                                $contraseñaEncriptada = hash("sha512", filter_input(INPUT_POST, "contraseñaExistente"));
-                                $esValida = $contraseñaEncriptada === $contraseñaExistente['contraseña'];
+                                $claveFormulario = filter_input(INPUT_POST, "clave");
+                                $esValida = $claveFormulario === $claveUnica['Clave'];
                                 $registroExistoso = $consultaSesiones->num_rows > 0 && $esValida;
-
                                 if ($esValida) {
-                                    // Set the user in the session
-                                    $_SESSION['usuario'] = $usuarioLogin;
-
                                     $mensajeExito .= "Inicio de Sesión realizado con éxito. \n";
-                                    $buscarRolUsuarioRegistrado = $conexionBD->query("SELECT id_rol FROM usuario WHERE login='$usuarioLogin'");
-
+                                    $buscarRolUsuarioRegistrado = $conexionBD->query("SELECT id_rol FROM usuario WHERE login='$dniEmpleado'");
                                     if ($buscarRolUsuarioRegistrado) {
                                         $mensajeExito .= "Rol recuperado con éxito.\n";
                                         $rolUsuarioRegistrado = $buscarRolUsuarioRegistrado->fetch_column();
                                         $buscarTipoRolUsuarioRegistrado = $conexionBD->query("SELECT rol FROM rol WHERE id_rol='$rolUsuarioRegistrado'");
-
                                         if ($buscarTipoRolUsuarioRegistrado) {
                                             $mensajeExito .= "Tipo de rol encontrado.\n";
                                             $rol = $buscarTipoRolUsuarioRegistrado->fetch_column();
                                             $_SESSION['rol'] = $rol;
-
-                                            // Redirect based on user role
-                                            switch ($_SESSION['rol']) {
-                                                case "administrador":
-                                                    header("Location: ../Vista/index.php");
-                                                    exit();
-                                                case "cliente":
-                                                    header("Location: ../Vista/index.php");
-                                                    exit();
-                                                case "empleado":
-                                                    header("Location: ../Vista/index.php");
-                                                    exit();
+                                            if ($_SESSION['rol'] == "empleado") {
+                                                header("Location: ../Vista/index.php");
+                                                exit();
                                             }
                                         } else {
                                             $mensajeError .= "Tipo de rol no encontrado.\n";

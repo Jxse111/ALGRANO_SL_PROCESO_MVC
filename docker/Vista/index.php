@@ -33,7 +33,7 @@ session_start();
 </head>
 
 <body>
-    <?php if (!isset($_SESSION['cliente']) && !isset($_SESSION['administrador']) && !isset($_SESSION['empleado'])) { ?>
+    <?php if ($_SESSION['rol'] != "administrador" || $_SESSION['rol'] != "empleado" || $_SESSION['rol'] != "cliente"){ ?>
         <!-- Alert para modo invitado -->
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong>¡MODO INVITADO!</strong> Para acceder a todas las funcionalidades, por favor inicia sesión o regístrate.
@@ -75,18 +75,20 @@ session_start();
                         </div>
                     </div>
                     <a href="contacto.html" class="nav-item nav-link">Contacto</a>
-                    <?php if (!isset($_SESSION['cliente']) || !isset($_SESSION['administrador']) || !isset($_SESSION['empleado'])): ?>
+                    <?php if ($_SESSION['rol'] != "administrador" || $_SESSION['rol'] != "empleado" || $_SESSION['rol'] != "cliente"){ ?>
                         <a href="login.html" class="nav-item nav-link btn btn-primary font-weight-bold">Iniciar Sesión</a>
                         <a href="registro.html" class="nav-item nav-link btn btn-secondary font-weight-bold">Regístrate</a>
-                    <?php endif; ?>
-                    <?php if (isset($_SESSION['cliente']) || isset($_SESSION['administrador']) || isset($_SESSION['empleado'])): ?>
+                    <?php } ?>
+                    <?php if ($_SESSION['rol'] == "administrador" || $_SESSION['rol'] == "empleado" || $_SESSION['rol'] == "cliente"): ?>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Mi Cuenta</a>
                             <div class="dropdown-menu text-capitalize" style="background-color: #33211d; border: none;">
                                 <a href="perfil.html" class="dropdown-item" style="color: #DA9F5B;">Perfil</a>
-                                <?php if (isset($_SESSION['administrador'])): ?>
+                                <?php if ($_SESSION['rol'] == "administrador"){ ?>
                                     <a href="areaAdmin.php" class="dropdown-item" style="color: #DA9F5B" ;>Administrar</a>
-                                <?php endif; ?>
+                                <?php }elseif($_SESSION['rol'] == "empleado"){ ?>
+                                    <a href="areaEmpleado.php" class="dropdown-item" style="color: #DA9F5B" ;>Workspace</a>
+                                <?php } ?>
                                 <a href="cerrarSesion.html" class="dropdown-item" style="color: #DA9F5B;">Cerrar sesión</a>
                             </div>
                         </div>
