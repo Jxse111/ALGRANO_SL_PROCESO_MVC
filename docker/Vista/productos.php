@@ -3,10 +3,6 @@ session_start();
 require_once '../Modelo/Algrano.php';
 require_once '../Modelo/Producto.php';
 
-if (!isset($_SESSION['usuario'])) {
-    die("Error debe <a href='login.php'>identificarse</a>.<br />");
-}
-
 // Inicializa la cesta si no existe
 if (!isset($_SESSION['cesta'])) {
     $_SESSION['cesta'] = []; // Inicializa la cesta como un array vacío
