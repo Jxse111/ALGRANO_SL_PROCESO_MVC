@@ -41,14 +41,6 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
 
 <body>
     <?php if ($_SESSION['rol'] == "invitado") { ?>
-        <!-- Alert para modo invitado -->
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>¡MODO INVITADO!</strong> Para acceder a todas las funcionalidades, por favor inicia sesión o regístrate.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <!-- Banner modo invitado -->
         <div class="bg-warning text-center py-2">
             <h4 class="text-dark m-0"><i class="fas fa-user-clock mr-2"></i>MODO INVITADO</h4>
         </div>
@@ -343,90 +335,6 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
     </div>
 
     <!-- Menu End -->
-
-
-    <!-- Reservation Start -->
-    <div class="container-fluid my-5">
-        <div class="container">
-            <div class="reservation position-relative overlay-top overlay-bottom">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 my-5 my-lg-0">
-                        <div class="p-5">
-                            <div class="mb-4">
-                                <h1 class="display-3 text-primary">30% de descuento</h1>
-                                <h1 class="text-white">Por reservar online</h1>
-                            </div>
-                            <p class="text-white">Ventajas de hacer una reserva online de nuestro café:
-                            </p>
-                            <ul class="list-inline text-white m-0">
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Garantizas la
-                                    disponibilidad de tus productos favoritos.
-                                </li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Personalizas tu pedido
-                                    según tus gustos y necesidades.
-                                </li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Realizas tu compra
-                                    cómodamente desde casa.
-                                </li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Programas envíos
-                                    recurrentes para no quedarte sin café.
-                                </li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Accedes a promociones
-                                    exclusivas para clientes en línea.
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
-                            <h1 class="text-white mb-4 mt-5">BOLETÍN DE RESERVA</h1>
-                            <form class="mb-5">
-                                <div class="form-group">
-                                    <input type="text" class="form-control bg-transparent border-primary p-4"
-                                        placeholder="Nombre" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control bg-transparent border-primary p-4"
-                                        placeholder="Correo" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <div class="date" id="date" data-target-input="nearest">
-                                        <input type="text"
-                                            class="form-control bg-transparent border-primary p-4 datetimepicker-input"
-                                            placeholder="Fecha" data-target="#date" data-toggle="datetimepicker" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="time" id="time" data-target-input="nearest">
-                                        <input type="text"
-                                            class="form-control bg-transparent border-primary p-4 datetimepicker-input"
-                                            placeholder="Hora" data-target="#time" data-toggle="datetimepicker" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <select class="custom-select bg-transparent border-primary px-4"
-                                        style="height: 49px;">
-                                        <option selected>Cantidad</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="3">4</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <button class="btn btn-primary btn-block font-weight-bold py-3"
-                                        type="submit">Reservar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Reservation End -->
-
 
     <!-- Testimonial Start -->
     <div class="container-fluid py-5">
