@@ -9,7 +9,7 @@
     <meta content="Free Website Template" name="description">
 
     <!-- Favicon -->
-    <link href="../img/LogoFavicon.png" rel="icon">
+    <link href="../img/ALGRANO.png" rel="icon">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -40,6 +40,21 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="navbar-nav ml-auto p-4">
+                <a href="index.php" class="nav-item nav-link active">Inicio</a>
+                <a href="sobreNosotros.html" class="nav-item nav-link">Sobre nosotros</a>
+                <a href="servicios.html" class="nav-item nav-link">Servicios</a>
+                <a href="menu.html" class="nav-item nav-link">Carta</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Páginas</a>
+                    <div class="dropdown-menu text-capitalize" style="background-color: #33211d; border: none;">
+                        <a href="reservas.html" class="dropdown-item" style="color: #DA9F5B;">Reservas</a>
+                        <a href="comentarios.html" class="dropdown-item" style="color: #DA9F5B;">Testimonio</a>
+                    </div>
+                </div>
+                <a href="contacto.html" class="nav-item nav-link">Contacto</a>
+                </div>
+            </div>
         </nav>
     </div>
     <!-- Navbar End -->
@@ -49,79 +64,98 @@
     <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
         <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
             style="min-height: 400px">
-            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Administración</h1>
+            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Reservas</h1>
             <div class="d-inline-flex mb-lg-5">
                 <p class="m-0 text-white"><a class="text-white" href="index.php">Inicio</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Administración</p> 
+                <p class="m-0 text-white">Reservas</p>
             </div>
         </div>
     </div>
     <!-- Page Header End -->
 
 
-    <!-- Administration Start -->
-    <div>
-        <!-- Aquí puedes agregar el contenido de la página de administración -->
-        <h2 class="text-center">Bienvenido a la sección de administración</h2>
-        <?php 
-        require_once '../Modelo/Cliente.php';
-        require_once '../Modelo/Empleado.php';
-        //Lista de Clientes y empleados a administrar
-        $clientes = Cliente::listarClientes(); // Obtiene los clientes  
-        $empleados = Empleado::listarEmpleados(); // Obtiene los empleados
-        ?>
-        <div class="container mt-5">
-            <!-- Tabla de Clientes -->
-            <h3>Clientes</h3>
-            <table class="table table-bordered">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>DNI_cliente</th>
-                        <th>Codigo Cliente</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach($clientes as $cliente){?>
-                    <tr>
-                        <td><?php echo $cliente['DNI_cliente'] ?></td>
-                        <td><?php echo $cliente['codigo_cliente'] ?></td>
-                        <td>
-                            <button onclick="window.location.href='editarCliente.php?id=<?php echo $cliente['codigo_cliente']; ?>'" class="btn btn-primary btn-sm">Editar</button>
-                            <button onclick="window.location.href='eliminarCliente.php?id=<?php echo $cliente['codigo_cliente']; ?>'" class="btn btn-danger btn-sm">Eliminar</button>
-                        </td>
-                    </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+    <!-- Reservation Start -->
+    <div class="container-fluid my-5">
+        <div class="container">
+            <div class="reservation position-relative overlay-top overlay-bottom">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 my-5 my-lg-0">
+                        <div class="p-5">
+                            <div class="mb-4">
+                                <h1 class="display-3 text-primary">30% de descuento</h1>
+                                <h1 class="text-white">Por reservar online</h1>
+                            </div>
+                            <p class="text-white">Ventajas de hacer una reserva online de nuestro café:
+                            </p>
+                            <ul class="list-inline text-white m-0">
+                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Garantizas la
+                                    disponibilidad de tus productos favoritos.
+                                </li>
+                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Personalizas tu pedido
+                                    según tus gustos y necesidades.
+                                </li>
+                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Realizas tu compra
+                                    cómodamente desde casa.
+                                </li>
+                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Programas envíos
+                                    recurrentes para no quedarte sin café.
+                                </li>
+                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Accedes a promociones
+                                    exclusivas para clientes en línea.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
+                            <h1 class="text-white mb-4 mt-5">BOLETÍN DE RESERVA</h1>
+                            <form class="mb-5">
+                                <div class="form-group">
+                                    <input type="text" class="form-control bg-transparent border-primary p-4"
+                                        placeholder="Nombre" required="required" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control bg-transparent border-primary p-4"
+                                        placeholder="Correo" required="required" />
+                                </div>
+                                <div class="form-group">
+                                    <div class="date" id="date" data-target-input="nearest">
+                                        <input type="text"
+                                            class="form-control bg-transparent border-primary p-4 datetimepicker-input"
+                                            placeholder="Fecha" data-target="#date" data-toggle="datetimepicker" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="time" id="time" data-target-input="nearest">
+                                        <input type="text"
+                                            class="form-control bg-transparent border-primary p-4 datetimepicker-input"
+                                            placeholder="Hora" data-target="#time" data-toggle="datetimepicker" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <select class="custom-select bg-transparent border-primary px-4"
+                                        style="height: 49px;">
+                                        <option selected>Cantidad</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="3">4</option>
+                                    </select>
+                                </div>
 
-            <!-- Tabla de Empleados -->
-            <h3 class="mt-5">Empleados</h3>
-            <table class="table table-bordered">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Puesto</th>
-                        <th>Departamento</th>
-                        <th>Clave</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach($empleados as $empleado){ ?>
-                    <tr>
-                        <td><?php echo $empleado['puesto']; ?></td>
-                        <td><?php echo $empleado['departamento']; ?></td>
-                        <td><?php echo $empleado['Clave']; ?></td>
-                        <td>
-                        <button onclick="window.location.href='editarEmpleado.php?id=<?php echo $empleado['Clave']; ?>'" class="btn btn-primary btn-sm">Editar</button>
-                        <button onclick="window.location.href='eliminarEmpleado.php?id=<?php echo $empleado['Clave']; ?>'" class="btn btn-danger btn-sm">Eliminar</button>
-                        </td>
-                    </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
+                                <div>
+                                    <button class="btn btn-primary btn-block font-weight-bold py-3"
+                                        type="submit">Reservar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- Administration End -->
+    <!-- Reservation End -->
 
 
     <!-- Footer Start -->
@@ -162,7 +196,7 @@
                 <div class="w-100">
                     <div class="input-group">
                         <input type="text" class="form-control border-light" style="padding: 25px;"
-                            placeholder="Correo">
+                            placeholder="Your Email">
                         <div class="input-group-append">
                             <button class="btn btn-primary font-weight-bold px-3">Suscribirse</button>
                         </div>

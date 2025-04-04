@@ -19,7 +19,7 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
     <meta content="Free Website Template" name="description">
 
     <!-- Favicon -->
-    <link href="../img/ALGRANO.png" rel="icon">
+    <link href="../img/LogoFavicon.png" rel="icon">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -41,8 +41,8 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
 
 <body>
     <?php if ($_SESSION['rol'] == "invitado") { ?>
-        <div class="bg-warning text-center py-2">
-            <h4 class="text-dark m-0"><i class="fas fa-user-clock mr-2"></i>MODO INVITADO</h4>
+        <div style="background-color: #DA9F5B;" class="text-center py-2">
+            <h4 class="text-black m-0"><i class="fas fa-user-clock mr-2"></i>MODO INVITADO</h4>
         </div>
     <?php } ?>
     <div id="loaderPagina" class="section_loader">
@@ -66,33 +66,29 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
                     <a href="sobreNosotros.html" class="nav-item nav-link">Sobre nosotros</a>
                     <a href="servicios.html" class="nav-item nav-link">Servicios</a>
                     <a href="menu.html" class="nav-item nav-link">Carta</a>
+                    <a href="comentarios.html" class="nav-item nav-link">Testimonio</a>
+                    <a href="contacto.html" class="nav-item nav-link">Contacto</a>
+                </div>
+                <?php if ($_SESSION['rol'] == "invitado") { ?>
+                    <a href="login.html" class="nav-item nav-link btn btn-primary font-weight-bold">Iniciar Sesión</a>
+                    <a href="registro.html" class="nav-item nav-link btn btn-secondary font-weight-bold">Regístrate</a>
+                <?php } ?>
+                <?php if ($_SESSION['rol'] == "administrador" || $_SESSION['rol'] == "empleado" || $_SESSION['rol'] == "cliente"): ?>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Páginas</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Mi Cuenta</a>
                         <div class="dropdown-menu text-capitalize" style="background-color: #33211d; border: none;">
-                            <a href="comentarios.html" class="dropdown-item" style="color: #DA9F5B;">Testimonio</a>
+                            <a href="perfil.html" class="dropdown-item" style="color: #DA9F5B;">Perfil</a>
+                            <?php if ($_SESSION['rol'] == "administrador") { ?>
+                                <a href="areaAdmin.php" class="dropdown-item" style="color: #DA9F5B" ;>Administrar</a>
+                            <?php } elseif ($_SESSION['rol'] == "empleado") { ?>
+                                <a href="areaEmpleado.php" class="dropdown-item" style="color: #DA9F5B" ;>Workspace</a>
+                            <?php } ?>
+                            <a href="../Controlador/cerrarSesion_proceso.php" class="dropdown-item"
+                                style="color: #DA9F5B;">Cerrar sesión</a>
                         </div>
                     </div>
-                    <a href="contacto.html" class="nav-item nav-link">Contacto</a>
-                    <?php if ($_SESSION['rol'] == "invitado") { ?>
-                        <a href="login.html" class="nav-item nav-link btn btn-primary font-weight-bold">Iniciar Sesión</a>
-                        <a href="registro.html" class="nav-item nav-link btn btn-secondary font-weight-bold">Regístrate</a>
-                    <?php } ?>
-                    <?php if ($_SESSION['rol'] == "administrador" || $_SESSION['rol'] == "empleado" || $_SESSION['rol'] == "cliente"): ?>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Mi Cuenta</a>
-                            <div class="dropdown-menu text-capitalize" style="background-color: #33211d; border: none;">
-                                <a href="perfil.html" class="dropdown-item" style="color: #DA9F5B;">Perfil</a>
-                                <?php if ($_SESSION['rol'] == "administrador") { ?>
-                                    <a href="areaAdmin.php" class="dropdown-item" style="color: #DA9F5B" ;>Administrar</a>
-                                <?php } elseif ($_SESSION['rol'] == "empleado") { ?>
-                                    <a href="areaEmpleado.php" class="dropdown-item" style="color: #DA9F5B" ;>Workspace</a>
-                                <?php } ?>
-                                <a href="../Controlador/cerrarSesion_proceso.php" class="dropdown-item"
-                                    style="color: #DA9F5B;">Cerrar sesión</a>
-                            </div>
-                        </div>
-                    <?php endif; ?>
-                </div>
+                <?php endif; ?>
+            </div>
         </nav>
     </div>
     <!-- Carousel Start -->
