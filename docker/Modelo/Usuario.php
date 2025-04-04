@@ -23,7 +23,7 @@ class Usuario
      * @param mixed $correo correo electrónico del usuario
      * @param mixed $fechaNacimiento fehca de nacimiento del usuario
      */
-    public function __construct($dni, $nombre, $contrasena, $direccion, $correo, $fechaNacimiento, $idRolUsuario = '01')
+    public function __construct($dni, $nombre, $contrasena, $direccion, $correo, $fechaNacimiento, $idRolUsuario = '1')
     {
         $this->dni = $dni;
         $this->nombre = $nombre;
@@ -99,12 +99,12 @@ class Usuario
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
         $usuarios = [];
-        
+
         $consultaListadoUsuarios = $conexionBD->prepare('SELECT * FROM usuario');
         if ($consultaListadoUsuarios->execute()) {
             $usuarios = $consultaListadoUsuarios->get_result()->fetch_all(MYSQLI_ASSOC);
         }
-        
+
         return $usuarios;
     }
 
@@ -123,13 +123,19 @@ class Usuario
         $fechaNacUsuario = $this->fechaNacimiento;
         $idRolUsuario = $this->idRolUsuario;
         if (noExisteUsuario($dniUsuario, $conexionBD)) {
-            $consultaInsercionUsuario = $conexionBD->prepare('INSERT INTO usuario VALUES (?,?,?,?,?,?,?)');
-            $consultaInsercionUsuario->bind_param('sssssss', $dniUsuario, $nombreUsuario, $contraseñaUsuario, $direccionUsuario, $correoUsuario, $fechaNacUsuario, $idRolUsuario);
-            if ($consultaInsercionUsuario->execute()) {
-                $esValido = true;
+            // Encriptar la contraseña antes de guardarla
+            $contraseñaUsuario = hash("sha512", $contraseñaUsuario);
+            try {
+                $consultaInsercionUsuario = $conexionBD->prepare('INSERT INTO usuario VALUES (?,?,?,?,?,?,?)');
+                $consultaInsercionUsuario->bind_param('sssssss', $dniUsuario, $nombreUsuario, $contraseñaUsuario, $direccionUsuario, $correoUsuario, $fechaNacUsuario, $idRolUsuario);
+                if ($consultaInsercionUsuario->execute()) {
+                    $esValido = true;
+                }
+            } catch (Exception $e) {
+                echo "Error: " . $e->getMessage();
             }
         } else {
-            $consultaInsercionUsuario = $conexionBD->prepare('UPDATE usuario SET usuario = ? , contraseña = ?, direccion = ?, correo = ?, fec_nac = ?, id_rol_usuario = ?  WHERE DNI = ?');
+            $consultaInsercionUsuario = $conexionBD->prepare('UPDATE usuario SET nombre = ? , contraseña = ?, direccion = ?, correo = ?, fecha_nac = ?, id_rol_usuario = ?  WHERE DNI = ?');
             $consultaInsercionUsuario->bind_param('ssssss', $nombreUsuario, $contraseñaUsuario, $direccionUsuario, $correoUsuario, $fechaNacUsuario, $idRolUsuario, $dniUsuario);
             if ($consultaInsercionUsuario->execute()) {
                 $esValido = true;
@@ -137,4 +143,6 @@ class Usuario
         }
         return $esValido ? true : false;
     }
+
+
 }
