@@ -346,7 +346,7 @@ function validarCodigo($codigo, $conexionBD)
 {
     $esValido = false;
     $codigo = validarCadena($codigo);
-    if (noExisteCodigo($codigo, $conexionBD)) {
+    if (noExisteCodigoCliente($codigo, $conexionBD)) {
         $esValido = true;
     }
     return $esValido ? $codigo : false;

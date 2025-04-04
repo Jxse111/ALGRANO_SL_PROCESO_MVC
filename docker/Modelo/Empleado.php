@@ -7,11 +7,13 @@ class Empleado extends Usuario
     // Aquí puedes agregar propiedades y métodos específicos para la clase Empleado
     private $puesto;
     private $departamento;
-    public function __construct($dni, $nombre, $contrasena, $direccion, $correo, $fechaNacimiento, $puesto, $departamento, $idRolUsuario = '03')
+    private $claveUnica;
+    public function __construct($dni, $nombre, $contrasena, $direccion, $correo, $fechaNacimiento, $puesto, $departamento, $claveUnica, $idRolUsuario = '03')
     {
         parent::__construct($dni, $nombre, $contrasena, $direccion, $correo, $fechaNacimiento, $idRolUsuario);
         $this->puesto = $puesto;
         $this->departamento = $departamento;
+        $this->claveUnica = $claveUnica;
     }
 
     public function getPuesto()
@@ -25,6 +27,11 @@ class Empleado extends Usuario
         return $this->departamento;
     }
 
+    public function getClaveUnica()
+    {
+        return $this->claveUnica;
+    }
+    //Método que lista todos los empleados de la base de datos
     public static function listarEmpleados()
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();

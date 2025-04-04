@@ -71,9 +71,6 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
 
                                             // Redirect based on user role
                                             switch ($_SESSION['rol']) {
-                                                case "administrador":
-                                                    header("Location: ../Vista/index.php");
-                                                    exit();
                                                 case "cliente":
                                                     header("Location: ../Vista/index.php");
                                                     exit();

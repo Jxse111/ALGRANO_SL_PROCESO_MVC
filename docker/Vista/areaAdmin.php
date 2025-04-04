@@ -77,26 +77,21 @@
             <table class="table table-bordered">
                 <thead class="thead-dark">
                     <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Teléfono</th>
-                        <th>Acciones</th>
+                        <th>DNI_cliente</th>
+                        <th>Codigo Cliente</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($clientes as $cliente): ?>
+                    <?php foreach($clientes as $cliente){?>
                     <tr>
-                        <td><?php echo $cliente->getId(); ?></td>
-                        <td><?php echo $cliente->getNombre(); ?></td>
-                        <td><?php echo $cliente->getEmail(); ?></td>
-                        <td><?php echo $cliente->getTelefono(); ?></td>
+                        <td><?php echo $cliente['DNI_cliente'] ?></td>
+                        <td><?php echo $cliente['codigo_cliente'] ?></td>
                         <td>
-                            <a href="editarCliente.php?id=<?php echo $cliente->getId(); ?>" class="btn btn-primary btn-sm">Editar</a>
-                            <a href="eliminarCliente.php?id=<?php echo $cliente->getId(); ?>" class="btn btn-danger btn-sm">Eliminar</a>
+                            <button onclick="window.location.href='editarCliente.php?id=<?php echo $cliente['codigo_cliente']; ?>'" class="btn btn-primary btn-sm">Editar</button>
+                            <button onclick="window.location.href='eliminarCliente.php?id=<?php echo $cliente['codigo_cliente']; ?>'" class="btn btn-danger btn-sm">Eliminar</button>
                         </td>
                     </tr>
-                    <?php endforeach; ?>
+                    <?php } ?>
                 </tbody>
             </table>
 
@@ -105,26 +100,23 @@
             <table class="table table-bordered">
                 <thead class="thead-dark">
                     <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Cargo</th>
-                        <th>Acciones</th>
+                        <th>Puesto</th>
+                        <th>Departamento</th>
+                        <th>Clave</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($empleados as $empleado): ?>
+                    <?php foreach($empleados as $empleado){ ?>
                     <tr>
-                        <td><?php echo $empleado->getId(); ?></td>
-                        <td><?php echo $empleado->getNombre(); ?></td>
-                        <td><?php echo $empleado->getEmail(); ?></td>
-                        <td><?php echo $empleado->getCargo(); ?></td>
+                        <td><?php echo $empleado['puesto']; ?></td>
+                        <td><?php echo $empleado['departamento']; ?></td>
+                        <td><?php echo $empleado['Clave']; ?></td>
                         <td>
-                            <a href="editarEmpleado.php?id=<?php echo $empleado->getId(); ?>" class="btn btn-primary btn-sm">Editar</a>
-                            <a href="eliminarEmpleado.php?id=<?php echo $empleado->getId(); ?>" class="btn btn-danger btn-sm">Eliminar</a>
+                        <button onclick="window.location.href='editarEmpleado.php?id=<?php echo $empleado['Clave']; ?>'" class="btn btn-primary btn-sm">Editar</button>
+                        <button onclick="window.location.href='eliminarEmpleado.php?id=<?php echo $empleado['Clave']; ?>'" class="btn btn-danger btn-sm">Eliminar</button>
                         </td>
                     </tr>
-                    <?php endforeach; ?>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

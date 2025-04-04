@@ -60,7 +60,7 @@ function noExisteDireccion($direccion, $conexionBD)
     $consultaDireccionesExistentes = $conexionBD->query('SELECT direccion FROM usuario');
     $direcciones = $consultaDireccionesExistentes->fetch_all(MYSQLI_ASSOC);
     foreach ($direcciones as $direccionExistente) {
-        if ($direccionExistente['fec_nac'] != $direccion) {
+        if ($direccionExistente['direccion'] != $direccion) {
             $direccionNoExiste = true;
         }
     }
@@ -70,7 +70,7 @@ function noExisteDireccion($direccion, $conexionBD)
 function noExisteFechaNacimiento($fecha, $conexionBD)
 {
     $fechaNoExiste = false;
-    $consultaFechasExistentes = $conexionBD->query('SELECT correo FROM usuario');
+    $consultaFechasExistentes = $conexionBD->query('SELECT fec_nac FROM usuario');
     $fechas = $consultaFechasExistentes->fetch_all(MYSQLI_ASSOC);
     foreach ($fechas as $fechaExistente) {
         if ($fechaExistente['fec_nac'] != $fecha) {
