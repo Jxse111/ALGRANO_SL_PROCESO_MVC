@@ -137,6 +137,4 @@ class Usuario
         }
         return $esValido ? true : false;
     }
-
-
 }

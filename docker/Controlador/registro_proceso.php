@@ -1,11 +1,3 @@
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-
-<body>
     <?php
     require_once './funcionesValidacion.php';
     require_once '../Modelo/funcionesBaseDeDatos.php';
@@ -15,7 +7,7 @@
     $conexionBD = Algrano::conectarAlgranoMySQLi();
     $mensajeError = "Lista de mensajes de error: ";
     $mensajeExito = "Lista de mensajes de éxito: ";
-    echo "Buenos dias, bienvenido a la página de registro de Algrano. <br>";
+    "Buenos dias, bienvenido a la página de registro de Algrano. <br>";
     if (filter_has_var(INPUT_POST, "crearCuenta")) {
         try {
             //Validación de los datos recogidos
@@ -30,10 +22,13 @@
             if ($camposValidados) {
                 $mensajeExito .= "Datos recibidos y validados correctamente. ";
                 $usuarioRegistro = new Usuario($dniValidado, $usuarioValidado, $contraseñaValidada, $direcciónValidada, $correoValidado, $fechaNacimientoValidada);
-                print_r($usuarioRegistro);
+                print_r(value: $usuarioRegistro);
                 echo "Usuario en proceso de registro...";
-                if ($usuarioRegistro->guardarUsuario()) {
-                    header("Location: ../Vista/login.html");
+                if (!empty($usuarioRegistro)) {
+                    echo "No estoy vacio";
+                    if($usuarioRegistro->guardarUsuario()){
+
+                    }
                 }
             }
         } catch (Exception $ex) {
@@ -44,6 +39,3 @@
         echo "No se ha podido crear la cuenta, no se han recibido los datos del formulario.";
     }
     ?>
-</body>
-
-</html>

@@ -73,7 +73,14 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
                                             switch ($_SESSION['rol']) {
                                                 case "cliente":
                                                     header("Location: ../Vista/index.php");
-                                                    exit();
+                                                    break;
+                                                case "empleado":
+                                                    header("Location: ../Vista/index.php");
+                                                    break;
+                                                case "administrador":
+                                                    header("Location: ../Vista/index.php");
+                                                    break;
+
                                             }
                                         } else {
                                             $mensajeError .= "Tipo de rol no encontrado.\n";
@@ -102,39 +109,3 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
     }
 }
 ?>
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>Proceso de Login</title>
-</head>
-
-<body>
-    <h2>LISTA DE MENSAJES: </h2>
-    <?php if ($mensajeError != "Mensajes de error : " && !$registroExistoso) { ?>
-        <h2>Mensajes de error: </h2>
-        <ul>
-            <li><?php echo nl2br($mensajeError); ?></li>
-        </ul>
-    <?php } ?>
-
-    <?php if ($mensajeExito != "Mensajes de éxito: " && $registroExistoso) { ?>
-        <h2>Mensajes de éxito: </h2>
-        <ul>
-            <li><?php echo nl2br($mensajeExito); ?></li>
-        </ul>
-    <?php } ?>
-
-    <br><br>
-    <?php if ($registroExistoso) { ?>
-        <form action="sesionUsuario.php" method="post">
-            <button type="submit" name="Acceder">Acceder</button>
-        </form>
-    <?php } else { ?>
-        <a href="../Vista/index.php">Volver al inicio</a>
-    <?php } ?>
-</body>
-
-</html>

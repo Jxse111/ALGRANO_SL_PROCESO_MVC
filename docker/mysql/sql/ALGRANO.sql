@@ -40,21 +40,19 @@ CREATE TABLE IF NOT EXISTS empleado (
 CREATE TABLE IF NOT EXISTS producto (
     id_producto CHAR(9) PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
+    precio_ud DECIMAL(10, 2) NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+-- Tabla Productos Detalle
+CREATE TABLE IF NOT EXISTS productos_detalle (
+    id_producto_detalle CHAR(9) PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
     tipo ENUM('Grano', 'Molido') NOT NULL,
     descripcion TEXT,
     stock INT NOT NULL DEFAULT 0,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     origen VARCHAR(100),
-    precio_ud DECIMAL(10, 2) NOT NULL
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
-
--- Tabla Realiza
-CREATE TABLE IF NOT EXISTS realiza (
-    DNI_usuario CHAR(9) NOT NULL,
-    id_producto CHAR(9) NOT NULL,
-    PRIMARY KEY(DNI_usuario, id_producto),
-    FOREIGN KEY (DNI_usuario) REFERENCES usuario (DNI) ON DELETE CASCADE,
-    FOREIGN KEY (id_producto) REFERENCES producto (id_producto) ON DELETE CASCADE
+    FOREIGN KEY (id_producto_detalle) REFERENCES producto (id_producto) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 -- Tabla Pedido
@@ -67,19 +65,8 @@ CREATE TABLE IF NOT EXISTS pedido (
     estado ENUM('Pendiente','Pagado','Enviado','Entregado','Cancelado') DEFAULT 'Pendiente'
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
--- Tabla Compone
-CREATE TABLE IF NOT EXISTS compone(
-    id_producto CHAR(9) NOT NULL,
-    codigo_pedido CHAR(9) NOT NULL,
-    PRIMARY KEY(id_producto, codigo_pedido),
-    FOREIGN KEY (id_producto) 
-    REFERENCES producto (id_producto) ON DELETE CASCADE,
-    FOREIGN KEY (codigo_pedido) 
-    REFERENCES pedido (codigo_pedido) ON DELETE CASCADE
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
-
 -- Tabla Detalles Pedido
-CREATE TABLE IF NOT EXISTS detalle (
+CREATE TABLE IF NOT EXISTS pedidos_detalle (
     codigo_detalle CHAR(9) PRIMARY KEY NOT NULL,
     subtotal DECIMAL(10, 2) NOT NULL,
     cantidad_descrita INT NOT NULL,
