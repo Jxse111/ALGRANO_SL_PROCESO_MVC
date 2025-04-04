@@ -29,17 +29,17 @@
 </head>
 
 <body>
-   <!-- Navbar Start -->
-   <div class="container-fluid p-0 nav-bar">
-    <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
-        <a href="index.php" class="navbar-brand px-lg-4 m-0">
-            <h1 class="m-0 display-4 text-uppercase text-white"><img src="../img/ALGRANO.png" alt="" height="80"
-                    width="80"></h1>
-        </a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0 nav-bar">
+        <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
+            <a href="index.php" class="navbar-brand px-lg-4 m-0">
+                <h1 class="m-0 display-4 text-uppercase text-white"><img src="../img/ALGRANO.png" alt="" height="80"
+                        width="80"></h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
         </nav>
     </div>
     <!-- Navbar End -->
@@ -53,7 +53,7 @@
             <div class="d-inline-flex mb-lg-5">
                 <p class="m-0 text-white"><a class="text-white" href="index.php">Inicio</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Administración</p> 
+                <p class="m-0 text-white">Administración</p>
             </div>
         </div>
     </div>
@@ -64,58 +64,129 @@
     <div>
         <!-- Aquí puedes agregar el contenido de la página de administración -->
         <h2 class="text-center">Bienvenido a la sección de administración</h2>
-        <?php 
-        require_once '../Modelo/Cliente.php';
-        require_once '../Modelo/Empleado.php';
+        <?php
+        require_once '../Modelo/Usuario.php';
         //Lista de Clientes y empleados a administrar
-        $clientes = Cliente::listarClientes(); // Obtiene los clientes  
-        $empleados = Empleado::listarEmpleados(); // Obtiene los empleados
+        $usuarios = Usuario::listarUsuarios(); // Obtiene los usuario  
+        $empleados = array_filter($usuarios, function ($usuario) {
+            return $usuario['id_rol_usuario'] == 2;
+        });
+        $clientes = array_filter($usuarios, function ($usuario) {
+            return $usuario['id_rol_usuario'] == 1;
+        });
         ?>
         <div class="container mt-5">
             <!-- Tabla de Clientes -->
-            <h3>Clientes</h3>
+            <h3>Usuarios</h3>
             <table class="table table-bordered">
                 <thead class="thead-dark">
                     <tr>
-                        <th>DNI_cliente</th>
-                        <th>Codigo Cliente</th>
+                        <th>DNI</th>
+                        <th>Usuario</th>
+                        <th>Direccion</th>
+                        <th>Correo</th>
+                        <th>Fecha de nacimiento</th>
+                        <th>Id_rol</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($clientes as $cliente){?>
-                    <tr>
-                        <td><?php echo $cliente['DNI_cliente'] ?></td>
-                        <td><?php echo $cliente['codigo_cliente'] ?></td>
-                        <td>
-                            <button onclick="window.location.href='editarCliente.php?id=<?php echo $cliente['codigo_cliente']; ?>'" class="btn btn-primary btn-sm">Editar</button>
-                            <button onclick="window.location.href='eliminarCliente.php?id=<?php echo $cliente['codigo_cliente']; ?>'" class="btn btn-danger btn-sm">Eliminar</button>
-                        </td>
-                    </tr>
+                    <?php foreach ($usuarios as $usuario) { ?>
+                        <tr>
+                            <td><?php echo $usuario['DNI'] ?></td>
+                            <td><?php echo $usuario['usuario'] ?></td>
+                            <td><?php echo $usuario['direccion'] ?></td>
+                            <td><?php echo $usuario['correo'] ?></td>
+                            <td><?php echo $usuario['fec_nac'] ?></td>
+                            <td><?php echo $usuario['id_rol_usuario'] ?></td>
+                            <td>
+                                <button
+                                    onclick="window.location.href='editarEmpleado.php?id=<?php echo $usuario['DNI']; ?>'"
+                                    class="btn btn-primary btn-sm">Editar</button>
+                            </td>
+                            <td> <button
+                                    onclick="window.location.href='eliminarEmpleado.php?id=<?php echo $usuario['DNI']; ?>'"
+                                    class="btn btn-danger btn-sm">Eliminar</button>
+                            </td>
+                        </tr>
                     <?php } ?>
                 </tbody>
             </table>
+
 
             <!-- Tabla de Empleados -->
             <h3 class="mt-5">Empleados</h3>
             <table class="table table-bordered">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Puesto</th>
-                        <th>Departamento</th>
-                        <th>Clave</th>
+                        <th>DNI</th>
+                        <th>Usuario</th>
+                        <th>Direccion</th>
+                        <th>Correo</th>
+                        <th>Fecha de nacimiento</th>
+                        <th>Id_rol</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($empleados as $empleado){ ?>
+                    <?php foreach ($empleados as $empleado) { ?>
+                        <tr>
+                            <td><?php echo $empleado['DNI'] ?></td>
+                            <td><?php echo $empleado['usuario'] ?></td>
+                            <td><?php echo $empleado['direccion'] ?></td>
+                            <td><?php echo $empleado['correo'] ?></td>
+                            <td><?php echo $empleado['fec_nac'] ?></td>
+                            <td><?php echo $empleado['id_rol_usuario'] ?></td>
+                            <td>
+                                <button
+                                    onclick="window.location.href='editarEmpleado.php?id=<?php echo $empleado['DNI']; ?>'"
+                                    class="btn btn-primary btn-sm">Editar</button>
+                            </td>
+                            <td> <button
+                                    onclick="window.location.href='eliminarEmpleado.php?id=<?php echo $empleado['DNI']; ?>'"
+                                    class="btn btn-danger btn-sm">Eliminar</button>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+
+            <!-- Tabla de Clientes -->
+            <h3 class="mt-5">Clientes</h3>
+            <table class="table table-bordered">
+                <thead class="thead-dark">
                     <tr>
-                        <td><?php echo $empleado['puesto']; ?></td>
-                        <td><?php echo $empleado['departamento']; ?></td>
-                        <td><?php echo $empleado['Clave']; ?></td>
-                        <td>
-                        <button onclick="window.location.href='editarEmpleado.php?id=<?php echo $empleado['Clave']; ?>'" class="btn btn-primary btn-sm">Editar</button>
-                        <button onclick="window.location.href='eliminarEmpleado.php?id=<?php echo $empleado['Clave']; ?>'" class="btn btn-danger btn-sm">Eliminar</button>
-                        </td>
+                        <th>DNI</th>
+                        <th>Usuario</th>
+                        <th>Direccion</th>
+                        <th>Correo</th>
+                        <th>Fecha de nacimiento</th>
+                        <th>Id_rol</th>
+                        <th></th>
+                        <th></th>
                     </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($clientes as $cliente) { ?>
+                        <tr>
+                            <td><?php echo $cliente['DNI'] ?></td>
+                            <td><?php echo $cliente['usuario'] ?></td>
+                            <td><?php echo $cliente['direccion'] ?></td>
+                            <td><?php echo $cliente['correo'] ?></td>
+                            <td><?php echo $cliente['fec_nac'] ?></td>
+                            <td><?php echo $cliente['id_rol_usuario'] ?></td>
+                            <td>
+                                <button
+                                    onclick="window.location.href='editarEmpleado.php?id=<?php echo $cliente['DNI']; ?>'"
+                                    class="btn btn-primary btn-sm">Editar</button>
+                            </td>
+                            <td> <button
+                                    onclick="window.location.href='eliminarEmpleado.php?id=<?php echo $cliente['DNI']; ?>'"
+                                    class="btn btn-danger btn-sm">Eliminar</button>
+                            </td>
+                        </tr>
                     <?php } ?>
                 </tbody>
             </table>
