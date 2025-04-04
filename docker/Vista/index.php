@@ -69,7 +69,6 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Páginas</a>
                         <div class="dropdown-menu text-capitalize" style="background-color: #33211d; border: none;">
-                            <a href="reservas.html" class="dropdown-item" style="color: #DA9F5B;">Reservas</a>
                             <a href="comentarios.html" class="dropdown-item" style="color: #DA9F5B;">Testimonio</a>
                         </div>
                     </div>
