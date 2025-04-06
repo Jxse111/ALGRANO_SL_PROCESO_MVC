@@ -17,12 +17,12 @@ if (filter_has_var(INPUT_POST, "crearCuenta")) {
         $correoValidado = validarCorreo(filter_input(INPUT_POST, "correo"), $conexionBD);
         $fechaNacimientoValidada = validarFechaNacimiento(filter_input(INPUT_POST, "fec_nac"), $conexionBD);
         $camposValidados = $dniValidado && $usuarioValidado && $contraseñaValidada && $direcciónValidada && $correoValidado && $fechaNacimientoValidada;
-        //echo var_dump($dniValidado, $usuarioValidado, $contraseñaValidada, $direcciónValidada, $correoValidado, $fechaNacimientoValidada);
+        echo var_dump($dniValidado, $usuarioValidado, $contraseñaValidada, $direcciónValidada, $correoValidado, $fechaNacimientoValidada);
         if ($camposValidados) {
             $mensajeExito .= "Datos recibidos y validados correctamente. ";
             $usuarioRegistro = new Usuario($dniValidado, $usuarioValidado, $contraseñaValidada, $direcciónValidada, $correoValidado, $fechaNacimientoValidada);
-            //print_r(value: $usuarioRegistro);
-            //echo "Usuario en proceso de registro...";
+            print_r(value: $usuarioRegistro);
+            echo "Usuario en proceso de registro...";
             if ($usuarioRegistro->guardarUsuario()) {
                 header("Location: ../Vista/login.html");
             }
