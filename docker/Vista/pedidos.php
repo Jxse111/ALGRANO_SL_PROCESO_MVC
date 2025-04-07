@@ -73,8 +73,8 @@ if ($_SESSION['rol'] != "cliente") {
         <?php
         require_once '../Modelo/Pedido.php';
 
-        $pedidos = Pedido::listarPedidos(); // Obtiene los pedidos realizados por ese usuario  
-        $pedidosDetallados = Pedido::listarPedidosDetallados(); // Obtiene los pedidos detallados
+        $pedidos = Pedido::obtenerPedidosCliente(); // Obtiene los pedidos realizados por ese usuario  
+        //$pedidosDetallados = Pedido::listarPedidosDetallados(); // Obtiene los pedidos detallados
         ?>
         <div class="container mt-5">
         <div class="container mt-5">
