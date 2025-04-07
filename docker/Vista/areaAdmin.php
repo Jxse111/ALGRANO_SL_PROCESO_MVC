@@ -183,7 +183,6 @@ if ($_SESSION['rol'] != "administrador") {
                             <td><?php echo $cliente['direccion'] ?></td>
                             <td><?php echo $cliente['correo'] ?></td>
                             <td><?php echo $cliente['fec_nac'] ?></td>
-                            <td><?php echo $cliente['Id_Cliente'] ?></td>
                             <td><?php echo $cliente['id_rol_usuario'] ?></td>
                             <td>
                                 <button

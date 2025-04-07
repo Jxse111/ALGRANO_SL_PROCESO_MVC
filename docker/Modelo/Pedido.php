@@ -3,16 +3,16 @@
 class Pedido
 {
     private $codigo;
-    private $nombre;
+    private $dniCliente;
     private $tipo;
     private $precioTotal;
     private $fechaPedido;
     private $estado;
 
-    public function __construct($codigo, $nombre, $tipo, $precioTotal, $fechaPedido, $estado)
+    public function __construct($codigo, $dniCliente, $tipo, $precioTotal, $fechaPedido, $estado)
     {
         $this->codigo = $codigo;
-        $this->nombre = $nombre;
+        $this->dniCliente = $dniCliente;
         $this->tipo = $tipo;
         $this->precioTotal = $precioTotal;
         $this->fechaPedido = $fechaPedido;
@@ -25,9 +25,9 @@ class Pedido
         return $this->codigo;
     }
 
-    public function getNombre()
+    public function getdniCliente()
     {
-        return $this->nombre;
+        return $this->dniCliente;
     }
 
     public function getTipo()
@@ -50,11 +50,6 @@ class Pedido
         return $this->estado;
     }
     //Setter
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-    }
-
     public function setTipo($tipo)
     {
         $this->tipo = $tipo;
@@ -75,12 +70,12 @@ class Pedido
         $this->estado = $estado;
     }
 
-    public static function obtenerPedidosCliente($idCliente)
+    public static function obtenerPedidosCliente($dniCliente)
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
         $pedidos = [];
-        $consulta = $conexionBD->prepare('SELECT p.* FROM pedido p INNER JOIN usuario u ON p.id_usuario = u.id WHERE u.id = ? AND u.rol = 1');
-        $consulta->bind_param('i', $idCliente);
+        $consulta = $conexionBD->prepare('SELECT p.* FROM pedido p INNER JOIN usuario u ON p.DNI_Cliente = u.DNI WHERE u.DNI = ? AND u.rol = 1');
+        $consulta->bind_param('i', $dniCliente);
         if ($consulta->execute()) {
             $pedidos = $consulta->get_result()->fetch_all(MYSQLI_ASSOC);
         }
