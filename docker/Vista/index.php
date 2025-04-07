@@ -54,15 +54,15 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
     <div class="container-fluid p-0 nav-bar">
         <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
             <a href="index.php" class="navbar-brand px-lg-4 m-0">
-                <h1 class="m-0 display-4 text-uppercase text-white"><img src="../img/ALGRANO.png" alt="" height="80"
-                        width="80"></h1>
+                <h1 class="m-0 display-4 text-uppercase text-white">
+                    <img src="../img/ALGRANO.png" alt="Logo" height="80" width="80">
+                </h1>
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto p-4">
-                    <a href="index.php" class="nav-item nav-link active">Inicio</a>
                     <a href="sobreNosotros.php" class="nav-item nav-link">Sobre nosotros</a>
                     <a href="servicios.php" class="nav-item nav-link">Servicios</a>
                     <a href="menu.php" class="nav-item nav-link">Carta</a>
@@ -75,8 +75,10 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
                 <?php } ?>
                 <?php if ($_SESSION['rol'] == "administrador" || $_SESSION['rol'] == "empleado" || $_SESSION['rol'] == "cliente"): ?>
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Mi Cuenta</a>
-                        <div class="dropdown-menu text-capitalize" style="background-color: #33211d; border: none;">
+                        <img src="../img/profilePic.png" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                            alt="Mi Cuenta" style="width: 100px; height: 80px; border-radius: 50%; margin-right: 20px;">
+                        <div class="dropdown-menu text-capitalize" style="background-color: rgba(27, 18, 15, 0.8); backdrop-filter: blur(8px); border-radius: 10px; left: -30px;">
+
                             <a href="perfil.html" class="dropdown-item" style="color: #DA9F5B;">Perfil</a>
                             <?php if ($_SESSION['rol'] == "administrador") { ?>
                                 <a href="areaAdmin.php" class="dropdown-item" style="color: #DA9F5B" ;>Administrar</a>

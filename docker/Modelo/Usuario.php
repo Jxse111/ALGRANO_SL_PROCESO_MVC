@@ -68,11 +68,16 @@ class Usuario
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
         $esValido = false;
-        if (!noExisteUsuario($dniUsuario, $conexionBD)) {
-            $consultaEliminacionUsuario = $conexionBD->prepare('DELETE FROM usuario WHERE dni = ?');
-            $consultaEliminacionUsuario->bind_param('s', $dniUsuario);
-            if ($consultaEliminacionUsuario->execute()) {
-                $esValido = true;
+        if (existeUsuario($dniUsuario, $conexionBD)) {
+            // Eliminar el usuario de la base de datos
+            try {
+                $consultaEliminacionUsuario = $conexionBD->prepare('DELETE FROM usuario WHERE DNI = ?');
+                $consultaEliminacionUsuario->bind_param('s', $dniUsuario);
+                if ($consultaEliminacionUsuario->execute()) {
+                    $esValido = true;
+                }
+            } catch (Exception $e) {
+                echo "Error: " . $e->getMessage();
             }
         }
         return $esValido ? true : false;
@@ -84,7 +89,7 @@ class Usuario
         $conexionBD = Algrano::conectarAlgranoMySQLi();
         $esValido = false;
         if (!noExisteUsuario($dniUsuario, $conexionBD)) {
-            $consultaBusquedaUsuario = $conexionBD->prepare('SELECT * FROM usuario WHERE dni = ?');
+            $consultaBusquedaUsuario = $conexionBD->prepare('SELECT * FROM usuario WHERE DNI = ?');
             $consultaBusquedaUsuario->bind_param('s', $dniUsuario);
             if ($consultaBusquedaUsuario->execute()) {
                 $datosUsuario = $consultaBusquedaUsuario->fetch_all();

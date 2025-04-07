@@ -54,20 +54,22 @@ session_start();
             <?php } ?>
             <?php if ($_SESSION['rol'] == "administrador" || $_SESSION['rol'] == "empleado" || $_SESSION['rol'] == "cliente"): ?>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Mi Cuenta</a>
-                    <div class="dropdown-menu text-capitalize" style="background-color: #33211d; border: none;">
-                        <a href="perfil.html" class="dropdown-item" style="color: #DA9F5B;">Perfil</a>
-                        <?php if ($_SESSION['rol'] == "administrador") { ?>
-                            <a href="areaAdmin.php" class="dropdown-item" style="color: #DA9F5B" ;>Administrar</a>
-                        <?php } elseif ($_SESSION['rol'] == "empleado") { ?>
-                            <a href="areaEmpleado.php" class="dropdown-item" style="color: #DA9F5B" ;>Workspace</a>
-                        <?php } ?>
-                        <a href="../Controlador/cerrarSesion_proceso.php" class="dropdown-item"
-                            style="color: #DA9F5B;">Cerrar sesión</a>
+                        <img src="../img/profilePic.png" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                            alt="Mi Cuenta" style="width: 100px; height: 80px; border-radius: 50%; margin-right: 20px;">
+                        <div class="dropdown-menu text-capitalize" style="background-color: rgba(27, 18, 15, 0.8); backdrop-filter: blur(8px); border-radius: 10px; left: -30px;">
+
+                            <a href="perfil.html" class="dropdown-item" style="color: #DA9F5B;">Perfil</a>
+                            <?php if ($_SESSION['rol'] == "administrador") { ?>
+                                <a href="areaAdmin.php" class="dropdown-item" style="color: #DA9F5B" ;>Administrar</a>
+                            <?php } elseif ($_SESSION['rol'] == "empleado") { ?>
+                                <a href="areaEmpleado.php" class="dropdown-item" style="color: #DA9F5B" ;>Workspace</a>
+                            <?php } ?>
+                            <a href="../Controlador/cerrarSesion_proceso.php" class="dropdown-item"
+                                style="color: #DA9F5B;">Cerrar sesión</a>
+                        </div>
                     </div>
-                </div>
-            <?php endif; ?>
-        </div>
+                <?php endif; ?>
+            </div>
         </nav>
     </div>
     <!-- Navbar End -->

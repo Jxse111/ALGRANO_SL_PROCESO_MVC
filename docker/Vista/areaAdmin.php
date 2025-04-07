@@ -85,7 +85,7 @@ if ($_SESSION['rol'] != "administrador") {
             <!-- Tabla de Clientes -->
             <h3>Usuarios</h3>
             <table class="table table-bordered">
-                <thead class="thead-dark">
+                <thead style="background-color: #362421; color: #DB9F5B;">
                     <tr>
                         <th>DNI</th>
                         <th>Usuario</th>
@@ -97,7 +97,7 @@ if ($_SESSION['rol'] != "administrador") {
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="background-color:#DFB767; color: #362421;">
                     <?php foreach ($usuarios as $usuario) { ?>
                         <tr>
                             <td><?php echo $usuario['DNI'] ?></td>
@@ -108,11 +108,11 @@ if ($_SESSION['rol'] != "administrador") {
                             <td><?php echo $usuario['id_rol_usuario'] ?></td>
                             <td>
                                 <button
-                                    onclick="window.location.href='editarEmpleado.php?id=<?php echo $usuario['DNI']; ?>'"
+                                    onclick="window.location.href='../Controlador/editarUsuario.php?id=<?php echo $usuario['DNI']; ?>'"
                                     class="btn btn-primary btn-sm">Editar</button>
                             </td>
                             <td> <button
-                                    onclick="window.location.href='eliminarEmpleado.php?id=<?php echo $usuario['DNI']; ?>'"
+                                    onclick="return confirm('¿Desea eliminar este usuario?') ? window.location.href='../Controlador/eliminarUsuario.php?id=<?php echo $usuario['DNI']; ?>' : false"
                                     class="btn btn-danger btn-sm">Eliminar</button>
                             </td>
                         </tr>
@@ -124,7 +124,7 @@ if ($_SESSION['rol'] != "administrador") {
             <!-- Tabla de Empleados -->
             <h3 class="mt-5">Empleados</h3>
             <table class="table table-bordered">
-                <thead class="thead-dark">
+                <thead style="background-color: #362421; color: #DB9F5B;">
                     <tr>
                         <th>DNI</th>
                         <th>Usuario</th>
@@ -136,7 +136,7 @@ if ($_SESSION['rol'] != "administrador") {
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="background-color: #DFB767; color: #362421;">
                     <?php foreach ($empleados as $empleado) { ?>
                         <tr>
                             <td><?php echo $empleado['DNI'] ?></td>
@@ -147,11 +147,12 @@ if ($_SESSION['rol'] != "administrador") {
                             <td><?php echo $empleado['id_rol_usuario'] ?></td>
                             <td>
                                 <button
-                                    onclick="window.location.href='editarEmpleado.php?id=<?php echo $empleado['DNI']; ?>'"
+                                    onclick="window.location.href='../Controlador/editarUsuario.php?id=<?php echo $empleado['DNI']; ?>'"
                                     class="btn btn-primary btn-sm">Editar</button>
                             </td>
                             <td> <button
-                                    onclick="window.location.href='eliminarEmpleado.php?id=<?php echo $empleado['DNI']; ?>'"
+                            <button
+                                    onclick="return confirm('¿Desea eliminar este empleado?') ? window.location.href='../Controlador/eliminarUsuario.php?id=<?php echo $usuario['DNI']; ?>' : false"
                                     class="btn btn-danger btn-sm">Eliminar</button>
                             </td>
                         </tr>
@@ -162,7 +163,7 @@ if ($_SESSION['rol'] != "administrador") {
             <!-- Tabla de Clientes -->
             <h3 class="mt-5">Clientes</h3>
             <table class="table table-bordered">
-                <thead class="thead-dark">
+                <thead style="background-color: #362421; color: #DB9F5B;">
                     <tr>
                         <th>DNI</th>
                         <th>Usuario</th>
@@ -174,7 +175,7 @@ if ($_SESSION['rol'] != "administrador") {
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="background-color:#DFB767; color: #362421;">
                     <?php foreach ($clientes as $cliente) { ?>
                         <tr>
                             <td><?php echo $cliente['DNI'] ?></td>
@@ -185,11 +186,12 @@ if ($_SESSION['rol'] != "administrador") {
                             <td><?php echo $cliente['id_rol_usuario'] ?></td>
                             <td>
                                 <button
-                                    onclick="window.location.href='editarEmpleado.php?id=<?php echo $cliente['DNI']; ?>'"
+                                    onclick="window.location.href='../Controlador/editarUsuario.php?id=<?php echo $cliente['DNI']; ?>'"
                                     class="btn btn-primary btn-sm">Editar</button>
                             </td>
                             <td> <button
-                                    onclick="window.location.href='eliminarEmpleado.php?id=<?php echo $cliente['DNI']; ?>'"
+                            <button
+                                    onclick="return confirm('¿Desea eliminar este cliente?') ? window.location.href='../Controlador/eliminarUsuario.php?id=<?php echo $usuario['DNI']; ?>' : false"
                                     class="btn btn-danger btn-sm">Eliminar</button>
                             </td>
                         </tr>

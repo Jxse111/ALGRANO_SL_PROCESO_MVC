@@ -17,6 +17,7 @@ function noExisteCodigoCliente($codigo, $conexionBD)
 function noExisteUsuario($dni, $conexionBD)
 {
     $usuarioNoExiste = false;
+
     $consultaUsuariosExistentes = $conexionBD->query("SELECT DNI FROM usuario");
     $usuarios = $consultaUsuariosExistentes->fetch_all(MYSQLI_ASSOC);
     foreach ($usuarios as $usuarioExistente) {
@@ -26,7 +27,6 @@ function noExisteUsuario($dni, $conexionBD)
     }
     return $usuarioNoExiste ? true : false;
 }
-
 
 function noExisteContraseña($contraseña, $conexionBD)
 {
@@ -80,13 +80,13 @@ function noExisteFechaNacimiento($fecha, $conexionBD)
     return $fechaNoExiste ? true : false;
 }
 
-function existeUsuario($usuario, $conexionBD)
+function existeUsuario($dni, $conexionBD)
 {
     $usuarioNoExiste = false;
-    $consultaUsuariosExistentes = $conexionBD->query("SELECT usuario FROM usuario");
+    $consultaUsuariosExistentes = $conexionBD->query("SELECT DNI FROM usuario");
     $usuarios = $consultaUsuariosExistentes->fetch_all(MYSQLI_ASSOC);
     foreach ($usuarios as $usuarioExistente) {
-        if ($usuarioExistente['usuario'] == $usuario) {
+        if ($usuarioExistente['DNI'] == $dni) {
             $usuarioNoExiste = true;
         }
     }
