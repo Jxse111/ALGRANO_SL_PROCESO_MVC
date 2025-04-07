@@ -136,10 +136,22 @@ class Producto
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
         $productos = [];
-            $consultaBusquedaProductos = $conexionBD->prepare('SELECT * FROM producto');
-            if ($consultaBusquedaProductos->execute()) {
-                $productos = $consultaBusquedaProductos->get_result()->fetch_all(MYSQLI_ASSOC);
-            }
+        $consultaBusquedaProductos = $conexionBD->prepare('SELECT * FROM producto');
+        if ($consultaBusquedaProductos->execute()) {
+            $productos = $consultaBusquedaProductos->get_result()->fetch_all(MYSQLI_ASSOC);
+        }
+
+        return $productos;
+    }
+
+    public static function listarProductosDetallados()
+    {
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
+        $productos = [];
+        $consultaBusquedaProductos = $conexionBD->prepare('SELECT * FROM productos_detalle');
+        if ($consultaBusquedaProductos->execute()) {
+            $productos = $consultaBusquedaProductos->get_result()->fetch_all(MYSQLI_ASSOC);
+        }
 
         return $productos;
     }
@@ -157,15 +169,21 @@ class Producto
         $origenProducto = $this->origen;
         $precioUnitarioProducto = $this->precioUnitario;
         if (noExisteProducto($idProducto, $conexionBD)) {
-            $consultaInsercionProducto = $conexionBD->prepare('INSERT INTO producto VALUES (?,?,?,?,?,?,?,?)');
-            $consultaInsercionProducto->bind_param('ssssdssd', $idProducto, $nombreProducto, $tipoProducto, $descripcionProducto, $stockProducto, $fechaCreacionProducto, $origenProducto, $precioUnitarioProducto);
+            $consultaInsercionProducto = $conexionBD->prepare('INSERT INTO producto VALUES (?,?,?)');
+            $consultaInsercionProducto->bind_param('sss', $idProducto, $nombreProducto, $precioUnitarioProducto);
             if ($consultaInsercionProducto->execute()) {
-                $esValido = true;
+                $consultaInsercionProductoDetalle = $conexionBD->prepare('INSERT INTO producto_detalle VALUES (?,?,?,?,?,?,?)');
+                $consultaInsercionProductoDetalle->bind_param('ssssdss', $idProducto, $nombreProducto, $tipoProducto, $descripcionProducto, $stockProducto, $fechaCreacionProducto, $origenProducto);
+                if ($consultaInsercionProductoDetalle->execute()) {
+                    $esValido = true;
+                }
             }
         } else {
-            $consultaInsercionProducto = $conexionBD->prepare('UPDATE producto SET nombre = ? , tipo = ?, descripcion = ?, stock = ?, fecha_creacion = ?, origen = ?, precio_ud  WHERE id_producto = ?');
-            $consultaInsercionProducto->bind_param('sssdssds', $nombreProducto, $tipoProducto, $descripcionProducto, $stockProducto, $fechaCreacionProducto, $origenProducto, $precioUnitarioProducto, $idProducto);
+            $consultaInsercionProducto = $conexionBD->prepare('UPDATE producto SET nombre = ? , precio_ud = ? WHERE id_producto = ?');
+            $consultaInsercionProducto->bind_param('sss', $nombreProducto, $precioUnitarioProducto, $idProducto);
             if ($consultaInsercionProducto->execute()) {
+                $consultaInsercionProductoDetalle = $conexionBD->prepare('UPDATE producto_detalle SET nombre = ? , tipo = ?, descripcion = ?, stock = ?, fecha_creacion = ?, origen = ? WHERE id_producto_detalle = ?');
+                $consultaInsercionProductoDetalle->bind_param('sssdsss', $nombreProducto, $tipoProducto, $descripcionProducto, $stockProducto, $fechaCreacionProducto, $origenProducto, $idProducto);
                 $esValido = true;
             }
         }

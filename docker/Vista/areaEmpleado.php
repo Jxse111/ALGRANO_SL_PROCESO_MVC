@@ -74,7 +74,9 @@ if ($_SESSION['rol'] != "empleado") {
         require_once '../Modelo/Producto.php';
         //Lista de Clientes y empleados a administrar
         $productos = Producto::listarProductos(); // Obtiene los productos  
+        $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los productos detallados
         ?>
+        <div class="container mt-5">
         <div class="container mt-5">
             <!-- Tabla de Productos -->
             <h3>Productos</h3>
@@ -108,6 +110,51 @@ if ($_SESSION['rol'] != "empleado") {
                 </tbody>
             </table>
         </div>
+        <br><br>
+        <hr>
+        <br><br>
+            <!-- Tabla de Productos Detallados -->
+            <h3>Productos detallados</h3>
+            <table class="table table-bordered">
+                <thead style="background-color: #362421; color: #DB9F5B;">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Descripcion</th>
+                        <th>Stock</th>
+                        <th>Fecha de Creación</th>
+                        <th>Lugar de Origen</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody style="background-color:#DFB767; color: #362421;">
+                    <?php foreach ($productosDetallados as $productoDetallado) { ?>
+                        <tr>
+                            <td><?php echo $productoDetallado['id_producto_detalle'] ?></td>
+                            <td><?php echo $productoDetallado['nombre'] ?></td>
+                            <td><?php echo $productoDetallado['tipo'] ?></td>
+                            <td><?php echo $productoDetallado['descripcion'] ?></td>
+                            <td><?php echo $productoDetallado['stock'] ?></td>
+                            <td><?php echo $productoDetallado['fecha_creacion'] ?></td>
+                            <td><?php echo $productoDetallado['origen'] ?></td>
+                            <td>
+                                <button
+                                    onclick="window.location.href='../Controlador/editarUsuario.php?id=<?php echo $producto['id_producto']; ?>'"
+                                    class="btn btn-primary btn-sm">Editar</button>
+                            </td>
+                            <td> <button
+                                    onclick="return confirm('¿Desea eliminar este producto?') ? window.location.href='../Controlador/eliminarProducto.php?id=<?php echo $producto['id_producto']; ?>' : false"
+                                    class="btn btn-danger btn-sm">Eliminar</button>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+
+
     </div>
     <!-- Administration End -->
 
