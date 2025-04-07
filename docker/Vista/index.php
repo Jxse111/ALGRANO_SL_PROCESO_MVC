@@ -63,11 +63,11 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto p-4">
                     <a href="index.php" class="nav-item nav-link active">Inicio</a>
-                    <a href="sobreNosotros.html" class="nav-item nav-link">Sobre nosotros</a>
-                    <a href="servicios.html" class="nav-item nav-link">Servicios</a>
-                    <a href="menu.html" class="nav-item nav-link">Carta</a>
-                    <a href="comentarios.html" class="nav-item nav-link">Testimonio</a>
-                    <a href="contacto.html" class="nav-item nav-link">Contacto</a>
+                    <a href="sobreNosotros.php" class="nav-item nav-link">Sobre nosotros</a>
+                    <a href="servicios.php" class="nav-item nav-link">Servicios</a>
+                    <a href="menu.php" class="nav-item nav-link">Carta</a>
+                    <a href="comentarios.php" class="nav-item nav-link">Testimonio</a>
+                    <a href="contacto.php" class="nav-item nav-link">Contacto</a>
                 </div>
                 <?php if ($_SESSION['rol'] == "invitado") { ?>
                     <a href="login.html" class="nav-item nav-link btn btn-primary font-weight-bold">Iniciar Sesión</a>

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,13 +12,11 @@
     <meta content="Free Website Template" name="description">
 
     <!-- Favicon -->
-    <link href="../img/ALGRANO.png" rel="icon">
+    <link href="../img/LogoFavicon.png" rel="icon">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -42,19 +43,31 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
             <div class="navbar-nav ml-auto p-4">
                 <a href="index.php" class="nav-item nav-link active">Inicio</a>
-                <a href="sobreNosotros.html" class="nav-item nav-link">Sobre nosotros</a>
-                <a href="servicios.html" class="nav-item nav-link">Servicios</a>
-                <a href="menu.html" class="nav-item nav-link">Carta</a>
+                <a href="servicios.php" class="nav-item nav-link">Servicios</a>
+                <a href="menu.php" class="nav-item nav-link">Carta</a>
+                <a href="comentarios.php" class="nav-item nav-link">Testimonio</a>
+                <a href="contacto.php" class="nav-item nav-link">Contacto</a>
+            </div>
+            <?php if ($_SESSION['rol'] == "invitado") { ?>
+                <a href="login.html" class="nav-item nav-link btn btn-primary font-weight-bold">Iniciar Sesión</a>
+                <a href="registro.html" class="nav-item nav-link btn btn-secondary font-weight-bold">Regístrate</a>
+            <?php } ?>
+            <?php if ($_SESSION['rol'] == "administrador" || $_SESSION['rol'] == "empleado" || $_SESSION['rol'] == "cliente"): ?>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Páginas</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Mi Cuenta</a>
                     <div class="dropdown-menu text-capitalize" style="background-color: #33211d; border: none;">
-                        <a href="reservas.html" class="dropdown-item" style="color: #DA9F5B;">Reservas</a>
-                        <a href="comentarios.html" class="dropdown-item" style="color: #DA9F5B;">Testimonio</a>
+                        <a href="perfil.html" class="dropdown-item" style="color: #DA9F5B;">Perfil</a>
+                        <?php if ($_SESSION['rol'] == "administrador") { ?>
+                            <a href="areaAdmin.php" class="dropdown-item" style="color: #DA9F5B" ;>Administrar</a>
+                        <?php } elseif ($_SESSION['rol'] == "empleado") { ?>
+                            <a href="areaEmpleado.php" class="dropdown-item" style="color: #DA9F5B" ;>Workspace</a>
+                        <?php } ?>
+                        <a href="../Controlador/cerrarSesion_proceso.php" class="dropdown-item"
+                            style="color: #DA9F5B;">Cerrar sesión</a>
                     </div>
                 </div>
-                <a href="contacto.html" class="nav-item nav-link">Contacto</a>
-                </div>
-            </div>
+            <?php endif; ?>
+        </div>
         </nav>
     </div>
     <!-- Navbar End -->
@@ -62,100 +75,58 @@
 
     <!-- Page Header Start -->
     <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
-        <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
-            style="min-height: 400px">
-            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Reservas</h1>
+        <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Sobre nosotros</h1>
             <div class="d-inline-flex mb-lg-5">
                 <p class="m-0 text-white"><a class="text-white" href="index.php">Inicio</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Reservas</p>
+                <p class="m-0 text-white">Sobre nosotros</p>
             </div>
         </div>
     </div>
     <!-- Page Header End -->
 
 
-    <!-- Reservation Start -->
-    <div class="container-fluid my-5">
+    <!-- About Start -->
+    <div class="container-fluid py-5">
         <div class="container">
-            <div class="reservation position-relative overlay-top overlay-bottom">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 my-5 my-lg-0">
-                        <div class="p-5">
-                            <div class="mb-4">
-                                <h1 class="display-3 text-primary">30% de descuento</h1>
-                                <h1 class="text-white">Por reservar online</h1>
-                            </div>
-                            <p class="text-white">Ventajas de hacer una reserva online de nuestro café:
-                            </p>
-                            <ul class="list-inline text-white m-0">
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Garantizas la
-                                    disponibilidad de tus productos favoritos.
-                                </li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Personalizas tu pedido
-                                    según tus gustos y necesidades.
-                                </li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Realizas tu compra
-                                    cómodamente desde casa.
-                                </li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Programas envíos
-                                    recurrentes para no quedarte sin café.
-                                </li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Accedes a promociones
-                                    exclusivas para clientes en línea.
-                                </li>
-                            </ul>
-                        </div>
+            <div class="section-title">
+                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Sobre nosotros</h4>
+                <h1 class="display-4">Llevamos sirviendo café desde 1950</h1>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 py-0 py-lg-5">
+                    <h1 class="mb-3">Sobre nosotros</h1>
+                    <h5 class="mb-3">Nuestra pasión por el café nos impulsa a brindar la mejor experiencia en cada taza.
+                        Somos una empresa dedicada a la venta de café de alta calidad, cuidadosamente seleccionado de
+                        las mejores regiones cafetaleras del mundo. Nuestro objetivo es llevar a nuestros clientes un
+                        producto excepcional, con un sabor auténtico y una historia detrás de cada grano.</h5>
+                    <p>Es todo</p>
+                    <a href="" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">Para saber más</a>
+                </div>
+                <div class="col-lg-4 py-5 py-lg-0" style="min-height: 500px;">
+                    <div class="position-relative h-100">
+                        <img class="position-absolute w-100 h-100" src="../img/about.png" style="object-fit: cover;">
                     </div>
-                    <div class="col-lg-6">
-                        <div class="text-center p-5" style="background: rgba(51, 33, 29, .8);">
-                            <h1 class="text-white mb-4 mt-5">BOLETÍN DE RESERVA</h1>
-                            <form class="mb-5">
-                                <div class="form-group">
-                                    <input type="text" class="form-control bg-transparent border-primary p-4"
-                                        placeholder="Nombre" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control bg-transparent border-primary p-4"
-                                        placeholder="Correo" required="required" />
-                                </div>
-                                <div class="form-group">
-                                    <div class="date" id="date" data-target-input="nearest">
-                                        <input type="text"
-                                            class="form-control bg-transparent border-primary p-4 datetimepicker-input"
-                                            placeholder="Fecha" data-target="#date" data-toggle="datetimepicker" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="time" id="time" data-target-input="nearest">
-                                        <input type="text"
-                                            class="form-control bg-transparent border-primary p-4 datetimepicker-input"
-                                            placeholder="Hora" data-target="#time" data-toggle="datetimepicker" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <select class="custom-select bg-transparent border-primary px-4"
-                                        style="height: 49px;">
-                                        <option selected>Cantidad</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="3">4</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <button class="btn btn-primary btn-block font-weight-bold py-3"
-                                        type="submit">Reservar</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                </div>
+                <div class="col-lg-4 py-0 py-lg-5">
+                    <h1 class="mb-3">Nuestra visión de mercado</h1>
+                    <p>Convertirnos en una marca reconocida por la calidad de nuestro café y nuestro compromiso con la
+                        sostenibilidad, siendo el punto de referencia para los amantes del buen café.</p>
+                    <h5 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Calidad: Nos enfocamos en ofrecer
+                        productos de la más alta calidad.</h5>
+                    <h5 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Transparencia: Promovemos prácticas
+                        éticas y transparentes en cada paso.
+                    </h5>
+                    <h5 class="mb-3"><i class="fa fa-check text-primary mr-3"></i>Sostenibilidad: Apoyamos el cultivo
+                        responsable y respetuoso con el medio ambiente.
+                    </h5>
+                    <a href="" class="btn btn-primary font-weight-bold py-2 px-4 mt-2">Más sobre nosotros</a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Reservation End -->
+    <!-- About End -->
 
 
     <!-- Footer Start -->

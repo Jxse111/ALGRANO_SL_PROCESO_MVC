@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,9 +16,7 @@
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -42,16 +43,31 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
             <div class="navbar-nav ml-auto p-4">
                 <a href="index.php" class="nav-item nav-link active">Inicio</a>
-                <a href="sobreNosotros.html" class="nav-item nav-link">Sobre nosotros</a>
-                <a href="servicios.html" class="nav-item nav-link">Servicios</a>
-                <a href="menu.html" class="nav-item nav-link">Carta</a>
-                <a href="comentarios.html" class="nav-item nav-link">Testimonio</a>
-                <a href="contacto.html" class="nav-item nav-link">Contacto</a>
-                </div>
+                <a href="sobreNosotros.php" class="nav-item nav-link">Sobre nosotros</a>
+                <a href="menu.php" class="nav-item nav-link">Carta</a>
+                <a href="contacto.php" class="nav-item nav-link">Contacto</a>
+                <a href="comentarios.php" class="nav-item nav-link">Testimonio</a>
+            </div>
+            <?php if ($_SESSION['rol'] == "invitado") { ?>
                 <a href="login.html" class="nav-item nav-link btn btn-primary font-weight-bold">Iniciar Sesión</a>
                 <a href="registro.html" class="nav-item nav-link btn btn-secondary font-weight-bold">Regístrate</a>
+            <?php } ?>
+            <?php if ($_SESSION['rol'] == "administrador" || $_SESSION['rol'] == "empleado" || $_SESSION['rol'] == "cliente"): ?>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Mi Cuenta</a>
+                    <div class="dropdown-menu text-capitalize" style="background-color: #33211d; border: none;">
+                        <a href="perfil.html" class="dropdown-item" style="color: #DA9F5B;">Perfil</a>
+                        <?php if ($_SESSION['rol'] == "administrador") { ?>
+                            <a href="areaAdmin.php" class="dropdown-item" style="color: #DA9F5B" ;>Administrar</a>
+                        <?php } elseif ($_SESSION['rol'] == "empleado") { ?>
+                            <a href="areaEmpleado.php" class="dropdown-item" style="color: #DA9F5B" ;>Workspace</a>
+                        <?php } ?>
+                        <a href="../Controlador/cerrarSesion_proceso.php" class="dropdown-item"
+                            style="color: #DA9F5B;">Cerrar sesión</a>
+                    </div>
                 </div>
-            </div>
+            <?php endif; ?>
+        </div>
         </nav>
     </div>
     <!-- Navbar End -->
@@ -59,72 +75,78 @@
 
     <!-- Page Header Start -->
     <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
-        <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
-            style="min-height: 400px">
-            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Comentarios</h1>
+        <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Servicios</h1>
             <div class="d-inline-flex mb-lg-5">
                 <p class="m-0 text-white"><a class="text-white" href="index.php">Inicio</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Comentarios</p>
+                <p class="m-0 text-white">Servicios</p>
             </div>
         </div>
     </div>
     <!-- Page Header End -->
 
 
-    <!-- Testimonial Start -->
-    <div class="container-fluid py-5">
+    <!-- Service Start -->
+    <div class="container-fluid pt-5">
         <div class="container">
             <div class="section-title">
-                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Comentarios</h4>
-                <h1 class="display-4">Nuestros clientes quedaron satisfechos</h1>
+                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Nuestros servicios</h4>
+                <h1 class="display-4">Grano fresco y totalmente orgánico</h1>
             </div>
-            <div class="owl-carousel testimonial-carousel">
-                <div class="testimonial-item">
-                    <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid" src="../img/testimonial-1.jpg" alt="">
-                        <div class="ml-3">
-                            <h4>Ana Belén</h4>
-                            <i>Abogada</i>
+            <div class="row">
+                <div class="col-lg-6 mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-sm-5">
+                            <img class="img-fluid mb-3 mb-sm-0" src="../img/service-1.jpg" alt="">
+                        </div>
+                        <div class="col-sm-7">
+                            <h4><i class="fa fa-truck service-icon"></i>Reparto rápido e inmediato a su hogar</h4>
+                            <p class="m-0">Llegamos a su hogar en un periquete</p>
                         </div>
                     </div>
-                    <p class="m-0">El mejor café que he probado en años</p>
                 </div>
-                <div class="testimonial-item">
-                    <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid" src="../img/testimonial-2.jpg" alt="">
-                        <div class="ml-3">
-                            <h4>Pablo</h4>
-                            <i>Oficinista</i>
+                <div class="col-lg-6 mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-sm-5">
+                            <img class="img-fluid mb-3 mb-sm-0" src="../img/service-2.jpg" alt="">
+                        </div>
+                        <div class="col-sm-7">
+                            <h4><i class="fa fa-coffee service-icon"></i>Granos de café frescos</h4>
+                            <p class="m-0">Granos de café totalmente frescos y orgánicos</p>
                         </div>
                     </div>
-                    <p class="m-0">Como buen catador de café que soy (ya que trabajo en una oficina y me paso el dia
-                        bebiendo café),este café sin duda es de los mejores del mercado</p>
                 </div>
-                <div class="testimonial-item">
-                    <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid" src="../img/testimonial-3.jpg" alt="">
-                        <div class="ml-3">
-                            <h4>Minerva</h4>
-                            <i>Psicóloga</i>
+                <div class="col-lg-6 mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-sm-5">
+                            <img class="img-fluid mb-3 mb-sm-0" src="../img/service-3.jpg" alt="">
+                        </div>
+                        <div class="col-sm-7">
+                            <h4><i class="fa fa-award service-icon"></i>El café con la mejor calidad</h4>
+                            <p class="m-0">Café rico en sabor y olor</p>
                         </div>
                     </div>
-                    <p class="m-0">Realmente muy bueno y fresco</p>
                 </div>
-                <div class="testimonial-item">
-                    <div class="d-flex align-items-center mb-3">
-                        <img class="img-fluid" src="../img/testimonial-4.jpg" alt="">
-                        <div class="ml-3">
-                            <h4>Miguel</h4>
-                            <i>Asesor financiero</i>
+                <div class="col-lg-6 mb-5">
+                    <div class="row align-items-center">
+                        <div class="col-sm-5">
+                            <img class="img-fluid mb-3 mb-sm-0" src="../img/service-4.jpg" alt="">
+                        </div>
+                        <div class="col-sm-7">
+                            <h4><i class="fa fa-table service-icon"></i>Carta de servicios</h4>
+                            <p class="m-0"> Ofrecemos una experiencia completa para amantes del café, desde la venta de
+                                café de especialidad hasta suscripciones personalizadas, asesoría para empresas, y
+                                talleres de cata. Nos enfocamos en la calidad, sostenibilidad y el comercio justo,
+                                trabajando directamente con productores para brindar el mejor café en cada taza y
+                                garantizar un impacto positivo en la comunidad cafetalera.</p>
                         </div>
                     </div>
-                    <p class="m-0">Es un café espléndido con un sabor único y autentico</p>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Testimonial End -->
+    <!-- Service End -->
 
 
     <!-- Footer Start -->
