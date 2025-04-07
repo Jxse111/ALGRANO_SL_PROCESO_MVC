@@ -3,13 +3,12 @@ require_once './funcionesValidacion.php';
 require_once '../Modelo/funcionesBaseDeDatos.php';
 require_once '../Modelo/Algrano.php';
 require_once '../Modelo/Usuario.php';
-//creación de la conexión
+// Creación de la conexión
 $conexionBD = Algrano::conectarAlgranoMySQLi();
 $mensajeError = "Lista de mensajes de error: ";
-$mensajeExito = "Lista de mensajes de éxito: ";
 if (filter_has_var(INPUT_POST, "crearCuenta")) {
     try {
-        //Validación de los datos recogidos
+        // Validación de los datos recogidos
         $dniValidado = validarDNI(filter_input(INPUT_POST, "DNI"));
         $usuarioValidado = validarUsuario(filter_input(INPUT_POST, "usuario"), $conexionBD);
         $contraseñaValidada = validarContraseña(filter_input(INPUT_POST, "contraseña"), $conexionBD);
@@ -17,14 +16,14 @@ if (filter_has_var(INPUT_POST, "crearCuenta")) {
         $correoValidado = validarCorreo(filter_input(INPUT_POST, "correo"), $conexionBD);
         $fechaNacimientoValidada = validarFechaNacimiento(filter_input(INPUT_POST, "fec_nac"), $conexionBD);
         $camposValidados = $dniValidado && $usuarioValidado && $contraseñaValidada && $direcciónValidada && $correoValidado && $fechaNacimientoValidada;
-        echo var_dump($dniValidado, $usuarioValidado, $contraseñaValidada, $direcciónValidada, $correoValidado, $fechaNacimientoValidada);
+        //echo var_dump($dniValidado, $usuarioValidado, $contraseñaValidada, $direcciónValidada, $correoValidado, $fechaNacimientoValidada);
+
         if ($camposValidados) {
-            $mensajeExito .= "Datos recibidos y validados correctamente. ";
             $usuarioRegistro = new Usuario($dniValidado, $usuarioValidado, $contraseñaValidada, $direcciónValidada, $correoValidado, $fechaNacimientoValidada);
-            print_r(value: $usuarioRegistro);
-            echo "Usuario en proceso de registro...";
+            //print_r($usuarioRegistro);
             if ($usuarioRegistro->guardarUsuario()) {
                 header("Location: ../Vista/login.html");
+                exit;
             }
         }
     } catch (Exception $ex) {
