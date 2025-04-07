@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['rol'] != "administrador") {
+if ($_SESSION['rol'] != "cliente") {
     header("Location: ./index.php");
     exit();
 } ?>
@@ -55,150 +55,64 @@ if ($_SESSION['rol'] != "administrador") {
     <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
         <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
             style="min-height: 400px">
-            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Administración</h1>
+            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Mis Pedidos</h1>
             <div class="d-inline-flex mb-lg-5">
                 <p class="m-0 text-white"><a class="text-white" href="index.php">Inicio</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Administración</p>
+                <p class="m-0 text-white">Mis pedidos</p>
             </div>
         </div>
     </div>
     <!-- Page Header End -->
 
 
-    <!-- Administration Start -->
+    <!-- Area de Empleado Start -->
     <div>
         <!-- Aquí puedes agregar el contenido de la página de administración -->
-        <h2 class="text-center">Bienvenido a la sección de administración</h2>
+        <h2 class="text-center">Sección de pedidos realizados</h2>
         <?php
-        require_once '../Modelo/Usuario.php';
-        //Lista de Clientes y empleados a administrar
-        $usuarios = Usuario::listarUsuarios(); // Obtiene los usuario  
-        $empleados = array_filter($usuarios, function ($usuario) {
-            return $usuario['id_rol_usuario'] == 2;
-        });
-        $clientes = array_filter($usuarios, function ($usuario) {
-            return $usuario['id_rol_usuario'] == 1;
-        });
+        require_once '../Modelo/Pedido.php';
+
+        $pedidos = Pedido::listarPedidos(); // Obtiene los pedidos realizados por ese usuario  
+        $pedidosDetallados = Pedido::listarPedidosDetallados(); // Obtiene los pedidos detallados
         ?>
         <div class="container mt-5">
-            <!-- Tabla de Clientes -->
-            <h3>Usuarios</h3>
+        <div class="container mt-5">
+            <!-- Tabla de Pedidos -->
+            <h3>Pedidos</h3>
             <table class="table table-bordered">
                 <thead style="background-color: #362421; color: #DB9F5B;">
                     <tr>
-                        <th>DNI</th>
-                        <th>Usuario</th>
-                        <th>Direccion</th>
-                        <th>Correo</th>
-                        <th>Fecha de nacimiento</th>
-                        <th>Id_rol</th>
-                        <th></th>
-                        <th></th>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Tipo</th>
+                        <th>Precio Total</th>
+                        <th>Fecha</th>
+                        <th>Estado del pedido</th>
                     </tr>
                 </thead>
                 <tbody style="background-color:#DFB767; color: #362421;">
-                    <?php foreach ($usuarios as $usuario) { ?>
+                    <?php foreach ($pedidos as $pedido) { ?>
                         <tr>
-                            <td><?php echo $usuario['DNI'] ?></td>
-                            <td><?php echo $usuario['usuario'] ?></td>
-                            <td><?php echo $usuario['direccion'] ?></td>
-                            <td><?php echo $usuario['correo'] ?></td>
-                            <td><?php echo $usuario['fec_nac'] ?></td>
-                            <td><?php echo $usuario['id_rol_usuario'] ?></td>
+                            <td><?php echo $pedido['codigo_pedido'] ?></td>
+                            <td><?php echo $pedido['nombre'] ?></td>
+                            <td><?php echo $pedido['tipo'] ?></td>
+                            <td><?php echo $pedido['precio_total'] ?></td>
+                            <td><?php echo $pedido['fecha_pedido'] ?></td>
+                            <td><?php echo $pedido['estado'] ?></td>
                             <td>
                                 <button
-                                    onclick="window.location.href='../Controlador/editarUsuario.php?id=<?php echo $usuario['DNI']; ?>'"
-                                    class="btn btn-primary btn-sm">Editar</button>
-                            </td>
-                            <td> <button
-                                    onclick="return confirm('¿Desea eliminar este usuario?') ? window.location.href='../Controlador/eliminarUsuario.php?id=<?php echo $usuario['DNI']; ?>' : false"
-                                    class="btn btn-danger btn-sm">Eliminar</button>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-
-
-            <!-- Tabla de Empleados -->
-            <h3 class="mt-5">Empleados</h3>
-            <table class="table table-bordered">
-                <thead style="background-color: #362421; color: #DB9F5B;">
-                    <tr>
-                        <th>DNI</th>
-                        <th>Usuario</th>
-                        <th>Direccion</th>
-                        <th>Correo</th>
-                        <th>Fecha de nacimiento</th>
-                        <th>Id_rol</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody style="background-color: #DFB767; color: #362421;">
-                    <?php foreach ($empleados as $empleado) { ?>
-                        <tr>
-                            <td><?php echo $empleado['DNI'] ?></td>
-                            <td><?php echo $empleado['usuario'] ?></td>
-                            <td><?php echo $empleado['direccion'] ?></td>
-                            <td><?php echo $empleado['correo'] ?></td>
-                            <td><?php echo $empleado['fec_nac'] ?></td>
-                            <td><?php echo $empleado['id_rol_usuario'] ?></td>
-                            <td>
-                                <button
-                                    onclick="window.location.href='../Controlador/editarUsuario.php?id=<?php echo $empleado['DNI']; ?>'"
-                                    class="btn btn-primary btn-sm">Editar</button>
-                            </td>
-                            <td> <button
-                                    onclick="return confirm('¿Desea eliminar este usuario?') ? window.location.href='../Controlador/eliminarUsuario.php?id=<?php echo $empleado['DNI']; ?>' : false"
-                                    class="btn btn-danger btn-sm">Eliminar</button>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-
-            <!-- Tabla de Clientes -->
-            <h3 class="mt-5">Clientes</h3>
-            <table class="table table-bordered">
-                <thead style="background-color: #362421; color: #DB9F5B;">
-                    <tr>
-                        <th>DNI</th>
-                        <th>Usuario</th>
-                        <th>Direccion</th>
-                        <th>Correo</th>
-                        <th>Fecha de nacimiento</th>
-                        <th>Código de Cliente</th>
-                        <th>Id_rol</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody style="background-color:#DFB767; color: #362421;">
-                    <?php foreach ($clientes as $cliente) { ?>
-                        <tr>
-                            <td><?php echo $cliente['DNI'] ?></td>
-                            <td><?php echo $cliente['usuario'] ?></td>
-                            <td><?php echo $cliente['direccion'] ?></td>
-                            <td><?php echo $cliente['correo'] ?></td>
-                            <td><?php echo $cliente['fec_nac'] ?></td>
-                            <td><?php echo $cliente['Id_Cliente'] ?></td>
-                            <td><?php echo $cliente['id_rol_usuario'] ?></td>
-                            <td>
-                                <button
-                                    onclick="window.location.href='../Controlador/editarUsuario.php?id=<?php echo $cliente['DNI']; ?>'"
-                                    class="btn btn-primary btn-sm">Editar</button>
-                            </td>
-                            <td> <button
-                                    onclick="return confirm('¿Desea eliminar este cliente?') ? window.location.href='../Controlador/eliminarUsuario.php?id=<?php echo $cliente['DNI']; ?>' : false"
-                                    class="btn btn-danger btn-sm">Eliminar</button>
+                                    onclick="window.location.href='../Controlador/editarUsuario.php?id=<?php echo $pedido['codigo_pedido']; ?>'"
+                                    class="btn btn-primary btn-sm">Consultar Información Detallada</button>
                             </td>
                         </tr>
                     <?php } ?>
                 </tbody>
             </table>
         </div>
+        <br><br>
+        <hr>
+        <br><br>
     </div>
     <!-- Administration End -->
 
