@@ -1,4 +1,6 @@
 <?php
+require_once 'Algrano.php';
+require_once 'funcionesBaseDeDatos.php';
 class Producto
 {
     private $idProducto;
@@ -10,7 +12,7 @@ class Producto
     private $origen;
     private $precioUnitario;
 
-    public function __construct($idProducto, $nombre, $tipo = "Grano", $descripcion, $stock = 1, $fechaCreacion, $origen, $precioUnitario)
+    public function __construct($idProducto, $nombre, $descripcion, $fechaCreacion, $origen, $precioUnitario, $stock = 1, $tipo = "Grano")
     {
         $this->idProducto = $idProducto;
         $this->nombre = $nombre;
@@ -130,19 +132,16 @@ class Producto
     }
 
     //Método que devuelve todos los productos de la base de datos en formato de array.
-    public static function listarProductos(){
+    public static function listarProductos()
+    {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
-        $esValido = false;
-        try{
+        $productos = [];
             $consultaBusquedaProductos = $conexionBD->prepare('SELECT * FROM producto');
-            if ($consultaBusquedaProductos->num_rows > 0) {
-                $datosProducto = $consultaBusquedaProductos->fetch_all();
-                $esValido = true;
+            if ($consultaBusquedaProductos->execute()) {
+                $productos = $consultaBusquedaProductos->get_result()->fetch_all(MYSQLI_ASSOC);
             }
-        }catch(Exception $ex){
-            echo "Error: ".$ex->getMessage();
-        }
-        return $esValido ? $datosProducto : false;
+
+        return $productos;
     }
     //Método que guarda un Usuario, lo inserta o lo actualiza.
     public function crearProducto()
