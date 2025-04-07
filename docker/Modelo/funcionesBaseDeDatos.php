@@ -80,7 +80,20 @@ function noExisteFechaNacimiento($fecha, $conexionBD)
     return $fechaNoExiste ? true : false;
 }
 
-function existeUsuario($dni, $conexionBD)
+function existeUsuario($usuario, $conexionBD)
+{
+    $usuarioNoExiste = false;
+    $consultaUsuariosExistentes = $conexionBD->query("SELECT usuario FROM usuario");
+    $usuarios = $consultaUsuariosExistentes->fetch_all(MYSQLI_ASSOC);
+    foreach ($usuarios as $usuarioExistente) {
+        if ($usuarioExistente['usuario'] == $usuario) {
+            $usuarioNoExiste = true;
+        }
+    }
+    return $usuarioNoExiste ? true : false;
+}
+
+function existedni($dni, $conexionBD)
 {
     $usuarioNoExiste = false;
     $consultaUsuariosExistentes = $conexionBD->query("SELECT DNI FROM usuario");

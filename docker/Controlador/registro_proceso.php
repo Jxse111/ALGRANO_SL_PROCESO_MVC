@@ -5,7 +5,6 @@ require_once '../Modelo/Algrano.php';
 require_once '../Modelo/Usuario.php';
 // Creación de la conexión
 $conexionBD = Algrano::conectarAlgranoMySQLi();
-$mensajeError = "Lista de mensajes de error: ";
 if (filter_has_var(INPUT_POST, "crearCuenta")) {
     try {
         // Validación de los datos recogidos
@@ -25,12 +24,14 @@ if (filter_has_var(INPUT_POST, "crearCuenta")) {
                 header("Location: ../Vista/login.html");
                 exit;
             }
+        }else{
+            echo nl2br("Los campos no son válidos o son erróneos." . "\n");
         }
     } catch (Exception $ex) {
-        $mensajeError .= "ERROR: " . $ex->getMessage();
+        echo nl2br("ERROR: " . $ex->getMessage() . "\n"); ;
         $conexionBD->close();
     }
 } else {
-    echo "No se ha podido crear la cuenta, no se han recibido los datos del formulario.";
+    echo nl2br("No se ha podido crear la cuenta, no se han recibido los datos del formulario." . "\n");
 }
 ?>

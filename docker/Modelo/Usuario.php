@@ -68,7 +68,7 @@ class Usuario
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
         $esValido = false;
-        if (existeUsuario($dniUsuario, $conexionBD)) {
+        if (existedni($dniUsuario, $conexionBD)) {
             // Eliminar el usuario de la base de datos
             try {
                 $consultaEliminacionUsuario = $conexionBD->prepare('DELETE FROM usuario WHERE DNI = ?');

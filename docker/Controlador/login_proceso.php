@@ -8,6 +8,7 @@ ini_set('display_errors', 1);
 require_once './funcionesValidacion.php';
 require_once '../Modelo/funcionesBaseDeDatos.php';
 require_once '../Modelo/Algrano.php';
+require_once  '../Modelo/Usuario.php';
 
 $mensajeError = "Mensajes de error : ";
 $mensajeExito = "Mensajes de éxito: ";
@@ -24,7 +25,7 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
 
         // Validate the connection was successful
         if (!$conexionBD) {
-            $mensajeError .= "No se pudo establecer conexión con la base de datos.\n";
+            echo nl2br("No se pudo establecer conexión con la base de datos." . "\n");
         } else {
             try {
                 // Get the username from the form
@@ -32,7 +33,7 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
                 //echo var_dump($usuarioLogin);
                 // Validate the user exists
                 if (empty($usuarioLogin)) {
-                    $mensajeError .= "El nombre de usuario no puede estar vacío.\n";
+                    echo nl2br("El nombre de usuario no puede estar vacío." . "\n");
                 } else {
                     // Validate the user with the database
                     $usuarioLogin = validarUsuarioExistente($usuarioLogin, $conexionBD);
@@ -83,24 +84,24 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
 
                                             }
                                         } else {
-                                            $mensajeError .= "Tipo de rol no encontrado.\n";
+                                            echo nl2br("Tipo de rol no encontrado." . "\n");
                                         }
                                     } else {
-                                        $mensajeError .= "No se ha podido recuperar el rol.\n";
+                                        echo nl2br("No se ha podido recuperar el rol." . "\n");
                                     }
                                 } else {
-                                    $mensajeError .= "No se ha podido iniciar sesión, la contraseña o el usuario no son correctos.\n";
+                                    echo nl2br("No se ha podido iniciar sesión, la contraseña o el usuario no son correctos." . "\n");
                                 }
                             }
                         } else {
-                            $mensajeError .= "La consulta no se ha podido realizar o el usuario no existe.\n";
+                            echo nl2br("La consulta no se ha podido realizar o el usuario no existe." . "\n");
                         }
                     } else {
-                        $mensajeError .= "Los datos son inválidos o incorrectos.\n";
+                        echo nl2br("Los datos son inválidos o incorrectos." . "\n");
                     }
                 }
             } catch (Exception $ex) {
-                $mensajeError .= "ERROR: " . $ex->getMessage();
+                echo nl2br("ERROR: " . $ex->getMessage() . "\n");
             }
 
             // Close the database connection
