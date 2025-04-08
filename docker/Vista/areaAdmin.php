@@ -169,7 +169,6 @@ if ($_SESSION['rol'] != "administrador") {
                         <th>Direccion</th>
                         <th>Correo</th>
                         <th>Fecha de nacimiento</th>
-                        <th>Código de Cliente</th>
                         <th>Id_rol</th>
                         <th></th>
                         <th></th>
