@@ -1,5 +1,6 @@
 <?php
 require_once('Algrano.php');
+require_once('funcionesBaseDeDatos.php');
 /**
  * Clase que implementa un objeto de tipo Usuario para el acceso a la web.
  *
@@ -68,7 +69,7 @@ class Usuario
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
         $esValido = false;
-        if (existedni($dniUsuario, $conexionBD)) {
+        if (existeDni($dniUsuario, $conexionBD)) {
             // Eliminar el usuario de la base de datos
             try {
                 $consultaEliminacionUsuario = $conexionBD->prepare('DELETE FROM usuario WHERE DNI = ?');
@@ -88,11 +89,11 @@ class Usuario
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
         $esValido = false;
-        if (!noExisteUsuario($dniUsuario, $conexionBD)) {
+        if (existeDni($dniUsuario, $conexionBD)) {
             $consultaBusquedaUsuario = $conexionBD->prepare('SELECT * FROM usuario WHERE DNI = ?');
             $consultaBusquedaUsuario->bind_param('s', $dniUsuario);
             if ($consultaBusquedaUsuario->execute()) {
-                $datosUsuario = $consultaBusquedaUsuario->fetch_all();
+                $datosUsuario = $consultaBusquedaUsuario->get_result()->fetch_all(MYSQLI_ASSOC);
                 $esValido = true;
             }
         }
@@ -127,7 +128,7 @@ class Usuario
         $correoUsuario = $this->correo;
         $fechaNacUsuario = $this->fechaNacimiento;
         $idRolUsuario = $this->idRolUsuario;
-        if (noExisteUsuario($dniUsuario, $conexionBD)) {
+        if (!existeDni($dniUsuario, $conexionBD)) {
             // Encriptar la contraseña antes de guardarla
             $contraseñaUsuario = hash("sha512", $contraseñaUsuario);
             try {
@@ -140,8 +141,8 @@ class Usuario
                 echo "Error: " . $e->getMessage();
             }
         } else {
-            $consultaInsercionUsuario = $conexionBD->prepare('UPDATE usuario SET nombre = ? , contraseña = ?, direccion = ?, correo = ?, fecha_nac = ?, id_rol_usuario = ?  WHERE DNI = ?');
-            $consultaInsercionUsuario->bind_param('ssssss', $nombreUsuario, $contraseñaUsuario, $direccionUsuario, $correoUsuario, $fechaNacUsuario, $idRolUsuario, $dniUsuario);
+            $consultaInsercionUsuario = $conexionBD->prepare('UPDATE usuario SET usuario = ? , contraseña = ?, direccion = ?, correo = ?, fec_nac = ?, id_rol_usuario = ?  WHERE DNI = ?');
+            $consultaInsercionUsuario->bind_param('sssssss', $nombreUsuario, $contraseñaUsuario, $direccionUsuario, $correoUsuario, $fechaNacUsuario, $idRolUsuario, $dniUsuario);
             if ($consultaInsercionUsuario->execute()) {
                 $esValido = true;
             }

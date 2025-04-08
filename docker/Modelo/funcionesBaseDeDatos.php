@@ -93,7 +93,7 @@ function existeUsuario($usuario, $conexionBD)
     return $usuarioNoExiste ? true : false;
 }
 
-function existedni($dni, $conexionBD)
+function existeDni($dni, $conexionBD)
 {
     $usuarioNoExiste = false;
     $consultaUsuariosExistentes = $conexionBD->query("SELECT DNI FROM usuario");

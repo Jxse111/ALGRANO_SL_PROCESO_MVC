@@ -108,7 +108,7 @@ if ($_SESSION['rol'] != "administrador") {
                             <td><?php echo $usuario['id_rol_usuario'] ?></td>
                             <td>
                                 <button
-                                    onclick="window.location.href='../Controlador/editarUsuario.php?id=<?php echo $usuario['DNI']; ?>'"
+                                    onclick="window.location.href='../Vista/editarUsuario.php?id=<?php echo $usuario['DNI']; ?>'"
                                     class="btn btn-primary btn-sm">Editar</button>
                             </td>
                             <td> <button
@@ -146,8 +146,8 @@ if ($_SESSION['rol'] != "administrador") {
                             <td><?php echo $empleado['fec_nac'] ?></td>
                             <td><?php echo $empleado['id_rol_usuario'] ?></td>
                             <td>
-                                <button
-                                    onclick="window.location.href='../Controlador/editarUsuario.php?id=<?php echo $empleado['DNI']; ?>'"
+                            <button
+                                    onclick="window.location.href='../Vista/editarUsuario.php?id=<?php echo $empleado['DNI']; ?>'"
                                     class="btn btn-primary btn-sm">Editar</button>
                             </td>
                             <td> <button
@@ -185,8 +185,8 @@ if ($_SESSION['rol'] != "administrador") {
                             <td><?php echo $cliente['fec_nac'] ?></td>
                             <td><?php echo $cliente['id_rol_usuario'] ?></td>
                             <td>
-                                <button
-                                    onclick="window.location.href='../Controlador/editarUsuario.php?id=<?php echo $cliente['DNI']; ?>'"
+                            <button
+                                    onclick="window.location.href='../Vista/editarUsuario.php?id=<?php echo $cliente['DNI']; ?>'"
                                     class="btn btn-primary btn-sm">Editar</button>
                             </td>
                             <td> <button
