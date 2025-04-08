@@ -1,18 +1,19 @@
-CREATE DATABASE IF NOT EXISTS algrano;
+-- Script de creación de la base de datos para MySQL (modificado y corregido)
 
+CREATE DATABASE IF NOT EXISTS algrano;
 USE algrano;
 
 -- Tabla Rol
 CREATE TABLE IF NOT EXISTS rol (
     id_rol CHAR(9) NOT NULL PRIMARY KEY,
-    rol VARCHAR(30)
+    rol VARCHAR(30) NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 -- Tabla Usuario
 CREATE TABLE IF NOT EXISTS usuario (
     DNI CHAR(9) NOT NULL PRIMARY KEY,
     usuario VARCHAR(30) NOT NULL,
-    contraseña CHAR(255) NOT NULL,
+    contrasena CHAR(255) NOT NULL,
     direccion VARCHAR(100) NOT NULL,
     correo VARCHAR(50) UNIQUE NOT NULL,
     fec_nac DATE NOT NULL,
@@ -31,8 +32,8 @@ CREATE TABLE IF NOT EXISTS cliente (
 -- Tabla Empleado
 CREATE TABLE IF NOT EXISTS empleado (
     DNI_empleado CHAR(9) NOT NULL PRIMARY KEY,
-    puesto VARCHAR(30),
-    departamento VARCHAR(30),
+    puesto VARCHAR(30) NOT NULL,
+    departamento VARCHAR(30) NOT NULL,
     FOREIGN KEY (DNI_empleado) REFERENCES usuario (DNI) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
@@ -58,11 +59,14 @@ CREATE TABLE IF NOT EXISTS productos_detalle (
 -- Tabla Pedido
 CREATE TABLE IF NOT EXISTS pedido (
     codigo_pedido CHAR(9) PRIMARY KEY,
-    nombre VARCHAR(30) NOT NULL,
+    DNI_cliente CHAR(9) NOT NULL,
+    id_producto_pedido CHAR(9) NOT NULL,
     tipo ENUM('Grano', 'Molido') NOT NULL,
     precio_total DECIMAL(10, 2) NOT NULL,
     fecha_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    estado ENUM('Pendiente','Pagado','Enviado','Entregado','Cancelado') DEFAULT 'Pendiente'
+    estado ENUM('Pendiente','Pagado','Enviado','Entregado','Cancelado') DEFAULT 'Pendiente',
+    FOREIGN KEY (DNI_cliente) REFERENCES usuario (DNI) ON DELETE CASCADE,
+    FOREIGN KEY (id_producto_pedido) REFERENCES producto (id_producto) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
 -- Tabla Detalles Pedido
@@ -73,3 +77,55 @@ CREATE TABLE IF NOT EXISTS pedidos_detalle (
     codigo_pedido CHAR(9) NOT NULL,
     FOREIGN KEY (codigo_pedido) REFERENCES pedido (codigo_pedido) ON DELETE CASCADE
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+
+-- Script de inserción de datos iniciales
+
+-- Roles
+INSERT INTO rol (id_rol, rol) VALUES
+('ROL001', 'Administrador'),
+('ROL002', 'Cliente'),
+('ROL003', 'Empleado');
+
+-- Usuarios
+INSERT INTO usuario (DNI, usuario, contrasena, direccion, correo, fec_nac, id_rol_usuario) VALUES
+('12345678A', 'adminuser', 'adminpass', 'Calle Admin 1', 'admin@algrano.com', '1990-01-01', 'ROL001'),
+('23456789B', 'clientuser', 'clientpass', 'Av Cliente 2', 'cliente@algrano.com', '1995-05-15', 'ROL002'),
+('34567890C', 'empleuser', 'emppass', 'Paseo Empleado 3', 'empleado@algrano.com', '1988-07-22', 'ROL003');
+
+-- Clientes
+INSERT INTO cliente (DNI_cliente, codigo_cliente) VALUES
+('23456789B', 'CLI001');
+
+-- Empleados
+INSERT INTO empleado (DNI_empleado, puesto, departamento) VALUES
+('34567890C', 'Encargado', 'Ventas');
+
+-- Productos
+INSERT INTO producto (id_producto, nombre, precio_ud) VALUES
+('PROD001', 'Café Arábica', 12.50),
+('PROD002', 'Café Robusta', 9.75);
+
+-- Detalles de Productos
+INSERT INTO productos_detalle (id_producto_detalle, nombre, tipo, descripcion, stock, origen) VALUES
+('PROD001', 'Café Arábica', 'Grano', 'Café de alta calidad.', 100, 'Colombia'),
+('PROD002', 'Café Robusta', 'Molido', 'Café con más cafeína.', 80, 'Brasil');
+
+-- Pedidos
+INSERT INTO pedido (codigo_pedido, DNI_cliente, id_producto_pedido, tipo, precio_total, estado) VALUES
+('PED001', '23456789B', 'PROD001', 'Grano', 25.00, 'Pagado');
+
+-- Detalles del pedido
+INSERT INTO pedidos_detalle (codigo_detalle, subtotal, cantidad_descrita, codigo_pedido) VALUES
+('DET001', 25.00, 2, 'PED001');
+
+-- Crear usuario de base de datos y asignar permisos
+CREATE USER IF NOT EXISTS 'algrano_admin'@'localhost' IDENTIFIED BY 'admin123';
+CREATE USER IF NOT EXISTS 'algrano_cliente'@'localhost' IDENTIFIED BY 'cliente123';
+CREATE USER IF NOT EXISTS 'algrano_empleado'@'localhost' IDENTIFIED BY 'empleado123';
+
+-- Asignar privilegios
+GRANT ALL PRIVILEGES ON algrano.* TO 'algrano_admin'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON algrano.producto TO 'algrano_empleado'@'localhost';
+GRANT SELECT, INSERT ON algrano.pedido TO 'algrano_cliente'@'localhost';
+
+FLUSH PRIVILEGES;
