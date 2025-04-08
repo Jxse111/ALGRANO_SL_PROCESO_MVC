@@ -8,7 +8,7 @@ ini_set('display_errors', 1);
 require_once './funcionesValidacion.php';
 require_once '../Modelo/funcionesBaseDeDatos.php';
 require_once '../Modelo/Algrano.php';
-require_once  '../Modelo/Usuario.php';
+require_once '../Modelo/Usuario.php';
 
 $mensajeError = "Mensajes de error : ";
 $mensajeExito = "Mensajes de éxito: ";
