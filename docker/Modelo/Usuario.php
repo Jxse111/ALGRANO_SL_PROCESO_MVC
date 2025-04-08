@@ -141,8 +141,9 @@ class Usuario
                 echo "Error: " . $e->getMessage();
             }
         } else {
-            $consultaInsercionUsuario = $conexionBD->prepare('UPDATE usuario SET usuario = ? , contraseña = ?, direccion = ?, correo = ?, fec_nac = ?, id_rol_usuario = ?  WHERE DNI = ?');
-            $consultaInsercionUsuario->bind_param('sssssss', $nombreUsuario, $contraseñaUsuario, $direccionUsuario, $correoUsuario, $fechaNacUsuario, $idRolUsuario, $dniUsuario);
+            $fechaFormateada = date('Y-m-d', strtotime($fechaNacUsuario));
+            $consultaInsercionUsuario = $conexionBD->prepare('UPDATE usuario SET usuario = ? , direccion = ?, correo = ?, fec_nac = ?, id_rol_usuario = ?  WHERE DNI = ?');
+            $consultaInsercionUsuario->bind_param('ssssss', $nombreUsuario, $direccionUsuario, $correoUsuario, $fechaFormateada, $idRolUsuario, $dniUsuario);
             if ($consultaInsercionUsuario->execute()) {
                 $esValido = true;
             }

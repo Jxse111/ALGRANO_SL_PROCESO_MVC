@@ -131,3 +131,16 @@ function noExisteProducto($idProducto, $conexionBD)
     }
     return $productoNoExiste ? true : false;
 }
+
+function existeProducto($idProducto, $conexionBD)
+{
+    $productoExiste = false;
+    $consultaProductosExistentes = $conexionBD->query("SELECT id_producto FROM producto");
+    $productos = $consultaProductosExistentes->fetch_all(MYSQLI_ASSOC);
+    foreach ($productos as $producto) {
+        if ($producto['id_producto'] == $idProducto) {
+            $productoExiste = true;
+        }
+    }
+    return $productoExiste ? true : false;
+}

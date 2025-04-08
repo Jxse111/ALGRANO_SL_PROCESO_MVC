@@ -120,11 +120,26 @@ class Producto
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
         $esValido = false;
-        if (!noExisteProducto($idProducto, $conexionBD)) {
+        if (existeProducto($idProducto, $conexionBD)) {
             $consultaBusquedaProducto = $conexionBD->prepare('SELECT * FROM producto WHERE id_producto = ?');
             $consultaBusquedaProducto->bind_param('s', $idProducto);
             if ($consultaBusquedaProducto->execute()) {
-                $datosProducto = $consultaBusquedaProducto->fetch_all();
+                $datosProducto = $consultaBusquedaProducto->get_result()->fetch_all(MYSQLI_ASSOC);
+                $esValido = true;
+            }
+        }
+        return $esValido ? $datosProducto : false;
+    }
+
+    public static function buscarProductoDetallado($idProducto)
+    {
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
+        $esValido = false;
+        if (existeProducto($idProducto, $conexionBD)) {
+            $consultaBusquedaProducto = $conexionBD->prepare('SELECT * FROM productos_detalle WHERE id_producto_detalle = ?');
+            $consultaBusquedaProducto->bind_param('s', $idProducto);
+            if ($consultaBusquedaProducto->execute()) {
+                $datosProducto = $consultaBusquedaProducto->get_result()->fetch_all(MYSQLI_ASSOC);
                 $esValido = true;
             }
         }

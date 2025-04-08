@@ -98,11 +98,11 @@ if ($_SESSION['rol'] != "empleado") {
                             <td><?php echo $producto['precio_ud'] ?></td>
                             <td>
                                 <button
-                                    onclick="window.location.href='../Controlador/editarUsuario.php?id=<?php echo $producto['id_producto']; ?>'"
+                                    onclick="window.location.href='../Vista/editarProductos.php?id=<?php echo $producto['id_producto']; ?>'"
                                     class="btn btn-primary btn-sm">Editar</button>
                             </td>
                             <td> <button
-                                    onclick="return confirm('¿Desea eliminar este producto?') ? window.location.href='../Controlador/eliminarProducto.php?id=<?php echo $producto['id_producto']; ?>' : false"
+                                    onclick="return confirm('¿Desea eliminar este producto?') ? window.location.href='../Vista/editarProductos.php?id=<?php echo $producto['id_producto']; ?>' : false"
                                     class="btn btn-danger btn-sm">Eliminar</button>
                             </td>
                         </tr>
@@ -141,11 +141,11 @@ if ($_SESSION['rol'] != "empleado") {
                             <td><?php echo $productoDetallado['origen'] ?></td>
                             <td>
                                 <button
-                                    onclick="window.location.href='../Controlador/editarUsuario.php?id=<?php echo $producto['id_producto']; ?>'"
+                                    onclick="window.location.href='../Vista/editarProductos.php?id=<?php echo $producto['id_producto']; ?>'"
                                     class="btn btn-primary btn-sm">Editar</button>
                             </td>
                             <td> <button
-                                    onclick="return confirm('¿Desea eliminar este producto?') ? window.location.href='../Controlador/eliminarProducto.php?id=<?php echo $producto['id_producto']; ?>' : false"
+                                    onclick="return confirm('¿Desea eliminar este producto?') ? window.location.href='../Vista/eliminarProducto.php?id=<?php echo $producto['id_producto']; ?>' : false"
                                     class="btn btn-danger btn-sm">Eliminar</button>
                             </td>
                         </tr>

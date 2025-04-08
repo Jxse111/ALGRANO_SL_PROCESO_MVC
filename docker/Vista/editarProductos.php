@@ -1,19 +1,21 @@
 <?php
-require_once '../Modelo/Usuario.php';
+require_once '../Modelo/Producto.php';
 require_once '../Modelo/Algrano.php';
-$usuarioSinEditar = Usuario::buscarUsuario(filter_input(INPUT_GET, 'id'));
+$productoSinEditar = Producto::buscarProducto(filter_input(INPUT_GET, 'id'));
+$productoDetalladoSinEditar = Producto::buscarProductoDetallado(filter_input(INPUT_GET, 'id'));
 
-if (filter_has_var(INPUT_POST, 'modificarUsuario')) {
-    $nombreUsuario = filter_input(INPUT_POST, 'usuarioEditado');
-    $nombreUsuario = filter_input(INPUT_POST, 'usuarioEditado') ?: $usuarioSinEditar[0]['usuario'];
-    $direccionUsuario = filter_input(INPUT_POST, 'direccionEditada') ?: $usuarioSinEditar[0]['direccion'];
-    $correoUsuario = filter_input(INPUT_POST, 'correoEditado') ?: $usuarioSinEditar[0]['correo'];
-    $rolUsuario = filter_input(INPUT_POST, 'rolEditado') ?: $usuarioSinEditar[0]['id_rol_usuario'];
-    $dniUsuario = filter_input(INPUT_GET, 'id');
-    $fechaNacimientoUsuario = $usuarioSinEditar[0]['fec_nac'];
-    $usuario = new Usuario($dniUsuario, $nombreUsuario, '',$direccionUsuario, $correoUsuario, $fechaNacimientoUsuario, $rolUsuario);
-    $usuario->guardarUsuario();
-    header("location: ../Vista/areaAdmin.php");
+if (filter_has_var(INPUT_POST, 'modificarProducto')) {
+    $nombreProducto = filter_input(INPUT_POST, 'nombreEditado') ?: $productoSinEditar[0]['nombre'];
+    $precioProducto = filter_input(INPUT_POST, 'precioEditado') ?: $usuarioSinEditar[0]['precio_ud'];
+    $tipoProducto = filter_input(INPUT_POST, 'tipoEditado') ?: $productoDetalladoSinEditar[0]['tipo'];
+    $descripcionProducto = filter_input(INPUT_POST, 'descripcionEditada') ?: $productoDetalladoSinEditar[0]['descripcion'];
+    $stockProducto = filter_input(INPUT_POST, 'stockEditado') ?: $productoDetalladoSinEditar[0]['stock'];
+    $idProductoDetallado = filter_input(INPUT_GET, 'id');
+    $fechaCreacionProducto = filter_input(INPUT_POST, 'fechaEditada') ?: $productoDetalladoSinEditar[0]['fecha_creacion'];
+    $origenProducto = filter_input(INPUT_POST, 'origenEditado') ?: $precioDetalladoSinEditar[0]['origen'];
+    $producto = new Producto($idProductoDetallado, $nombreProducto, $descripcionProducto, $fechaCreacionProducto, $origenProducto, $precioProducto, $stockProducto, $tipoProducto);
+    $producto->crearProducto();
+    header("location: ../Vista/areaEmpleado.php");
 }
 ?>
 <!DOCTYPE html>
@@ -111,43 +113,61 @@ if (filter_has_var(INPUT_POST, 'modificarUsuario')) {
 
     <!-- Page Header Start -->
     <div class="container-fluid page-header mb-5">
-        <h1 class="display-4 mb-3 mt-0 text-white text-uppercase">FORMULARIO DE EDICIÓN DE USUARIOS</h1>
+        <h1 class="display-4 mb-3 mt-0 text-white text-uppercase">FORMULARIO DE EDICIÓN DE PRODUCTOS</h1>
     </div>
     <!-- Page Header End -->
 
     <!-- Contact Start -->
     <div class="contact-form">
         <div class="section-title">
-            <h4 class="text-primary text-uppercase">USUARIO CON DNI <?php echo filter_input(INPUT_GET, 'id') ?></h4>
+            <h4 class="text-primary text-uppercase">PRODUCTO CON CÓDIGO <?php echo filter_input(INPUT_GET, 'id') ?></h4>
         </div>
-        <?php foreach ($usuarioSinEditar as $usuario) { ?>
+        <?php
+        foreach ($productoSinEditar as $producto) {
+            foreach ($productoDetalladoSinEditar as $productoDetallado) ?>
             <form name="sentMessage" id="contactForm" novalidate="novalidate" method="POST">
                 <div class="control-group">
-                    <input type="text" class="form-control" name="usuarioEditado"
-                        placeholder="<?php echo $usuario['usuario'] ?>" />
+                    <input type="text" class="form-control" name="nombreEditado"
+                        placeholder="<?php echo $producto['nombre'] ?>" />
                     <p class="help-block text-danger"></p>
                 </div>
                 <div class="control-group">
-                    <input type="text" class="form-control" name="direccionEditada"
-                        placeholder="<?php echo $usuario['direccion'] ?>" />
+                    <input type="number" class="form-control" name="precioEditado"
+                        placeholder="<?php echo $producto['precio_ud'] ?> €" />
                     <p class="help-block text-danger"></p>
                 </div>
                 <div class="control-group">
-                    <input type="text" class="form-control" name="correoEditado"
-                        placeholder="<?php echo $usuario['correo'] ?>" />
+                    <input type="text" class="form-control" name="tipoEditado"
+                        placeholder="<?php echo $productoDetallado['tipo'] ?>" />
                     <p class="help-block text-danger"></p>
                 </div>
                 <div class="control-group">
-                    <input type="text" class="form-control" name="rolEditado"
-                        placeholder="<?php echo $usuario['id_rol_usuario'] ?>" />
+                    <input type="text" class="form-control" name="descripcionEditada"
+                        placeholder="<?php echo $productoDetallado['descripcion'] ?>" />
+                    <p class="help-block text-danger"></p>
+                </div>
+                <div class="control-group">
+                    <input type="number" class="form-control" name="stockEditado"
+                        placeholder="<?php echo $productoDetallado['stock'] ?>  paquete/s" />
+                    <p class="help-block text-danger"></p>
+                </div>
+                <div class="control-group">
+                    <input type="text" class="form-control" name="descripcionEditada"
+                        placeholder="<?php echo $productoDetallado['fecha_creacion'] ?>" />
+                    <p class="help-block text-danger"></p>
+                </div>
+                <div class="control-group">
+                    <input type="text" class="form-control" name="origenEditado"
+                        placeholder="<?php echo $productoDetallado['origen'] ?>" />
                     <p class="help-block text-danger"></p>
                 </div>
                 <div>
                     <button class="btn btn-primary font-weight-bold py-3 px-5" type="submit" id="entrar"
-                        name="modificarUsuario">Modificar usuario</button>
+                        name="modificarProducto">Modificar producto</button>
                 </div>
-                <a href="../Vista/areaAdmin.php" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">Volver al panel
-                    de administración</a>
+                <a href="../Vista/areaEmpleado.php" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">Volver al
+                    panel
+                    de administración de productos</a>
             </form>
         <?php } ?>
     </div>
