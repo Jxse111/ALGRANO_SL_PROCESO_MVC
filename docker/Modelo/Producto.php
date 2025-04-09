@@ -214,7 +214,9 @@ class Producto
             if ($consultaInsercionProducto->execute()) {
                 $consultaInsercionProductoDetalle = $conexionBD->prepare('UPDATE productos_detalle SET nombre = ? , tipo = ?, descripcion = ?, stock = ?, fecha_creacion = ?, origen = ? WHERE id_producto_detalle = ?');
                 $consultaInsercionProductoDetalle->bind_param('sssdsss', $nombreProducto, $tipoProducto, $descripcionProducto, $stockProducto, $fechaCreacionProducto, $origenProducto, $idProducto);
-                $esValido = true;
+                if($consultaInsercionProductoDetalle->execute()){
+                    $esValido = true;
+                }
             }
         }
         return $esValido ? true : false;
