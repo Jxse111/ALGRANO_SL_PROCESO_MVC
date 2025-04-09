@@ -1,4 +1,8 @@
 <?php
+session_start();
+if($_SESSION['rol'] != "empleado"){
+    header("location: ../Vista/index.php");
+}
 require_once '../Modelo/Producto.php';
 require_once '../Modelo/Algrano.php';
 $productoSinEditar = Producto::buscarProducto(filter_input(INPUT_GET, 'id'));
@@ -6,13 +10,13 @@ $productoDetalladoSinEditar = Producto::buscarProductoDetallado(filter_input(INP
 
 if (filter_has_var(INPUT_POST, 'modificarProducto')) {
     $nombreProducto = filter_input(INPUT_POST, 'nombreEditado') ?: $productoSinEditar[0]['nombre'];
-    $precioProducto = filter_input(INPUT_POST, 'precioEditado') ?: $usuarioSinEditar[0]['precio_ud'];
+    $precioProducto = filter_input(INPUT_POST, 'precioEditado') ?: $productoSinEditar[0]['precio_ud'];
     $tipoProducto = filter_input(INPUT_POST, 'tipoEditado') ?: $productoDetalladoSinEditar[0]['tipo'];
     $descripcionProducto = filter_input(INPUT_POST, 'descripcionEditada') ?: $productoDetalladoSinEditar[0]['descripcion'];
     $stockProducto = filter_input(INPUT_POST, 'stockEditado') ?: $productoDetalladoSinEditar[0]['stock'];
     $idProductoDetallado = filter_input(INPUT_GET, 'id');
     $fechaCreacionProducto = filter_input(INPUT_POST, 'fechaEditada') ?: $productoDetalladoSinEditar[0]['fecha_creacion'];
-    $origenProducto = filter_input(INPUT_POST, 'origenEditado') ?: $precioDetalladoSinEditar[0]['origen'];
+    $origenProducto = filter_input(INPUT_POST, 'origenEditado') ?: $productoDetalladoSinEditar[0]['origen'];
     $producto = new Producto($idProductoDetallado, $nombreProducto, $descripcionProducto, $fechaCreacionProducto, $origenProducto, $precioProducto, $stockProducto, $tipoProducto);
     $producto->crearProducto();
     header("location: ../Vista/areaEmpleado.php");
@@ -152,7 +156,7 @@ if (filter_has_var(INPUT_POST, 'modificarProducto')) {
                     <p class="help-block text-danger"></p>
                 </div>
                 <div class="control-group">
-                    <input type="text" class="form-control" name="descripcionEditada"
+                    <input type="text" class="form-control" name="fechaEditada"
                         placeholder="<?php echo $productoDetallado['fecha_creacion'] ?>" />
                     <p class="help-block text-danger"></p>
                 </div>

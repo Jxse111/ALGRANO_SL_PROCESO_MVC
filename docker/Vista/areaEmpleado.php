@@ -102,13 +102,14 @@ if ($_SESSION['rol'] != "empleado") {
                                     class="btn btn-primary btn-sm">Editar</button>
                             </td>
                             <td> <button
-                                    onclick="return confirm('¿Desea eliminar este producto?') ? window.location.href='../Vista/editarProductos.php?id=<?php echo $producto['id_producto']; ?>' : false"
+                                    onclick="return confirm('¿Desea eliminar este producto?') ? window.location.href='../Controlador/eliminarProducto.php?id=<?php echo $producto['id_producto']; ?>' : false"
                                     class="btn btn-danger btn-sm">Eliminar</button>
                             </td>
                         </tr>
                     <?php } ?>
                 </tbody>
             </table>
+            <button onclick="window.location.href='../Vista/agregarProductos.php'" class="btn btn-primary btn-sm">Añadir</button>
         </div>
         <br><br>
         <hr>
@@ -145,13 +146,14 @@ if ($_SESSION['rol'] != "empleado") {
                                     class="btn btn-primary btn-sm">Editar</button>
                             </td>
                             <td> <button
-                                    onclick="return confirm('¿Desea eliminar este producto?') ? window.location.href='../Vista/eliminarProducto.php?id=<?php echo $producto['id_producto']; ?>' : false"
+                                    onclick="return confirm('¿Desea eliminar este producto?') ? window.location.href='../Controlador/eliminarProducto.php?id=<?php echo $producto['id_producto']; ?>' : false"
                                     class="btn btn-danger btn-sm">Eliminar</button>
                             </td>
                         </tr>
                     <?php } ?>
                 </tbody>
             </table>
+            <button onclick="window.location.href='../Vista/agregarProductos.php'" class="btn btn-primary btn-sm">Añadir</button>
         </div>
 
 

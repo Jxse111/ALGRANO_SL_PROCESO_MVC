@@ -105,7 +105,7 @@ class Producto
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
         $esValido = false;
-        if (!noExisteProducto($$idProducto, $conexionBD)) {
+        if (existeProducto($idProducto, $conexionBD)) {
             $consultaEliminacionProducto = $conexionBD->prepare('DELETE FROM producto WHERE id_producto = ?');
             $consultaEliminacionProducto->bind_param('s', $idProducto);
             if ($consultaEliminacionProducto->execute()) {
@@ -114,6 +114,21 @@ class Producto
         }
         return $esValido ? true : false;
     }
+
+    public static function eliminarProductoDetallado($idProducto)
+    {
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
+        $esValido = false;
+        if (existeProducto($$idProducto, $conexionBD)) {
+            $consultaEliminacionProducto = $conexionBD->prepare('DELETE FROM productos_detalle WHERE id_producto_detalle = ?');
+            $consultaEliminacionProducto->bind_param('s', $idProducto);
+            if ($consultaEliminacionProducto->execute()) {
+                $esValido = true;
+            }
+        }
+        return $esValido ? true : false;
+    }
+
 
     //Método de búsqueda de usuario, devuelve los datos del usuario encontrado en formato de array.
     public static function buscarProducto($idProducto)
@@ -183,11 +198,11 @@ class Producto
         $fechaCreacionProducto = $this->fechaCreacion;
         $origenProducto = $this->origen;
         $precioUnitarioProducto = $this->precioUnitario;
-        if (noExisteProducto($idProducto, $conexionBD)) {
+        if (!existeProducto($idProducto, $conexionBD)) {
             $consultaInsercionProducto = $conexionBD->prepare('INSERT INTO producto VALUES (?,?,?)');
             $consultaInsercionProducto->bind_param('sss', $idProducto, $nombreProducto, $precioUnitarioProducto);
             if ($consultaInsercionProducto->execute()) {
-                $consultaInsercionProductoDetalle = $conexionBD->prepare('INSERT INTO producto_detalle VALUES (?,?,?,?,?,?,?)');
+                $consultaInsercionProductoDetalle = $conexionBD->prepare('INSERT INTO productos_detalle VALUES (?,?,?,?,?,?,?)');
                 $consultaInsercionProductoDetalle->bind_param('ssssdss', $idProducto, $nombreProducto, $tipoProducto, $descripcionProducto, $stockProducto, $fechaCreacionProducto, $origenProducto);
                 if ($consultaInsercionProductoDetalle->execute()) {
                     $esValido = true;
@@ -197,7 +212,7 @@ class Producto
             $consultaInsercionProducto = $conexionBD->prepare('UPDATE producto SET nombre = ? , precio_ud = ? WHERE id_producto = ?');
             $consultaInsercionProducto->bind_param('sss', $nombreProducto, $precioUnitarioProducto, $idProducto);
             if ($consultaInsercionProducto->execute()) {
-                $consultaInsercionProductoDetalle = $conexionBD->prepare('UPDATE producto_detalle SET nombre = ? , tipo = ?, descripcion = ?, stock = ?, fecha_creacion = ?, origen = ? WHERE id_producto_detalle = ?');
+                $consultaInsercionProductoDetalle = $conexionBD->prepare('UPDATE productos_detalle SET nombre = ? , tipo = ?, descripcion = ?, stock = ?, fecha_creacion = ?, origen = ? WHERE id_producto_detalle = ?');
                 $consultaInsercionProductoDetalle->bind_param('sssdsss', $nombreProducto, $tipoProducto, $descripcionProducto, $stockProducto, $fechaCreacionProducto, $origenProducto, $idProducto);
                 $esValido = true;
             }

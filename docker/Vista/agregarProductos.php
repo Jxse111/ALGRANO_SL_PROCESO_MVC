@@ -1,23 +1,23 @@
 <?php
 session_start();
-if($_SESSION['rol'] != "administrador"){
+if($_SESSION['rol'] != "empleado"){
     header("location: ../Vista/index.php");
 }
-require_once '../Modelo/Usuario.php';
+require_once '../Modelo/Producto.php';
 require_once '../Modelo/Algrano.php';
-$usuarioSinEditar = Usuario::buscarUsuario(filter_input(INPUT_GET, 'id'));
-
-if (filter_has_var(INPUT_POST, 'modificarUsuario')) {
-    $nombreUsuario = filter_input(INPUT_POST, 'usuarioEditado');
-    $nombreUsuario = filter_input(INPUT_POST, 'usuarioEditado') ?: $usuarioSinEditar[0]['usuario'];
-    $direccionUsuario = filter_input(INPUT_POST, 'direccionEditada') ?: $usuarioSinEditar[0]['direccion'];
-    $correoUsuario = filter_input(INPUT_POST, 'correoEditado') ?: $usuarioSinEditar[0]['correo'];
-    $rolUsuario = filter_input(INPUT_POST, 'rolEditado') ?: $usuarioSinEditar[0]['id_rol_usuario'];
-    $dniUsuario = filter_input(INPUT_GET, 'id');
-    $fechaNacimientoUsuario = $usuarioSinEditar[0]['fec_nac'];
-    $usuario = new Usuario($dniUsuario, $nombreUsuario, '',$direccionUsuario, $correoUsuario, $fechaNacimientoUsuario, $rolUsuario);
-    $usuario->guardarUsuario();
-    header("location: ../Vista/areaAdmin.php");
+if (filter_has_var(INPUT_POST, 'añadirProducto')) {
+    $idProducto = filter_input(INPUT_POST,'idAñadido'); 
+    $nombreProducto = filter_input(INPUT_POST, 'nombreAñadido');
+    $precioProducto = filter_input(INPUT_POST, 'precioAñadido');
+    $tipoProducto = filter_input(INPUT_POST, 'tipoAñadido');
+    $descripcionProducto = filter_input(INPUT_POST, 'descripcionAñadido');
+    $stockProducto = filter_input(INPUT_POST, 'stockAñadido');
+    $idProductoDetallado = filter_input(INPUT_GET, 'id');
+    $fechaCreacionProducto = filter_input(INPUT_POST, 'fechaAñadido');
+    $origenProducto = filter_input(INPUT_POST, 'origenAñadido');
+    $producto = new Producto($idProducto, $nombreProducto, $descripcionProducto, $fechaCreacionProducto, $origenProducto, $precioProducto, $stockProducto, $tipoProducto);
+    $producto->crearProducto();
+    header("location: ../Vista/areaEmpleado.php");
 }
 ?>
 <!DOCTYPE html>
@@ -115,45 +115,64 @@ if (filter_has_var(INPUT_POST, 'modificarUsuario')) {
 
     <!-- Page Header Start -->
     <div class="container-fluid page-header mb-5">
-        <h1 class="display-4 mb-3 mt-0 text-white text-uppercase">FORMULARIO DE EDICIÓN DE USUARIOS</h1>
+        <h1 class="display-4 mb-3 mt-0 text-white text-uppercase">FORMULARIO PARA AÑADIR PRODUCTOS</h1>
     </div>
     <!-- Page Header End -->
 
     <!-- Contact Start -->
     <div class="contact-form">
         <div class="section-title">
-            <h4 class="text-primary text-uppercase">USUARIO CON DNI <?php echo filter_input(INPUT_GET, 'id') ?></h4>
+            <h4 class="text-primary text-uppercase">PRODUCTO NUEVO</h4>
         </div>
-        <?php foreach ($usuarioSinEditar as $usuario) { ?>
             <form name="sentMessage" id="contactForm" novalidate="novalidate" method="POST">
-                <div class="control-group">
-                    <input type="text" class="form-control" name="usuarioEditado"
-                        placeholder="<?php echo $usuario['usuario'] ?>" />
+            <div class="control-group">
+                    <input type="text" class="form-control" name="idAñadido"
+                        placeholder="Código del producto" />
                     <p class="help-block text-danger"></p>
                 </div>
                 <div class="control-group">
-                    <input type="text" class="form-control" name="direccionEditada"
-                        placeholder="<?php echo $usuario['direccion'] ?>" />
+                    <input type="text" class="form-control" name="nombreAñadido"
+                        placeholder="Nombre del producto" />
                     <p class="help-block text-danger"></p>
                 </div>
                 <div class="control-group">
-                    <input type="text" class="form-control" name="correoEditado"
-                        placeholder="<?php echo $usuario['correo'] ?>" />
+                    <input type="number" class="form-control" name="precioAñadido"
+                        placeholder="Precio unitario" />
                     <p class="help-block text-danger"></p>
                 </div>
                 <div class="control-group">
-                    <input type="text" class="form-control" name="rolEditado"
-                        placeholder="<?php echo $usuario['id_rol_usuario'] ?>" />
+                    <input type="text" class="form-control" name="tipoAñadido"
+                        placeholder="tipo" />
+                    <p class="help-block text-danger"></p>
+                </div>
+                <div class="control-group">
+                    <input type="text" class="form-control" name="descripcionAñadido"
+                        placeholder="Descripcion" />
+                    <p class="help-block text-danger"></p>
+                </div>
+                <div class="control-group">
+                    <input type="number" class="form-control" name="stockAñadido"
+                        placeholder="Cantidad del producto" />
+                    <p class="help-block text-danger"></p>
+                </div>
+                <div class="control-group">
+                    <input type="text" class="form-control" name="fechaAñadido"
+                        placeholder="Fecha de creación" />
+                    <p class="help-block text-danger"></p>
+                </div>
+                <div class="control-group">
+                    <input type="text" class="form-control" name="origenAñadido"
+                        placeholder="Origen" />
                     <p class="help-block text-danger"></p>
                 </div>
                 <div>
                     <button class="btn btn-primary font-weight-bold py-3 px-5" type="submit" id="entrar"
-                        name="modificarUsuario">Modificar usuario</button>
+                        name="añadirProducto">Añadir nuevo producto</button>
                 </div>
-                <a href="../Vista/areaAdmin.php" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">Volver al panel
-                    de administración</a>
+                <a href="../Vista/areaEmpleado.php" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">Volver al
+                    panel
+                    de administración de productos</a>
             </form>
-        <?php } ?>
     </div>
     <!-- Contact End -->
 

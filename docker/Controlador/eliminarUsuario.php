@@ -1,4 +1,8 @@
 <?php
+session_start();
+if($_SESSION['rol'] != "administrador"){
+    header("location: ../Vista/index.php");
+}
 if (filter_has_var(INPUT_GET, "id")) {
     require_once '../Modelo/funcionesBaseDeDatos.php';
     require_once '../Modelo/Algrano.php';
