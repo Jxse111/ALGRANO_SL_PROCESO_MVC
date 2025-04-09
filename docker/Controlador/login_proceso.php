@@ -69,16 +69,18 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
                                             $mensajeExito .= "Tipo de rol encontrado.\n";
                                             $rol = $buscarTipoRolUsuarioRegistrado->fetch_column();
                                             $_SESSION['rol'] = $rol;
-
                                             // Redirect based on user role
                                             switch ($_SESSION['rol']) {
                                                 case "cliente":
+                                                    $_SESSION['usuario'] = $usuarioLogin;
                                                     header("Location: ../Vista/index.php");
                                                     break;
                                                 case "empleado":
+                                                    $_SESSION['usuario'] = $usuarioLogin;
                                                     header("Location: ../Vista/index.php");
                                                     break;
                                                 case "administrador":
+                                                    $_SESSION['usuario'] = $usuarioLogin;
                                                     header("Location: ../Vista/index.php");
                                                     break;
 

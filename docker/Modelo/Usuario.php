@@ -100,6 +100,21 @@ class Usuario
         return $esValido ? $datosUsuario : false;
     }
 
+    public static function buscarUsuarioPorNombre($nombreUsuario)
+    {
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
+        $esValido = false;
+        if (existeUsuario($nombreUsuario, $conexionBD)) {
+            $consultaBusquedaUsuario = $conexionBD->prepare('SELECT * FROM usuario WHERE usuario = ?');
+            $consultaBusquedaUsuario->bind_param('s', $nombreUsuario);
+            if ($consultaBusquedaUsuario->execute()) {
+                $datosUsuario = $consultaBusquedaUsuario->get_result()->fetch_all(MYSQLI_ASSOC);
+                $esValido = true;
+            }
+        }
+        return $esValido ? $datosUsuario : false;
+    }
+
     //Método que lista todos los usuarios de la base de datos
     public static function listarUsuarios()
     {

@@ -58,7 +58,7 @@ session_start();
                             alt="Mi Cuenta" style="width: 100px; height: 80px; border-radius: 50%; margin-right: 20px;">
                         <div class="dropdown-menu text-capitalize" style="background-color: rgba(27, 18, 15, 0.8); backdrop-filter: blur(8px); border-radius: 10px; left: -30px;">
 
-                            <a href="perfil.html" class="dropdown-item" style="color: #DA9F5B;">Perfil</a>
+                            <a href="perfil.php" class="dropdown-item" style="color: #DA9F5B;">Perfil</a>
                             <?php if ($_SESSION['rol'] == "administrador") { ?>
                                 <a href="areaAdmin.php" class="dropdown-item" style="color: #DA9F5B" ;>Administrar</a>
                             <?php } elseif ($_SESSION['rol'] == "empleado") { ?>

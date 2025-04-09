@@ -1,3 +1,12 @@
+<?php
+require_once '../Modelo/Algrano.php';
+require_once '../Modelo/Usuario.php';
+session_start();
+if ($_SESSION['rol'] == 'invitado') {
+    header('location: ../Vista/index.php');
+}
+$usuarioSesion = Usuario::buscarUsuarioPorNombre($_SESSION['usuario']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +43,8 @@
         <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
             <div class="container d-flex justify-content-center">
                 <a href="perfil.html" class="navbar-brand px-lg-4 m-0">
-                    <img alt="profilePic" src="../img/profilePic.png" height="150" width="150" style="border-radius: 50%;">
+                    <img alt="profilePic" src="../img/profilePic.png" height="150" width="150"
+                        style="border-radius: 50%;">
                 </a>
             </div>
         </nav>
@@ -62,23 +72,36 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 mb-5">
-                    <h4 class="text-primary text-uppercase mb-4 text-center" style="letter-spacing: 5px;">Información del Perfil</h4>
+                    <h4 class="text-primary text-uppercase mb-4 text-center" style="letter-spacing: 5px;">Información
+                        del Perfil</h4>
                     <form>
-                        <div class="form-group">
-                            <label for="username" class="h5">Usuario</label>
-                            <input type="text" class="form-control form-control-lg" id="username" placeholder="Nombre de usuario" value="" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="password" class="h5">Contraseña</label>
-                            <input type="password" class="form-control form-control-lg" id="password" placeholder="Contraseña" value="" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="h5">Correo</label>
-                            <input type="email" class="form-control form-control-lg" id="email" placeholder="Correo electrónico" value="" readonly>
-                        </div>
-                        <div class="form-group text-center mt-5">
-                            <button  onclick="window.location.href='../Controlador/cerrarSesion_proceso.php'" type="button" class="btn btn-danger btn-lg px-5">Cerrar sesión</button>
-                        </div>
+                        <?php foreach ($usuarioSesion as $usuario) { ?>
+                            <div class="form-group">
+                                <label for="username" class="h5">Usuario</label>
+                                <input type="text" class="form-control form-control-lg" id="username"
+                                    placeholder="Nombre de usuario" value="<?php echo $usuario['usuario'] ?>"
+                                    readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="mail" class="h5">Correo</label>
+                                <input type="text" class="form-control form-control-lg" id="correo" placeholder="Correo"
+                                    value="<?php echo $usuario['correo'] ?>" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="direccion" class="h5">Dirección</label>
+                                <input type="direccion" class="form-control form-control-lg" id="direccion"
+                                    placeholder="Dirección" value="<?php echo $usuario['direccion']?>" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="fec_nac" class="h5">Fecha de nacimiento</label>
+                                <input type="fec_nac" class="form-control form-control-lg" id="fec_nac"
+                                    placeholder="Fecha de nacimiento" value="<?php echo $usuario['fec_nac']?>" readonly>
+                            </div>
+                            <div class="form-group text-center mt-5">
+                                <button onclick="window.location.href='../Controlador/cerrarSesion_proceso.php'"
+                                    type="button" class="btn btn-danger btn-lg px-5">Cerrar sesión</button>
+                            </div>
+                        <?php } ?>
                     </form>
                 </div>
             </div>
@@ -135,7 +158,8 @@
             style="border-color: rgba(256, 256, 256, .1) !important;">
             <p class="mb-2 text-white">Copyright &copy; <a class="font-weight-bold" href="#">Domain</a>. All Rights
                 Reserved.</a></p>
-            <p class="m-0 text-white">Designed by <a class="font-weight-bold" href="https://github.com/Jxse111">Jxse111</a></p>
+            <p class="m-0 text-white">Designed by <a class="font-weight-bold"
+                    href="https://github.com/Jxse111">Jxse111</a></p>
         </div>
     </div>
     <!-- Footer End -->
@@ -163,4 +187,4 @@
     <script src="../js/main.js"></script>
 </body>
 
-</html> 
+</html>
