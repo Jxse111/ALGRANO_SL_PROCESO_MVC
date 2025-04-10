@@ -145,6 +145,19 @@ function existeProducto($idProducto, $conexionBD)
     return $productoExiste ? true : false;
 }
 
+function existePedido($codigoPedido, $conexionBD)
+{
+    $pedidoExiste = false;
+    $consultaPedidosExistentes = $conexionBD->query("SELECT codigo_pedido FROM pedido");
+    $pedidos = $consultaPedidosExistentes->fetch_all(MYSQLI_ASSOC);
+    foreach ($pedidos as $pedido) {
+        if ($pedido['codigo_pedido'] == $$codigoPedido) {
+            $pedidoExiste = true;
+        }
+    }
+    return $pedidoExiste ? true : false;
+}
+
 function existeProductoDetalle($idProducto, $conexionBD)
 {
     $productoExiste = false;

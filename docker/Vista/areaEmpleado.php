@@ -3,7 +3,14 @@ session_start();
 if ($_SESSION['rol'] != "empleado") {
     header("Location: ./index.php");
     exit();
-} ?>
+}
+require_once '../Modelo/Producto.php';
+require_once '../Modelo/Pedido.php';
+$productos = Producto::listarProductos(); // Obtiene los productos  
+$productosDetallados = Producto::listarProductosDetallados(); // Obtiene los productos detallados
+$pedidos = Pedido::listarPedidos(); // Obtiene los pedidos
+$pedidosDetallados = Pedido::listarPedidosDetalle(); // Obtiene los pedidos detallados
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,50 +77,45 @@ if ($_SESSION['rol'] != "empleado") {
     <div>
         <!-- Aquí puedes agregar el contenido de la página de administración -->
         <h2 class="text-center">Bienvenido a la sección de empleados</h2>
-        <?php
-        require_once '../Modelo/Producto.php';
-        //Lista de Clientes y empleados a administrar
-        $productos = Producto::listarProductos(); // Obtiene los productos  
-        $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los productos detallados
-        ?>
         <div class="container mt-5">
-        <div class="container mt-5">
-            <!-- Tabla de Productos -->
-            <h3>Productos</h3>
-            <table class="table table-bordered">
-                <thead style="background-color: #362421; color: #DB9F5B;">
-                    <tr>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Precio</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody style="background-color:#DFB767; color: #362421;">
-                    <?php foreach ($productos as $producto) { ?>
+            <div class="container mt-5">
+                <!-- Tabla de Productos -->
+                <h3>Productos</h3>
+                <table class="table table-bordered">
+                    <thead style="background-color: #362421; color: #DB9F5B;">
                         <tr>
-                            <td><?php echo $producto['id_producto'] ?></td>
-                            <td><?php echo $producto['nombre'] ?></td>
-                            <td><?php echo $producto['precio_ud'] ?></td>
-                            <td>
-                                <button
-                                    onclick="window.location.href='../Vista/editarProductos.php?id=<?php echo $producto['id_producto']; ?>'"
-                                    class="btn btn-primary btn-sm">Editar</button>
-                            </td>
-                            <td> <button
-                                    onclick="return confirm('¿Desea eliminar este producto?') ? window.location.href='../Controlador/eliminarProducto.php?id=<?php echo $producto['id_producto']; ?>' : false"
-                                    class="btn btn-danger btn-sm">Eliminar</button>
-                            </td>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th></th>
+                            <th></th>
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-            <button onclick="window.location.href='../Vista/agregarProductos.php'" class="btn btn-primary btn-sm">Añadir</button>
-        </div>
-        <br><br>
-        <hr>
-        <br><br>
+                    </thead>
+                    <tbody style="background-color:#DFB767; color: #362421;">
+                        <?php foreach ($productos as $producto) { ?>
+                            <tr>
+                                <td><?php echo $producto['id_producto'] ?></td>
+                                <td><?php echo $producto['nombre'] ?></td>
+                                <td><?php echo $producto['precio_ud'] ?></td>
+                                <td>
+                                    <button
+                                        onclick="window.location.href='../Vista/editarProductos.php?id=<?php echo $producto['id_producto']; ?>'"
+                                        class="btn btn-primary btn-sm">Editar</button>
+                                </td>
+                                <td> <button
+                                        onclick="return confirm('¿Desea eliminar este producto?') ? window.location.href='../Controlador/eliminarProducto.php?id=<?php echo $producto['id_producto']; ?>' : false"
+                                        class="btn btn-danger btn-sm">Eliminar</button>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+                <button onclick="window.location.href='../Vista/agregarProductos.php'"
+                    class="btn btn-primary btn-sm">Añadir</button>
+            </div>
+            <br><br>
+            <hr>
+            <br><br>
             <!-- Tabla de Productos Detallados -->
             <h3>Productos detallados</h3>
             <table class="table table-bordered">
@@ -153,10 +155,80 @@ if ($_SESSION['rol'] != "empleado") {
                     <?php } ?>
                 </tbody>
             </table>
-            <button onclick="window.location.href='../Vista/agregarProductos.php'" class="btn btn-primary btn-sm">Añadir</button>
+            <button onclick="window.location.href='../Vista/agregarProductos.php'"
+                class="btn btn-primary btn-sm">Añadir</button>
         </div>
-
-
+    </div>
+    <hr>
+    <!-- Tabla de Productos Detallados -->
+    <div class="container mt-5">
+        <h3>Pedidos</h3>
+        <table class="table table-bordered">
+            <thead style="background-color: #362421; color: #DB9F5B;">
+                <tr>
+                    <th>Código</th>
+                    <th>Tipo</th>
+                    <th>Precio Total</th>
+                    <th>Fecha</th>
+                    <th>Estado del pedido</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody style="background-color:#DFB767; color: #362421;">
+                <?php foreach ($pedidos as $pedido) { ?>
+                    <tr>
+                        <td><?php echo $pedido['codigo_pedido'] ?></td>
+                        <td><?php echo $pedido['tipo'] ?></td>
+                        <td><?php echo $pedido['precio_total'] ?></td>
+                        <td><?php echo $pedido['fecha_pedido'] ?></td>
+                        <td><?php echo $pedido['estado'] ?></td>
+                        <td><button
+                                onclick="window.location.href='../Vista/editarPedido.php?id=<?php echo $pedido['codigo_pedido']; ?>'"
+                                class="btn btn-primary btn-sm">Editar</button>
+                        </td>
+                        <td><button
+                                onclick="return confirm('¿Desea eliminar este pedido?') ? window.location.href='../Controlador/eliminarPedido.php?id=<?php echo $pedido['codigo_pedido']; ?>' : false"
+                                class="btn btn-danger btn-sm">Eliminar</button>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <div class="container mt-5">
+        <!-- Tabla de Pedidos -->
+        <h3>Pedidos Detallados</h3>
+        <table class="table table-bordered">
+            <thead style="background-color: #362421; color: #DB9F5B;">
+                <tr>
+                    <th>Código</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody style="background-color:#DFB767; color: #362421;">
+                <?php foreach ($pedidosDetallados as $pedidoDetallado) { ?>
+                    <tr>
+                        <td><?php echo $pedidoDetallado['codigo_pedido'] ?></td>
+                        <td><?php echo $pedidoDetallado['cantidad_descrita'] ?></td>
+                        <td><?php echo $pedidoDetallado['subtotal'] . "€" ?></td>
+                        <td><button
+                                onclick="window.location.href='../Vista/editarPedido.php?id=<?php echo $pedido['codigo_pedido']; ?>'"
+                                class="btn btn-primary btn-sm">Editar</button>
+                        </td>
+                        <td><button
+                                onclick="return confirm('¿Desea eliminar este pedido?') ? window.location.href='../Controlador/eliminarPedidos.php?id=<?php echo $pedido['codigo_pedido']; ?>' : false"
+                                class="btn btn-danger btn-sm">Eliminar</button>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
     </div>
     <!-- Administration End -->
 

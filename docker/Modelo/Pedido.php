@@ -1,33 +1,36 @@
 <?php
-
+require_once 'funcionesBaseDeDatos.php';
 class Pedido
 {
     private $codigo;
     private $dniCliente;
+    private $idProducto;
     private $tipo;
     private $precioTotal;
     private $fechaPedido;
     private $estado;
+    private $codigoDetalle;
+    private $subtotal;
+    private $cantidad;
 
-    public function __construct($codigo, $dniCliente, $tipo, $precioTotal, $fechaPedido, $estado)
+    public function __construct($codigo, $dniCliente, $idProducto, $tipo, $precioTotal, $fechaPedido, $estado, $codigoDetalle, $subtotal, $cantidad)
     {
         $this->codigo = $codigo;
         $this->dniCliente = $dniCliente;
+        $this->idProducto = $idProducto;
         $this->tipo = $tipo;
         $this->precioTotal = $precioTotal;
         $this->fechaPedido = $fechaPedido;
         $this->estado = $estado;
+        $this->codigoDetalle = $codigoDetalle;
+        $this->subtotal = $subtotal;
+        $this->cantidad = $cantidad;
     }
 
     //Getter
     public function getCodigo()
     {
         return $this->codigo;
-    }
-
-    public function getdniCliente()
-    {
-        return $this->dniCliente;
     }
 
     public function getTipo()
@@ -49,6 +52,22 @@ class Pedido
     {
         return $this->estado;
     }
+
+    public function getCodigoDetalle()
+    {
+        return $this->codigoDetalle;
+    }
+
+    public function getSubtotal()
+    {
+        return $this->subtotal;
+    }
+
+    public function getCantidad()
+    {
+        return $this->cantidad;
+    }
+
     //Setter
     public function setTipo($tipo)
     {
@@ -69,16 +88,139 @@ class Pedido
     {
         $this->estado = $estado;
     }
+    public function setSubtotal($subtotal)
+    {
+        $this->subtotal = $subtotal;
+    }
+    public function setCantidad($cantidad)
+    {
+        $this->cantidad = $cantidad;
+    }
 
     public static function obtenerPedidosCliente($dniCliente)
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
         $pedidos = [];
-        $consulta = $conexionBD->prepare('SELECT p.* FROM pedido p INNER JOIN usuario u ON p.DNI_Cliente = u.DNI WHERE u.DNI = ? AND u.rol = 1');
+        $consulta = $conexionBD->prepare('SELECT p.* FROM pedido p INNER JOIN usuario u ON p.DNI_Cliente = u.DNI WHERE u.DNI = ? AND u.id_rol_usuario = 1');
         $consulta->bind_param('i', $dniCliente);
         if ($consulta->execute()) {
             $pedidos = $consulta->get_result()->fetch_all(MYSQLI_ASSOC);
         }
         return $pedidos;
+    }
+
+    public static function obtenerPedidosPorCodigo($codigoPedido)
+    {
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
+        $pedidos = [];
+        $consulta = $conexionBD->prepare('SELECT * FROM pedido WHERE codigo_pedido = ?');
+        $consulta->bind_param('s', $codigoPedido);
+        if ($consulta->execute()) {
+            $pedidos = $consulta->get_result()->fetch_all(MYSQLI_ASSOC);
+        }
+        return $pedidos;
+    }
+
+
+    public static function obtenerPedidosDetalle($codigoPedido)
+    {
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
+        $pedidos = [];
+        $consulta = $conexionBD->prepare('SELECT * FROM pedidos_detalle WHERE codigo_pedido = ?');
+        $consulta->bind_param('s', $codigoPedido);
+        if ($consulta->execute()) {
+            $pedidos = $consulta->get_result()->fetch_all(MYSQLI_ASSOC);
+        }
+        return $pedidos;
+    }
+
+    public static function listarPedidos()
+    {
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
+        $pedidos = [];
+        $consultaBusquedaPedidos = $conexionBD->prepare('SELECT * FROM pedido');
+        if ($consultaBusquedaPedidos->execute()) {
+            $pedidos = $consultaBusquedaPedidos->get_result()->fetch_all(MYSQLI_ASSOC);
+        }
+
+        return $pedidos;
+    }
+
+    public static function listarPedidosDetalle()
+    {
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
+        $pedidos = [];
+        $consultaBusquedaPedidos = $conexionBD->prepare('SELECT * FROM pedidos_detalle');
+        if ($consultaBusquedaPedidos->execute()) {
+            $pedidos = $consultaBusquedaPedidos->get_result()->fetch_all(MYSQLI_ASSOC);
+        }
+
+        return $pedidos;
+    }
+
+    public function crearPedido($nombre, $descripcion, $stock, $fechaCreacion, $origen, $precioUnitario)
+    {
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
+        $esValido = false;
+        $codigo = $this->codigo;
+        $dniCliente = $this->dniCliente;
+        $idProducto = $this->idProducto;
+        $tipo = $this->tipo;
+        $precioTotal = $this->precioTotal;
+        $fechaPedido = $this->fechaPedido;
+        $estado = $this->estado;
+        $codigoDetalle = $this->codigoDetalle;
+        $subtotal = $this->subtotal;
+        $cantidad = $this->cantidad;
+        if (existePedido($codigo, $conexionBD) && existeProducto($idProducto, $conexionBD)) {
+            $consultaInsercionPedido = $conexionBD->prepare('INSERT INTO pedido VALUES (?,?,?,?,?,?,?)');
+            $consultaInsercionPedido->bind_param('ssssdss', $$codigo, $dniCliente, $idProducto, $tipo, $precioTotal, $fechaPedido, $estado);
+            if ($consultaInsercionPedido->execute()) {
+                $consultaInsercionPedidoDetalle = $conexionBD->prepare('INSERT INTO productos_detalle VALUES (?,?,?,?)');
+                $consultaInsercionPedidoDetalle->bind_param('sdis', $codigoDetalle, $subtotal, $cantidad, $codigo);
+                if ($consultaInsercionPedidoDetalle->execute()) {
+                    $esValido = true;
+                }
+            }
+        } else {
+            $consultaInsercionPedido = $conexionBD->prepare('UPDATE pedido SET tipo = ?, precio_total = ?, fecha_pedido = ?, estado = ?  WHERE codigo_pedido = ?');
+            $consultaInsercionPedido->bind_param('sdsss', $tipo, $precioTotal, $fechaPedido, $estado, $codigo);
+            if ($consultaInsercionPedido->execute()) {
+                $consultaInsercionPedidoDetalle = $conexionBD->prepare('UPDATE pedidos_detalle SET subtotal = ? , cantidad_descrita = ? WHERE codigo_detalle = ?');
+                $consultaInsercionPedidoDetalle->bind_param('dss', $subtotal, $cantidad, $codigoDetalle);
+                if ($consultaInsercionPedidoDetalle->execute()) {
+                    $esValido = true;
+                }
+            }
+        }
+        return $esValido ? true : false;
+    }
+
+    public static function eliminarPedido($codigoPedido)
+    {
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
+        $esValido = false;
+        if (existePedido($codigoPedido, $conexionBD)) {
+            $consultaEliminacionPedido = $conexionBD->prepare('DELETE FROM pedido WHERE codigo_pedido = ?');
+            $consultaEliminacionPedido->bind_param('s', $codigoPedido);
+            if ($consultaEliminacionPedido->execute()) {
+                $esValido = true;
+            }
+        }
+        return $esValido ? true : false;
+    }
+
+    public static function eliminarPedidoDetallado($codigoPedido)
+    {
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
+        $esValido = false;
+        if (existePedido($codigoPedido, $conexionBD)) {
+            $consultaEliminacionPedido = $conexionBD->prepare('DELETE FROM pedidos_detalle WHERE codigo_pedido = ?');
+            $consultaEliminacionPedido->bind_param('s', $codigoPedido);
+            if ($consultaEliminacionPedido->execute()) {
+                $esValido = true;
+            }
+        }
+        return $esValido ? true : false;
     }
 }

@@ -5,9 +5,7 @@ if ($_SESSION['rol'] != "cliente") {
     header("Location: ./index.php");
     exit();
 }
-
-$cliente = Usuario::buscarUsuarioPorNombre($_SESSION['usuario']);
-$dniCliente = $cliente[0]['DNI'];
+$codigoPedido = filter_input(INPUT_GET, 'id');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +58,7 @@ $dniCliente = $cliente[0]['DNI'];
     <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
         <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
             style="min-height: 400px">
-            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Mis Pedidos</h1>
+            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Información detallada del pedido</h1>
             <div class="d-inline-flex mb-lg-5">
                 <p class="m-0 text-white"><a class="text-white" href="index.php">Inicio</a></p>
                 <p class="m-0 text-white px-2">/</p>
@@ -74,43 +72,38 @@ $dniCliente = $cliente[0]['DNI'];
     <!-- Area de Empleado Start -->
     <div>
         <!-- Aquí puedes agregar el contenido de la página de administración -->
-        <h2 class="text-center">Sección de pedidos realizados</h2>
+        <h2 class="text-center">Sección de información sobre pedidos realizados</h2>
         <?php
         require_once '../Modelo/Pedido.php';
 
-        $pedidos = Pedido::obtenerPedidosCliente($dniCliente); // Obtiene los pedidos realizados por ese usuario  
+        $pedidosDetallados = Pedido::obtenerPedidosDetalle($codigoPedido); // Obtiene los pedidos realizados por ese usuario  
         //$pedidosDetallados = Pedido::listarPedidosDetallados(); // Obtiene los pedidos detallados
         ?>
         <div class="container mt-5">
             <div class="container mt-5">
                 <!-- Tabla de Pedidos -->
-                <h3>Pedidos</h3>
+                <h3>Pedidos Detallados</h3>
                 <table class="table table-bordered">
                     <thead style="background-color: #362421; color: #DB9F5B;">
                         <tr>
                             <th>Código</th>
-                            <th>Tipo</th>
-                            <th>Precio Total</th>
-                            <th>Fecha</th>
-                            <th>Estado del pedido</th>
-                            <th></th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
                         </tr>
                     </thead>
                     <tbody style="background-color:#DFB767; color: #362421;">
-                        <?php foreach ($pedidos as $pedido) { ?>
+                        <?php foreach ($pedidosDetallados as $pedidoDetallado) { ?>
                             <tr>
-                                <td><?php echo $pedido['codigo_pedido'] ?></td>
-                                <td><?php echo $pedido['tipo'] ?></td>
-                                <td><?php echo $pedido['precio_total'] ?></td>
-                                <td><?php echo $pedido['fecha_pedido'] ?></td>
-                                <td><?php echo $pedido['estado'] ?></td>
-                                <td> <button
-                                        onclick="window.location.href='../Vista/informacionPedidoDetalle.php?id=<?php echo $pedido['codigo_pedido']; ?>'"
-                                        class="btn btn-primary btn-sm">Consultar Información Detallada</button></td>
+                                <td><?php echo $pedidoDetallado['codigo_pedido']?></td>
+                                <td><?php echo $pedidoDetallado['cantidad_descrita'] ?></td>
+                                <td><?php echo $pedidoDetallado['subtotal'] . "€"?></td>
                             </tr>
                         <?php } ?>
                     </tbody>
                 </table>
+                <button
+                    onclick="window.location.href='../Vista/pedidos.php'"
+                    class="btn btn-primary btn-sm">Volver</button>
             </div>
             <br><br>
             <hr>
