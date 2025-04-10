@@ -5,8 +5,8 @@ if ($_SESSION['rol'] != "empleado") {
 }
 require_once '../Modelo/Pedido.php';
 require_once '../Modelo/Algrano.php';
-$pedidoSinEditar = Pedido::obtenerPedidosDetalle(filter_input(INPUT_GET, 'id'));
-$pedidoDetalladoSinEditar = Pedido::obtenerPedidosPorCodigo(filter_input(INPUT_GET, 'id'));
+$pedidoSinEditar = Pedido::obtenerPedidosPorCodigo(filter_input(INPUT_GET, 'id'));
+$pedidoDetalladoSinEditar = Pedido::obtenerPedidosDetalle(filter_input(INPUT_GET, 'id'));
 
 if (filter_has_var(INPUT_POST, 'modificarPedido')) {
     $codigoPedido = $pedidoSinEditar[0]['codigo_pedido'];
