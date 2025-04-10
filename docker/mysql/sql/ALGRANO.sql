@@ -82,24 +82,16 @@ CREATE TABLE IF NOT EXISTS pedidos_detalle (
 
 -- Roles
 INSERT INTO rol (id_rol, rol) VALUES
-('ROL001', 'Administrador'),
-('ROL002', 'Cliente'),
-('ROL003', 'Empleado');
+('0','invitado'),
+('1', 'cliente'),
+('2', 'empleado'),
+('3', 'administrador');
 
 -- Usuarios
 INSERT INTO usuario (DNI, usuario, contrasena, direccion, correo, fec_nac, id_rol_usuario) VALUES
-('12345678A', 'adminuser', 'adminpass', 'Calle Admin 1', 'admin@algrano.com', '1990-01-01', 'ROL001'),
-('23456789B', 'clientuser', 'clientpass', 'Av Cliente 2', 'cliente@algrano.com', '1995-05-15', 'ROL002'),
-('34567890C', 'empleuser', 'emppass', 'Paseo Empleado 3', 'empleado@algrano.com', '1988-07-22', 'ROL003');
-
--- Clientes
-INSERT INTO cliente (DNI_cliente, codigo_cliente) VALUES
-('23456789B', 'CLI001');
-
--- Empleados
-INSERT INTO empleado (DNI_empleado, puesto, departamento) VALUES
-('34567890C', 'Encargado', 'Ventas');
-
+('45123248K', 'AlgranoAdmin', '162132b381fbadbe5c3d288539aa0243f3a3c0ada934134aa9f2f5ac850fa8a331447d213e77f6b29373a39321e4e9d96f3f4cfe1e7fceed626a59a04b603442', 'Camino del lomo,32', 'algrano@gmail.com', '1987-06-23', '3'),
+('76594532F', 'Lxrenzx189', '2ec33b24018e46699d86954b3d20be96bfea1ea17f3d8be30af00ac8864923f19aa230fb340e1d3583deca1d62678304e1f9a019c3dee88f48d4961531b9bbfb', 'Camino de la serpiente,21', 'lorenzo189@gmail.com', '1987-06-23', '1'),
+('56432655M', 'EmpleadoMiguel123', '69d02a6c3c9ea7ff711e454020a16a81f7ee438cd3334e0f9be3eb0338df2dff58a231963c681e736143eeb6c1d3280d5f053d9892ff33ff09d95cf8294c556f', 'Camino de los objetos,5', 'miguelAlgrano@gmail.com', '1970-01-01', '2');
 -- Productos
 INSERT INTO producto (id_producto, nombre, precio_ud) VALUES
 ('PROD001', 'Café Arábica', 12.50),
@@ -119,13 +111,9 @@ INSERT INTO pedidos_detalle (codigo_detalle, subtotal, cantidad_descrita, codigo
 ('DET001', 25.00, 2, 'PED001');
 
 -- Crear usuario de base de datos y asignar permisos
-CREATE USER IF NOT EXISTS 'algrano_admin'@'localhost' IDENTIFIED BY 'admin123';
-CREATE USER IF NOT EXISTS 'algrano_cliente'@'localhost' IDENTIFIED BY 'cliente123';
-CREATE USER IF NOT EXISTS 'algrano_empleado'@'localhost' IDENTIFIED BY 'empleado123';
+CREATE USER IF NOT EXISTS 'algrano_admin'@'localhost' IDENTIFIED BY 'AlgranoAdmin';
+CREATE USER IF NOT EXISTS 'algrano_empleado'@'localhost' IDENTIFIED BY 'EmpleadoMiguel123';
 
 -- Asignar privilegios
 GRANT ALL PRIVILEGES ON algrano.* TO 'algrano_admin'@'localhost';
-GRANT SELECT, INSERT, UPDATE ON algrano.producto TO 'algrano_empleado'@'localhost';
-GRANT SELECT, INSERT ON algrano.pedido TO 'algrano_cliente'@'localhost';
-
-FLUSH PRIVILEGES;
+GRANT SELECT, INSERT, UPDATE ON algrano.producto TO 'algrano_empleado'@'localhost'
