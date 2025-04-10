@@ -153,7 +153,7 @@ if (filter_has_var(INPUT_POST, 'modificarPedido')) {
                     <p class="help-block text-danger"></p>
                 </div>
                 <div class="control-group">
-                    <input type="number" class="form-control" name="subtoralEditado"
+                    <input type="number" class="form-control" name="subtotalEditado"
                         placeholder="<?php echo $pedidoDetallado['subtotal'] ?>  €" />
                     <p class="help-block text-danger"></p>
                 </div>
