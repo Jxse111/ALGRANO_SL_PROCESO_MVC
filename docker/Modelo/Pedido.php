@@ -158,7 +158,7 @@ class Pedido
         return $pedidos;
     }
 
-    public function crearPedido($nombre, $descripcion, $stock, $fechaCreacion, $origen, $precioUnitario)
+    public function crearPedido()
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
         $esValido = false;
