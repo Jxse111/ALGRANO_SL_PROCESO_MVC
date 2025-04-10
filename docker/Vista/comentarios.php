@@ -118,8 +118,7 @@ session_start();
                             <i>Oficinista</i>
                         </div>
                     </div>
-                    <p class="m-0">Como buen catador de café que soy (ya que trabajo en una oficina y me paso el dia
-                        bebiendo café),este café sin duda es de los mejores del mercado</p>
+                    <p class="m-0">Este café sin duda es de los mejores del mercado</p>
                 </div>
                 <div class="testimonial-item">
                     <div class="d-flex align-items-center mb-3">
