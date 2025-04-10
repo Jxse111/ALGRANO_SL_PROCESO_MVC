@@ -171,10 +171,7 @@ session_start();
                     <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i
                             class="fab fa-twitter"></i></a>
                     <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i
                             class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square" href="#"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-5">
@@ -192,7 +189,7 @@ session_start();
                 <div class="w-100">
                     <div class="input-group">
                         <input type="text" class="form-control border-light" style="padding: 25px;"
-                            placeholder="Your Email">
+                            placeholder="Correo">
                         <div class="input-group-append">
                             <button class="btn btn-primary font-weight-bold px-3">Suscribirse</button>
                         </div>

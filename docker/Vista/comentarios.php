@@ -151,22 +151,19 @@ session_start();
         <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Localización</h4>
-                <p><i class="fa fa-map-marker-alt mr-2"></i>45 calle del grano de café, Almería, ES</p>
+                <p><i class="fa fa-map-marker-alt mr-2"></i>45 Camino del Grano de Café, Almería, ES</p>
                 <p><i class="fa fa-phone-alt mr-2"></i>+64 8988982134</p>
-                <p class="m-0"><i class="fa fa-envelope mr-2"></i>algranosl@hotcoffe.com</p>
+                <p class="m-0"><i class="fa fa-envelope mr-2"></i>algranoslhotcoffee@gmail.com</p>
             </div>
             <div class="col-lg-3 col-md-6 mb-5">
-                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">siguenos</h4>
+                <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Siguenos</h4>
                 <p>En nuestras redes sociales nos promocionamos y mostramos los últimos productos antes de que salgan en
                     la web</p>
                 <div class="d-flex justify-content-start">
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="https://x.com/Jxse111"><i
                             class="fab fa-twitter"></i></a>
                     <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i
                             class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square" href="#"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-5">
@@ -184,7 +181,7 @@ session_start();
                 <div class="w-100">
                     <div class="input-group">
                         <input type="text" class="form-control border-light" style="padding: 25px;"
-                            placeholder="Your Email">
+                            placeholder="Correo">
                         <div class="input-group-append">
                             <button class="btn btn-primary font-weight-bold px-3">Suscribirse</button>
                         </div>
