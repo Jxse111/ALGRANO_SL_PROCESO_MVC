@@ -104,7 +104,7 @@ INSERT INTO productos_detalle (id_producto_detalle, nombre, tipo, descripcion, s
 
 -- Pedidos
 INSERT INTO pedido (codigo_pedido, DNI_cliente, id_producto_pedido, tipo, precio_total, estado) VALUES
-('PED001', '23456789B', 'PROD001', 'Grano', 25.00, 'Pagado');
+('PED001', '76594532F', 'PROD001', 'Grano', 25.00, 'Pagado');
 
 -- Detalles del pedido
 INSERT INTO pedidos_detalle (codigo_detalle, subtotal, cantidad_descrita, codigo_pedido) VALUES
