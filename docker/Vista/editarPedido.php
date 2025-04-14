@@ -10,15 +10,15 @@ $pedidoDetalladoSinEditar = Pedido::obtenerPedidosDetalle(filter_input(INPUT_GET
 
 if (filter_has_var(INPUT_POST, 'modificarPedido')) {
     $codigoPedido = $pedidoSinEditar[0]['codigo_pedido'];
-    $codigoPedidoDetalle = $productoDetalladoSinEditar[0]['codigo_detalle'] ;
-    $dniCliente = $pedidoSinEditar[0]['DNI_Cliente'];
+    $codigoPedidoDetalle = $pedidoDetalladoSinEditar[0]['codigo_detalle'] ;
+    $dniCliente = $pedidoSinEditar[0]['DNI_cliente'];
     $idProducto = $pedidoSinEditar[0]['id_producto_pedido'];
     $tipoPedido = filter_input(INPUT_POST, 'tipo') ?: $pedidoSinEditar[0]['tipo'];
     $precioPedido = filter_input(INPUT_POST, 'precioEditado') ?: $pedidoSinEditar[0]['precio_total'];
     $fechaPedido = filter_input(INPUT_POST, 'fechaEditada') ?: $pedidoSinEditar[0]['fecha_pedido'];
     $estadoPedido = filter_input(INPUT_POST, 'estadoEditado') ?: $pedidoSinEditar[0]['estado'];
     $subtotalPedido = filter_input(INPUT_POST, 'subtotalEditado') ?: $pedidoDetalladoSinEditar[0]['subtotal'];
-    $cantidadPedido = filter_input(INPUT_GET, 'cantidadEditada') ?: $pedidoDetalladoSinEditar[0]['cantidad'];
+    $cantidadPedido = filter_input(INPUT_GET, 'cantidadEditada') ?: $pedidoDetalladoSinEditar[0]['cantidad_descrita'];
     $pedidoRealizado = new Pedido($codigoPedido, $dniCliente, $idProducto, $tipoPedido, $precioPedido, $fechaPedido, $estadoPedido, $codigoPedidoDetalle, $subtotalPedido, $cantidadPedido);
     $pedidoRealizado->crearPedido();
     header("location: ../Vista/areaEmpleado.php");
@@ -164,7 +164,7 @@ if (filter_has_var(INPUT_POST, 'modificarPedido')) {
                 </div>
                 <div>
                     <button class="btn btn-primary font-weight-bold py-3 px-5" type="submit" id="entrar"
-                        name="modificarProducto">Modificar pedido</button>
+                        name="modificarPedido">Modificar pedido</button>
                 </div>
                 <a href="../Vista/areaEmpleado.php" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">Volver al
                     panel

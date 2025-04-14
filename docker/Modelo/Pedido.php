@@ -172,9 +172,9 @@ class Pedido
         $codigoDetalle = $this->codigoDetalle;
         $subtotal = $this->subtotal;
         $cantidad = $this->cantidad;
-        if (existePedido($codigo, $conexionBD) && existeProducto($idProducto, $conexionBD)) {
+        if (!existePedido($codigo, $conexionBD) && existeProducto($idProducto, $conexionBD)) {
             $consultaInsercionPedido = $conexionBD->prepare('INSERT INTO pedido VALUES (?,?,?,?,?,?,?)');
-            $consultaInsercionPedido->bind_param('ssssdss', $$codigo, $dniCliente, $idProducto, $tipo, $precioTotal, $fechaPedido, $estado);
+            $consultaInsercionPedido->bind_param('ssssdss', $codigo, $dniCliente, $idProducto, $tipo, $precioTotal, $fechaPedido, $estado);
             if ($consultaInsercionPedido->execute()) {
                 $consultaInsercionPedidoDetalle = $conexionBD->prepare('INSERT INTO productos_detalle VALUES (?,?,?,?)');
                 $consultaInsercionPedidoDetalle->bind_param('sdis', $codigoDetalle, $subtotal, $cantidad, $codigo);

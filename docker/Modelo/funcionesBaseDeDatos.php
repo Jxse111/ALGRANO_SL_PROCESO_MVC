@@ -151,7 +151,7 @@ function existePedido($codigoPedido, $conexionBD)
     $consultaPedidosExistentes = $conexionBD->query("SELECT codigo_pedido FROM pedido");
     $pedidos = $consultaPedidosExistentes->fetch_all(MYSQLI_ASSOC);
     foreach ($pedidos as $pedido) {
-        if ($pedido['codigo_pedido'] == $$codigoPedido) {
+        if ($pedido['codigo_pedido'] == $codigoPedido) {
             $pedidoExiste = true;
         }
     }
