@@ -1,5 +1,8 @@
 <?php
 session_start();
+require_once '../Modelo/Producto.php';
+$productos = Producto::listarProductos(); // Obtiene los productos  
+$productosDetallados = Producto::listarProductosDetallados(); // Obtiene los productos detallados
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +62,8 @@ session_start();
                     <div class="nav-item dropdown">
                         <img src="../img/profilePic.png" class="nav-link dropdown-toggle" data-toggle="dropdown"
                             alt="Mi Cuenta" style="width: 100px; height: 80px; border-radius: 50%; margin-right: 20px;">
-                        <div class="dropdown-menu text-capitalize" style="background-color:rgba(27, 18, 15, 0.8); backdrop-filter: blur(8px); border-radius: 10px; left: -30px;">
+                        <div class="dropdown-menu text-capitalize"
+                            style="background-color:rgba(27, 18, 15, 0.8); backdrop-filter: blur(8px); border-radius: 10px; left: -30px;">
 
                             <a href="perfil.php" class="dropdown-item" style="color: #DA9F5B;">Perfil</a>
                             <?php if ($_SESSION['rol'] == "administrador") { ?>
@@ -82,102 +86,53 @@ session_start();
     <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
         <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
             style="min-height: 400px">
-            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Carta</h1>
+            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase">Cátalogo</h1>
             <div class="d-inline-flex mb-lg-5">
                 <p class="m-0 text-white"><a class="text-white" href="index.php">Inicio</a></p>
                 <p class="m-0 text-white px-2">/</p>
-                <p class="m-0 text-white">Carta</p>
+                <p class="m-0 text-white">Cátalogo de productos</p>
             </div>
         </div>
     </div>
     <!-- Page Header End -->
 
 
-    <!-- Menu Start -->
-    <div class="container-fluid pt-5">
-        <div class="container">
-            <div class="section-title">
-                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Carta y precios</h4>
-                <h1 class="display-4">Productos y precios únicos</h1>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <h1 class="mb-5">Café en grano</h1>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="../img/Arabico.png" alt="">
-                            <h5 class="menu-price">20€</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Café 100% arábica </h4>
-                            <p class="m-0">Uno de nuestros mejores cafes en grano,suave y delicado, con aroma a frutos
-                                secos y silvestres.</p>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="../img/Moka.png" alt="">
-                            <h5 class="menu-price">15€</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Café Moka</h4>
-                            <p class="m-0">Café suave con notas de chocolate, es la mezcla perfecta entre café y cacao.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="../img/Mundo Novo.png" alt="">
-                            <h5 class="menu-price">35€</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Café Mundo Novo</h4>
-                            <p class="m-0">Café fusión entre Typica y Bourbon, dulce pero complejo, lleno de notas
-                                dulces similares al caramelo y al chocolate con una acidez suave.</p>
+    <!-- Catálogo de Productos Start -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Catálogo de Productos</h2>
+        <div class="row">
+            <?php foreach ($productos as $producto) { ?>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="<?php echo ($producto['imagen']); ?>" class="card-img-top"
+                            alt="<?php echo ($producto['nombre']); ?>">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo ($producto['nombre']); ?></h5>
+                            <?php
+                            // Buscar la descripción correspondiente al producto actual
+                            $descripcion = '';
+                            foreach ($productosDetallados as $productoDetallado) {
+                                if ($productoDetallado['id_producto_detalle'] == $producto['id_producto']) {
+                                    $descripcion = $productoDetallado['descripcion'];
+                                    break;
+                                }
+                            }
+                            ?>
+                            <p class="card-text"><?php echo ($descripcion); ?></p>
+                            <p class="card-text"><strong>Precio:
+                                    €<?php echo number_format($producto['precio_ud'], 2); ?></strong></p>
+                            <a href="detalleProducto.php?id=<?php echo $producto['id_producto']; ?>"
+                                class="btn btn-secondary">Ver
+                                Detalles</a>
+                                <a href="comprarProceso.php?id=<?php echo $producto['id_producto']; ?>"
+                                class="btn btn-primary">Comprar</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <h1 class="mb-5">Café recíen molido</h1>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="../img/Café Java.png" alt="">
-                            <h5 class="menu-price">20€</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Café Java tostado natural</h4>
-                            <p class="m-0">Un molido de gran calidad con notas picantes y toques de dulzura que se
-                                despliegan de forma suave en el paladar.</p>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="../img/Cafe Kenya.png" alt="">
-                            <h5 class="menu-price">15€</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Café Kenya AA mezcla </h4>
-                            <p class="m-0">Uno de nuestros molidos de mayor calidad,una sintonía entre notas cítricas y
-                                frutales, con pequeños matices de bayas rojas y negras.</p>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="../img/Café Robusto intenso.png" alt="">
-                            <h5 class="menu-price">10€</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Café Robusta intenso</h4>
-                            <p class="m-0">Nuestro molido con el sabor más intenso y vigorizante, algo más amargo pero
-                                su textura es cremosa.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php } ?>
         </div>
     </div>
-
-    <!-- Menu End -->
+    <!-- Catálogo de Productos End -->
 
 
     <!-- Footer Start -->

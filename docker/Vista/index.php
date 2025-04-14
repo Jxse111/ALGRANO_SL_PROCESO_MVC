@@ -65,7 +65,7 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
                 <div class="navbar-nav ml-auto p-4">
                     <a href="sobreNosotros.php" class="nav-item nav-link">Sobre nosotros</a>
                     <a href="servicios.php" class="nav-item nav-link">Servicios</a>
-                    <a href="menu.php" class="nav-item nav-link">Carta</a>
+                    <a href="menu.php" class="nav-item nav-link">Cátalogo</a>
                     <a href="comentarios.php" class="nav-item nav-link">Testimonio</a>
                     <a href="contacto.php" class="nav-item nav-link">Contacto</a>
                 </div>
@@ -239,9 +239,9 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
     <!-- Offer Start -->
     <div class="offer container-fluid my-5 py-5 text-center position-relative overlay-top overlay-bottom">
         <div class="container py-5">
-            <h1 class="display-3 text-primary mt-3">50% de descuento</h1>
-            <h1 class="text-white mb-3">Oferta especial de domingo</h1>
-            <h4 class="text-white font-weight-normal mb-4 pb-3">A partir del domingo dia 1 de enero hasta el 30 de enero
+            <h1 class="display-3 text-primary mt-3">25% de descuento</h1>
+            <h1 class="text-white mb-3">Oferta especial</h1>
+            <h4 class="text-white font-weight-normal mb-4 pb-3">A partir del domingo dia 1 de junio hasta el 30 de junio
                 de 2025</h4>
             <form class="form-inline justify-content-center mb-4">
                 <div class="input-group">
@@ -254,93 +254,6 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
         </div>
     </div>
     <!-- Offer End -->
-
-
-    <!-- Menu Start -->
-    <div class="container-fluid pt-5">
-        <div class="container">
-            <div class="section-title">
-                <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Carta y precios</h4>
-                <h1 class="display-4">Productos y precios únicos</h1>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <h1 class="mb-5">Café en grano</h1>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="../img/Arabico.png" alt="">
-                            <h5 class="menu-price">20€</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Café 100% arábica </h4>
-                            <p class="m-0">Uno de nuestros mejores cafes en grano,suave y delicado, con aroma a frutos
-                                secos y silvestres.</p>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="../img/Moka.png" alt="">
-                            <h5 class="menu-price">15€</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Café Moka</h4>
-                            <p class="m-0">Café suave con notas de chocolate, es la mezcla perfecta entre café y cacao.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="../img/Mundo Novo.png" alt="">
-                            <h5 class="menu-price">35€</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Café Mundo Novo</h4>
-                            <p class="m-0">Café fusión entre Typica y Bourbon, dulce pero complejo, lleno de notas
-                                dulces similares al caramelo y al chocolate con una acidez suave.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <h1 class="mb-5">Café recíen molido</h1>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="../img/Café Java.png" alt="">
-                            <h5 class="menu-price">20€</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Café Java tostado natural</h4>
-                            <p class="m-0">Un molido de gran calidad con notas picantes y toques de dulzura que se
-                                despliegan de forma suave en el paladar.</p>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="../img/Cafe Kenya.png" alt="">
-                            <h5 class="menu-price">15€</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Café Kenya AA mezcla </h4>
-                            <p class="m-0">Uno de nuestros molidos de mayor calidad,una sintonía entre notas cítricas y
-                                frutales, con pequeños matices de bayas rojas y negras.</p>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-5">
-                        <div class="col-4 col-sm-3">
-                            <img class="w-100 rounded-circle mb-3 mb-sm-0" src="../img/Café Robusto intenso.png" alt="">
-                            <h5 class="menu-price">10€</h5>
-                        </div>
-                        <div class="col-8 col-sm-9">
-                            <h4>Café Robusta intenso</h4>
-                            <p class="m-0">Nuestro molido con el sabor más intenso y vigorizante, algo más amargo pero
-                                su textura es cremosa.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Menu End -->
 
     <!-- Testimonial Start -->
     <div class="container-fluid py-5">

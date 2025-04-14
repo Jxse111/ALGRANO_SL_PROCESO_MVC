@@ -46,7 +46,7 @@ session_start();
                 <div class="navbar-nav ml-auto p-4">
                     <a href="index.php" class="nav-item nav-link active">Inicio</a>
                     <a href="sobreNosotros.php" class="nav-item nav-link">Sobre nosotros</a>
-                    <a href="menu.php" class="nav-item nav-link">Carta</a>
+                    <a href="menu.php" class="nav-item nav-link">Cátalogo</a>
                     <a href="contacto.php" class="nav-item nav-link">Contacto</a>
                     <a href="comentarios.php" class="nav-item nav-link">Testimonio</a>
                 </div>

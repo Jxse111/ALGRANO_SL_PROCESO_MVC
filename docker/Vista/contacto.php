@@ -47,7 +47,7 @@ session_start();
                     <a href="index.php" class="nav-item nav-link active">Inicio</a>
                     <a href="sobreNosotros.php" class="nav-item nav-link">Sobre nosotros</a>
                     <a href="servicios.php" class="nav-item nav-link">Servicios</a>
-                    <a href="menu.php" class="nav-item nav-link">Carta</a>
+                    <a href="menu.php" class="nav-item nav-link">Cátalogo</a>
                     <a href="comentarios.php" class="nav-item nav-link">Testimonio</a>
                 </div>
                 <?php if ($_SESSION['rol'] == "invitado") { ?>
