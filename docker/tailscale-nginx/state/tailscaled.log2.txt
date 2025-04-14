@@ -1,0 +1,1 @@
+{"logtail":{"client_time":"2025-04-14T09:19:08.130321413Z","proc_id":538955564,"proc_seq":69},"text":"tailscaled got signal terminated; shutting down\n"}

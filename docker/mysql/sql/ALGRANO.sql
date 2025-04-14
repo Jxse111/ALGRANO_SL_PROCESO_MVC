@@ -88,7 +88,7 @@ INSERT INTO rol (id_rol, rol) VALUES
 ('3', 'administrador');
 
 -- Usuarios
-INSERT INTO usuario (DNI, usuario, contrasena, direccion, correo, fec_nac, id_rol_usuario) VALUES
+INSERT INTO usuario (DNI, usuario, contraseña, direccion, correo, fec_nac, id_rol_usuario) VALUES
 ('45123248K', 'AlgranoAdmin', '162132b381fbadbe5c3d288539aa0243f3a3c0ada934134aa9f2f5ac850fa8a331447d213e77f6b29373a39321e4e9d96f3f4cfe1e7fceed626a59a04b603442', 'Camino del lomo,32', 'algrano@gmail.com', '1987-06-23', '3'),
 ('76594532F', 'Lxrenzx189', '2ec33b24018e46699d86954b3d20be96bfea1ea17f3d8be30af00ac8864923f19aa230fb340e1d3583deca1d62678304e1f9a019c3dee88f48d4961531b9bbfb', 'Camino de la serpiente,21', 'lorenzo189@gmail.com', '1987-06-23', '1'),
 ('56432655M', 'EmpleadoMiguel123', '69d02a6c3c9ea7ff711e454020a16a81f7ee438cd3334e0f9be3eb0338df2dff58a231963c681e736143eeb6c1d3280d5f053d9892ff33ff09d95cf8294c556f', 'Camino de los objetos,5', 'miguelAlgrano@gmail.com', '1970-01-01', '2');
