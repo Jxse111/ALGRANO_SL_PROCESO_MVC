@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS rol (
 CREATE TABLE IF NOT EXISTS usuario (
     DNI CHAR(9) NOT NULL PRIMARY KEY,
     usuario VARCHAR(30) NOT NULL,
-    contrasena CHAR(255) NOT NULL,
+    contraseña CHAR(255) NOT NULL,
     direccion VARCHAR(100) NOT NULL,
     correo VARCHAR(50) UNIQUE NOT NULL,
     fec_nac DATE NOT NULL,
