@@ -52,6 +52,12 @@ session_start();
                 <a href="login.html" class="nav-item nav-link btn btn-primary font-weight-bold">Iniciar Sesión</a>
                 <a href="registro.html" class="nav-item nav-link btn btn-secondary font-weight-bold">Regístrate</a>
             <?php } ?>
+            <?php if ($_SESSION['rol'] == "cliente") { ?>
+                    <a href="carrito.php" class="nav-item nav-link">
+                        <i class="fas fa-shopping-cart" style="color: #DA9F5B; font-size: 24px;"></i>
+                    </a>
+                <?php }
+                ?>
             <?php if ($_SESSION['rol'] == "administrador" || $_SESSION['rol'] == "empleado" || $_SESSION['rol'] == "cliente"): ?>
                 <div class="nav-item dropdown">
                         <img src="../img/profilePic.png" class="nav-link dropdown-toggle" data-toggle="dropdown"
@@ -63,6 +69,8 @@ session_start();
                                 <a href="areaAdmin.php" class="dropdown-item" style="color: #DA9F5B" ;>Administrar</a>
                             <?php } elseif ($_SESSION['rol'] == "empleado") { ?>
                                 <a href="areaEmpleado.php" class="dropdown-item" style="color: #DA9F5B" ;>Workspace</a>
+                            <?php } elseif ($_SESSION['rol'] == "cliente") { ?>
+                                <a href="pedidos.php" class="dropdown-item" style="color: #DA9F5B" ;>Mis pedidos</a>
                             <?php } ?>
                             <a href="../Controlador/cerrarSesion_proceso.php" class="dropdown-item"
                                 style="color: #DA9F5B;">Cerrar sesión</a>
