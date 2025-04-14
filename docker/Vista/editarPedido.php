@@ -10,10 +10,10 @@ $pedidoDetalladoSinEditar = Pedido::obtenerPedidosDetalle(filter_input(INPUT_GET
 
 if (filter_has_var(INPUT_POST, 'modificarPedido')) {
     $codigoPedido = $pedidoSinEditar[0]['codigo_pedido'];
-    $codigoPedidoDetalle = $pedidoDetalladoSinEditar[0]['codigo_detalle'] ;
+    $codigoPedidoDetalle = $pedidoDetalladoSinEditar[0]['codigo_detalle'];
     $dniCliente = $pedidoSinEditar[0]['DNI_cliente'];
     $idProducto = $pedidoSinEditar[0]['id_producto_pedido'];
-    $tipoPedido = filter_input(INPUT_POST, 'tipo') ?: $pedidoSinEditar[0]['tipo'];
+    $tipoPedido = $pedidoSinEditar[0]['tipo'];
     $precioPedido = filter_input(INPUT_POST, 'precioEditado') ?: $pedidoSinEditar[0]['precio_total'];
     $fechaPedido = filter_input(INPUT_POST, 'fechaEditada') ?: $pedidoSinEditar[0]['fecha_pedido'];
     $estadoPedido = filter_input(INPUT_POST, 'estadoEditado') ?: $pedidoSinEditar[0]['estado'];
@@ -132,34 +132,34 @@ if (filter_has_var(INPUT_POST, 'modificarPedido')) {
         foreach ($pedidoSinEditar as $pedido) {
             foreach ($pedidoDetalladoSinEditar as $pedidoDetallado) ?>
             <form name="sentMessage" id="contactForm" novalidate="novalidate" method="POST">
-                <div class="control-group">
-                    <input type="text" class="form-control" name="tipoEditado"
-                        placeholder="<?php echo $pedido['tipo'] ?>" />
-                    <p class="help-block text-danger"></p>
-                </div>
-                <div class="control-group">
-                    <input type="number" class="form-control" name="precioEditado"
-                        placeholder="<?php echo $pedido['precio_total'] ?> €" />
-                    <p class="help-block text-danger"></p>
-                </div>
+                <h6 class="text-primary font-weight-bold mb-2">Fecha del pedido</h6>
                 <div class="control-group">
                     <input type="text" class="form-control" name="fechaEditada"
                         placeholder="<?php echo $pedido['fecha_pedido'] ?>" />
                     <p class="help-block text-danger"></p>
                 </div>
+                <h6 class="text-primary font-weight-bold mb-2">Estado del pedido</h6>
                 <div class="control-group">
                     <input type="text" class="form-control" name="estadoEditado"
                         placeholder="<?php echo $pedido['estado'] ?>" />
                     <p class="help-block text-danger"></p>
                 </div>
-                <div class="control-group">
-                    <input type="number" class="form-control" name="subtotalEditado"
-                        placeholder="<?php echo $pedidoDetallado['subtotal'] ?>  €" />
-                    <p class="help-block text-danger"></p>
-                </div>
+                <h6 class="text-primary font-weight-bold mb-2">Cantidad</h6>
                 <div class="control-group">
                     <input type="text" class="form-control" name="cantidadEditada"
                         placeholder="<?php echo $pedidoDetallado['cantidad_descrita'] ?>" />
+                    <p class="help-block text-danger"></p>
+                </div>
+                <h6 class="text-primary font-weight-bold mb-2">Subtotal</h6>
+                <div class="control-group">
+                    <input type="number" class="form-control" name="subtotalEditado"
+                        placeholder="<?php echo $pedidoDetallado['subtotal'] ?> €" />
+                    <p class="help-block text-danger"></p>
+                </div>
+                <h6 class="text-primary font-weight-bold mb-2">Precio Total del pedido</h6>
+                <div class="control-group">
+                    <input type="number" class="form-control" name="precioEditado"
+                        placeholder="<?php echo $pedido['precio_total'] ?> €" />
                     <p class="help-block text-danger"></p>
                 </div>
                 <div>
