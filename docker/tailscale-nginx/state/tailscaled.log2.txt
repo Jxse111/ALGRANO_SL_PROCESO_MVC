@@ -1,3 +1,0 @@
-{"logtail":{"client_time":"2025-04-14T09:41:36.757530912Z","proc_id":1184826870,"proc_seq":69},"text":"tailscaled got signal terminated; shutting down\n"}
-{"logtail":{"client_time":"2025-04-14T09:41:36.75794719Z","proc_id":1184826870,"proc_seq":70},"text":"control: client.Shutdown ...\n"}
-{"logtail":{"client_time":"2025-04-14T09:41:36.758176929Z","proc_id":1184826870,"proc_seq":71},"v":1,"text":"control: mapRoutine: context done.\n"}

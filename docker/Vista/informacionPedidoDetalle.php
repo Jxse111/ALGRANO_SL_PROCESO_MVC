@@ -86,7 +86,6 @@ $codigoPedido = filter_input(INPUT_GET, 'id');
                 <table class="table table-bordered">
                     <thead style="background-color: #362421; color: #DB9F5B;">
                         <tr>
-                            <th>Código</th>
                             <th>Cantidad</th>
                             <th>Subtotal</th>
                         </tr>
@@ -94,7 +93,6 @@ $codigoPedido = filter_input(INPUT_GET, 'id');
                     <tbody style="background-color:#DFB767; color: #362421;">
                         <?php foreach ($pedidosDetallados as $pedidoDetallado) { ?>
                             <tr>
-                                <td><?php echo $pedidoDetallado['codigo_pedido']?></td>
                                 <td><?php echo $pedidoDetallado['cantidad_descrita'] ?></td>
                                 <td><?php echo $pedidoDetallado['subtotal'] . "€"?></td>
                             </tr>
