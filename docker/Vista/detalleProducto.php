@@ -123,7 +123,7 @@ $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los pro
                                             <strong>Stock:</strong> <?php echo $productoDetalle['stock']; ?> unidades
                                         </div>
                                         <?php if ($_SESSION['rol'] == 'cliente' || $_SESSION['rol'] == 'administrador'): ?>
-                                            <form action="../Controlador/agregarCarrito_proceso.php" method="POST"></form>
+                                            <form action="../Controlador/comprarProceso.php" method="POST">
                                             <input type="hidden" name="producto_id" value="<?php echo $productoId; ?>">
                                             <div class="form-group">
                                                 <input type="number" name="cantidad" class="form-control" min="1"

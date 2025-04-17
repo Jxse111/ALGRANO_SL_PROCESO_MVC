@@ -5,8 +5,6 @@ if ($_SESSION['rol'] != "cliente") {
     exit();
 }
 require_once '../Modelo/Producto.php';
-$productos = Producto::listarProductos(); // Obtiene los productos  
-$productosDetallados = Producto::listarProductosDetallados(); // Obtiene los productos detallados
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,9 +69,9 @@ $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los pro
     <!-- Cart Section Start -->
     <div class="container">
         <h2 class="text-center mb-4">Tu Cesta</h2>
-        <?php if (empty($_SESSION['cesta'])): ?>
+        <?php if (empty($_SESSION['cesta'])) { ?>
             <p class="text-center">Su cesta está vacía.</p>
-        <?php else: ?>
+        <?php } else { ?>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -84,28 +82,42 @@ $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los pro
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
+                    <?php
                     $total = 0;
-                    foreach ($_SESSION['cesta'] as $producto):
-                        $subtotal = $producto['cantidad'] * $producto['precio'];
-                        $total += $subtotal;
-                    ?>
-                    <tr>
-                        <td><?= htmlspecialchars($producto['nombre']) ?></td>
-                        <td><?= htmlspecialchars($producto['cantidad']) ?></td>
-                        <td><?= number_format($producto['precio'], 2) ?> €</td>
-                        <td><?= number_format($subtotal, 2) ?> €</td>
-                    </tr>
-                    <?php endforeach; ?>
-                    <tr>
-                        <td colspan="3" class="text-right font-weight-bold">Total</td>
-                        <td><?= number_format($total, 2) ?> €</td>
-                    </tr>
-                </tbody>
-            </table>
-        <?php endif; ?>
+                    $idProductoCesta = $_SESSION['cesta'];
+                    $cantidadProductoCesta = $_SESSION['cantidad'];
+                    $producto = Producto::buscarProducto($idProductoCesta);
+                    $productoDetallado = Producto::buscarProductoDetallado($idProductoCesta);
+                    if ($producto && $productoDetallado) {
+
+                        ?>
+                        <tr>
+                            <?php foreach ($producto as $productoCesta) {
+                                foreach ($productoDetallado as $productoDetalladoCesta)
+                                    $subtotal = $productoCesta['precio_ud'] * $cantidadProductoCesta;
+                                $total += $subtotal; ?>
+                                <td><?= htmlspecialchars($productoCesta['nombre']) ?></td>
+                                <td><?= htmlspecialchars($cantidadProductoCesta) ?></td>
+                                <td><?= number_format($productoCesta['precio_ud'], 2) ?> €</td>
+                                <td><?= number_format($subtotal, 2) ?> €</td>
+                            <?php } ?>
+                        </tr>
+                        <?php
+                    }
+        }
+        ?>
+                <tr>
+                    <td colspan="3" class="text-right font-weight-bold">Total</td>
+                    <td><?= number_format($total, 2) ?> €</td>
+                </tr>
+            </tbody>
+        </table>
+        <form action="../Vista/pago.php" method="post">
+            <input type="hidden" name="total" value="<?= $total ?>">
+            <button type="submit" class="btn btn-primary">Realizar compra</button>
+        </form>
     </div>
-    <!-- Cart Section End --></tr>
+    <!-- Cart Section End -->
     <!-- Footer Start -->
     <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
         <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">

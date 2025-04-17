@@ -132,8 +132,6 @@ $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los pro
                             <a href="detalleProducto.php?id=<?php echo $producto['id_producto']; ?>"
                                 class="btn btn-secondary">Ver
                                 Detalles</a>
-                            <a href="comprarProceso.php?id=<?php echo $producto['id_producto']; ?>"
-                                class="btn btn-primary">Comprar</a>
                         </div>
                     </div>
                 </div>

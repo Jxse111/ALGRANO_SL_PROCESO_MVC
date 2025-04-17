@@ -1,0 +1,5 @@
+{"logtail":{"client_time":"2025-04-17T10:03:10.423986031Z","proc_id":379480328,"proc_seq":69},"text":"tailscaled got signal terminated; shutting down\n"}
+{"logtail":{"client_time":"2025-04-17T10:03:10.424429255Z","proc_id":379480328,"proc_seq":70},"text":"control: client.Shutdown ...\n"}
+{"logtail":{"client_time":"2025-04-17T10:03:10.424691644Z","proc_id":379480328,"proc_seq":71},"text":"control: updateRoutine: exiting\n"}
+{"logtail":{"client_time":"2025-04-17T10:03:10.424916461Z","proc_id":379480328,"proc_seq":72},"v":1,"text":"control: authRoutine: context done.\n"}
+{"logtail":{"client_time":"2025-04-17T10:03:10.425132818Z","proc_id":379480328,"proc_seq":73},"text":"control: authRoutine: exiting\n"}

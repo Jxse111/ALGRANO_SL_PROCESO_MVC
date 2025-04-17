@@ -7,6 +7,10 @@ if (empty($_SESSION['rol'])) {
 if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_SESSION['rol'] != "cliente") {
     $_SESSION['rol'] = 'invitado';
 }
+if (filter_has_var(INPUT_GET, "mensaje")) {
+    $mensajePagoExitoso = filter_input(INPUT_GET, "mensaje");
+    echo "<script>alert('$mensajePagoExitoso');</script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
