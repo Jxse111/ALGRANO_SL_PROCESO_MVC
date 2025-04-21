@@ -112,8 +112,8 @@ $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los pro
             <?php foreach ($productos as $producto) { ?>
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <img src="<?php echo ($producto['imagen']); ?>" class="card-img-top"
-                            alt="<?php echo ($producto['nombre']); ?>">
+                        <img src="data:image/png;base64,<?php echo base64_encode($producto['imagen']); ?>"
+                            class="card-img-top" alt="<?php echo ($producto['nombre']); ?>">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo ($producto['nombre']); ?></h5>
                             <?php

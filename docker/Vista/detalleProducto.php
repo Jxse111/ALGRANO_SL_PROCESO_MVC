@@ -110,8 +110,9 @@ $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los pro
                                 if ($producto['id_producto'] == $productoId) {
                                     ?>
                                     <div class="col-lg-6">
-                                        <img class="img-fluid mb-4" src="<?php echo $producto['imagen']; ?>"
-                                            alt="<?php echo $producto['nombre']; ?>">
+                                        <img src="data:image/png;base64,<?php echo base64_encode($producto['imagen']); ?>"
+                                            alt="<?php echo $producto['nombre']; ?>"
+                                            class="img-fluid" style="max-width: 400px; height: auto;">
                                     </div>
                                     <div class="col-lg-6">
                                         <h2 class="mb-4"><?php echo $productoDetalle['nombre']; ?></h2>
@@ -124,12 +125,12 @@ $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los pro
                                         </div>
                                         <?php if ($_SESSION['rol'] == 'cliente' || $_SESSION['rol'] == 'administrador'): ?>
                                             <form action="../Controlador/comprarProceso.php" method="POST">
-                                            <input type="hidden" name="producto_id" value="<?php echo $productoId; ?>">
-                                            <div class="form-group">
-                                                <input type="number" name="cantidad" class="form-control" min="1"
-                                                    max="<?php echo $productoDetalle['stock']; ?>" value="1" style="width: 100px;">
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Añadir al carrito</button>
+                                                <input type="hidden" name="producto_id" value="<?php echo $productoId; ?>">
+                                                <div class="form-group">
+                                                    <input type="number" name="cantidad" class="form-control" min="1"
+                                                        max="<?php echo $productoDetalle['stock']; ?>" value="1" style="width: 100px;">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Añadir al carrito</button>
                                             </form>
                                         <?php endif; ?>
                                     </div>
