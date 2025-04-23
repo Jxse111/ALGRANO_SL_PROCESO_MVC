@@ -1,6 +1,12 @@
 <?php
 session_start();
-$precioTotal = filter_input(INPUT_POST, "total") ?>
+$precioTotal = filter_input(INPUT_POST, "total");
+
+if (filter_has_var($INPUT_GET, "pagar")) {
+    unset($_SESSION['cesta']);
+    unset($_SESSION['cantidad']);
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -17,7 +23,7 @@ $precioTotal = filter_input(INPUT_POST, "total") ?>
         }
 
         .btn-custom:hover {
-            background-color:rgb(187, 136, 78);
+            background-color: rgb(187, 136, 78);
             border-color: #31201C;
             color: white;
         }
@@ -26,14 +32,17 @@ $precioTotal = filter_input(INPUT_POST, "total") ?>
             background-color: #DA9F5B;
             color: #31201C;
         }
+
         body {
             background-color: #31201C;
         }
+
         .card-body {
-            color:#DA9F5B;
+            color: #DA9F5B;
         }
+
         .form-label {
-            color:#DA9F5B;
+            color: #DA9F5B;
         }
     </style>
 </head>
@@ -88,12 +97,6 @@ $precioTotal = filter_input(INPUT_POST, "total") ?>
                             onclick="window.location.href='index.php?mensaje=Pago realizado con exito'">Realizar
                             Pago</button>
                         <a href="carrito.php" class="btn btn-secondary">Volver al carrito</a>
-                        <?php
-                        if (isset($_GET['pagar'])) {
-                            unset($_SESSION['cesta']);
-                            unset($_SESSION['cantidad']);
-                        }
-                        ?>
                     </div>
                     </form>
                 </div>
