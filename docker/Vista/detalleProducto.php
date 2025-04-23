@@ -3,6 +3,15 @@ session_start();
 require_once '../Modelo/Producto.php';
 $productos = Producto::listarProductos(); // Obtiene los productos  
 $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los productos detallados
+if (filter_has_var(INPUT_POST, 'comprar')) {
+    if ($_SESSION["cesta"] && $_SESSION["cantidad"]) {
+        $_SESSION["cesta"] = filter_input(INPUT_POST, "producto_id");
+        $_SESSION["cantidad"] = filter_input(INPUT_POST, "cantidad");
+    } else {
+        $_SESSION["cesta"] = [];
+        $_SESSION["cantidad"] = [];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -111,8 +120,8 @@ $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los pro
                                     ?>
                                     <div class="col-lg-6">
                                         <img src="data:image/png;base64,<?php echo base64_encode($producto['imagen']); ?>"
-                                            alt="<?php echo $producto['nombre']; ?>"
-                                            class="img-fluid" style="max-width: 400px; height: auto;">
+                                            alt="<?php echo $producto['nombre']; ?>" class="img-fluid"
+                                            style="max-width: 400px; height: auto;">
                                     </div>
                                     <div class="col-lg-6">
                                         <h2 class="mb-4"><?php echo $productoDetalle['nombre']; ?></h2>
@@ -123,8 +132,8 @@ $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los pro
                                             <strong>Tipo:</strong> <?php echo $productoDetalle['tipo']; ?><br>
                                             <strong>Stock:</strong> <?php echo $productoDetalle['stock']; ?> unidades
                                         </div>
-                                        <?php if ($_SESSION['rol'] == 'cliente' || $_SESSION['rol'] == 'administrador'): ?>
-                                            <form action="../Controlador/comprarProceso.php" method="POST">
+                                        <?php if ($_SESSION['rol'] == 'cliente' || $_SESSION['rol'] == 'administrador') { ?>
+                                            <form action="" method="POST">
                                                 <input type="hidden" name="producto_id" value="<?php echo $productoId; ?>">
                                                 <div class="form-group">
                                                     <input type="number" name="cantidad" class="form-control" min="1"
@@ -132,7 +141,7 @@ $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los pro
                                                 </div>
                                                 <button type="submit" class="btn btn-primary">Añadir al carrito</button>
                                             </form>
-                                        <?php endif; ?>
+                                        <?php } ?>
                                     </div>
                                     <?php
                                     break 2;
