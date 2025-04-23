@@ -1,5 +1,9 @@
 <?php
 session_start();
+// error_reporting(e_all);
+// ini_set('display_errors', 1);
+//Mostrar todos los datos almacenados en la sesión
+// print_r($_session);
 //print_r(value: $_SESSION["rol"]);
 if (empty($_SESSION['rol'])) {
     $_SESSION['rol'] = 0;

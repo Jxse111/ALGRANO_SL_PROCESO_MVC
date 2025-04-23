@@ -162,7 +162,9 @@ class Pedido
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
         $esValido = false;
-        $codigo = $this->codigo;
+        $consultaUltimoPedido = $conexionBD->query('SELECT MAX(codigo_pedido) as ultimoCodigo FROM pedido');
+        $resultado = $consultaUltimoPedido->fetch_assoc();
+        $codigo = $resultado['ultimoCodigo'] + 1;
         $dniCliente = $this->dniCliente;
         $idProducto = $this->idProducto;
         $tipo = $this->tipo;

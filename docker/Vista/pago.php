@@ -1,4 +1,5 @@
 <?php
+require_once("../Modelo/Pedido.php");
 session_start();
 $precioTotal = filter_input(INPUT_POST, "total");
 
