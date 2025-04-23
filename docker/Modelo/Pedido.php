@@ -165,9 +165,9 @@ class Pedido
         $consultaUltimoPedido = $conexionBD->query('SELECT MAX(codigo_pedido) as ultimoCodigo FROM pedido');
         $resultado = $consultaUltimoPedido->fetch_assoc();
         $codigo = $resultado['ultimoCodigo'] + 1;
-        $dniCliente = $this->dniCliente;
-        $idProducto = $this->idProducto;
-        $tipo = $this->tipo;
+        $dniCliente = $_SESSION["usuario"]->getDNI();
+        $idProducto = $_SESSION["id_producto"];
+        $tipo = $_SESSION["id_producto"]->getTipo();
         $precioTotal = $this->precioTotal;
         $fechaPedido = $this->fechaPedido;
         $estado = $this->estado;
