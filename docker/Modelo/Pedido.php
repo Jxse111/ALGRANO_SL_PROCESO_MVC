@@ -175,21 +175,21 @@ class Pedido
         $subtotal = $this->subtotal;
         $cantidad = $this->cantidad;
         if (!existePedido($codigo, $conexionBD) && existeProducto($idProducto, $conexionBD)) {
-            $consultaInsercionPedido = $conexionBD->prepare('INSERT INTO pedido VALUES (?,?,?,?,?,?,?)');
-            $consultaInsercionPedido->bind_param('ssssdss', $codigo, $dniCliente, $idProducto, $tipo, $precioTotal, $fechaPedido, $estado);
+            $consultaInsercionPedido = $conexionBD->prepare('INSERT INTO pedido VALUES (?,?,?,?,?)');
+            $consultaInsercionPedido->bind_param('ssdss', $codigo, $dniCliente, $precioTotal, $fechaPedido, $estado);
             if ($consultaInsercionPedido->execute()) {
-                $consultaInsercionPedidoDetalle = $conexionBD->prepare('INSERT INTO productos_detalle VALUES (?,?,?,?)');
-                $consultaInsercionPedidoDetalle->bind_param('sdis', $codigoDetalle, $subtotal, $cantidad, $codigo);
+                $consultaInsercionPedidoDetalle = $conexionBD->prepare('INSERT INTO productos_detalle VALUES (?,?,?,?,?,?)');
+                $consultaInsercionPedidoDetalle->bind_param('sssdis', $codigoDetalle, $idProducto, $tipo, $subtotal, $cantidad, $codigo);
                 if ($consultaInsercionPedidoDetalle->execute()) {
                     $esValido = true;
                 }
             }
         } else {
-            $consultaInsercionPedido = $conexionBD->prepare('UPDATE pedido SET tipo = ?, precio_total = ?, fecha_pedido = ?, estado = ?  WHERE codigo_pedido = ?');
-            $consultaInsercionPedido->bind_param('sdsss', $tipo, $precioTotal, $fechaPedido, $estado, $codigo);
+            $consultaInsercionPedido = $conexionBD->prepare('UPDATE pedido SET precio_total = ?, fecha_pedido = ?, estado = ?  WHERE codigo_pedido = ?');
+            $consultaInsercionPedido->bind_param('dsss', $precioTotal, $fechaPedido, $estado, $codigo);
             if ($consultaInsercionPedido->execute()) {
-                $consultaInsercionPedidoDetalle = $conexionBD->prepare('UPDATE pedidos_detalle SET subtotal = ? , cantidad_descrita = ? WHERE codigo_detalle = ?');
-                $consultaInsercionPedidoDetalle->bind_param('dss', $subtotal, $cantidad, $codigoDetalle);
+                $consultaInsercionPedidoDetalle = $conexionBD->prepare('UPDATE pedidos_detalle SET tipo = ?, subtotal = ? , cantidad_descrita = ? WHERE codigo_detalle = ?');
+                $consultaInsercionPedidoDetalle->bind_param('sdss', $tipo, $subtotal, $cantidad, $codigoDetalle);
                 if ($consultaInsercionPedidoDetalle->execute()) {
                     $esValido = true;
                 }
