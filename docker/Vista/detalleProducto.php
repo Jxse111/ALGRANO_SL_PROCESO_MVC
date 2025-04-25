@@ -4,12 +4,26 @@ require_once '../Modelo/Producto.php';
 $productos = Producto::listarProductos(); // Obtiene los productos  
 $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los productos detallados
 if (filter_has_var(INPUT_POST, 'comprar')) {
-    if ($_SESSION["cesta"] && $_SESSION["cantidad"]) {
-        $_SESSION["cesta"] = filter_input(INPUT_POST, "producto_id");
-        $_SESSION["cantidad"] = filter_input(INPUT_POST, "cantidad");
-    } else {
+    if (
+        !isset($_SESSION["cesta"]) || !is_array($_SESSION["cesta"]) ||
+        !isset($_SESSION["cantidad"]) || !is_array($_SESSION["cantidad"])
+    ) {
         $_SESSION["cesta"] = [];
         $_SESSION["cantidad"] = [];
+    }
+
+    $producto_id = filter_input(INPUT_POST, "producto_id");
+    $cantidad = filter_input(INPUT_POST, "cantidad");
+
+    // Check if product already exists in cart
+    $index = array_search($producto_id, $_SESSION["cesta"]);
+    if ($index === false) {
+        // Product not in cart, add it
+        $_SESSION["cesta"][] = $producto_id;
+        $_SESSION["cantidad"][] = $cantidad;
+        echo "<script>alert('Producto añadido al carrito');</script>";
+    } else {
+        echo "<script>alert('Este producto ya está en el carrito');</script>";
     }
 }
 ?>
@@ -67,6 +81,12 @@ if (filter_has_var(INPUT_POST, 'comprar')) {
                     <a href="login.html" class="nav-item nav-link btn btn-primary font-weight-bold">Iniciar Sesión</a>
                     <a href="registro.html" class="nav-item nav-link btn btn-secondary font-weight-bold">Regístrate</a>
                 <?php } ?>
+                <?php if ($_SESSION['rol'] == "cliente") { ?>
+                    <a href="carrito.php" class="nav-item nav-link">
+                        <i class="fas fa-shopping-cart" style="color: #DA9F5B; font-size: 24px;"></i>
+                    </a>
+                <?php }
+                ?>
                 <?php if ($_SESSION['rol'] == "administrador" || $_SESSION['rol'] == "empleado" || $_SESSION['rol'] == "cliente"): ?>
                     <div class="nav-item dropdown">
                         <img src="../img/profilePic.png" class="nav-link dropdown-toggle" data-toggle="dropdown"
@@ -117,7 +137,7 @@ if (filter_has_var(INPUT_POST, 'comprar')) {
                         if ($productoDetalle['id_producto_detalle'] == $productoId) {
                             foreach ($productos as $producto) {
                                 if ($producto['id_producto'] == $productoId) {
-                                    ?>
+                ?>
                                     <div class="col-lg-6">
                                         <img src="data:image/png;base64,<?php echo base64_encode($producto['imagen']); ?>"
                                             alt="<?php echo $producto['nombre']; ?>" class="img-fluid"
@@ -139,11 +159,11 @@ if (filter_has_var(INPUT_POST, 'comprar')) {
                                                     <input type="number" name="cantidad" class="form-control" min="1"
                                                         max="<?php echo $productoDetalle['stock']; ?>" value="1" style="width: 100px;">
                                                 </div>
-                                                <button type="submit" class="btn btn-primary">Añadir al carrito</button>
+                                                <button type="submit" name="comprar" class="btn btn-primary">Añadir al carrito</button>
                                             </form>
                                         <?php } ?>
                                     </div>
-                                    <?php
+                <?php
                                     break 2;
                                 }
                             }

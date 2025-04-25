@@ -2,11 +2,7 @@
 require_once("../Modelo/Pedido.php");
 session_start();
 $precioTotal = filter_input(INPUT_POST, "total");
-
-if (filter_has_var($INPUT_GET, "pagar")) {
-    unset($_SESSION['cesta']);
-    unset($_SESSION['cantidad']);
-}
+$_SESSION['total'] = $precioTotal;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -57,7 +53,7 @@ if (filter_has_var($INPUT_GET, "pagar")) {
                     <h3 class="text-center">Pago con Tarjeta</h3>
                 </div>
                 <div class="card-body">
-                    <form action="../Controlador/procesarPagoTarjeta.php" method="POST"></form>
+                    <form action="../Controlador/pagoProceso.php" method="POST">
                     <div class="mb-3">
                         <label for="titular" class="form-label">Titular de la tarjeta</label>
                         <input type="text" class="form-control" id="titular" name="titular" required>
@@ -94,8 +90,7 @@ if (filter_has_var($INPUT_GET, "pagar")) {
                         </div>
                     </div>
                     <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-custom" name="pagar"
-                            onclick="window.location.href='index.php?mensaje=Pago realizado con exito'">Realizar
+                        <button type="submit" class="btn btn-custom" name="pagar">Realizar
                             Pago</button>
                         <a href="carrito.php" class="btn btn-secondary">Volver al carrito</a>
                     </div>

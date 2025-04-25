@@ -84,38 +84,42 @@ require_once '../Modelo/Producto.php';
                 <tbody>
                     <?php
                     $total = 0;
-                    $idProductoCesta = $_SESSION['cesta'];
-                    $cantidadProductoCesta = $_SESSION['cantidad'];
-                    $producto = Producto::buscarProducto($idProductoCesta);
-                    $productoDetallado = Producto::buscarProductoDetallado($idProductoCesta);
-                    if ($producto && $productoDetallado) {
+                    if (!empty($_SESSION['cesta']) && !empty($_SESSION['cantidad'])) {
+                        for ($i = 0; $i < count($_SESSION['cesta']); $i++) {
+                            $idProducto = $_SESSION['cesta'][$i];
+                            $cantidad = $_SESSION['cantidad'][$i];
+                            $producto = Producto::buscarProducto($idProducto);
+                            $productoDetallado = Producto::buscarProductoDetallado($idProducto);
 
-                        ?>
-                        <tr>
-                            <?php foreach ($producto as $productoCesta) {
-                                foreach ($productoDetallado as $productoDetalladoCesta)
-                                    $subtotal = $productoCesta['precio_ud'] * $cantidadProductoCesta;
-                                $total += $subtotal; ?>
-                                <td><?= htmlspecialchars($productoCesta['nombre']) ?></td>
-                                <td><?= htmlspecialchars($cantidadProductoCesta) ?></td>
-                                <td><?= number_format($productoCesta['precio_ud'], 2) ?> €</td>
-                                <td><?= number_format($subtotal, 2) ?> €</td>
-                            <?php } ?>
-                        </tr>
-                        <?php
+                            if ($producto && $productoDetallado) {
+                                foreach ($producto as $productoCesta) {
+                                    $subtotal = $productoCesta['precio_ud'] * $cantidad;
+                                    $_SESSION['subtotales'][$i] = $subtotal;
+                                    $total += $subtotal;
+                    ?>
+                                    <tr>
+                                        <td><?= htmlspecialchars($productoCesta['nombre']) ?></td>
+                                        <td><?= htmlspecialchars($cantidad) ?></td>
+                                        <td><?= number_format($productoCesta['precio_ud'], 2) ?> €</td>
+                                        <td><?= number_format($subtotal, 2) ?> €</td>
+                                    </tr>
+                <?php
+                                }
+                            }
+                        }
                     }
-        }
-        ?>
+                }
+                ?>
                 <tr>
                     <td colspan="3" class="text-right font-weight-bold">Total</td>
                     <td><?= number_format($total, 2) ?> €</td>
                 </tr>
-            </tbody>
-        </table>
-        <form action="../Vista/pago.php" method="post">
-            <input type="hidden" name="total" value="<?= $total ?>">
-            <button type="submit" class="btn btn-primary">Realizar compra</button>
-        </form>
+                </tbody>
+            </table>
+            <form action="../Vista/pago.php" method="post">
+                <input type="hidden" name="total" value="<?= $total ?>">
+                <button type="submit" class="btn btn-primary">Realizar compra</button>
+            </form>
     </div>
     <!-- Cart Section End -->
     <!-- Footer Start -->
