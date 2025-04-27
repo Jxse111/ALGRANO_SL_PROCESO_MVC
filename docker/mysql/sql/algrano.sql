@@ -190,6 +190,18 @@ VALUES
         'Café Robusta',
         9.75,
         '../img/Productos/Café Robusto.png'
+    ),
+    (
+        'PROD003',
+        'Café Java',
+        15.50,
+        '../img/Productos/Café Java.png'
+        ),
+    (
+        'PROD004',
+        'Café Kenya',
+        25.50,
+        '../img/Productos/Café Kenya.png'
     );
 -- Detalles de Productos
 INSERT INTO
@@ -207,7 +219,7 @@ VALUES
         'PROD001',
         'Café Arábica',
         'Grano',
-        'Café de alta calidad.',
+        'Café con sabor suave, equilibrado, aromático .',
         100,
         'Colombia'
     ),
@@ -215,9 +227,25 @@ VALUES
         'PROD002',
         'Café Robusta',
         'Molido',
-        'Café con más cafeína.',
+        'Café con un sabor fuerte, amargo y terroso, con notas de nuex y chocolate amargo.',
         80,
         'Brasil'
+        ),
+    (
+        'PROD003',
+        'Café Java',
+        'Molido',
+        'Café con sabor fuerte, dulce y ligeramente picante, con notas de chocolate, frutos secos y especias.',
+        50,
+        'Indonesia'
+        ),
+    (
+        'PROD004',
+        'Café Kenya',
+        'Molido',
+        'Café con sabor brillante, afrutado y a menudo con notas cítricas, especialmente de limón.',
+        100,
+        'Kenia'
     );
 -- Pedidos
 INSERT INTO
