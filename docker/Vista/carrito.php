@@ -5,6 +5,7 @@ if ($_SESSION['rol'] != "cliente") {
     exit();
 }
 require_once '../Modelo/Producto.php';
+$total = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -198,7 +198,7 @@ INSERT INTO
     )
 VALUES (
         'DET002',
-        'PROD001',
+        'PROD002',
         'Molido',
         10.00,
         3,

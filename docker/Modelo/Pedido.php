@@ -162,12 +162,10 @@ class Pedido
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
         $esValido = false;
-        $consultaUltimoPedido = $conexionBD->query('SELECT MAX(codigo_pedido) as ultimoCodigo FROM pedido');
-        $resultado = $consultaUltimoPedido->fetch_assoc();
-        $codigo = $resultado['ultimoCodigo'] + 1;
-        $dniCliente = $_SESSION["usuario"]->getDNI();
-        $idProducto = $_SESSION["id_producto"];
-        $tipo = $_SESSION["id_producto"]->getTipo();
+        $codigo = $this->codigo;
+        $dniCliente = $this->dniCliente;
+        $idProducto = $this->idProducto;
+        $tipo = $this->tipo;
         $precioTotal = $this->precioTotal;
         $fechaPedido = $this->fechaPedido;
         $estado = $this->estado;
@@ -178,7 +176,7 @@ class Pedido
             $consultaInsercionPedido = $conexionBD->prepare('INSERT INTO pedido VALUES (?,?,?,?,?)');
             $consultaInsercionPedido->bind_param('ssdss', $codigo, $dniCliente, $precioTotal, $fechaPedido, $estado);
             if ($consultaInsercionPedido->execute()) {
-                $consultaInsercionPedidoDetalle = $conexionBD->prepare('INSERT INTO productos_detalle VALUES (?,?,?,?,?,?)');
+                $consultaInsercionPedidoDetalle = $conexionBD->prepare('INSERT INTO pedidos_detalle VALUES (?,?,?,?,?,?)');
                 $consultaInsercionPedidoDetalle->bind_param('sssdis', $codigoDetalle, $idProducto, $tipo, $subtotal, $cantidad, $codigo);
                 if ($consultaInsercionPedidoDetalle->execute()) {
                     $esValido = true;

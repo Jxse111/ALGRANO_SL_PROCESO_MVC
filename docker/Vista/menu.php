@@ -3,7 +3,6 @@ session_start();
 require_once '../Modelo/Producto.php';
 $productos = Producto::listarProductos(); // Obtiene los productos  
 $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los productos detallados
-print_r ($_SESSION['cesta']);
 ?>
 <!DOCTYPE html>
 <html lang="en">

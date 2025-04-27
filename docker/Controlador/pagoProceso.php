@@ -4,45 +4,74 @@ if ($_SESSION['rol'] != "cliente") {
     header("Location: ./index.php");
     exit();
 }
-print_r(value: $_SESSION);
+
 require_once '../Modelo/Pedido.php';
 require_once '../Modelo/Producto.php';
 require_once '../Modelo/Algrano.php';
 require_once '../Modelo/funcionesBaseDeDatos.php';
 require_once '../Modelo/Usuario.php';
 
+$precioTotalPedido = $_SESSION['total'];
+$subtotalesPedido = $_SESSION['subtotales'];
+$cantidadesPedido = $_SESSION['cantidad'];
+$productosCesta = $_SESSION['cesta'];
 $datosCliente = Usuario::buscarUsuarioPorNombre($_SESSION['usuario']);
-$datosProducto = Producto::buscarProducto($_SESSION['producto']);
 $dniCliente = $datosCliente[0]['DNI'];
-$idProducto = $datosProducto[0]['id_producto'];
-$tipoProducto = $datosProducto[0]['tipo'];
-$cantidad = $_SESSION['cantidad'];
-$total = $_SESSION['total'];
-$subtotal = $_SESSION['subtotales'];
-$fechaPedido = date('Y-m-d H:i:s');
-$estadoPedido = "Pagado";
 $conexionBD = Algrano::conectarAlgranoMySQLi();
 
 if (isset($_POST['pagar'])) {
     // Obtener último código de pedido
-    $ultimoPedido = $conexionBD->query("SELECT codigo_pedido FROM pedidos ORDER BY codigo_pedido DESC LIMIT 1");
+    $ultimoPedido = $conexionBD->query("SELECT codigo_pedido FROM pedido ORDER BY codigo_pedido DESC LIMIT 1");
     $row = $ultimoPedido->fetch_assoc();
     $numeroPedido = empty($row) ? 1 : intval(substr($row['codigo_pedido'], 3)) + 1;
     $codigoPedido = 'PED' . str_pad($numeroPedido, 3, '0', STR_PAD_LEFT);
 
-    // Obtener último código de detalle
-    $ultimoDetalle = $conexionBD->query("SELECT codigo_detalle FROM pedido_detalle ORDER BY codigo_detalle DESC LIMIT 1");
-    $rowDetalle = $ultimoDetalle->fetch_assoc();
-    $numeroDetalle = empty($rowDetalle) ? 1 : intval(substr($rowDetalle['codigo_detalle'], 3)) + 1;
-    $codigoDetalle = 'DET' . str_pad($numeroDetalle, 3, '0', STR_PAD_LEFT);
+    date_default_timezone_set('Europe/Madrid');
+    $fechaPedido = date('Y-m-d H:i:s');
+    $estadoPedido = "Pagado";
 
-    $pedido = new Pedido($codigoPedido, $dniCliente, $idProducto, $tipoProducto, $total, $fechaPedido, $estadoPedido, $codigoDetalle, $subtotal, $cantidad);
+    // Insertar el pedido principal
+    $pedido = new Pedido($codigoPedido, $dniCliente, null, null, $precioTotalPedido, $fechaPedido, $estadoPedido, null, null, null);
+
     if ($pedido->crearPedido()) {
-        // Actualizar el stock del producto
-        //$producto = new Producto($idProducto, null, null, null, null, null, null, null);
-        //$producto->crearProducto();
-        // Redirigir a la página de éxito
+        // Procesar cada producto en la cesta
+        foreach ($productosCesta as $index => $producto) {
+            // Obtener último código de detalle
+            $ultimoDetalle = $conexionBD->query("SELECT codigo_detalle FROM pedidos_detalle ORDER BY codigo_detalle DESC LIMIT 1");
+            $rowDetalle = $ultimoDetalle->fetch_assoc();
+            $numeroDetalle = empty($rowDetalle) ? 1 : intval(substr($rowDetalle['codigo_detalle'], 3)) + 1;
+            $codigoDetalle = 'DET' . str_pad($numeroDetalle, 3, '0', STR_PAD_LEFT);
+
+            $datosProducto = Producto::buscarProductoDetallado($producto);
+            // Crear detalle del pedido
+            $pedido = new Pedido(
+                $codigoPedido,
+                $dniCliente,
+                $producto,
+                isset($datosProducto[0]['tipo']) ? $datosProducto[0]['tipo'] : null,
+                $precioTotalPedido,
+                $fechaPedido,
+                $estadoPedido,
+                $codigoDetalle,
+                $subtotalesPedido[$index],
+                $cantidadesPedido[$index]
+            );
+
+            $pedido->crearPedido();
+
+            // Actualizar stock del producto
+            $conexionBD->query("UPDATE productos_detalle SET stock = stock - " . $cantidadesPedido[$index] .
+                " WHERE id_producto_detalle = '" . $producto . "'");
+        }
+
+        // Limpiar la sesión
+        unset($_SESSION['cesta']);
+        unset($_SESSION['total']);
+        unset($_SESSION['subtotales']);
+        unset($_SESSION['cantidad']);
+
         header("Location: ../Vista/pedidos.php");
+        exit();
     } else {
         echo "Error al crear el pedido.";
     }
