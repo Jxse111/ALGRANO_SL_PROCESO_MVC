@@ -16,7 +16,7 @@ if (filter_has_var(INPUT_POST, 'añadirProducto')) {
     $fechaCreacionProducto = filter_input(INPUT_POST, 'fechaAñadido');
     $origenProducto = filter_input(INPUT_POST, 'origenAñadido');
     $imagenProducto = filter_input(INPUT_POST, 'imagenAñadido');
-    $producto = new Producto($idProducto, $nombreProducto, $descripcionProducto, $fechaCreacionProducto, $origenProducto, $precioProducto, $stockProducto, $imagenProducto, $tipoProducto);
+    $producto = new Producto($idProducto, $nombreProducto, $descripcionProducto, $fechaCreacionProducto, $origenProducto, $precioProducto, $imagenProducto, $stockProducto, $tipoProducto);
     $producto->crearProducto();
     header("location: ../Vista/areaEmpleado.php");
 }

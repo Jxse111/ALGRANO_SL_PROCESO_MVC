@@ -219,7 +219,7 @@ VALUES
         'PROD001',
         'Café Arábica',
         'Grano',
-        'Café con sabor suave, equilibrado, aromático .',
+        'Café con sabor suave, equilibrado, aromático.',
         100,
         'Colombia'
     ),
@@ -227,7 +227,7 @@ VALUES
         'PROD002',
         'Café Robusta',
         'Molido',
-        'Café con un sabor fuerte, amargo y terroso, con notas de nuex y chocolate amargo.',
+        'Café con un sabor fuerte, amargo y terroso, con notas de nuez y chocolate amargo.',
         80,
         'Brasil'
         ),
