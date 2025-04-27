@@ -1,5 +1,7 @@
 <?php
 require_once '../Modelo/Usuario.php';
+require_once '../Modelo/Producto.php';
+require_once '../Modelo/Pedido.php';
 session_start();
 if ($_SESSION['rol'] != "cliente") {
     header("Location: ./index.php");
@@ -74,10 +76,7 @@ $codigoPedido = filter_input(INPUT_GET, 'id');
         <!-- Aquí puedes agregar el contenido de la página de administración -->
         <h2 class="text-center">Sección de información sobre pedidos realizados</h2>
         <?php
-        require_once '../Modelo/Pedido.php';
-
         $pedidosDetallados = Pedido::obtenerPedidosDetalle($codigoPedido); // Obtiene los pedidos realizados por ese usuario  
-        //$pedidosDetallados = Pedido::listarPedidosDetallados(); // Obtiene los pedidos detallados
         ?>
         <div class="container mt-5">
             <div class="container mt-5">
@@ -86,15 +85,22 @@ $codigoPedido = filter_input(INPUT_GET, 'id');
                 <table class="table table-bordered">
                     <thead style="background-color: #362421; color: #DB9F5B;">
                         <tr>
-                            <th>Cantidad</th>
+                            <th>Código Detalle</th>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
                             <th>Subtotal</th>
+                            <th>Cantidad</th>
                         </tr>
                     </thead>
                     <tbody style="background-color:#DFB767; color: #362421;">
-                        <?php foreach ($pedidosDetallados as $pedidoDetallado) { ?>
+                        <?php foreach ($pedidosDetallados as $pedidoDetallado) {
+                            $nombreProducto = Producto::buscarProducto($pedidoDetallado['id_producto_pedido']) ?>
                             <tr>
+                                <td><?php echo $pedidoDetallado['codigo_detalle'] ?></td>
+                                <td><?php echo $nombreProducto[0]['nombre'] ?></td>
+                                <td><?php echo $pedidoDetallado['tipo'] ?></td>
+                                <td><?php echo $pedidoDetallado['subtotal'] . "€" ?></td>
                                 <td><?php echo $pedidoDetallado['cantidad_descrita'] ?></td>
-                                <td><?php echo $pedidoDetallado['subtotal'] . "€"?></td>
                             </tr>
                         <?php } ?>
                     </tbody>

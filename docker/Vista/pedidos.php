@@ -89,9 +89,9 @@ $dniCliente = $cliente[0]['DNI'];
                     <thead style="background-color: #362421; color: #DB9F5B;">
                         <tr>
                             <th>Código</th>
-                            <th>Precio Total</th>
                             <th>Fecha</th>
                             <th>Estado del pedido</th>
+                            <th>Precio Total</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -101,7 +101,7 @@ $dniCliente = $cliente[0]['DNI'];
                                 <td><?php echo $pedido['codigo_pedido'] ?></td>
                                 <td><?php echo $pedido['fecha_pedido'] ?></td>
                                 <td><?php echo $pedido['estado'] ?></td>
-                                <td><?php echo $pedido['precio_total'] ?></td>
+                                <td><?php echo $pedido['precio_total'] . "€"?></td>
                                 <td> <button
                                         onclick="window.location.href='../Vista/informacionPedidoDetalle.php?id=<?php echo $pedido['codigo_pedido']; ?>'"
                                         class="btn btn-primary btn-sm">Consultar Información Detallada</button></td>
