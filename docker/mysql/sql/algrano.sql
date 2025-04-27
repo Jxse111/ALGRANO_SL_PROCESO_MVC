@@ -1,87 +1,148 @@
 -- Script de creación de la base de datos para MySQL (modificado y corregido)
-CREATE DATABASE IF NOT EXISTS algrano;
+CREATE DATABASE
+IF NOT EXISTS algrano;
 
 USE algrano;
 -- Tabla Rol
-CREATE TABLE IF NOT EXISTS rol (
-    id_rol CHAR(9) NOT NULL PRIMARY KEY,
-    rol VARCHAR(30) NOT NULL
+CREATE TABLE
+IF NOT EXISTS rol
+(
+    id_rol CHAR
+(9) NOT NULL PRIMARY KEY,
+    rol VARCHAR
+(30) NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 -- Tabla Usuario
-CREATE TABLE IF NOT EXISTS usuario (
-    DNI CHAR(9) NOT NULL PRIMARY KEY,
-    usuario VARCHAR(30) NOT NULL,
-    contraseña CHAR(255) NOT NULL,
-    direccion VARCHAR(100) NOT NULL,
-    correo VARCHAR(50) UNIQUE NOT NULL,
+CREATE TABLE
+IF NOT EXISTS usuario
+(
+    DNI CHAR
+(9) NOT NULL PRIMARY KEY,
+    usuario VARCHAR
+(30) NOT NULL,
+    contraseña CHAR
+(255) NOT NULL,
+    direccion VARCHAR
+(100) NOT NULL,
+    correo VARCHAR
+(50) UNIQUE NOT NULL,
     fec_nac DATE NOT NULL,
-    id_rol_usuario CHAR(9) NOT NULL,
-    FOREIGN KEY (id_rol_usuario) REFERENCES rol (id_rol) ON DELETE CASCADE
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+    id_rol_usuario CHAR
+(9) NOT NULL,
+    FOREIGN KEY
+(id_rol_usuario) REFERENCES rol
+(id_rol) ON
+DELETE CASCADE
+) ENGINE = InnoDB
+DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 -- Tabla Productos
-CREATE TABLE IF NOT EXISTS producto (
-    id_producto CHAR(9) PRIMARY KEY,
-    nombre VARCHAR(255) NOT NULL,
-    precio_ud DECIMAL(10, 2) NOT NULL,
-    imagen LONGBLOB
+CREATE TABLE
+IF NOT EXISTS producto
+(
+    id_producto CHAR
+(9) PRIMARY KEY,
+    nombre VARCHAR
+(255) NOT NULL,
+    precio_ud DECIMAL
+(10, 2) NOT NULL,
+    imagen VARCHAR
+(255)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 -- Tabla Productos Detalle
-CREATE TABLE IF NOT EXISTS productos_detalle (
-    id_producto_detalle CHAR(9) PRIMARY KEY,
-    nombre VARCHAR(255) NOT NULL,
-    tipo ENUM('Grano', 'Molido') NOT NULL,
+CREATE TABLE
+IF NOT EXISTS productos_detalle
+(
+    id_producto_detalle CHAR
+(9) PRIMARY KEY,
+    nombre VARCHAR
+(255) NOT NULL,
+    tipo ENUM
+('Grano', 'Molido') NOT NULL,
     descripcion TEXT,
     stock INT NOT NULL DEFAULT 0,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    origen VARCHAR(100),
-    FOREIGN KEY (id_producto_detalle) REFERENCES producto (id_producto) ON DELETE CASCADE
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+    origen VARCHAR
+(100),
+    FOREIGN KEY
+(id_producto_detalle) REFERENCES producto
+(id_producto) ON
+DELETE CASCADE
+) ENGINE = InnoDB
+DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 -- Tabla Pedido
-CREATE TABLE IF NOT EXISTS pedido (
-    codigo_pedido CHAR(9) PRIMARY KEY,
-    DNI_cliente CHAR(9) NOT NULL,
-    precio_total DECIMAL(10, 2) NOT NULL,
+CREATE TABLE
+IF NOT EXISTS pedido
+(
+    codigo_pedido CHAR
+(9) PRIMARY KEY,
+    DNI_cliente CHAR
+(9) NOT NULL,
+    precio_total DECIMAL
+(10, 2) NOT NULL,
     fecha_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    estado ENUM(
+    estado ENUM
+(
         'Pendiente',
         'Pagado',
         'Enviado',
         'Entregado',
         'Cancelado'
     ) DEFAULT 'Pendiente',
-    FOREIGN KEY (DNI_cliente) REFERENCES usuario (DNI) ON DELETE CASCADE
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+    FOREIGN KEY
+(DNI_cliente) REFERENCES usuario
+(DNI) ON
+DELETE CASCADE
+) ENGINE = InnoDB
+DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 -- Tabla Detalles Pedido
-CREATE TABLE IF NOT EXISTS pedidos_detalle (
-    codigo_detalle CHAR(9) PRIMARY KEY NOT NULL,
-    id_producto_pedido CHAR(9) NOT NULL,
-    tipo ENUM('Grano', 'Molido') NOT NULL,
-    subtotal DECIMAL(10, 2) NOT NULL,
+CREATE TABLE
+IF NOT EXISTS pedidos_detalle
+(
+    codigo_detalle CHAR
+(9) PRIMARY KEY NOT NULL,
+    id_producto_pedido CHAR
+(9) NOT NULL,
+    tipo ENUM
+('Grano', 'Molido') NOT NULL,
+    subtotal DECIMAL
+(10, 2) NOT NULL,
     cantidad_descrita INT NOT NULL,
-    codigo_pedido CHAR(9) NOT NULL,
-    FOREIGN KEY (codigo_pedido) REFERENCES pedido (codigo_pedido) ON DELETE CASCADE,
-    FOREIGN KEY (id_producto_pedido) REFERENCES producto (id_producto) ON DELETE CASCADE
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
+    codigo_pedido CHAR
+(9) NOT NULL,
+    FOREIGN KEY
+(codigo_pedido) REFERENCES pedido
+(codigo_pedido) ON
+DELETE CASCADE,
+    FOREIGN KEY (id_producto_pedido)
+REFERENCES producto
+(id_producto) ON
+DELETE CASCADE
+) ENGINE = InnoDB
+DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_general_ci;
 -- Script de inserción de datos iniciales
 -- Roles
 INSERT INTO
-    rol (id_rol, rol)
-VALUES ('0', 'invitado'),
+    rol
+    (id_rol, rol)
+VALUES
+    ('0', 'invitado'),
     ('1', 'cliente'),
     ('2', 'empleado'),
     ('3', 'administrador');
 -- Usuarios
 INSERT INTO
-    usuario (
-        DNI,
-        usuario,
-        contraseña,
-        direccion,
-        correo,
-        fec_nac,
-        id_rol_usuario
+    usuario
+    (
+    DNI,
+    usuario,
+    contraseña,
+    direccion,
+    correo,
+    fec_nac,
+    id_rol_usuario
     )
-VALUES (
+VALUES
+    (
         '45123248K',
         'AlgranoAdmin',
         '162132b381fbadbe5c3d288539aa0243f3a3c0ada934134aa9f2f5ac850fa8a331447d213e77f6b29373a39321e4e9d96f3f4cfe1e7fceed626a59a04b603442',
@@ -110,35 +171,39 @@ VALUES (
     );
 -- Productos
 INSERT INTO
-    producto (
-        id_producto,
-        nombre,
-        precio_ud,
-        imagen
+    producto
+    (
+    id_producto,
+    nombre,
+    precio_ud,
+    imagen
     )
-VALUES (
+VALUES
+    (
         'PROD001',
-        'Café Arábica',
+        'Café Arabico',
         12.50,
-        NULL
+        '../img/Productos/Arabico.png'
     ),
     (
         'PROD002',
         'Café Robusta',
         9.75,
-        NULL
+        '../img/Productos/Café Robusto.png'
     );
 -- Detalles de Productos
 INSERT INTO
-    productos_detalle (
-        id_producto_detalle,
-        nombre,
-        tipo,
-        descripcion,
-        stock,
-        origen
+    productos_detalle
+    (
+    id_producto_detalle,
+    nombre,
+    tipo,
+    descripcion,
+    stock,
+    origen
     )
-VALUES (
+VALUES
+    (
         'PROD001',
         'Café Arábica',
         'Grano',
@@ -156,13 +221,15 @@ VALUES (
     );
 -- Pedidos
 INSERT INTO
-    pedido (
-        codigo_pedido,
-        DNI_cliente,
-        precio_total,
-        estado
+    pedido
+    (
+    codigo_pedido,
+    DNI_cliente,
+    precio_total,
+    estado
     )
-VALUES (
+VALUES
+    (
         'PED001',
         '76594532F',
         35.00,
@@ -170,15 +237,17 @@ VALUES (
     );
 -- Detalles del pedido
 INSERT INTO
-    pedidos_detalle (
-        codigo_detalle,
-        id_producto_pedido,
-        tipo,
-        subtotal,
-        cantidad_descrita,
-        codigo_pedido
+    pedidos_detalle
+    (
+    codigo_detalle,
+    id_producto_pedido,
+    tipo,
+    subtotal,
+    cantidad_descrita,
+    codigo_pedido
     )
-VALUES (
+VALUES
+    (
         'DET001',
         'PROD001',
         'Grano',
@@ -188,15 +257,17 @@ VALUES (
     );
 
 INSERT INTO
-    pedidos_detalle (
-        codigo_detalle,
-        id_producto_pedido,
-        tipo,
-        subtotal,
-        cantidad_descrita,
-        codigo_pedido
+    pedidos_detalle
+    (
+    codigo_detalle,
+    id_producto_pedido,
+    tipo,
+    subtotal,
+    cantidad_descrita,
+    codigo_pedido
     )
-VALUES (
+VALUES
+    (
         'DET002',
         'PROD002',
         'Molido',
@@ -205,9 +276,11 @@ VALUES (
         'PED001'
     );
 -- Crear usuario de base de datos y asignar permisos
-CREATE USER IF NOT EXISTS 'algrano_admin' @'localhost' IDENTIFIED BY 'AlgranoAdmin';
+CREATE USER
+IF NOT EXISTS 'algrano_admin' @'localhost' IDENTIFIED BY 'AlgranoAdmin';
 
-CREATE USER IF NOT EXISTS 'algrano_empleado' @'localhost' IDENTIFIED BY 'EmpleadoMiguel123';
+CREATE USER
+IF NOT EXISTS 'algrano_empleado' @'localhost' IDENTIFIED BY 'EmpleadoMiguel123';
 -- Asignar privilegios
 GRANT ALL PRIVILEGES ON algrano.* TO 'algrano_admin' @'localhost';
 

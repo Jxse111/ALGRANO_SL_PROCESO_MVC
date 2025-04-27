@@ -80,10 +80,10 @@ $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los pro
                                 <a href="pedidos.php" class="dropdown-item" style="color: #DA9F5B" ;>Mis pedidos</a>
                                 <a href="../Controlador/cerrarSesion_proceso.php" class="dropdown-item"
                                     style="color: #DA9F5B;">Cerrar sesión</a>
-                            </div>
                         </div>
-                    <?php }
-                } ?>
+                    </div>
+            <?php }
+                        } ?>
             </div>
         </nav>
     </div>
@@ -112,7 +112,9 @@ $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los pro
             <?php foreach ($productos as $producto) { ?>
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <img src="data:image/png;base64,<?php echo base64_encode($producto['imagen']); ?>"
+                        <?php $imagenProducto = !empty($producto['imagen']) ? $producto['imagen'] : "../img/Productos/default.jpg"; 
+                        ?>
+                        <img src="<?php echo $imagenProducto; ?>"
                             class="card-img-top" alt="<?php echo ($producto['nombre']); ?>">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo ($producto['nombre']); ?></h5>

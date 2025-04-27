@@ -136,10 +136,11 @@ if (filter_has_var(INPUT_POST, 'comprar')) {
                     foreach ($productosDetallados as $productoDetalle) {
                         if ($productoDetalle['id_producto_detalle'] == $productoId) {
                             foreach ($productos as $producto) {
-                                if ($producto['id_producto'] == $productoId) {
-                ?>
+                                if ($producto['id_producto'] == $productoId) { ?>
                                     <div class="col-lg-6">
-                                        <img src="data:image/png;base64,<?php echo base64_encode($producto['imagen']); ?>"
+                                        <?php $imagenProducto = !empty($producto['imagen']) ? $producto['imagen'] : "../img/Productos/default.jpg";
+                                        ?>
+                                        <img src="<?php echo $imagenProducto; ?>"
                                             alt="<?php echo $producto['nombre']; ?>" class="img-fluid"
                                             style="max-width: 400px; height: auto;">
                                     </div>
