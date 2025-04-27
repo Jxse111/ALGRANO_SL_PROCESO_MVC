@@ -13,7 +13,7 @@ class Producto
     private $precioUnitario;
 
     private $imagen;
-    public function __construct($idProducto, $nombre, $descripcion, $fechaCreacion, $origen, $precioUnitario, $stock = 1, $tipo = "Grano",$imagen)
+    public function __construct($idProducto, $nombre, $descripcion, $fechaCreacion, $origen, $precioUnitario, $stock = 1,$imagen, $tipo = "Grano")
     {
         $this->idProducto = $idProducto;
         $this->nombre = $nombre;
