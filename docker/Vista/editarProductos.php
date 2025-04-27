@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION['rol'] != "empleado"){
+if ($_SESSION['rol'] != "empleado") {
     header("location: ../Vista/index.php");
 }
 require_once '../Modelo/Producto.php';
@@ -17,7 +17,8 @@ if (filter_has_var(INPUT_POST, 'modificarProducto')) {
     $idProductoDetallado = filter_input(INPUT_GET, 'id');
     $fechaCreacionProducto = filter_input(INPUT_POST, 'fechaEditada') ?: $productoDetalladoSinEditar[0]['fecha_creacion'];
     $origenProducto = filter_input(INPUT_POST, 'origenEditado') ?: $productoDetalladoSinEditar[0]['origen'];
-    $producto = new Producto($idProductoDetallado, $nombreProducto, $descripcionProducto, $fechaCreacionProducto, $origenProducto, $precioProducto, $stockProducto, $tipoProducto);
+    $imagenProducto = filter_input(INPUT_POST, 'imagenAñadido') ?: $productoSinEditar[0]['imagen'];
+    $producto = new Producto($idProductoDetallado, $nombreProducto, $descripcionProducto, $fechaCreacionProducto, $origenProducto, $precioProducto, $stockProducto, $tipoProducto,$imagenProducto);
     $producto->crearProducto();
     header("location: ../Vista/areaEmpleado.php");
 }

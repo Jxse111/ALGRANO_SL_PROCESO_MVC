@@ -12,7 +12,8 @@ class Producto
     private $origen;
     private $precioUnitario;
 
-    public function __construct($idProducto, $nombre, $descripcion, $fechaCreacion, $origen, $precioUnitario, $stock = 1, $tipo = "Grano")
+    private $imagen;
+    public function __construct($idProducto, $nombre, $descripcion, $fechaCreacion, $origen, $precioUnitario, $stock = 1, $tipo = "Grano",$imagen)
     {
         $this->idProducto = $idProducto;
         $this->nombre = $nombre;
@@ -22,6 +23,7 @@ class Producto
         $this->fechaCreacion = $fechaCreacion;
         $this->origen = $origen;
         $this->precioUnitario = $precioUnitario;
+        $this->imagen = $imagen;
     }
 
     public function getIdProducto()
@@ -196,10 +198,11 @@ class Producto
         $stockProducto = $this->stock;
         $fechaCreacionProducto = $this->fechaCreacion;
         $origenProducto = $this->origen;
+        $imagenProducto = $this->imagen;
         $precioUnitarioProducto = $this->precioUnitario;
         if (!existeProducto($idProducto, $conexionBD)) {
             $consultaInsercionProducto = $conexionBD->prepare('INSERT INTO producto VALUES (?,?,?)');
-            $consultaInsercionProducto->bind_param('sss', $idProducto, $nombreProducto, $precioUnitarioProducto);
+            $consultaInsercionProducto->bind_param('ssss', $idProducto, $nombreProducto, $precioUnitarioProducto,$imagenProducto);
             if ($consultaInsercionProducto->execute()) {
                 $consultaInsercionProductoDetalle = $conexionBD->prepare('INSERT INTO productos_detalle VALUES (?,?,?,?,?,?,?)');
                 $consultaInsercionProductoDetalle->bind_param('ssssdss', $idProducto, $nombreProducto, $tipoProducto, $descripcionProducto, $stockProducto, $fechaCreacionProducto, $origenProducto);
@@ -209,7 +212,7 @@ class Producto
             }
         } else {
             $consultaInsercionProducto = $conexionBD->prepare('UPDATE producto SET nombre = ? , precio_ud = ? WHERE id_producto = ?');
-            $consultaInsercionProducto->bind_param('sss', $nombreProducto, $precioUnitarioProducto, $idProducto);
+            $consultaInsercionProducto->bind_param('ssss', $nombreProducto, $precioUnitarioProducto,$imagenProducto,$idProducto);
             if ($consultaInsercionProducto->execute()) {
                 $consultaInsercionProductoDetalle = $conexionBD->prepare('UPDATE productos_detalle SET nombre = ? , tipo = ?, descripcion = ?, stock = ?, fecha_creacion = ?, origen = ? WHERE id_producto_detalle = ?');
                 $consultaInsercionProductoDetalle->bind_param('sssdsss', $nombreProducto, $tipoProducto, $descripcionProducto, $stockProducto, $fechaCreacionProducto, $origenProducto, $idProducto);

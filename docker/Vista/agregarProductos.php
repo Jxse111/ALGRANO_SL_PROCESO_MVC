@@ -1,12 +1,12 @@
 <?php
 session_start();
-if($_SESSION['rol'] != "empleado"){
+if ($_SESSION['rol'] != "empleado") {
     header("location: ../Vista/index.php");
 }
 require_once '../Modelo/Producto.php';
 require_once '../Modelo/Algrano.php';
 if (filter_has_var(INPUT_POST, 'añadirProducto')) {
-    $idProducto = filter_input(INPUT_POST,'idAñadido'); 
+    $idProducto = filter_input(INPUT_POST, 'idAñadido');
     $nombreProducto = filter_input(INPUT_POST, 'nombreAñadido');
     $precioProducto = filter_input(INPUT_POST, 'precioAñadido');
     $tipoProducto = filter_input(INPUT_POST, 'tipoAñadido');
@@ -15,7 +15,8 @@ if (filter_has_var(INPUT_POST, 'añadirProducto')) {
     $idProductoDetallado = filter_input(INPUT_GET, 'id');
     $fechaCreacionProducto = filter_input(INPUT_POST, 'fechaAñadido');
     $origenProducto = filter_input(INPUT_POST, 'origenAñadido');
-    $producto = new Producto($idProducto, $nombreProducto, $descripcionProducto, $fechaCreacionProducto, $origenProducto, $precioProducto, $stockProducto, $tipoProducto);
+    $imagenProducto = filter_input(INPUT_POST, 'imagenAñadido');
+    $producto = new Producto($idProducto, $nombreProducto, $descripcionProducto, $fechaCreacionProducto, $origenProducto, $precioProducto, $stockProducto, $tipoProducto, $imagenProducto);
     $producto->crearProducto();
     header("location: ../Vista/areaEmpleado.php");
 }
@@ -124,55 +125,60 @@ if (filter_has_var(INPUT_POST, 'añadirProducto')) {
         <div class="section-title">
             <h4 class="text-primary text-uppercase">PRODUCTO NUEVO</h4>
         </div>
-            <form name="sentMessage" id="contactForm" novalidate="novalidate" method="POST">
+        <form name="sentMessage" id="contactForm" novalidate="novalidate" method="POST">
             <div class="control-group">
-                    <input type="text" class="form-control" name="idAñadido"
-                        placeholder="Código del producto" />
-                    <p class="help-block text-danger"></p>
-                </div>
-                <div class="control-group">
-                    <input type="text" class="form-control" name="nombreAñadido"
-                        placeholder="Nombre del producto" />
-                    <p class="help-block text-danger"></p>
-                </div>
-                <div class="control-group">
-                    <input type="number" class="form-control" name="precioAñadido"
-                        placeholder="Precio unitario" />
-                    <p class="help-block text-danger"></p>
-                </div>
-                <div class="control-group">
-                    <input type="text" class="form-control" name="tipoAñadido"
-                        placeholder="tipo" />
-                    <p class="help-block text-danger"></p>
-                </div>
-                <div class="control-group">
-                    <input type="text" class="form-control" name="descripcionAñadido"
-                        placeholder="Descripcion" />
-                    <p class="help-block text-danger"></p>
-                </div>
-                <div class="control-group">
-                    <input type="number" class="form-control" name="stockAñadido"
-                        placeholder="Cantidad del producto" />
-                    <p class="help-block text-danger"></p>
-                </div>
-                <div class="control-group">
-                    <input type="text" class="form-control" name="fechaAñadido"
-                        placeholder="Fecha de creación" />
-                    <p class="help-block text-danger"></p>
-                </div>
-                <div class="control-group">
-                    <input type="text" class="form-control" name="origenAñadido"
-                        placeholder="Origen" />
-                    <p class="help-block text-danger"></p>
-                </div>
-                <div>
-                    <button class="btn btn-primary font-weight-bold py-3 px-5" type="submit" id="entrar"
-                        name="añadirProducto">Añadir nuevo producto</button>
-                </div>
-                <a href="../Vista/areaEmpleado.php" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">Volver al
-                    panel
-                    de administración de productos</a>
-            </form>
+                <input type="text" class="form-control" name="idAñadido"
+                    placeholder="Código del producto" />
+                <p class="help-block text-danger"></p>
+            </div>
+            <div class="control-group">
+                <input type="text" class="form-control" name="nombreAñadido"
+                    placeholder="Nombre del producto" />
+                <p class="help-block text-danger"></p>
+            </div>
+            <div class="control-group">
+                <input type="number" class="form-control" name="precioAñadido"
+                    placeholder="Precio unitario" />
+                <p class="help-block text-danger"></p>
+            </div>
+            <div class="control-group">
+                <input type="text" class="form-control" name="tipoAñadido"
+                    placeholder="tipo" />
+                <p class="help-block text-danger"></p>
+            </div>
+            <div class="control-group">
+                <input type="text" class="form-control" name="descripcionAñadido"
+                    placeholder="Descripcion" />
+                <p class="help-block text-danger"></p>
+            </div>
+            <div class="control-group">
+                <input type="number" class="form-control" name="stockAñadido"
+                    placeholder="Cantidad del producto" />
+                <p class="help-block text-danger"></p>
+            </div>
+            <div class="control-group">
+                <input type="text" class="form-control" name="fechaAñadido"
+                    placeholder="Fecha de creación" />
+                <p class="help-block text-danger"></p>
+            </div>
+            <div class="control-group">
+                <input type="text" class="form-control" name="origenAñadido"
+                    placeholder="Origen" />
+                <p class="help-block text-danger"></p>
+            </div>
+            <div class="control-group">
+                <input type="text" class="form-control" name="imagenAñadido"
+                    placeholder="Ruta de la imagen (ej: ../img/Productos/cafe-arabica.jpg)" />
+                <p class="help-block text-danger"></p>
+            </div>
+            <div>
+                <button class="btn btn-primary font-weight-bold py-3 px-5" type="submit" id="entrar"
+                    name="añadirProducto">Añadir nuevo producto</button>
+            </div>
+            <a href="../Vista/areaEmpleado.php" class="btn btn-secondary font-weight-bold py-2 px-4 mt-2">Volver al
+                panel
+                de administración de productos</a>
+        </form>
     </div>
     <!-- Contact End -->
 
