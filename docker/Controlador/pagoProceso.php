@@ -58,6 +58,7 @@ if (isset($_POST['pagar'])) {
             );
 
             $pedido->crearPedido();
+            $pedido->dividirPedidoDetalles($producto);
 
             // Actualizar stock del producto
             $conexionBD->query("UPDATE productos_detalle SET stock = stock - " . $cantidadesPedido[$index] .
@@ -70,9 +71,9 @@ if (isset($_POST['pagar'])) {
         unset($_SESSION['subtotales']);
         unset($_SESSION['cantidad']);
 
-        header("Location: ../Vista/pedidos.php");
+        header("Location: ../Vista/pedidos.php?success=Pedido creado con éxito.");
         exit();
     } else {
-        echo "Error al crear el pedido.";
+        header("Location: ../Vista/pedidos.php?error=El pedido no se ha podido crear.");
     }
 }

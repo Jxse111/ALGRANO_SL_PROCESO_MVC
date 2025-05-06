@@ -11,12 +11,13 @@ if (filter_has_var(INPUT_GET, "id")) {
     $codigoPedido = filter_input(INPUT_GET, 'id');
     //echo $dniUsuario;
     if (Pedido::eliminarPedido($codigoPedido) && Pedido::eliminarPedidoDetallado($codigoPedido)) {
-        header("location: ../Vista/areaEmpleado.php");
+        header("location: ../Vista/areaEmpleado.php?success=Pedido eliminado con éxito.");
         exit;
     } else {
-        echo "no se ha podido eliminar el pedido.";
+        header('Location: ../Vista/areaEmpleado.php?error=ERROR:No se ha podido eliminar el pedido.');
     }
 } else {
-    echo "No se ha podido eliminar el pedido, no se han recibido los datos del formulario.";
+    header('Location: ../Vista/areaEmpleado.php?error=ERROR:Pedido no encontrado en el sistema.');
+
 }
 ?>

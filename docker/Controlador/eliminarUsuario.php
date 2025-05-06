@@ -11,12 +11,12 @@ if (filter_has_var(INPUT_GET, "id")) {
     $dniUsuario = filter_input(INPUT_GET, 'id');
     //echo $dniUsuario;
     if (Usuario::eliminarUsuario($dniUsuario)) {
-        header("location: ../Vista/areaAdmin.php");
+        header("location: ../Vista/areaAdmin.php?success=Usuario eliminado con éxito.");
         exit;
     } else {
-        echo "no se ha podido eliminar el usuario.";
+        header("location: ../Vista/areaAdmin.php?error=ERROR:El usuario no se ha podido eliminar.");
     }
 } else {
-    echo "No se ha podido eliminar el usuario, no se han recibido los datos del formulario.";
+    header("location: ../Vista/areaAdmin.php?error=EL usuario no se encuentra en el sistema.");
 }
 ?>

@@ -1,5 +1,4 @@
 <?php
-// Start the session at the very beginning before any output
 session_start();
 
 error_reporting(E_ALL);
@@ -10,35 +9,26 @@ require_once '../Modelo/funcionesBaseDeDatos.php';
 require_once '../Modelo/Algrano.php';
 require_once '../Modelo/Usuario.php';
 
-$mensajeError = "Mensajes de error : ";
-$mensajeExito = "Mensajes de éxito: ";
-$registroExistoso = false;
-
 if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")) {
-    // Check if user is already logged in
     if (isset($_SESSION['cliente'])) {
         header("Location: ../Vista/index.php");
         exit();
     } else {
-        // Create database connection BEFORE trying to use it
         $conexionBD = Algrano::conectarAlgranoMySQLi();
 
-        // Validate the connection was successful
         if (!$conexionBD) {
-            echo nl2br("No se pudo establecer conexión con la base de datos." . "\n");
+            header("Location: ../ERRORES/ERROR_CONEXION.html");
+            exit();
         } else {
             try {
-                // Get the username from the form
                 $usuarioLogin = filter_input(INPUT_POST, "usuarioExistente");
-                //echo var_dump($usuarioLogin);
-                // Validate the user exists
+                
                 if (empty($usuarioLogin)) {
-                    echo nl2br("El nombre de usuario no puede estar vacío." . "\n");
+                    header("Location: ../ERRORES/ERROR_DATOS_INCORRECTOS.html");
+                    exit();
                 } else {
-                    // Validate the user with the database
                     $usuarioLogin = validarUsuarioExistente($usuarioLogin, $conexionBD);
                     if ($usuarioLogin) {
-                        // Extract the password of the registered user
                         $conexionBD->autocommit(false);
                         $consultaSesiones = $conexionBD->query("SELECT contraseña FROM usuario WHERE usuario='$usuarioLogin'");
 
@@ -46,69 +36,50 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
                             $contraseña = $consultaSesiones->fetch_all(MYSQLI_ASSOC);
 
                             foreach ($contraseña as $contraseñaExistente) {
-                                //echo var_dump($contraseñaExistente['contraseña']);
-                                // If the two encrypted passwords are exact, the session login is successful.
                                 $contraseñaEncriptada = hash("sha512", filter_input(INPUT_POST, "contraseñaExistente"));
-                                //echo var_dump(value: $contraseñaEncriptada);
                                 $esValida = $contraseñaEncriptada === $contraseñaExistente['contraseña'];
-                                $registroExistoso = $consultaSesiones->num_rows > 0 && $esValida;
 
                                 if ($esValida) {
-                                    // Set the user in the session
                                     $_SESSION['usuario'] = $usuarioLogin;
-
-                                    $mensajeExito .= "Inicio de Sesión realizado con éxito. \n";
                                     $buscarRolUsuarioRegistrado = $conexionBD->query("SELECT id_rol_usuario FROM usuario WHERE usuario='$usuarioLogin'");
 
                                     if ($buscarRolUsuarioRegistrado) {
-                                        $mensajeExito .= "Rol recuperado con éxito.\n";
                                         $rolUsuarioRegistrado = $buscarRolUsuarioRegistrado->fetch_column();
                                         $buscarTipoRolUsuarioRegistrado = $conexionBD->query("SELECT rol FROM rol WHERE id_rol='$rolUsuarioRegistrado'");
 
                                         if ($buscarTipoRolUsuarioRegistrado) {
-                                            $mensajeExito .= "Tipo de rol encontrado.\n";
                                             $rol = $buscarTipoRolUsuarioRegistrado->fetch_column();
                                             $_SESSION['rol'] = $rol;
-                                            // Redirect based on user role
-                                            switch ($_SESSION['rol']) {
-                                                case "cliente":
-                                                    $_SESSION['usuario'] = $usuarioLogin;
-                                                    header("Location: ../Vista/index.php");
-                                                    break;
-                                                case "empleado":
-                                                    $_SESSION['usuario'] = $usuarioLogin;
-                                                    header("Location: ../Vista/index.php");
-                                                    break;
-                                                case "administrador":
-                                                    $_SESSION['usuario'] = $usuarioLogin;
-                                                    header("Location: ../Vista/index.php");
-                                                    break;
-
-                                            }
+                                            $_SESSION['usuario'] = $usuarioLogin;
+                                            header("Location: ../Vista/index.php?success=Bienvenido a Algrano, " . $_SESSION['usuario'] . ".");
+                                            exit();
                                         } else {
-                                            echo nl2br("Tipo de rol no encontrado." . "\n");
+                                            header("Location: ../ERRORES/ERROR_LOGIN.html");
+                                            exit();
                                         }
                                     } else {
-                                        echo nl2br("No se ha podido recuperar el rol." . "\n");
+                                        header("Location: ../ERRORES/ERROR_LOGIN.html");
+                                        exit();
                                     }
                                 } else {
-                                    echo nl2br("No se ha podido iniciar sesión, la contraseña o el usuario no son correctos." . "\n");
+                                    header("Location: ../ERRORES/ERROR_LOGIN.html");
+                                    exit();
                                 }
                             }
                         } else {
-                            echo nl2br("La consulta no se ha podido realizar o el usuario no existe." . "\n");
+                            header("Location: ../ERRORES/ERROR_LOGIN.html");
+                            exit();
                         }
                     } else {
-                        echo nl2br("Los datos son inválidos o incorrectos." . "\n");
+                        header("Location: ../ERRORES/ERROR_DATOS_INCORRECTOS.html");
+                        exit();
                     }
                 }
             } catch (Exception $ex) {
-                echo nl2br("ERROR: " . $ex->getMessage() . "\n");
+                header("Location: ../ERRORES/ERROR_GENERAL.html");
+                exit();
             }
-
-            // Close the database connection
             Algrano::desconectar();
         }
     }
 }
-?>

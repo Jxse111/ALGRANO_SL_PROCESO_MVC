@@ -196,6 +196,33 @@ class Pedido
         return $esValido ? true : false;
     }
 
+    public function dividirPedidoDetalles($productos) {
+        $conexionBD = Algrano::conectarAlgranoMySQLi();
+        $esValido = false;
+        
+        foreach ($productos as $producto) {
+            $codigoDetalle = uniqid('DET_');
+            $consultaInsercionDetalle = $conexionBD->prepare('INSERT INTO pedidos_detalle VALUES (?,?,?,?,?,?)');
+            $consultaInsercionDetalle->bind_param('sssdis', 
+                $codigoDetalle, 
+                $producto['id_producto'], 
+                $producto['tipo'], 
+                $producto['subtotal'], 
+                $producto['cantidad'], 
+                $this->codigo
+            );
+            
+            if ($consultaInsercionDetalle->execute()) {
+                $esValido = true;
+            } else {
+                $esValido = false;
+                break;
+            }
+        }
+        
+        return $esValido;
+    }
+
     public static function eliminarPedido($codigoPedido)
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
