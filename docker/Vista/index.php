@@ -48,7 +48,65 @@ if (filter_has_var(INPUT_GET, "mensaje")) {
 </head>
 
 <body>
-    <?php if ($_SESSION['rol'] == "invitado") { ?>
+    <?php
+    //Si hay algun mensaje de exito o error a mostrar que se muestre en un modal
+    if (isset($_GET['success'])):
+    ?>
+        <div class="modal" id="messageModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Éxito</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><?php echo htmlspecialchars($_GET['success']); ?></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $("#messageModal").modal("show");
+            });
+        </script>
+    <?php
+    elseif (isset($_GET['error'])):
+    ?>
+        <div class="modal" id="messageModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Error</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><?php echo htmlspecialchars($_GET['error']); ?></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function() {
+                $("#messageModal").modal("show");
+            });
+        </script>
+    <?php
+    endif;
+    ?>
+    <?php
+    //Comprobar si el usuario es invitado y mostrar un mensaje
+    if ($_SESSION['rol'] == "invitado") { ?>
         <div style="background-color: #DA9F5B;" class="text-center py-2">
             <h4 class="text-black m-0"><i class="fas fa-user-clock mr-2"></i>MODO INVITADO</h4>
         </div>
