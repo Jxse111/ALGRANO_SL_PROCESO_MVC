@@ -85,7 +85,6 @@ $codigoPedido = filter_input(INPUT_GET, 'id');
                 <table class="table table-bordered">
                     <thead style="background-color: #362421; color: #DB9F5B;">
                         <tr>
-                            <th>Código Detalle</th>
                             <th>Nombre</th>
                             <th>Tipo</th>
                             <th>Subtotal</th>
@@ -96,7 +95,6 @@ $codigoPedido = filter_input(INPUT_GET, 'id');
                         <?php foreach ($pedidosDetallados as $pedidoDetallado) {
                             $nombreProducto = Producto::buscarProducto($pedidoDetallado['id_producto_pedido']) ?>
                             <tr>
-                                <td><?php echo $pedidoDetallado['codigo_detalle'] ?></td>
                                 <td><?php echo $nombreProducto[0]['nombre'] ?></td>
                                 <td><?php echo $pedidoDetallado['tipo'] ?></td>
                                 <td><?php echo $pedidoDetallado['subtotal'] . "€" ?></td>

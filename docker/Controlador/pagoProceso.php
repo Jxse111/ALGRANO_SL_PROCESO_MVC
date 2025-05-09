@@ -10,7 +10,7 @@ require_once '../Modelo/Producto.php';
 require_once '../Modelo/Algrano.php';
 require_once '../Modelo/funcionesBaseDeDatos.php';
 require_once '../Modelo/Usuario.php';
-
+const IVA = 1.21;
 $precioTotalPedido = $_SESSION['total'];
 $subtotalesPedido = $_SESSION['subtotales'];
 $cantidadesPedido = $_SESSION['cantidad'];
@@ -35,7 +35,7 @@ if (isset($_POST['pagar'])) {
 
     if ($pedido->crearPedido()) {
         // Procesar cada producto en la cesta
-        foreach ($productosCesta as $index => $producto) {
+        foreach ($productosCesta as $i => $producto) {
             // Obtener último código de detalle
             $ultimoDetalle = $conexionBD->query("SELECT codigo_detalle FROM pedidos_detalle ORDER BY codigo_detalle DESC LIMIT 1");
             $rowDetalle = $ultimoDetalle->fetch_assoc();
@@ -49,19 +49,27 @@ if (isset($_POST['pagar'])) {
                 $dniCliente,
                 $producto,
                 isset($datosProducto[0]['tipo']) ? $datosProducto[0]['tipo'] : null,
-                $precioTotalPedido,
+                $precioTotalPedido * IVA,
                 $fechaPedido,
                 $estadoPedido,
                 $codigoDetalle,
-                $subtotalesPedido[$index],
-                $cantidadesPedido[$index]
+                $subtotalesPedido[$i],
+                $cantidadesPedido[$i]
             );
 
             $pedido->crearPedido();
-            $pedido->dividirPedidoDetalles($producto);
+            // Obtener el último número de detalle
+            $ultimoDetalle = $conexionBD->query("SELECT codigo_detalle FROM pedidos_detalle ORDER BY codigo_detalle DESC LIMIT 1");
+            $rowDetalle = $ultimoDetalle->fetch_assoc();
+            $numeroDetalle = empty($rowDetalle) ? 1 : intval(substr($rowDetalle['codigo_detalle'], 3)) + 1;
+            $codigoDetalle = 'DET' . str_pad($numeroDetalle, 3, '0', STR_PAD_LEFT);
+
+            $consultaInsercionDetallesPedido = "INSERT INTO pedidos_detalle (codigo_detalle,id_producto_pedido, cantidad_descrita,tipo,subtotal,codigo_pedido) 
+                VALUES ('$codigoDetalle', '$producto', $cantidadesPedido[$i], '{$datosProducto[0]['tipo']}', $subtotalesPedido[$i],'$codigoPedido')";
+            $conexionBD->query($consultaInsercionDetallesPedido);
 
             // Actualizar stock del producto
-            $conexionBD->query("UPDATE productos_detalle SET stock = stock - " . $cantidadesPedido[$index] .
+            $conexionBD->query("UPDATE productos_detalle SET stock = stock - " . $cantidadesPedido[$i] .
                 " WHERE id_producto_detalle = '" . $producto . "'");
         }
 
@@ -70,10 +78,9 @@ if (isset($_POST['pagar'])) {
         unset($_SESSION['total']);
         unset($_SESSION['subtotales']);
         unset($_SESSION['cantidad']);
-
-        header("Location: ../Vista/pedidos.php?success=Pedido creado con éxito.");
+        header("Location: ../Vista/index.php?success=Pedido creado con éxito.");
         exit();
     } else {
-        header("Location: ../Vista/pedidos.php?error=El pedido no se ha podido crear.");
+        header("Location: ../Vista/index.php?error=El pedido no se ha podido crear.");
     }
 }

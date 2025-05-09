@@ -176,11 +176,7 @@ class Pedido
             $consultaInsercionPedido = $conexionBD->prepare('INSERT INTO pedido VALUES (?,?,?,?,?)');
             $consultaInsercionPedido->bind_param('ssdss', $codigo, $dniCliente, $precioTotal, $fechaPedido, $estado);
             if ($consultaInsercionPedido->execute()) {
-                $consultaInsercionPedidoDetalle = $conexionBD->prepare('INSERT INTO pedidos_detalle VALUES (?,?,?,?,?,?)');
-                $consultaInsercionPedidoDetalle->bind_param('sssdis', $codigoDetalle, $idProducto, $tipo, $subtotal, $cantidad, $codigo);
-                if ($consultaInsercionPedidoDetalle->execute()) {
-                    $esValido = true;
-                }
+                $esValido = true;
             }
         } else {
             $consultaInsercionPedido = $conexionBD->prepare('UPDATE pedido SET precio_total = ?, fecha_pedido = ?, estado = ?  WHERE codigo_pedido = ?');
@@ -194,33 +190,6 @@ class Pedido
             }
         }
         return $esValido ? true : false;
-    }
-
-    public function dividirPedidoDetalles($productos) {
-        $conexionBD = Algrano::conectarAlgranoMySQLi();
-        $esValido = false;
-        
-        foreach ($productos as $producto) {
-            $codigoDetalle = uniqid('DET_');
-            $consultaInsercionDetalle = $conexionBD->prepare('INSERT INTO pedidos_detalle VALUES (?,?,?,?,?,?)');
-            $consultaInsercionDetalle->bind_param('sssdis', 
-                $codigoDetalle, 
-                $producto['id_producto'], 
-                $producto['tipo'], 
-                $producto['subtotal'], 
-                $producto['cantidad'], 
-                $this->codigo
-            );
-            
-            if ($consultaInsercionDetalle->execute()) {
-                $esValido = true;
-            } else {
-                $esValido = false;
-                break;
-            }
-        }
-        
-        return $esValido;
     }
 
     public static function eliminarPedido($codigoPedido)
