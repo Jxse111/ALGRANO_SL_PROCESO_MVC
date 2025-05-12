@@ -111,11 +111,6 @@ if (filter_has_var(INPUT_GET, "mensaje")) {
             <h4 class="text-black m-0"><i class="fas fa-user-clock mr-2"></i>MODO INVITADO</h4>
         </div>
     <?php } ?>
-    <div id="loaderPagina" class="section_loader">
-        <div class="loader"></div>
-        <div class="loader_1"></div>
-        <div class="loader_2"></div>
-    </div>
     <!-- Navbar Start -->
     <div class="container-fluid p-0 nav-bar">
         <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
@@ -451,7 +446,91 @@ if (filter_has_var(INPUT_GET, "mensaje")) {
     <!-- Template Javascript -->
     <script src="../js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="../js/loader.js"></script>
+    <!-- Loader -->
+    <div class="loader-wrapper" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(27, 18, 15, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999;">
+        <div class="coffee-loader">
+            <div class="coffee-cup"></div>
+            <div class="coffee-steam">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <style>
+        .coffee-loader {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .coffee-cup {
+            position: absolute;
+            bottom: 0;
+            width: 100px;
+            height: 80px;
+            border: 6px solid #DA9F5B;
+            border-radius: 0 0 45px 45px;
+            background: transparent;
+        }
+
+        .coffee-cup::before {
+            content: '';
+            position: absolute;
+            right: -25px;
+            top: 15px;
+            width: 40px;
+            height: 30px;
+            border: 6px solid #DA9F5B;
+            border-radius: 40px 0;
+        }
+
+        .coffee-steam span {
+            position: absolute;
+            background: #DA9F5B;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .coffee-steam span:nth-child(1) {
+            animation: steam 2s infinite ease-in-out;
+            left: 20px;
+        }
+
+        .coffee-steam span:nth-child(2) {
+            animation: steam 2s infinite ease-in-out .4s;
+            left: 50px;
+        }
+
+        .coffee-steam span:nth-child(3) {
+            animation: steam 2s infinite ease-in-out .8s;
+            left: 80px;
+        }
+
+        @keyframes steam {
+            0% {
+                transform: translateY(80px) scale(0.1);
+                opacity: 0;
+            }
+
+            50% {
+                transform: translateY(40px) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(0px) scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+
+    <script>
+        $(window).on("load", function() {
+            $(".loader-wrapper").fadeOut("slow");
+        });
+    </script>
 </body>
 
 </html>
