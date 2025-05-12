@@ -112,7 +112,7 @@ $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los pro
             <?php foreach ($productos as $producto) { ?>
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <?php $imagenProducto = !empty($producto['imagen']) ? $producto['imagen'] : "../img/Productos/default.jpg"; 
+                        <?php $imagenProducto = !empty($producto['imagen']) ? $producto['imagen'] : "../img/Productos/default.jpg";
                         ?>
                         <img src="<?php echo $imagenProducto; ?>"
                             class="card-img-top" alt="<?php echo ($producto['nombre']); ?>">
@@ -129,11 +129,13 @@ $productosDetallados = Producto::listarProductosDetallados(); // Obtiene los pro
                             }
                             ?>
                             <p class="card-text"><?php echo ($descripcion); ?></p>
-                            <p class="card-text"><strong>Precio:
-                                    €<?php echo number_format($producto['precio_ud'], 2); ?></strong></p>
-                            <a href="detalleProducto.php?id=<?php echo $producto['id_producto']; ?>"
-                                class="btn btn-secondary">Ver
-                                Detalles</a>
+                            <?php if ($_SESSION['rol'] == "cliente") { ?>
+                                <p class="card-text"><strong>Precio:
+                                        €<?php echo number_format($producto['precio_ud'], 2); ?></strong></p>
+                                <a href="detalleProducto.php?id=<?php echo $producto['id_producto']; ?>"
+                                    class="btn btn-secondary">Ver
+                                    Detalles</a>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

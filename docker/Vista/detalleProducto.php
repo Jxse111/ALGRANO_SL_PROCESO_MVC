@@ -156,11 +156,13 @@ if (filter_has_var(INPUT_POST, 'comprar')) {
                                         <?php if ($_SESSION['rol'] == 'cliente' || $_SESSION['rol'] == 'administrador') { ?>
                                             <form action="" method="POST">
                                                 <input type="hidden" name="producto_id" value="<?php echo $productoId; ?>">
-                                                <div class="form-group">
-                                                    <input type="number" name="cantidad" class="form-control" min="1"
-                                                        max="<?php echo $productoDetalle['stock']; ?>" value="1" style="width: 100px;">
-                                                </div>
-                                                <button type="submit" name="comprar" class="btn btn-primary">Añadir al carrito</button>
+                                                <?php if ($productoDetalle['stock'] > 1) { ?>
+                                                    <div class="form-group">
+                                                        <input type="number" name="cantidad" class="form-control" min="1"
+                                                            max="<?php echo $productoDetalle['stock']; ?>" value="1" style="width: 100px;">
+                                                    </div>
+                                                    <button type="submit" name="comprar" class="btn btn-primary">Añadir al carrito</button>
+                                                <?php } ?>
                                             </form>
                                         <?php } ?>
                                     </div>

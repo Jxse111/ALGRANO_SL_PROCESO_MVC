@@ -72,14 +72,12 @@ if (isset($_POST['pagar'])) {
             $conexionBD->query("UPDATE productos_detalle SET stock = stock - " . $cantidadesPedido[$i] .
                 " WHERE id_producto_detalle = '" . $producto . "'");
         }
-
+        header("Location: ../Vista/index.php?success=El pedido se ha creado correctamente.");
         // Limpiar la sesión
         unset($_SESSION['cesta']);
         unset($_SESSION['total']);
         unset($_SESSION['subtotales']);
         unset($_SESSION['cantidad']);
-        header("Location: ../Vista/index.php?success=Pedido creado con éxito.");
-        exit();
     } else {
         header("Location: ../Vista/index.php?error=El pedido no se ha podido crear.");
     }
