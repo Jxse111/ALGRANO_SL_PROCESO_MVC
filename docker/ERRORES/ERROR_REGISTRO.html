@@ -77,42 +77,52 @@
     </style>
 </head>
 
-<body>
+<body class="bg-light">
     <!-- Navbar Start -->
     <div class="container-fluid p-0 nav-bar">
         <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
             <a href="index.html" class="navbar-brand px-lg-4 m-0">
-                <h1 class="m-0 display-4 text-uppercase text-white"><img src="../img/taza-de-cafe.png" alt="" height="80"
-                        width="80"> ALGRANO</h1>
+                <h1 class="m-0 display-4 text-uppercase text-white">
+                    <img src="../img/ALGRANO.png" alt="ALGRANO" height="80" width="80"> ALGRANO
+                </h1>
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto p-4">
-                    <a href="index.html" class="nav-item nav-link active">Inicio</a>
-                    <a href="sobreNosotros.html" class="nav-item nav-link">Sobre nosotros</a>
-                    <a href="servicios.html" class="nav-item nav-link">Servicios</a>
-                    <a href="menu.html" class="nav-item nav-link">Carta</a>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Páginas</a>
-                        <div class="dropdown-menu text-capitalize">
-                            <a href="reservas.html" class="dropdown-item">Reservas</a>
-                            <a href="comentarios.html" class="dropdown-item">Testimonio</a>
-                        </div>
-                    </div>
-                    <a href="contacto.html" class="nav-item nav-link">Contacto</a>
+                    <a href="../Vista/index.php" class="nav-item nav-link">Inicio</a>
+                    <a href="../Vista/sobreNosotros.php" class="nav-item nav-link">Sobre nosotros</a>
+                    <a href="../Vista/servicios.php" class="nav-item nav-link">Servicios</a>
+                    <a href="../Vista/menu.php" class="nav-item nav-link">Carta</a>
+                    <a href="../Vista/comentarios.php" class="nav-item nav-link">Testimonio</a>
+                    <a href="../Vista/contacto.php" class="nav-item nav-link">Contacto</a>
                 </div>
             </div>
         </nav>
     </div>
     <!-- Navbar End -->
-    <!-- Page Header Start -->
-    <div class="container-fluid page-header mb-5">
+
+    <!-- Error Message Section -->
+    <div class="container-fluid page-header mb-0">
+        <div class="container text-center py-5">
+            <i class="fas fa-exclamation-circle text-danger mb-4" style="font-size: 4rem;"></i>
+            <h2 class="text-white mb-4">NO SE HA PODIDO REGISTRAR AL USUARIO.</h2>
+            <p class="text-white mb-4">Por favor, vuelva a introducir los datos nuevamente.</p>
+            <a href="../Vista/registro.html" class="btn btn-primary">
+                <i class="fas fa-envelope mr-2"></i>Volver al formulario
+            </a>
+        </div>
     </div>
-    <!-- Page Header End -->
-    <h1 style="text-align-last: center; color: red;">NO SE HA PODIDO REGISTRAR AL USUARIO</h1>
-    <img src="" alt="ERROR_REGISTRO">
+
+    <!-- Error Image -->
+    <div class="container-fluid p-0">
+        <img src="../img/bg.jpg" alt="Error de conexión" class="img-fluid w-100">
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
