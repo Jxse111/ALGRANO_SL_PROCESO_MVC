@@ -3,10 +3,12 @@ require_once '../Modelo/Usuario.php';
 require_once '../Modelo/Producto.php';
 require_once '../Modelo/Pedido.php';
 session_start();
+//Verificamos si el usuario es cliente
 if ($_SESSION['rol'] != "cliente") {
     header("Location: ./index.php");
     exit();
 }
+//Recogemos el id del pedido
 $codigoPedido = filter_input(INPUT_GET, 'id');
 ?>
 <!DOCTYPE html>
@@ -31,16 +33,16 @@ $codigoPedido = filter_input(INPUT_GET, 'id');
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
+    <!-- Hoja de estilo de las librerias -->
     <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
-    <!-- Customized Bootstrap Stylesheet -->
+    <!--Hoja de estilos personalizada de Bootstrap -->
     <link href="../css/style.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Navbar Start -->
+    <!-- Barra de navegación -->
     <div class="container-fluid p-0 nav-bar">
         <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
             <a href="index.php" class="navbar-brand px-lg-4 m-0">
@@ -53,10 +55,10 @@ $codigoPedido = filter_input(INPUT_GET, 'id');
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
         </nav>
     </div>
-    <!-- Navbar End -->
+    <!-- Fin de la barra de navegación -->
 
 
-    <!-- Page Header Start -->
+    <!-- Cabecera de la web -->
     <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
         <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
             style="min-height: 400px">
@@ -68,15 +70,14 @@ $codigoPedido = filter_input(INPUT_GET, 'id');
             </div>
         </div>
     </div>
-    <!-- Page Header End -->
+    <!-- Fin de la cabecera -->
 
 
-    <!-- Area de Empleado Start -->
+    <!-- Area de Pedidos del cliente  -->
     <div>
-        <!-- Aquí puedes agregar el contenido de la página de administración -->
         <h2 class="text-center">Sección de información sobre pedidos realizados</h2>
         <?php
-        $pedidosDetallados = Pedido::obtenerPedidosDetalle($codigoPedido); // Obtiene los pedidos realizados por ese usuario  
+        $pedidosDetallados = Pedido::obtenerPedidosDetalle($codigoPedido); // Obtiene los pedidos realizados por ese cliente  
         ?>
         <div class="container mt-5">
             <div class="container mt-5">
@@ -111,10 +112,10 @@ $codigoPedido = filter_input(INPUT_GET, 'id');
             <hr>
             <br><br>
         </div>
-        <!-- Administration End -->
+        <!-- Fin de la pagina de pedidos del cliente -->
 
 
-        <!-- Footer Start -->
+        <!-- Footer -->
         <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
             <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
                 <div class="col-lg-3 col-md-6 mb-5">
@@ -170,14 +171,14 @@ $codigoPedido = filter_input(INPUT_GET, 'id');
                         Codex</a></p>
             </div>
         </div>
-        <!-- Footer End -->
+        <!-- Fin del Footer -->
 
 
-        <!-- Back to Top -->
+        <!-- Flecha de volver hacia la parte superior -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-        <!-- JavaScript Libraries -->
+        <!-- Librerias de Javascript -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
         <script src="../lib/easing/easing.min.js"></script>
@@ -187,97 +188,97 @@ $codigoPedido = filter_input(INPUT_GET, 'id');
         <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
         <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-        <!-- Contact Javascript File -->
+        <!-- Archivo de contacto de Javascript -->
         <script src="../mail/jqBootstrapValidation.min.js"></script>
         <script src="../mail/contact.js"></script>
 
-        <!-- Template Javascript -->
+        <!-- Plantilla de Javascript -->
         <script src="../js/main.js"></script>
-         <!-- Loader -->
-    <div class="loader-wrapper" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(27, 18, 15, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999;">
-        <div class="coffee-loader">
-            <div class="coffee-cup"></div>
-            <div class="coffee-steam">
-                <span></span>
-                <span></span>
-                <span></span>
+        <!-- Loader -->
+        <div class="loader-wrapper" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(27, 18, 15, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999;">
+            <div class="coffee-loader">
+                <div class="coffee-cup"></div>
+                <div class="coffee-steam">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
         </div>
-    </div>
-    <style>
-        .coffee-loader {
-            position: relative;
-            width: 120px;
-            height: 120px;
-        }
-
-        .coffee-cup {
-            position: absolute;
-            bottom: 0;
-            width: 100px;
-            height: 80px;
-            border: 6px solid #DA9F5B;
-            border-radius: 0 0 45px 45px;
-            background: transparent;
-        }
-
-        .coffee-cup::before {
-            content: '';
-            position: absolute;
-            right: -25px;
-            top: 15px;
-            width: 40px;
-            height: 30px;
-            border: 6px solid #DA9F5B;
-            border-radius: 40px 0;
-        }
-
-        .coffee-steam span {
-            position: absolute;
-            background: #DA9F5B;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        .coffee-steam span:nth-child(1) {
-            animation: steam 2s infinite ease-in-out;
-            left: 20px;
-        }
-
-        .coffee-steam span:nth-child(2) {
-            animation: steam 2s infinite ease-in-out .4s;
-            left: 50px;
-        }
-
-        .coffee-steam span:nth-child(3) {
-            animation: steam 2s infinite ease-in-out .8s;
-            left: 80px;
-        }
-
-        @keyframes steam {
-            0% {
-                transform: translateY(80px) scale(0.1);
-                opacity: 0;
+        <style>
+            .coffee-loader {
+                position: relative;
+                width: 120px;
+                height: 120px;
             }
 
-            50% {
-                transform: translateY(40px) scale(1);
-                opacity: 1;
+            .coffee-cup {
+                position: absolute;
+                bottom: 0;
+                width: 100px;
+                height: 80px;
+                border: 6px solid #DA9F5B;
+                border-radius: 0 0 45px 45px;
+                background: transparent;
             }
 
-            100% {
-                transform: translateY(0px) scale(1.5);
-                opacity: 0;
+            .coffee-cup::before {
+                content: '';
+                position: absolute;
+                right: -25px;
+                top: 15px;
+                width: 40px;
+                height: 30px;
+                border: 6px solid #DA9F5B;
+                border-radius: 40px 0;
             }
-        }
-    </style>
 
-    <script>
-        $(window).on("load", function() {
-            $(".loader-wrapper").fadeOut("slow");
-        });
-    </script>
+            .coffee-steam span {
+                position: absolute;
+                background: #DA9F5B;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+            }
+
+            .coffee-steam span:nth-child(1) {
+                animation: steam 2s infinite ease-in-out;
+                left: 20px;
+            }
+
+            .coffee-steam span:nth-child(2) {
+                animation: steam 2s infinite ease-in-out .4s;
+                left: 50px;
+            }
+
+            .coffee-steam span:nth-child(3) {
+                animation: steam 2s infinite ease-in-out .8s;
+                left: 80px;
+            }
+
+            @keyframes steam {
+                0% {
+                    transform: translateY(80px) scale(0.1);
+                    opacity: 0;
+                }
+
+                50% {
+                    transform: translateY(40px) scale(1);
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: translateY(0px) scale(1.5);
+                    opacity: 0;
+                }
+            }
+        </style>
+
+        <script>
+            $(window).on("load", function() {
+                $(".loader-wrapper").fadeOut("slow");
+            });
+        </script>
 </body>
 
 </html>

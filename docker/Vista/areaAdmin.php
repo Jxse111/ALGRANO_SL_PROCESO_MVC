@@ -26,16 +26,16 @@ if ($_SESSION['rol'] != "administrador") {
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
+    <!--Hoja de estilos de las librerias -->
     <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
-    <!-- Customized Bootstrap Stylesheet -->
+    <!-- Hoja de estilos personalizada para Bootstrap -->
     <link href="../css/style.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <!-- Navbar Start -->
+    <!-- Barra de navegación -->
     <div class="container-fluid p-0 nav-bar">
         <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
             <a href="index.php" class="navbar-brand px-lg-4 m-0">
@@ -48,10 +48,10 @@ if ($_SESSION['rol'] != "administrador") {
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
         </nav>
     </div>
-    <!-- Navbar End -->
+    <!-- Fin de la barra de navegación -->
 
 
-    <!-- Page Header Start -->
+    <!-- Cabecera -->
     <div class="container-fluid page-header mb-5 position-relative overlay-bottom">
         <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5"
             style="min-height: 400px">
@@ -63,12 +63,11 @@ if ($_SESSION['rol'] != "administrador") {
             </div>
         </div>
     </div>
-    <!-- Page Header End -->
+    <!-- Fin de la cabecera -->
 
 
-    <!-- Administration Start -->
+    <!-- AreaAdministrador -->
     <div>
-        <!-- Aquí puedes agregar el contenido de la página de administración -->
         <h2 class="text-center">Bienvenido a la sección de administración</h2>
         <?php
         require_once '../Modelo/Usuario.php';
@@ -198,10 +197,10 @@ if ($_SESSION['rol'] != "administrador") {
             </table>
         </div>
     </div>
-    <!-- Administration End -->
+    <!-- Fin de la AreaAdministrador -->
 
 
-    <!-- Footer Start -->
+    <!-- Footer -->
     <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
         <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
             <div class="col-lg-3 col-md-6 mb-5">
@@ -255,14 +254,14 @@ if ($_SESSION['rol'] != "administrador") {
                     Codex</a></p>
         </div>
     </div>
-    <!-- Footer End -->
+    <!-- Fin del Footer -->
 
 
-    <!-- Back to Top -->
+    <!-- Flecha de volver a la parte superior de la página -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
+    <!-- Librerias de JavaScript -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="../lib/easing/easing.min.js"></script>
@@ -272,13 +271,13 @@ if ($_SESSION['rol'] != "administrador") {
     <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-    <!-- Contact Javascript File -->
+    <!-- Archivo de contacto de Javascript-->
     <script src="../mail/jqBootstrapValidation.min.js"></script>
     <script src="../mail/contact.js"></script>
 
-    <!-- Template Javascript -->
+    <!-- Plantilla de Javascript -->
     <script src="../js/main.js"></script>
-     <!-- Loader -->
+    <!-- Loader -->
     <div class="loader-wrapper" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(27, 18, 15, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999;">
         <div class="coffee-loader">
             <div class="coffee-cup"></div>

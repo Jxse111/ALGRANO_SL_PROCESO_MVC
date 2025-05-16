@@ -11,10 +11,6 @@ if (empty($_SESSION['rol'])) {
 if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_SESSION['rol'] != "cliente") {
     $_SESSION['rol'] = 'invitado';
 }
-if (filter_has_var(INPUT_GET, "mensaje")) {
-    $mensajePagoExitoso = filter_input(INPUT_GET, "mensaje");
-    echo "<script>alert('$mensajePagoExitoso');</script>";
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,80 +34,24 @@ if (filter_has_var(INPUT_GET, "mensaje")) {
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
+    <!--  Hojas de estilos de Librerias -->
     <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
-    <!-- Customized Bootstrap Stylesheet -->
+    <!-- Hojas de estilos de Bootstrap -->
     <link href="../css/style.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/loader.css">
 </head>
 
 <body>
     <?php
-    //Si hay algun mensaje de exito o error a mostrar que se muestre en un modal
-    if (isset($_GET['success'])):
-    ?>
-        <div class="modal" id="messageModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Éxito</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p><?php echo htmlspecialchars($_GET['success']); ?></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script>
-            $(document).ready(function() {
-                $("#messageModal").modal("show");
-            });
-        </script>
-    <?php
-    elseif (isset($_GET['error'])):
-    ?>
-        <div class="modal" id="messageModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Error</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p><?php echo htmlspecialchars($_GET['error']); ?></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script>
-            $(document).ready(function() {
-                $("#messageModal").modal("show");
-            });
-        </script>
-    <?php
-    endif;
-    ?>
-    <?php
-    //Comprobar si el usuario es invitado y mostrar un mensaje
+    //Comprobamos si el usuario es invitado y mostrar un mensaje
     if ($_SESSION['rol'] == "invitado") { ?>
         <div style="background-color: #DA9F5B;" class="text-center py-2">
             <h4 class="text-black m-0"><i class="fas fa-user-clock mr-2"></i>MODO INVITADO</h4>
         </div>
     <?php } ?>
-    <!-- Navbar Start -->
+    <!-- Barra de navegación -->
     <div class="container-fluid p-0 nav-bar">
         <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
             <a href="index.php" class="navbar-brand px-lg-4 m-0">
@@ -163,7 +103,7 @@ if (filter_has_var(INPUT_GET, "mensaje")) {
             </div>
         </nav>
     </div>
-    <!-- Carousel Start -->
+    <!-- Comienzo del carrousel -->
     <div class="container-fluid p-0 mb-5">
         <div id="blog-carousel" class="carousel slide overlay-bottom" data-ride="carousel">
             <div class="carousel-inner">
@@ -172,15 +112,15 @@ if (filter_has_var(INPUT_GET, "mensaje")) {
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <h2 class="text-primary font-weight-medium m-0">Llevamos sirviendo</h2>
                         <h1 class="display-1 text-white m-0">CAFÉ</h1>
-                        <h2 class="text-white m-0">* DESDE 1950 *</h2>
+                        <h2 class="text-white m-0">* DESDE 2025 *</h2>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img class="w-100" src="../img/carousel-2.jpg" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <h2 class="text-primary font-weight-medium m-0">Llevamos sirviendo</h2>
+                        <h2 class="text-primary font-weight-medium m-0">Servimos</h2>
                         <h1 class="display-1 text-white m-0">CAFÉ</h1>
-                        <h2 class="text-white m-0">* DESDE 1950 *</h2>
+                        <h2 class="text-white m-0">* 100% ORGÁNICO *</h2>
                     </div>
                 </div>
             </div>
@@ -192,13 +132,13 @@ if (filter_has_var(INPUT_GET, "mensaje")) {
             </a>
         </div>
     </div>
-    <!-- Carousel End -->
-    <!-- About Start -->
+    <!-- Fin del carrousel -->
+    <!-- Sobre nosotros -->
     <div class="container-fluid py-5">
         <div class="container">
             <div class="section-title">
                 <h4 class="text-primary text-uppercase" style="letter-spacing: 5px;">Sobre nosotros</h4>
-                <h1 class="display-4">Llevamos sirviendo café desde 1950</h1>
+                <h1 class="display-4">Llevamos sirviendo café desde 2025</h1>
             </div>
             <div class="row">
                 <div class="col-lg-4 py-0 py-lg-5">
@@ -232,10 +172,10 @@ if (filter_has_var(INPUT_GET, "mensaje")) {
             </div>
         </div>
     </div>
-    <!-- About End -->
+    <!-- Fin del apartado Sobre nosotros -->
 
 
-    <!-- Service Start -->
+    <!-- Servicios -->
     <div class="container-fluid pt-5">
         <div class="container">
             <div class="section-title">
@@ -294,10 +234,10 @@ if (filter_has_var(INPUT_GET, "mensaje")) {
             </div>
         </div>
     </div>
-    <!-- Service End -->
+    <!-- Fin del apartado de Servicios -->
 
 
-    <!-- Offer Start -->
+    <!-- Oferta -->
     <div class="offer container-fluid my-5 py-5 text-center position-relative overlay-top overlay-bottom">
         <div class="container py-5">
             <h1 class="display-3 text-primary mt-3">25% de descuento</h1>
@@ -314,9 +254,9 @@ if (filter_has_var(INPUT_GET, "mensaje")) {
             </form>
         </div>
     </div>
-    <!-- Offer End -->
+    <!-- Fin de la oferta -->
 
-    <!-- Testimonial Start -->
+    <!-- Comentarios -->
     <div class="container-fluid py-5">
         <div class="container">
             <div class="section-title">
@@ -358,7 +298,7 @@ if (filter_has_var(INPUT_GET, "mensaje")) {
                     <div class="d-flex align-items-center mb-3">
                         <img class="img-fluid" src="../img/testimonial-4.jpg" alt="">
                         <div class="ml-3">
-                            <h4>Miguel</h4>
+                            <h4>Lorenzo</h4>
                             <i>Asesor financiero</i>
                         </div>
                     </div>
@@ -367,10 +307,10 @@ if (filter_has_var(INPUT_GET, "mensaje")) {
             </div>
         </div>
     </div>
-    <!-- Testimonial End -->
+    <!-- Fin del apartado de comentarios -->
 
 
-    <!-- Footer Start -->
+    <!-- Footer -->
     <div class="container-fluid footer text-white mt-5 pt-5 px-0 position-relative overlay-top">
         <div class="row mx-0 pt-5 px-sm-3 px-lg-5 mt-4">
             <div class="col-lg-3 col-md-6 mb-5">
@@ -422,14 +362,14 @@ if (filter_has_var(INPUT_GET, "mensaje")) {
                 Reserved.</a></p>
         </div>
     </div>
-    <!-- Footer End -->
+    <!-- Fin del Footer -->
 
 
-    <!-- Back to Top -->
+    <!-- Flecha de vuelta a la parte superior -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 
-    <!-- JavaScript Libraries -->
+    <!-- Librerias de Javascript -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="../lib/easing/easing.min.js"></script>
@@ -439,11 +379,11 @@ if (filter_has_var(INPUT_GET, "mensaje")) {
     <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
     <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
-    <!-- Contact Javascript File -->
+    <!-- Archivo de datos de contacto de Javascript -->
     <script src="../mail/jqBootstrapValidation.min.js"></script>
     <script src="../mail/contact.js"></script>
 
-    <!-- Template Javascript -->
+    <!-- Plantilla de Javascript -->
     <script src="../js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <!-- Loader -->

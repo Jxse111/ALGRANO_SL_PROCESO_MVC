@@ -93,7 +93,7 @@ $productos = Producto::listarProductos(); // Obtiene los productos
             </div>
         </form>
     </footer>
-     <!-- Loader -->
+    <!-- Loader -->
     <div class="loader-wrapper" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(27, 18, 15, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999;">
         <div class="coffee-loader">
             <div class="coffee-cup"></div>

@@ -43,15 +43,15 @@ if (filter_has_var(INPUT_POST, 'añadirProducto')) {
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
+    <!-- Hoja de estilos para las librerias -->
     <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
-    <!-- Customized Bootstrap Stylesheet -->
+    <!-- Hoja de estilos personalizada para Bootstrap -->
     <link href="../css/style.min.css" rel="stylesheet">
 
     <style>
-        /* Styles for header and form */
+        /* Estilos para el formulario */
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
@@ -101,7 +101,7 @@ if (filter_has_var(INPUT_POST, 'añadirProducto')) {
 </head>
 
 <body>
-    <!-- Navbar Start -->
+    <!-- Barra de navegación -->
     <div class="container-fluid p-0 nav-bar">
         <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
             <a href="index.php" class="navbar-brand px-lg-4 m-0">
@@ -112,15 +112,15 @@ if (filter_has_var(INPUT_POST, 'añadirProducto')) {
             </button>
         </nav>
     </div>
-    <!-- Navbar End -->
+    <!-- Fin de la barra de navegación -->
 
-    <!-- Page Header Start -->
+    <!-- Cabecera -->
     <div class="container-fluid page-header mb-5">
         <h1 class="display-4 mb-3 mt-0 text-white text-uppercase">FORMULARIO PARA AÑADIR PRODUCTOS</h1>
     </div>
-    <!-- Page Header End -->
+    <!-- Fin de la cabecera -->
 
-    <!-- Contact Start -->
+    <!-- Agregar productos nuevos -->
     <div class="contact-form">
         <div class="section-title">
             <h4 class="text-primary text-uppercase">PRODUCTO NUEVO</h4>
@@ -180,8 +180,8 @@ if (filter_has_var(INPUT_POST, 'añadirProducto')) {
                 de administración de productos</a>
         </form>
     </div>
-    <!-- Contact End -->
- <!-- Loader -->
+    <!-- Fin del formulario para agregar productos -->
+    <!-- Loader -->
     <div class="loader-wrapper" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(27, 18, 15, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999;">
         <div class="coffee-loader">
             <div class="coffee-cup"></div>

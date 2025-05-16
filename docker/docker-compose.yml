@@ -33,10 +33,10 @@ services:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
     environment:
-      PMA_HOST: mysql  # Conectar a MySQL a través del nombre del contenedor 'mysql'
+      PMA_HOST: mysql  # Conectamos a MySQL a través del nombre del contenedor 'mysql'
       MYSQL_ROOT_PASSWORD: root  # La misma contraseña para el usuario root de MySQL
     ports:
-      - "8081:80"  # Acceder a phpMyAdmin desde http://localhost:8081
+      - "8081:80"  # Accedemos a phpMyAdmin desde http://localhost:8081
     networks:
       - app-network
     depends_on:
