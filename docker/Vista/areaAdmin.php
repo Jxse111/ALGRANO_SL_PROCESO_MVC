@@ -145,7 +145,7 @@ if ($_SESSION['rol'] != "administrador") {
                             <td><?php echo $empleado['fec_nac'] ?></td>
                             <td><?php echo $empleado['id_rol_usuario'] ?></td>
                             <td>
-                            <button
+                                <button
                                     onclick="window.location.href='../Vista/editarUsuario.php?id=<?php echo $empleado['DNI']; ?>'"
                                     class="btn btn-primary btn-sm">Editar</button>
                             </td>
@@ -183,7 +183,7 @@ if ($_SESSION['rol'] != "administrador") {
                             <td><?php echo $cliente['fec_nac'] ?></td>
                             <td><?php echo $cliente['id_rol_usuario'] ?></td>
                             <td>
-                            <button
+                                <button
                                     onclick="window.location.href='../Vista/editarUsuario.php?id=<?php echo $cliente['DNI']; ?>'"
                                     class="btn btn-primary btn-sm">Editar</button>
                             </td>
@@ -226,10 +226,10 @@ if ($_SESSION['rol'] != "administrador") {
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Horario de apertura</h4>
                 <div>
-                    <h6 class="text-white text-uppercase">Lunes - Viernes</h6>
+                    <h6 class="text-white text-uppercase">Lunes - Sábado</h6>
+                    <p>10.00 AM - 20.00 PM</p>
+                    <h6 class="text-white text-uppercase">Domingo</h6>
                     <p>8.00 AM - 14.00 PM</p>
-                    <h6 class="text-white text-uppercase">Sábado - Domingo</h6>
-                    <p>15.00 PM - 19.00 PM</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-5">

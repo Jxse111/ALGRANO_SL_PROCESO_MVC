@@ -80,10 +80,10 @@ session_start();
                                 <a href="pedidos.php" class="dropdown-item" style="color: #DA9F5B" ;>Mis pedidos</a>
                                 <a href="../Controlador/cerrarSesion_proceso.php" class="dropdown-item"
                                     style="color: #DA9F5B;">Cerrar sesión</a>
-                            </div>
                         </div>
-                    <?php }
-                } ?>
+                    </div>
+            <?php }
+                        } ?>
             </div>
         </nav>
     </div>
@@ -182,10 +182,10 @@ session_start();
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Horario de apertura</h4>
                 <div>
-                    <h6 class="text-white text-uppercase">Lunes - Viernes</h6>
+                    <h6 class="text-white text-uppercase">Lunes - Sábado</h6>
+                    <p>10.00 AM - 20.00 PM</p>
+                    <h6 class="text-white text-uppercase">Domingo</h6>
                     <p>8.00 AM - 14.00 PM</p>
-                    <h6 class="text-white text-uppercase">Sábado - Domingo</h6>
-                    <p>15.00 PM - 19.00 PM</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-5">

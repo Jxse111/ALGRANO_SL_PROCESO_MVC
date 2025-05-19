@@ -90,12 +90,12 @@ $usuarioSesion = Usuario::buscarUsuarioPorNombre($_SESSION['usuario']);
                             <div class="form-group">
                                 <label for="direccion" class="h5">Dirección</label>
                                 <input type="direccion" class="form-control form-control-lg" id="direccion"
-                                    placeholder="Dirección" value="<?php echo $usuario['direccion']?>" readonly>
+                                    placeholder="Dirección" value="<?php echo $usuario['direccion'] ?>" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="fec_nac" class="h5">Fecha de nacimiento</label>
                                 <input type="fec_nac" class="form-control form-control-lg" id="fec_nac"
-                                    placeholder="Fecha de nacimiento" value="<?php echo $usuario['fec_nac']?>" readonly>
+                                    placeholder="Fecha de nacimiento" value="<?php echo $usuario['fec_nac'] ?>" readonly>
                             </div>
                             <div class="form-group text-center mt-5">
                                 <button onclick="window.location.href='../Controlador/cerrarSesion_proceso.php'"
@@ -135,10 +135,10 @@ $usuarioSesion = Usuario::buscarUsuarioPorNombre($_SESSION['usuario']);
             <div class="col-lg-3 col-md-6 mb-5">
                 <h4 class="text-white text-uppercase mb-4" style="letter-spacing: 3px;">Horario de apertura</h4>
                 <div>
-                    <h6 class="text-white text-uppercase">Lunes - Viernes</h6>
-                    <p>08:00 - 18:00 </p>
-                    <h6 class="text-white text-uppercase">Sábado - Domingo</h6>
-                    <p>08:00 - 14:00 </p>
+                    <h6 class="text-white text-uppercase">Lunes - Sábado</h6>
+                    <p>10.00 AM - 20.00 PM</p>
+                    <h6 class="text-white text-uppercase">Domingo</h6>
+                    <p>8.00 AM - 14.00 PM</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-5">
