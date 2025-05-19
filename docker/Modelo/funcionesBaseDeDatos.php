@@ -1,6 +1,12 @@
 <?php
 require_once 'patrones.php';
 
+/**
+ * Método que cierra la conexión con la base de datos mediante PDO
+ * @param string $codigo codigo del cliente a comprobar
+ * @param object $conexionBD Objeto de conexión a la base de datos
+ * @return boolean Devuelve el objeto con la conexión cerrada
+ */
 function noExisteCodigoCliente($codigo, $conexionBD)
 {
     $codigoNoExiste = false;
@@ -13,7 +19,12 @@ function noExisteCodigoCliente($codigo, $conexionBD)
     }
     return $codigoNoExiste ? true : false;
 }
-
+/**
+ * Método que verifica que no existe un usuario en la base de datos
+ * @param string $dni DNI del usuario
+ * @param object $conexionBD Objeto de conexión a la base de datos
+ * @return boolean Devuelve true si el usuario no existe, false si existe
+ */
 function noExisteUsuario($dni, $conexionBD)
 {
     $usuarioNoExiste = false;
@@ -27,7 +38,12 @@ function noExisteUsuario($dni, $conexionBD)
     }
     return $usuarioNoExiste ? true : false;
 }
-
+/**
+ * Metodo que verifica si no existe una contraseña en la base de datos
+ * @param string $contraseña Contraseña del usuario
+ * @param object $conexionBD Objeto de conexión a la base de datos
+ * @return boolean Devuelve true si la contraseña no existe, false si existe
+ */
 function noExisteContraseña($contraseña, $conexionBD)
 {
     $contraseñaNoExiste = false;
@@ -40,7 +56,12 @@ function noExisteContraseña($contraseña, $conexionBD)
     }
     return $contraseñaNoExiste ? true : false;
 }
-
+/**
+ * Método que verifica que no existe un correo en la base de datos
+ * @param mixed $correo correo del usuario
+ * @param mixed $conexionBD Objeto de conexión a la base de datos
+ * @return bool Devuelve true si el correo no existe, false si existe
+ */
 function noExisteCorreo($correo, $conexionBD)
 {
     $correoNoExiste = false;
@@ -53,7 +74,12 @@ function noExisteCorreo($correo, $conexionBD)
     }
     return $correoNoExiste ? true : false;
 }
-
+/**
+ * Método que verifica que no existe una dirección en la base de datos
+ * @param mixed $direccion direccion del usuario
+ * @param mixed $conexionBD Objeto de conexión a la base de datos
+ * @return bool Devuelve true si la dirección no existe, false si existe
+ */
 function noExisteDireccion($direccion, $conexionBD)
 {
     $direccionNoExiste = false;
@@ -66,7 +92,12 @@ function noExisteDireccion($direccion, $conexionBD)
     }
     return $direccionNoExiste ? true : false;
 }
-
+/**
+ * Método que verifica que no existe una fecha de nacimiento en la base de datos
+ * @param mixed $fecha fecha de nacimiento del usuario
+ * @param mixed $conexionBD Objeto de conexión a la base de datos
+ * @return bool Devuelve true si la fecha no existe, false si existe
+ */
 function noExisteFechaNacimiento($fecha, $conexionBD)
 {
     $fechaNoExiste = false;
@@ -79,7 +110,12 @@ function noExisteFechaNacimiento($fecha, $conexionBD)
     }
     return $fechaNoExiste ? true : false;
 }
-
+/**
+ * Método que verifica si existe un usuario en la base de datos
+ * @param string $usuario Nombre de usuario
+ * @param object $conexionBD Objeto de conexión a la base de datos
+ * @return boolean Devuelve true si el usuario existe, false si no existe
+ */
 function existeUsuario($usuario, $conexionBD)
 {
     $usuarioNoExiste = false;
@@ -92,7 +128,12 @@ function existeUsuario($usuario, $conexionBD)
     }
     return $usuarioNoExiste ? true : false;
 }
-
+/**
+ * Método que verifica si existe un DNI en la base de datos
+ * @param string $dni DNI del usuario a verificar
+ * @param object $conexionBD Objeto de conexión a la base de datos
+ * @return bool Devuelve true si el DNI existe, false si no existe
+ */
 function existeDni($dni, $conexionBD)
 {
     $usuarioNoExiste = false;
@@ -105,7 +146,12 @@ function existeDni($dni, $conexionBD)
     }
     return $usuarioNoExiste ? true : false;
 }
-
+/**
+ * Método que verifica si existe una contraseña en la base de datos
+ * @param string $contraseña Contraseña del usuario
+ * @param object $conexionBD Objeto de conexión a la base de datos
+ * @return bool Devuelve true si la contraseña existe, false si no existe
+ */
 function existeContraseña($contraseña, $conexionBD)
 {
     $contraseñaNoExiste = false;
@@ -118,7 +164,12 @@ function existeContraseña($contraseña, $conexionBD)
     }
     return $contraseñaNoExiste ? true : false;
 }
-
+/**
+ * Método que verifica que no existe un producto en la base de datos
+ * @param mixed $idProducto ID del producto
+ * @param mixed $conexionBD Objeto de conexión a la base de datos
+ * @return bool Devuelve true si el producto no existe, false si existe
+ */
 function noExisteProducto($idProducto, $conexionBD)
 {
     $productoNoExiste = false;
@@ -131,7 +182,12 @@ function noExisteProducto($idProducto, $conexionBD)
     }
     return $productoNoExiste ? true : false;
 }
-
+/**
+ * Método que verifica que existe un producto en la base de datos
+ * @param mixed $idProducto ID del producto
+ * @param mixed $conexionBD Objeto de conexión a la base de datos
+ * @return bool Devuelve true si el producto existe, false si no existe
+ */
 function existeProducto($idProducto, $conexionBD)
 {
     $productoExiste = false;
@@ -144,7 +200,12 @@ function existeProducto($idProducto, $conexionBD)
     }
     return $productoExiste ? true : false;
 }
-
+/**
+ * Método que verifica que existe un pedido en la base de datos
+ * @param mixed $codigoPedido Código del pedido
+ * @param mixed $conexionBD Objeto de conexión a la base de datos
+ * @return bool Devuelve true si el pedido existe, false si no existe
+ */
 function existePedido($codigoPedido, $conexionBD)
 {
     $pedidoExiste = false;
@@ -157,7 +218,12 @@ function existePedido($codigoPedido, $conexionBD)
     }
     return $pedidoExiste ? true : false;
 }
-
+/**
+ * Método que verifica que existe un producto detalle en la base de datos
+ * @param mixed $idProducto ID del producto detalle
+ * @param mixed $conexionBD Objeto de conexión a la base de datos
+ * @return bool Devuelve true si el producto detalle existe, false si no existe
+ */
 function existeProductoDetalle($idProducto, $conexionBD)
 {
     $productoExiste = false;

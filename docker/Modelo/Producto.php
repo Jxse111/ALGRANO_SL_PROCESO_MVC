@@ -1,8 +1,14 @@
 <?php
 require_once 'Algrano.php';
 require_once 'funcionesBaseDeDatos.php';
+/**
+ * Clase que implementa un objeto de tipo Producto para el acceso a la web.
+ *
+ * @author José Martínez Estrada
+ */
 class Producto
 {
+    // Atributos
     private $idProducto;
     private $nombre;
     private $tipo;
@@ -13,6 +19,7 @@ class Producto
     private $precioUnitario;
 
     private $imagen;
+    // Constructor
     public function __construct($idProducto, $nombre, $descripcion, $fechaCreacion, $origen, $precioUnitario,$imagen ,$stock = 1, $tipo = "Grano")
     {
         $this->idProducto = $idProducto;
@@ -26,6 +33,7 @@ class Producto
         $this->imagen = $imagen;
     }
 
+    // Getters y Setters
     public function getIdProducto()
     {
         return $this->idProducto;
@@ -100,8 +108,11 @@ class Producto
         $this->precioUnitario = $precioUnitario;
     }
 
-    //Métodos de la estáticos
-    //Método que elimina el usuario existente de la base de datos
+    /**
+     * Método que elimina un producto de la base de datos.
+     * @param mixed $idProducto ID del producto a eliminar
+     * @return bool Devuelve true si se eliminó el producto, false si no se eliminó
+     */
     public static function eliminarProducto($idProducto)
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -116,6 +127,11 @@ class Producto
         return $esValido ? true : false;
     }
 
+    /**
+     * Método que elimina un producto detallado de la base de datos.
+     * @param mixed $idProducto ID del producto a eliminar
+     * @return bool Devuelve true si se eliminó el producto, false si no se eliminó
+     */
     public static function eliminarProductoDetallado($idProducto)
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -131,7 +147,11 @@ class Producto
     }
 
 
-    //Método de búsqueda de usuario, devuelve los datos del usuario encontrado en formato de array.
+    /**
+     * Método que busca un producto en la base de datos.
+     * @param mixed $idProducto ID del producto a buscar
+     * @return array|bool Devuelve un array con los datos del producto si se encontró, false si no se encontró
+     */
     public static function buscarProducto($idProducto)
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -147,6 +167,11 @@ class Producto
         return $esValido ? $datosProducto : false;
     }
 
+    /**
+     * Método que busca un producto detallado en la base de datos.
+     * @param mixed $idProducto ID del producto a buscar
+     * @return array|bool Devuelve un array con los datos del producto si se encontró, false si no se encontró
+     */
     public static function buscarProductoDetallado($idProducto)
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -162,7 +187,10 @@ class Producto
         return $esValido ? $datosProducto : false;
     }
 
-    //Método que devuelve todos los productos de la base de datos en formato de array.
+    /**
+     * Método que obtiene todos los productos de la base de datos.
+     * @return array Devuelve un array con todos los productos
+     */
     public static function listarProductos()
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -175,6 +203,10 @@ class Producto
         return $productos;
     }
 
+    /**
+     * Método que obtiene todos los productos detallados de la base de datos.
+     * @return array Devuelve un array con todos los productos detallados
+     */
     public static function listarProductosDetallados()
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -186,7 +218,11 @@ class Producto
 
         return $productos;
     }
-    //Método que guarda un Usuario, lo inserta o lo actualiza.
+
+    /**
+     * Método que crea o actualiza un producto en la base de datos.
+     * @return bool Devuelve true si se creó el producto, false si no se creó
+     */
     public function crearProducto()
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();

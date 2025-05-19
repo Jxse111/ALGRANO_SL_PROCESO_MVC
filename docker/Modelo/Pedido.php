@@ -1,7 +1,13 @@
 <?php
 require_once 'funcionesBaseDeDatos.php';
+/**
+ * Clase que implementa un objeto de tipo Pedido para el acceso a la web.
+ *
+ * @author José Martínez Estrada
+ */
 class Pedido
 {
+    // Atributos
     private $codigo;
     private $dniCliente;
     private $idProducto;
@@ -13,6 +19,7 @@ class Pedido
     private $subtotal;
     private $cantidad;
 
+    // Constructor
     public function __construct($codigo, $dniCliente, $idProducto, $tipo, $precioTotal, $fechaPedido, $estado, $codigoDetalle, $subtotal, $cantidad)
     {
         $this->codigo = $codigo;
@@ -97,6 +104,12 @@ class Pedido
         $this->cantidad = $cantidad;
     }
 
+    // Métodos
+    /**
+     * Método que obtiene los pedidos de un cliente
+     * @param mixed $dniCliente DNI del cliente
+     * @return array Devuelve un array con los pedidos del cliente
+     */
     public static function obtenerPedidosCliente($dniCliente)
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -109,6 +122,11 @@ class Pedido
         return $pedidos;
     }
 
+    /**
+     * Método que obtiene los pedidos por su código
+     * @param mixed $codigoPedido Código del pedido
+     * @return array Devuelve un array con los pedidos
+     */
     public static function obtenerPedidosPorCodigo($codigoPedido)
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -121,7 +139,11 @@ class Pedido
         return $pedidos;
     }
 
-
+    /**
+     * Método que obtiene los detalles de un pedido por su código
+     * @param mixed $codigoPedido Código del pedido
+     * @return array Devuelve un array con los detalles del pedido
+     */
     public static function obtenerPedidosDetalle($codigoPedido)
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -133,7 +155,10 @@ class Pedido
         }
         return $pedidos;
     }
-
+    /**
+     * Método que obtiene todos los pedidos
+     * @return array Devuelve un array con todos los pedidos
+     */
     public static function listarPedidos()
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -145,7 +170,10 @@ class Pedido
 
         return $pedidos;
     }
-
+    /**
+     * Método que obtiene todos los detalles de los pedidos
+     * @return array Devuelve un array con todos los detalles de los pedidos
+     */
     public static function listarPedidosDetalle()
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -158,6 +186,10 @@ class Pedido
         return $pedidos;
     }
 
+    /**
+     * Método que crea un pedido
+     * @return bool Devuelve true si se ha creado el pedido, false si no se ha creado
+     */
     public function crearPedido()
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -191,7 +223,11 @@ class Pedido
         }
         return $esValido ? true : false;
     }
-
+    /**
+     * Método que elimina un pedido
+     * @param mixed $codigoPedido Código del pedido
+     * @return bool Devuelve true si se ha eliminado el pedido, false si no se ha eliminado
+     */
     public static function eliminarPedido($codigoPedido)
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -205,7 +241,11 @@ class Pedido
         }
         return $esValido ? true : false;
     }
-
+    /**
+     * Método que elimina un pedido detallado
+     * @param mixed $codigoPedido Código del pedido
+     * @return bool Devuelve true si se ha eliminado el pedido, false si no se ha eliminado
+     */
     public static function eliminarPedidoDetallado($codigoPedido)
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();

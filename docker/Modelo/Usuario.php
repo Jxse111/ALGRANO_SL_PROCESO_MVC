@@ -8,6 +8,7 @@ require_once('funcionesBaseDeDatos.php');
  */
 class Usuario
 {
+    // Atributos
     private $dni;
     private $nombre;
     private $contrasena;
@@ -63,8 +64,12 @@ class Usuario
         return $this->fechaNacimiento;
     }
 
-    //Métodos de la estáticos
-    //Método que elimina el usuario existente de la base de datos
+
+    /**
+     * Método que elimina un usuario de la base de datos.
+     * @param mixed $dniUsuario DNI del usuario a eliminar
+     * @return bool Devuelve true si el usuario fue eliminado, false si no fue eliminado
+     */
     public static function eliminarUsuario($dniUsuario)
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -84,7 +89,11 @@ class Usuario
         return $esValido ? true : false;
     }
 
-    //Método de búsqueda de usuario, devuelve los datos del usuario encontrado en formato de array.
+    /**
+     * Método que busca un usuario en la base de datos por su DNI.
+     * @param mixed $dniUsuario DNI del usuario a buscar
+     * @return array|bool Devuelve un array con los datos del usuario si existe, false si no existe
+     */
     public static function buscarUsuario($dniUsuario)
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -100,6 +109,11 @@ class Usuario
         return $esValido ? $datosUsuario : false;
     }
 
+    /**
+     * Método que busca un usuario en la base de datos por su nombre.
+     * @param mixed $nombreUsuario Nombre del usuario a buscar
+     * @return array|bool Devuelve un array con los datos del usuario si existe, false si no existe
+     */
     public static function buscarUsuarioPorNombre($nombreUsuario)
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -115,7 +129,10 @@ class Usuario
         return $esValido ? $datosUsuario : false;
     }
 
-    //Método que lista todos los usuarios de la base de datos
+    /**
+     * Método que busca un usuario en la base de datos por su correo.
+     * @return array Devuelve un array con los datos del usuario si existe.
+     */
     public static function listarUsuarios()
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
@@ -131,7 +148,10 @@ class Usuario
 
 
 
-    //Método que guarda un Usuario, lo inserta o lo actualiza.
+    /**
+     * Método que guarda un usuario en la base de datos.
+     * @return bool Devuelve true si el usuario fue guardado, false si no fue guardado
+     */
     public function guardarUsuario()
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
