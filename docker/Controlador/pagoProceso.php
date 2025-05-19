@@ -20,7 +20,7 @@ $dniCliente = $datosCliente[0]['DNI'];
 $conexionBD = Algrano::conectarAlgranoMySQLi();
 
 if (isset($_POST['pagar'])) {
-    // Obtener último código de pedido
+    // Obtenemos el último código de pedido
     $ultimoPedido = $conexionBD->query("SELECT codigo_pedido FROM pedido ORDER BY codigo_pedido DESC LIMIT 1");
     $row = $ultimoPedido->fetch_assoc();
     $numeroPedido = empty($row) ? 1 : intval(substr($row['codigo_pedido'], 3)) + 1;
@@ -30,20 +30,20 @@ if (isset($_POST['pagar'])) {
     $fechaPedido = date('Y-m-d H:i:s');
     $estadoPedido = "Pagado";
 
-    // Insertar el pedido principal
+    // Insertamos el pedido principal
     $pedido = new Pedido($codigoPedido, $dniCliente, null, null, $precioTotalPedido, $fechaPedido, $estadoPedido, null, null, null);
 
     if ($pedido->crearPedido()) {
-        // Procesar cada producto en la cesta
+        // Procesamos cada producto en la cesta
         foreach ($productosCesta as $i => $producto) {
-            // Obtener último código de detalle
+            // Obtenemos último código de detalle
             $ultimoDetalle = $conexionBD->query("SELECT codigo_detalle FROM pedidos_detalle ORDER BY codigo_detalle DESC LIMIT 1");
             $rowDetalle = $ultimoDetalle->fetch_assoc();
             $numeroDetalle = empty($rowDetalle) ? 1 : intval(substr($rowDetalle['codigo_detalle'], 3)) + 1;
             $codigoDetalle = 'DET' . str_pad($numeroDetalle, 3, '0', STR_PAD_LEFT);
 
             $datosProducto = Producto::buscarProductoDetallado($producto);
-            // Crear detalle del pedido
+            // Creamos el detalle del pedido
             $pedido = new Pedido(
                 $codigoPedido,
                 $dniCliente,
@@ -58,7 +58,7 @@ if (isset($_POST['pagar'])) {
             );
 
             $pedido->crearPedido();
-            // Obtener el último número de detalle
+            // Obtenemos el último número de detalle
             $ultimoDetalle = $conexionBD->query("SELECT codigo_detalle FROM pedidos_detalle ORDER BY codigo_detalle DESC LIMIT 1");
             $rowDetalle = $ultimoDetalle->fetch_assoc();
             $numeroDetalle = empty($rowDetalle) ? 1 : intval(substr($rowDetalle['codigo_detalle'], 3)) + 1;
@@ -68,12 +68,12 @@ if (isset($_POST['pagar'])) {
                 VALUES ('$codigoDetalle', '$producto', $cantidadesPedido[$i], '{$datosProducto[0]['tipo']}', $subtotalesPedido[$i],'$codigoPedido')";
             $conexionBD->query($consultaInsercionDetallesPedido);
 
-            // Actualizar stock del producto
+            // Actualizamos el stock del producto
             $conexionBD->query("UPDATE productos_detalle SET stock = stock - " . $cantidadesPedido[$i] .
                 " WHERE id_producto_detalle = '" . $producto . "'");
         }
         header("Location: ../Vista/index.php?success=El pedido se ha creado correctamente.");
-        // Limpiar la sesión
+        // Limpiamos la sesión para que no queden datos de la cesta
         unset($_SESSION['cesta']);
         unset($_SESSION['total']);
         unset($_SESSION['subtotales']);

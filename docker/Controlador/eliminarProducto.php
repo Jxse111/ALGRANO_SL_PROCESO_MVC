@@ -1,15 +1,17 @@
 <?php
+require_once '../Modelo/funcionesBaseDeDatos.php';
+require_once '../Modelo/Algrano.php';
+require_once '../Modelo/Producto.php';
 session_start();
+// Si el usuario no es empleado, lo redirigimos a la página de inicio
 if ($_SESSION['rol'] != "empleado") {
     header("location: ../Vista/index.php");
 }
+// Comprobamos si se ha pasado el id del producto a eliminar
 if (filter_has_var(INPUT_GET, "id")) {
-    require_once '../Modelo/funcionesBaseDeDatos.php';
-    require_once '../Modelo/Algrano.php';
-    require_once '../Modelo/Producto.php';
     $conexionBD = Algrano::conectarAlgranoMySQLi();
     $codigoProducto = filter_input(INPUT_GET, 'id');
-    //echo $dniUsuario;
+    //Si el producto se ha podido eliminar, se eliminan los detalles del producto
     if (Producto::eliminarProducto($codigoProducto) && Producto::eliminarProductoDetallado($codigoProducto)) {
         header("location: ../Vista/areaEmpleado.php?success=Producto eliminado con éxito.");
         exit;
