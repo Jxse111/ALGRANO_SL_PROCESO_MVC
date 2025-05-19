@@ -45,10 +45,10 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
         <div style="background-color: #DA9F5B;" class="text-center py-2">
             <h4 class="text-black m-0"><i class="fas fa-user-clock mr-2"></i>MODO INVITADO</h4>
         </div>
-    <?php }else{?>
-                <div style="background-color: #DA9F5B;" class="text-center py-2">
-            <h4 class="text-black m-0"><i class="fas fa-coffee mr-2"></i>Bienvenido <?php echo $_SESSION['usuario']?></h4>
-                </div>
+    <?php } else { ?>
+        <div style="background-color: #DA9F5B;" class="text-center py-2">
+            <h4 class="text-black m-0"><i class="fas fa-coffee mr-2"></i>Bienvenido <?php echo $_SESSION['usuario'] ?></h4>
+        </div>
     <?php } ?>
     <!-- Barra de navegación -->
     <div class="container-fluid p-0 nav-bar">
@@ -359,6 +359,8 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
             style="border-color: rgba(256, 256, 256, .1) !important;">
             <p class="mb-2 text-white">Copyright &copy; <a class="font-weight-bold" href="#">Domain</a>. All Rights
                 Reserved.</a></p>
+            <p class="m-0 text-white">Designed by <a class="font-weight-bold"
+                    href="https://github.com/Jxse111">Jxse111</a></p>
         </div>
     </div>
     <!-- Fin del Footer -->

@@ -1,0 +1,9 @@
+{"logtail":{"client_time":"2025-05-19T10:32:06.464288743Z","proc_id":616702946,"proc_seq":70},"text":"tailscaled got signal terminated; shutting down\n"}
+{"logtail":{"client_time":"2025-05-19T10:32:06.4644957Z","proc_id":616702946,"proc_seq":71},"text":"control: client.Shutdown ...\n"}
+{"logtail":{"client_time":"2025-05-19T10:32:06.464565154Z","proc_id":616702946,"proc_seq":72},"text":"auditlog: stopped for profileID: \n"}
+{"logtail":{"client_time":"2025-05-19T10:32:06.464585391Z","proc_id":616702946,"proc_seq":73},"v":1,"text":"control: authRoutine: context done.\n"}
+{"logtail":{"client_time":"2025-05-19T10:32:06.464640682Z","proc_id":616702946,"proc_seq":74},"text":"control: authRoutine: exiting\n"}
+{"logtail":{"client_time":"2025-05-19T10:32:06.464655444Z","proc_id":616702946,"proc_seq":75},"text":"control: updateRoutine: exiting\n"}
+{"logtail":{"client_time":"2025-05-19T10:32:06.46468521Z","proc_id":616702946,"proc_seq":76},"v":1,"text":"control: mapRoutine: context done.\n"}
+{"logtail":{"client_time":"2025-05-19T10:32:06.464697428Z","proc_id":616702946,"proc_seq":77},"text":"control: mapRoutine: exiting\n"}
+{"logtail":{"client_time":"2025-05-19T10:32:06.464728011Z","proc_id":616702946,"proc_seq":78},"text":"control: Client.Shutdown done.\n"}

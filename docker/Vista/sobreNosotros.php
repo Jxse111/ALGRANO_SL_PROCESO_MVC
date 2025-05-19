@@ -16,7 +16,7 @@ session_start();
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -32,34 +32,34 @@ session_start();
 <body>
     <!-- Barra de navegación -->
     <div class="container-fluid p-0 nav-bar">
-    <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
-        <a href="index.php" class="navbar-brand px-lg-4 m-0">
-            <h1 class="m-0 display-4 text-uppercase text-white"><img src="../img/ALGRANO.png" alt="" height="80"
-                    width="80"></h1>
-        </a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-            <div class="navbar-nav ml-auto p-4">
-                <a href="index.php" class="nav-item nav-link active">Inicio</a>
-                <a href="servicios.php" class="nav-item nav-link">Servicios</a>
-                <a href="menu.php" class="nav-item nav-link">Cátalogo</a>
-                <a href="comentarios.php" class="nav-item nav-link">Testimonio</a>
-                <a href="contacto.php" class="nav-item nav-link">Contacto</a>
-            </div>
-            <?php if ($_SESSION['rol'] == "invitado") { ?>
-                <a href="login.html" class="nav-item nav-link btn btn-primary font-weight-bold">Iniciar Sesión</a>
-                <a href="registro.html" class="nav-item nav-link btn btn-secondary font-weight-bold">Regístrate</a>
-            <?php } ?>
-            <?php if ($_SESSION['rol'] == "cliente") { ?>
+        <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
+            <a href="index.php" class="navbar-brand px-lg-4 m-0">
+                <h1 class="m-0 display-4 text-uppercase text-white"><img src="../img/ALGRANO.png" alt="" height="80"
+                        width="80"></h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto p-4">
+                    <a href="index.php" class="nav-item nav-link active">Inicio</a>
+                    <a href="servicios.php" class="nav-item nav-link">Servicios</a>
+                    <a href="menu.php" class="nav-item nav-link">Cátalogo</a>
+                    <a href="comentarios.php" class="nav-item nav-link">Testimonio</a>
+                    <a href="contacto.php" class="nav-item nav-link">Contacto</a>
+                </div>
+                <?php if ($_SESSION['rol'] == "invitado") { ?>
+                    <a href="login.html" class="nav-item nav-link btn btn-primary font-weight-bold">Iniciar Sesión</a>
+                    <a href="registro.html" class="nav-item nav-link btn btn-secondary font-weight-bold">Regístrate</a>
+                <?php } ?>
+                <?php if ($_SESSION['rol'] == "cliente") { ?>
                     <a href="carrito.php" class="nav-item nav-link">
                         <i class="fas fa-shopping-cart" style="color: #DA9F5B; font-size: 24px;"></i>
                     </a>
                 <?php }
                 ?>
-            <?php if ($_SESSION['rol'] == "administrador" || $_SESSION['rol'] == "empleado" || $_SESSION['rol'] == "cliente"): ?>
-                <div class="nav-item dropdown">
+                <?php if ($_SESSION['rol'] == "administrador" || $_SESSION['rol'] == "empleado" || $_SESSION['rol'] == "cliente"): ?>
+                    <div class="nav-item dropdown">
                         <img src="../img/profilePic.png" class="nav-link dropdown-toggle" data-toggle="dropdown"
                             alt="Mi Cuenta" style="width: 100px; height: 80px; border-radius: 50%; margin-right: 20px;">
                         <div class="dropdown-menu text-capitalize" style="background-color: rgba(27, 18, 15, 0.8); backdrop-filter: blur(8px); border-radius: 10px; left: -30px;">
@@ -186,9 +186,10 @@ session_start();
             style="border-color: rgba(256, 256, 256, .1) !important;">
             <p class="mb-2 text-white">Copyright &copy; <a class="font-weight-bold" href="#">Domain</a>. All Rights
                 Reserved.</a></p>
-            <p class="m-0 text-white">Designed by <a class="font-weight-bold" href="https://htmlcodex.com">HTML
-                    Codex</a></p>
+            <p class="m-0 text-white">Designed by <a class="font-weight-bold"
+                    href="https://github.com/Jxse111">Jxse111</a></p>
         </div>
+    </div>
     </div>
     <!-- Fin del Footer -->
 
