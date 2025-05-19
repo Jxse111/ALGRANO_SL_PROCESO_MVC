@@ -36,6 +36,20 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
     <!-- Hojas de estilos de Bootstrap -->
     <link href="../css/style.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/loader.css">
+    <style>
+        .carousel-item {
+            transition: transform 1.2s ease-in-out;
+        }
+
+        .carousel-fade .carousel-item {
+            opacity: 0;
+            transition: opacity .5s ease-in-out;
+        }
+
+        .carousel-fade .carousel-item.active {
+            opacity: 1;
+        }
+    </style>
 </head>
 
 <body>
@@ -104,7 +118,7 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
     </div>
     <!-- Comienzo del carrousel -->
     <div class="container-fluid p-0 mb-5">
-        <div id="blog-carousel" class="carousel slide overlay-bottom" data-ride="carousel">
+        <div id="blog-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img class="w-100" src="../img/carousel-1.jpg" alt="Image">
@@ -123,12 +137,18 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
                     </div>
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#blog-carousel" data-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
+            <a class="carousel-control-prev" href="#blog-carousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#blog-carousel" data-slide="next">
-                <span class="carousel-control-next-icon"></span>
+            <a class="carousel-control-next" href="#blog-carousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
             </a>
+            <ol class="carousel-indicators">
+                <li data-target="#blog-carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#blog-carousel" data-slide-to="1"></li>
+            </ol>
         </div>
     </div>
     <!-- Fin del carrousel -->
