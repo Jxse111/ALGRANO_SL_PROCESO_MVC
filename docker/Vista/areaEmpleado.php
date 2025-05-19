@@ -167,40 +167,33 @@ $pedidosDetallados = Pedido::listarPedidosDetalle(); // Obtiene los pedidos deta
                 <tr>
                     <th>Código</th>
                     <th>Fecha</th>
-                    <th>Cantidad</th>
                     <th>Estado del pedido</th>
-                    <th>Subtotal</th>
                     <th>Precio Total</th>
                     <th></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody style="background-color:#DFB767; color: #362421;">
-                <?php foreach ($pedidos as $pedido) {
-                    foreach ($pedidosDetallados as $pedidoDetallado) {
-                        ?>
-                        <tr>
-                            <td><?php echo $pedido['codigo_pedido'] ?></td>
-                            <td><?php echo $pedido['fecha_pedido'] ?></td>
-                            <td><?php echo $pedidoDetallado['cantidad_descrita'] ?></td>
-                            <td><?php echo $pedido['estado'] ?></td>
-                            <td><?php echo $pedidoDetallado['subtotal'] . "€" ?></td>
-                            <td><?php echo $pedido['precio_total'] . "€" ?></td>
-                            <td><button
-                                    onclick="window.location.href='../Vista/editarPedido.php?id=<?php echo $pedido['codigo_pedido']; ?>'"
-                                    class="btn btn-primary btn-sm">Editar</button>
-                            </td>
-                            <td><button
-                                    onclick="return confirm('¿Desea eliminar este pedido?') ? window.location.href='../Controlador/eliminarPedido.php?id=<?php echo $pedido['codigo_pedido']; ?>' : false"
-                                    class="btn btn-danger btn-sm">Eliminar</button>
-                            </td>
-                        </tr>
-                    <?php } ?>
-                </tbody>
-                <?php }?>
-            </table>
-        </div>
-        </div>
+                <?php foreach ($pedidos as $pedido) { ?>
+                    <tr>
+                        <td><?php echo $pedido['codigo_pedido'] ?></td>
+                        <td><?php echo $pedido['fecha_pedido'] ?></td>
+                        <td><?php echo $pedido['estado'] ?></td>
+                        <td><?php echo $pedido['precio_total'] . "€" ?></td>
+                        <td><button
+                                onclick="window.location.href='../Vista/editarPedido.php?id=<?php echo $pedido['codigo_pedido']; ?>'"
+                                class="btn btn-primary btn-sm">Editar</button>
+                        </td>
+                        <td><button
+                                onclick="return confirm('¿Desea eliminar este pedido?') ? window.location.href='../Controlador/eliminarPedido.php?id=<?php echo $pedido['codigo_pedido']; ?>' : false"
+                                class="btn btn-danger btn-sm">Eliminar</button>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
+    </div>
     <!-- Fin de la area del empleado -->
 
 

@@ -12,8 +12,8 @@ if (filter_has_var(INPUT_POST, 'modificarPedido')) {
     $codigoPedido = $pedidoSinEditar[0]['codigo_pedido'];
     $codigoPedidoDetalle = $pedidoDetalladoSinEditar[0]['codigo_detalle'];
     $dniCliente = $pedidoSinEditar[0]['DNI_cliente'];
-    $idProducto = $pedidoSinEditar[0]['id_producto_pedido'];
-    $tipoPedido = $pedidoSinEditar[0]['tipo'];
+    $idProducto = $pedidoDetalladoSinEditar[0]['id_producto_pedido'];
+    $tipoPedido = $pedidoDetalladoSinEditar[0]['tipo'];
     $precioPedido = filter_input(INPUT_POST, 'precioEditado') ?: $pedidoSinEditar[0]['precio_total'];
     $fechaPedido = filter_input(INPUT_POST, 'fechaEditada') ?: $pedidoSinEditar[0]['fecha_pedido'];
     $estadoPedido = filter_input(INPUT_POST, 'estadoEditado') ?: $pedidoSinEditar[0]['estado'];
@@ -140,8 +140,14 @@ if (filter_has_var(INPUT_POST, 'modificarPedido')) {
                 </div>
                 <h6 class="text-primary font-weight-bold mb-2">Estado del pedido</h6>
                 <div class="control-group">
-                    <input type="text" class="form-control" name="estadoEditado"
-                        placeholder="<?php echo $pedido['estado'] ?>" />
+                    <select class="form-control" name="estadoEditado">
+                        <option value="<?php echo $pedido['estado'] ?>"><?php echo $pedido['estado'] ?></option>
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="Pagado">Pagado</option>
+                        <option value="Enviado">Enviado</option>
+                        <option value="Entregado">Entregado</option>
+                        <option value="Cancelado">Cancelado</option>
+                    </select>
                     <p class="help-block text-danger"></p>
                 </div>
                 <h6 class="text-primary font-weight-bold mb-2">Cantidad</h6>
@@ -173,91 +179,6 @@ if (filter_has_var(INPUT_POST, 'modificarPedido')) {
         <?php } ?>
     </div>
     <!-- Fin del Formulario de edición de pedidos -->
-    <!-- Loader -->
-    <div class="loader-wrapper" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(27, 18, 15, 0.95); display: flex; justify-content: center; align-items: center; z-index: 9999;">
-        <div class="coffee-loader">
-            <div class="coffee-cup"></div>
-            <div class="coffee-steam">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </div>
-    <style>
-        .coffee-loader {
-            position: relative;
-            width: 120px;
-            height: 120px;
-        }
-
-        .coffee-cup {
-            position: absolute;
-            bottom: 0;
-            width: 100px;
-            height: 80px;
-            border: 6px solid #DA9F5B;
-            border-radius: 0 0 45px 45px;
-            background: transparent;
-        }
-
-        .coffee-cup::before {
-            content: '';
-            position: absolute;
-            right: -25px;
-            top: 15px;
-            width: 40px;
-            height: 30px;
-            border: 6px solid #DA9F5B;
-            border-radius: 40px 0;
-        }
-
-        .coffee-steam span {
-            position: absolute;
-            background: #DA9F5B;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        .coffee-steam span:nth-child(1) {
-            animation: steam 2s infinite ease-in-out;
-            left: 20px;
-        }
-
-        .coffee-steam span:nth-child(2) {
-            animation: steam 2s infinite ease-in-out .4s;
-            left: 50px;
-        }
-
-        .coffee-steam span:nth-child(3) {
-            animation: steam 2s infinite ease-in-out .8s;
-            left: 80px;
-        }
-
-        @keyframes steam {
-            0% {
-                transform: translateY(80px) scale(0.1);
-                opacity: 0;
-            }
-
-            50% {
-                transform: translateY(40px) scale(1);
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(0px) scale(1.5);
-                opacity: 0;
-            }
-        }
-    </style>
-
-    <script>
-        $(window).on("load", function() {
-            $(".loader-wrapper").fadeOut("slow");
-        });
-    </script>
 </body>
 
 </html>

@@ -136,7 +136,7 @@ class Producto
     {
         $conexionBD = Algrano::conectarAlgranoMySQLi();
         $esValido = false;
-        if (existeProducto($$idProducto, $conexionBD)) {
+        if (existeProducto($idProducto, $conexionBD)) {
             $consultaEliminacionProducto = $conexionBD->prepare('DELETE FROM productos_detalle WHERE id_producto_detalle = ?');
             $consultaEliminacionProducto->bind_param('s', $idProducto);
             if ($consultaEliminacionProducto->execute()) {
@@ -237,7 +237,7 @@ class Producto
         $imagenProducto = $this->imagen;
         $precioUnitarioProducto = $this->precioUnitario;
         if (!existeProducto($idProducto, $conexionBD)) {
-            $consultaInsercionProducto = $conexionBD->prepare('INSERT INTO producto VALUES (?,?,?)');
+            $consultaInsercionProducto = $conexionBD->prepare('INSERT INTO producto VALUES (?,?,?,?)');
             $consultaInsercionProducto->bind_param('ssss', $idProducto, $nombreProducto, $precioUnitarioProducto,$imagenProducto);
             if ($consultaInsercionProducto->execute()) {
                 $consultaInsercionProductoDetalle = $conexionBD->prepare('INSERT INTO productos_detalle VALUES (?,?,?,?,?,?,?)');
@@ -247,7 +247,7 @@ class Producto
                 }
             }
         } else {
-            $consultaInsercionProducto = $conexionBD->prepare('UPDATE producto SET nombre = ? , precio_ud = ? WHERE id_producto = ?');
+            $consultaInsercionProducto = $conexionBD->prepare('UPDATE producto SET nombre = ? , precio_ud = ? , imagen = ? WHERE id_producto = ?');
             $consultaInsercionProducto->bind_param('ssss', $nombreProducto, $precioUnitarioProducto,$imagenProducto,$idProducto);
             if ($consultaInsercionProducto->execute()) {
                 $consultaInsercionProductoDetalle = $conexionBD->prepare('UPDATE productos_detalle SET nombre = ? , tipo = ?, descripcion = ?, stock = ?, fecha_creacion = ?, origen = ? WHERE id_producto_detalle = ?');

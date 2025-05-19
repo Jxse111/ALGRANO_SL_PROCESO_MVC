@@ -1,10 +1,5 @@
 <?php
 session_start();
-// error_reporting(e_all);
-// ini_set('display_errors', 1);
-//Mostrar todos los datos almacenados en la sesión
-// print_r($_session);
-//print_r(value: $_SESSION["rol"]);
 if (empty($_SESSION['rol'])) {
     $_SESSION['rol'] = 0;
 }
@@ -50,6 +45,10 @@ if ($_SESSION['rol'] != "empleado" && $_SESSION['rol'] != "administrador" && $_S
         <div style="background-color: #DA9F5B;" class="text-center py-2">
             <h4 class="text-black m-0"><i class="fas fa-user-clock mr-2"></i>MODO INVITADO</h4>
         </div>
+    <?php }else{?>
+                <div style="background-color: #DA9F5B;" class="text-center py-2">
+            <h4 class="text-black m-0"><i class="fas fa-coffee mr-2"></i>Bienvenido <?php echo $_SESSION['usuario']?></h4>
+                </div>
     <?php } ?>
     <!-- Barra de navegación -->
     <div class="container-fluid p-0 nav-bar">

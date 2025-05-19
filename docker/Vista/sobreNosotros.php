@@ -68,7 +68,7 @@ session_start();
                             <?php if ($_SESSION['rol'] == "administrador") { ?>
                                 <a href="areaAdmin.php" class="dropdown-item" style="color: #DA9F5B" ;>Administrar</a>
                             <?php } elseif ($_SESSION['rol'] == "empleado") { ?>
-                                <a href="areaEmpleado.php" class="dropdown-item" style="color: #DA9F5B" ;>Workspace</a>
+                                <a href="areaEmpleado.php" class="dropdown-item" style="color: #DA9F5B" ;>Área Empleado</a>
                             <?php } elseif ($_SESSION['rol'] == "cliente") { ?>
                                 <a href="pedidos.php" class="dropdown-item" style="color: #DA9F5B" ;>Mis pedidos</a>
                             <?php } ?>
