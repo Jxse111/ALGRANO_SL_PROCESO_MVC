@@ -173,10 +173,9 @@ session_start();
                 <p>En nuestras redes sociales nos promocionamos y mostramos los últimos productos antes de que salgan en
                     la web</p>
                 <div class="d-flex justify-content-start">
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="https://x.com/Jxse111"><i
-                            class="fab fa-twitter"></i></a>
-                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i
+                    <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="https://www.linkedin.com/in/jos%C3%A9-mart%C3%ADnez-estrada-997b77208/?trk=people-guest_people_search-card&originalSubdomain=es"><i
                             class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-lg btn-outline-light btn-lg-square" href="https://www.instagram.com/coffe.algrano_sl/"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 mb-5">
