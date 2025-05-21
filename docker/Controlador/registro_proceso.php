@@ -23,15 +23,14 @@ if (filter_has_var(INPUT_POST, "crearCuenta")) {
             if ($usuarioRegistro->guardarUsuario()) {
                 header("Location: ../Vista/login.html");
                 exit;
+            } else {
+                header("Location: ../ERRORES/ERROR_REGISTRO.html");
             }
-        }else{
-            echo nl2br("Los campos no son válidos o son erróneos." . "\n");
+        } else {
+            header("Location: ../ERRORES/ERROR_DATOS_INCORRECTOS.html");
         }
     } catch (Exception $ex) {
-        echo nl2br("ERROR: " . $ex->getMessage() . "\n"); ;
+        header("Location: ../ERRORES/ERROR_CONEXION.html");
         $conexionBD->close();
     }
-} else {
-    echo nl2br("No se ha podido crear la cuenta, no se han recibido los datos del formulario." . "\n");
 }
-?>

@@ -72,7 +72,7 @@ if (filter_has_var(INPUT_POST, "entrar") || filter_has_var(INPUT_POST, "entrar")
                     }
                 }
             } catch (Exception $ex) {
-                header("Location: ../ERRORES/ERROR_GENERAL.html");
+                header("Location: ../ERRORES/ERROR_CONEXION.html");
                 exit();
             }
             Algrano::desconectar();
