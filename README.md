@@ -20,6 +20,6 @@ El sistema cuenta con dos tipos de usuarios:
 1. Clona este repositorio en tu máquina local:
 
    ```bash
-   git clone https://github.com/Jxse11/ALGRANO-S.L.git
+   git clone https://github.com/Jxse11/ALGRANO_SL_PROCESO_MVC.git
 
 Si deseas contribuir al proyecto, por favor crea un "fork" del repositorio y haz un "pull request" con tus cambios. Asegúrate de seguir las buenas prácticas de codificación y documentación.
