@@ -1,12 +1,2 @@
-{"logtail":{"client_time":"2025-05-22T14:21:35.508407418Z","proc_id":2524082640,"proc_seq":74},"text":"tailscaled got signal terminated; shutting down\n"}
-{"logtail":{"client_time":"2025-05-22T14:21:35.50858431Z","proc_id":2524082640,"proc_seq":75},"text":"control: client.Shutdown ...\n"}
-{"logtail":{"client_time":"2025-05-22T14:21:35.508610567Z","proc_id":2524082640,"proc_seq":76},"text":"auditlog: stopped for profileID: \n"}
-{"logtail":{"client_time":"2025-05-22T14:21:35.508626171Z","proc_id":2524082640,"proc_seq":77},"v":1,"text":"control: authRoutine: context done.\n"}
-{"logtail":{"client_time":"2025-05-22T14:21:35.508632262Z","proc_id":2524082640,"proc_seq":78},"text":"control: authRoutine: exiting\n"}
-{"logtail":{"client_time":"2025-05-22T14:21:35.50864046Z","proc_id":2524082640,"proc_seq":79},"text":"control: updateRoutine: exiting\n"}
-{"logtail":{"client_time":"2025-05-22T14:21:35.508646201Z","proc_id":2524082640,"proc_seq":80},"v":1,"text":"control: mapRoutine: context done.\n"}
-{"logtail":{"client_time":"2025-05-22T14:21:35.50865149Z","proc_id":2524082640,"proc_seq":81},"text":"control: mapRoutine: exiting\n"}
-{"logtail":{"client_time":"2025-05-22T14:21:35.508671Z","proc_id":2524082640,"proc_seq":82},"text":"control: Client.Shutdown done.\n"}
-{"logtail":{"client_time":"2025-05-22T14:21:35.508971762Z","proc_id":2524082640,"proc_seq":83},"v":2,"text":"wg: Routine: receive incoming mkReceiveFunc - stopped\n"}
-{"logtail":{"client_time":"2025-05-22T14:21:35.509019381Z","proc_id":2524082640,"proc_seq":84},"v":2,"text":"wg: Routine: receive incoming mkReceiveFunc - stopped\n"}
-{"logtail":{"client_time":"2025-05-22T14:21:35.50918184Z","proc_id":2524082640,"proc_seq":85},"text":"dns: inotify: context canceled\n"}
+{"logtail":{"client_time":"2025-05-22T15:17:52.099164653Z","proc_id":1313157051,"proc_seq":70},"text":"tailscaled got signal terminated; shutting down\n"}
+{"logtail":{"client_time":"2025-05-22T15:17:52.099712319Z","proc_id":1313157051,"proc_seq":71},"text":"control: client.Shutdown ...\n"}

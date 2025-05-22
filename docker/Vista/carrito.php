@@ -6,6 +6,7 @@ if ($_SESSION['rol'] != "cliente") {
 }
 require_once '../Modelo/Producto.php';
 $total = 0;
+const IVA = 1.21;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,8 +113,8 @@ $total = 0;
                 }
                 ?>
                 <tr>
-                    <td colspan="3" class="text-right font-weight-bold">Total</td>
-                    <td><?= number_format($total, 2) ?> €</td>
+                    <td colspan="3" class="text-right font-weight-bold">Total + IVA</td>
+                    <td><?= number_format($total, 2)+IVA ?> €</td>
                 </tr>
                 </tbody>
             </table>
