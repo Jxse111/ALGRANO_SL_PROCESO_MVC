@@ -12,11 +12,11 @@ if (filter_has_var(INPUT_GET, "id")) {
     $conexionBD = Algrano::conectarAlgranoMySQLi();
     $dniUsuario = filter_input(INPUT_GET, 'id');
     if (Usuario::eliminarUsuario($dniUsuario)) {
-        header("location: ../Vista/areaAdmin.php?success=Usuario eliminado con éxito.");
+        header("location: ../Vista/areaAdmin.php");
         exit;
     } else {
-        header("location: ../Vista/areaAdmin.php?error=ERROR:El usuario no se ha podido eliminar.");
+        header("location: ../Vista/areaAdmin.php");
     }
 } else {
-    header("location: ../Vista/areaAdmin.php?error=EL usuario no se encuentra en el sistema.");
+    header("location: ../Vista/areaAdmin.php");
 }
