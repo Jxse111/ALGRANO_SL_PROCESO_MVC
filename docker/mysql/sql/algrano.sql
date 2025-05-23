@@ -202,6 +202,12 @@ VALUES
         'Café Kenya',
         25.50,
         '../img/Productos/Café Kenya.png'
+    ),
+    (
+        'PROD005',
+        'Café Mezcla Arábica Robusta',
+        30.00,
+        '../img/Productos/Café Mezcla Arábica.png'
     );
 -- Detalles de Productos
 INSERT INTO
@@ -246,6 +252,14 @@ VALUES
         'Café con sabor brillante, afrutado y a menudo con notas cítricas, especialmente de limón.',
         100,
         'Kenia'
+    ),
+    (
+        'PROD005',
+        'Café Mezcla Arábica Robusta',
+        'Grano',
+        'Café con un sabor suave, afrutado e intenso, es muy cremoso y de un olor espectacular.',
+        50,
+        'Yemen'
     );
 -- Pedidos
 INSERT INTO
