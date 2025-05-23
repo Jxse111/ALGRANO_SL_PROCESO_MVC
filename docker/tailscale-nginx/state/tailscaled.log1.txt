@@ -1,2 +1,73 @@
-{"logtail":{"client_time":"2025-05-22T15:17:52.099164653Z","proc_id":1313157051,"proc_seq":70},"text":"tailscaled got signal terminated; shutting down\n"}
-{"logtail":{"client_time":"2025-05-22T15:17:52.099712319Z","proc_id":1313157051,"proc_seq":71},"text":"control: client.Shutdown ...\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.733323159Z","proc_id":1942812892,"proc_seq":6},"text":"dns: using \"direct\" mode\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.733677512Z","proc_id":1942812892,"proc_seq":7},"text":"dns: using *dns.directManager\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.736793133Z","proc_id":1942812892,"proc_seq":8},"text":"dns: inotify: NewDirWatcher: context canceled\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.750358163Z","proc_id":1942812892,"proc_seq":9},"text":"wgengine.NewUserspaceEngine(tun \"tailscale0\") ...\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.752780265Z","proc_id":1942812892,"proc_seq":10},"v":1,"text":"router: policy routing available; found 3 rules\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.752895337Z","proc_id":1942812892,"proc_seq":11},"v":1,"text":"router: kernel supports IPv6 policy routing (found 2 rules)\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.752990995Z","proc_id":1942812892,"proc_seq":12},"text":"dns: [rc=unknown ret=direct]\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.753003871Z","proc_id":1942812892,"proc_seq":13},"text":"dns: using \"direct\" mode\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.75549929Z","proc_id":1942812892,"proc_seq":14},"text":"dns: using *dns.directManager\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.755733277Z","proc_id":1942812892,"proc_seq":15},"text":"link state: interfaces.State{defaultRoute=eth0 ifs={eth0:[172.19.0.2/16]} v4=true v6=false}\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.80143348Z","proc_id":1942812892,"proc_seq":16},"text":"onPortUpdate(port=57428, network=udp6)\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.801475848Z","proc_id":1942812892,"proc_seq":17},"text":"router: using firewall mode pref \n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.803478919Z","proc_id":1942812892,"proc_seq":18},"text":"router: default choosing iptables\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.804590488Z","proc_id":1942812892,"proc_seq":19},"v":1,"text":"router: kernel supports IPv6 policy routing (found 2 rules)\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.806918532Z","proc_id":1942812892,"proc_seq":20},"text":"router: netfilter running in iptables mode v6 = true, v6filter = true, v6nat = true\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.807316603Z","proc_id":1942812892,"proc_seq":21},"text":"onPortUpdate(port=54727, network=udp4)\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.807496206Z","proc_id":1942812892,"proc_seq":22},"v":1,"text":"magicsock: peermtu: peer MTU status is false\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.807682736Z","proc_id":1942812892,"proc_seq":23},"text":"magicsock: disco key = d:d7bf85700b99dd11\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.808099928Z","proc_id":1942812892,"proc_seq":24},"text":"Creating WireGuard device...\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.808393787Z","proc_id":1942812892,"proc_seq":25},"text":"Bringing WireGuard device up...\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.808560858Z","proc_id":1942812892,"proc_seq":26},"v":2,"text":"wg: UDP bind has been updated\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.808575145Z","proc_id":1942812892,"proc_seq":27},"v":2,"text":"wg: Interface state was Down, requested Up, now Up\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.809712591Z","proc_id":1942812892,"proc_seq":28},"text":"Bringing router up...\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.813182928Z","proc_id":1942812892,"proc_seq":29},"v":2,"text":"wg: Routine: receive incoming receiveDERP - started\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.815291062Z","proc_id":1942812892,"proc_seq":30},"text":"external route: up\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.815388955Z","proc_id":1942812892,"proc_seq":31},"v":2,"text":"wg: Routine: receive incoming mkReceiveFunc - started\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.815900526Z","proc_id":1942812892,"proc_seq":32},"v":2,"text":"wg: Routine: receive incoming mkReceiveFunc - started\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.817006439Z","proc_id":1942812892,"proc_seq":33},"text":"Clearing router settings...\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.817313711Z","proc_id":1942812892,"proc_seq":34},"text":"Starting network monitor...\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.817657677Z","proc_id":1942812892,"proc_seq":35},"text":"Engine created.\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.818827676Z","proc_id":1942812892,"proc_seq":36},"text":"monitor: [unexpected] network state changed, but stringification didn't: interfaces.State{defaultRoute=eth0 ifs={eth0:[172.19.0.2/16]} v4=true v6=false}\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.819205086Z","proc_id":1942812892,"proc_seq":37},"text":"monitor: [unexpected] old: {\"InterfaceIPs\":{\"eth0\":[\"172.19.0.2/16\"],\"lo\":[\"127.0.0.1/8\",\"::1/128\"]},\"Interface\":{\"eth0\":{\"Index\":41,\"MTU\":1500,\"Name\":\"eth0\",\"HardwareAddr\":\"AkKsEwAC\",\"Flags\":51,\"AltAddrs\":null,\"Desc\":\"\"},\"lo\":{\"Index\":1,\"MTU\":65536,\"Name\":\"lo\",\"HardwareAddr\":null,\"Flags\":37,\"AltAddrs\":null,\"Desc\":\"\"}},\"HaveV6\":false,\"HaveV4\":true,\"IsExpensive\":false,\"DefaultRouteInterface\":\"eth0\",\"HTTPProxy\":\"\",\"PAC\":\"\"}\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.819389602Z","proc_id":1942812892,"proc_seq":38},"text":"monitor: [unexpected] new: {\"InterfaceIPs\":{\"eth0\":[\"172.19.0.2/16\"],\"lo\":[\"127.0.0.1/8\",\"::1/128\"],\"tailscale0\":[\"fe80::f2ae:5113:355d:e8a6/64\"]},\"Interface\":{\"eth0\":{\"Index\":41,\"MTU\":1500,\"Name\":\"eth0\",\"HardwareAddr\":\"AkKsEwAC\",\"Flags\":51,\"AltAddrs\":null,\"Desc\":\"\"},\"lo\":{\"Index\":1,\"MTU\":65536,\"Name\":\"lo\",\"HardwareAddr\":null,\"Flags\":37,\"AltAddrs\":null,\"Desc\":\"\"},\"tailscale0\":{\"Index\":2,\"MTU\":1280,\"Name\":\"tailscale0\",\"HardwareAddr\":null,\"Flags\":57,\"AltAddrs\":null,\"Desc\":\"\"}},\"HaveV6\":false,\"HaveV4\":true,\"IsExpensive\":false,\"DefaultRouteInterface\":\"eth0\",\"HTTPProxy\":\"\",\"PAC\":\"\"}\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.819668558Z","proc_id":1942812892,"proc_seq":39},"text":"LinkChange: major, rebinding. New state: interfaces.State{defaultRoute=eth0 ifs={eth0:[172.19.0.2/16]} v4=true v6=false}\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.819967924Z","proc_id":1942812892,"proc_seq":40},"text":"onPortUpdate(port=57428, network=udp6)\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.820187438Z","proc_id":1942812892,"proc_seq":41},"text":"onPortUpdate(port=54727, network=udp4)\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.8202058Z","proc_id":1942812892,"proc_seq":42},"v":1,"text":"magicsock: peermtu: peer MTU status is false\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.820222267Z","proc_id":1942812892,"proc_seq":43},"text":"Rebind; defIf=\"eth0\", ips=[172.19.0.2/16]\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.820234043Z","proc_id":1942812892,"proc_seq":44},"text":"magicsock: 0 active derp conns\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.820713877Z","proc_id":1942812892,"proc_seq":45},"text":"monitor: gateway and self IP changed: gw=172.19.0.1 self=172.19.0.2\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.821160864Z","proc_id":1942812892,"proc_seq":46},"text":"pm: migrating \"_daemon\" profile to new format\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.821480324Z","proc_id":1942812892,"proc_seq":47},"text":"logpolicy: using system state directory \"/var/lib/tailscale\"\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.821729379Z","proc_id":1942812892,"proc_seq":48},"v":1,"text":"netmap packet filter: (not ready yet)\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.821936889Z","proc_id":1942812892,"proc_seq":49},"v":1,"text":"dnsfallback: SetCachePath error reading \"/var/lib/tailscale/derpmap.cached.json\": open /var/lib/tailscale/derpmap.cached.json: no such file or directory\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.822180194Z","proc_id":1942812892,"proc_seq":50},"text":"got LocalBackend in 72ms\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.82236583Z","proc_id":1942812892,"proc_seq":51},"text":"Start\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.823861026Z","proc_id":1942812892,"proc_seq":52},"v":1,"Hostinfo":{"IPNVersion":"1.82.5-te4d64c6fa","BackendLogID":"b657b4b1f030b1145abf89e0aa2f49c6c562427a397f6742fe76130a5f289649","OS":"linux","OSVersion":"6.8.0-1027-azure","Container":true,"Distro":"alpine","DistroVersion":"3.19.7","Desktop":false,"Package":"container","Hostname":"tailscale-nginx","Machine":"x86_64","GoArch":"amd64","GoArchVar":"v1","GoVersion":"go1.24.2","Cloud":"azure","Userspace":false,"UserspaceRouter":false,"AppConnector":false}}
+{"logtail":{"client_time":"2025-05-23T07:35:44.824612808Z","proc_id":1942812892,"proc_seq":53},"text":"auditlog: created\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.824742073Z","proc_id":1942812892,"proc_seq":54},"v":1,"text":"control: HostInfo: {\"IPNVersion\":\"1.82.5-te4d64c6fa\",\"BackendLogID\":\"b657b4b1f030b1145abf89e0aa2f49c6c562427a397f6742fe76130a5f289649\",\"OS\":\"linux\",\"OSVersion\":\"6.8.0-1027-azure\",\"Container\":true,\"Distro\":\"alpine\",\"DistroVersion\":\"3.19.7\",\"Desktop\":false,\"Package\":\"container\",\"Hostname\":\"tailscale-nginx\",\"Machine\":\"x86_64\",\"GoArch\":\"amd64\",\"GoArchVar\":\"v1\",\"GoVersion\":\"go1.24.2\",\"Cloud\":\"azure\",\"Userspace\":false,\"UserspaceRouter\":false,\"AppConnector\":false}\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.824904381Z","proc_id":1942812892,"proc_seq":55},"text":"auditlog: [unexpected] failed to restore logs: empty key\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.82497852Z","proc_id":1942812892,"proc_seq":56},"text":"Backend: logs: be:b657b4b1f030b1145abf89e0aa2f49c6c562427a397f6742fe76130a5f289649 fe:\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.825096591Z","proc_id":1942812892,"proc_seq":57},"v":1,"text":"control: authRoutine: state:new; goal=nil paused=false\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.825399904Z","proc_id":1942812892,"proc_seq":58},"v":1,"text":"control: mapRoutine: state:new\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.825511897Z","proc_id":1942812892,"proc_seq":59},"text":"Switching ipn state NoState -> NeedsLogin (WantRunning=false, nm=false)\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.825674327Z","proc_id":1942812892,"proc_seq":60},"text":"health(warnable=wantrunning-false): error: Tailscale is stopped.\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.825752882Z","proc_id":1942812892,"proc_seq":61},"text":"blockEngineUpdates(true)\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.826156573Z","proc_id":1942812892,"proc_seq":62},"v":1,"text":"magicsock: peermtu: peer MTU status is false\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.826512769Z","proc_id":1942812892,"proc_seq":63},"text":"wgengine: Reconfig: configuring userspace WireGuard config (with 0/0 peers)\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.826683699Z","proc_id":1942812892,"proc_seq":64},"text":"wgengine: Reconfig: configuring router\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.826776063Z","proc_id":1942812892,"proc_seq":65},"text":"wgengine: Reconfig: configuring DNS\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.826925177Z","proc_id":1942812892,"proc_seq":66},"text":"dns: Set: {DefaultResolvers:[] Routes:{} SearchDomains:[] Hosts:0}\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.826944559Z","proc_id":1942812892,"proc_seq":67},"text":"dns: Resolvercfg: {Routes:{} Hosts:0 LocalDomains:[], cloud=\"azure\"}\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.826953541Z","proc_id":1942812892,"proc_seq":68},"text":"dns: OScfg: {}\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.827082228Z","proc_id":1942812892,"proc_seq":69},"v":1,"text":"wgengine: Reconfig done\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.968819793Z","proc_id":1942812892,"proc_seq":70},"text":"tailscaled got signal terminated; shutting down\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.968940166Z","proc_id":1942812892,"proc_seq":71},"text":"control: client.Shutdown ...\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.968973991Z","proc_id":1942812892,"proc_seq":72},"text":"auditlog: stopped for profileID: \n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.968997545Z","proc_id":1942812892,"proc_seq":73},"v":1,"text":"control: authRoutine: context done.\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.969004176Z","proc_id":1942812892,"proc_seq":74},"text":"control: authRoutine: exiting\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.969034814Z","proc_id":1942812892,"proc_seq":75},"text":"control: updateRoutine: exiting\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.969042398Z","proc_id":1942812892,"proc_seq":76},"v":1,"text":"control: mapRoutine: context done.\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.969048244Z","proc_id":1942812892,"proc_seq":77},"text":"control: mapRoutine: exiting\n"}
+{"logtail":{"client_time":"2025-05-23T07:35:44.969066487Z","proc_id":1942812892,"proc_seq":78},"text":"control: Client.Shutdown done.\n"}

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION['rol'] != "administrador"){
+if ($_SESSION['rol'] != "administrador") {
     header("location: ../Vista/index.php");
 }
 require_once '../Modelo/Usuario.php';
@@ -15,7 +15,7 @@ if (filter_has_var(INPUT_POST, 'modificarUsuario')) {
     $rolUsuario = filter_input(INPUT_POST, 'rolEditado') ?: $usuarioSinEditar[0]['id_rol_usuario'];
     $dniUsuario = filter_input(INPUT_GET, 'id');
     $fechaNacimientoUsuario = $usuarioSinEditar[0]['fec_nac'];
-    $usuario = new Usuario($dniUsuario, $nombreUsuario, '',$direccionUsuario, $correoUsuario, $fechaNacimientoUsuario, $rolUsuario);
+    $usuario = new Usuario($dniUsuario, $nombreUsuario, '', $direccionUsuario, $correoUsuario, $fechaNacimientoUsuario, $rolUsuario);
     $usuario->guardarUsuario();
     header("location: ../Vista/areaAdmin.php");
 }
@@ -126,21 +126,25 @@ if (filter_has_var(INPUT_POST, 'modificarUsuario')) {
         </div>
         <?php foreach ($usuarioSinEditar as $usuario) { ?>
             <form name="sentMessage" id="contactForm" novalidate="novalidate" method="POST">
+                <h6 class="text-primary font-weight-bold mb-2">Nombre de usuario</h6>
                 <div class="control-group">
                     <input type="text" class="form-control" name="usuarioEditado"
                         placeholder="<?php echo $usuario['usuario'] ?>" />
                     <p class="help-block text-danger"></p>
                 </div>
+                <h6 class="text-primary font-weight-bold mb-2">Dirección</h6>
                 <div class="control-group">
                     <input type="text" class="form-control" name="direccionEditada"
                         placeholder="<?php echo $usuario['direccion'] ?>" />
                     <p class="help-block text-danger"></p>
                 </div>
+                <h6 class="text-primary font-weight-bold mb-2">Correo</h6>
                 <div class="control-group">
                     <input type="text" class="form-control" name="correoEditado"
                         placeholder="<?php echo $usuario['correo'] ?>" />
                     <p class="help-block text-danger"></p>
                 </div>
+                <h6 class="text-primary font-weight-bold mb-2">Rol</h6>
                 <div class="control-group">
                     <input type="text" class="form-control" name="rolEditado"
                         placeholder="<?php echo $usuario['id_rol_usuario'] ?>" />

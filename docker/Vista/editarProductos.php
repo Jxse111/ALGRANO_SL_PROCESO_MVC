@@ -131,36 +131,43 @@ if (filter_has_var(INPUT_POST, 'modificarProducto')) {
         foreach ($productoSinEditar as $producto) {
             foreach ($productoDetalladoSinEditar as $productoDetallado) ?>
             <form name="sentMessage" id="contactForm" novalidate="novalidate" method="POST">
+                <h6 class="text-primary font-weight-bold mb-2">Nombre</h6>
                 <div class="control-group">
                     <input type="text" class="form-control" name="nombreEditado"
                         placeholder="<?php echo $producto['nombre'] ?>" />
                     <p class="help-block text-danger"></p>
                 </div>
+                <h6 class="text-primary font-weight-bold mb-2">Precio unitario</h6>
                 <div class="control-group">
                     <input type="number" class="form-control" name="precioEditado"
                         placeholder="<?php echo $producto['precio_ud'] ?> €" />
                     <p class="help-block text-danger"></p>
                 </div>
+                <h6 class="text-primary font-weight-bold mb-2">Tipo</h6>
                 <div class="control-group">
                     <input type="text" class="form-control" name="tipoEditado"
                         placeholder="<?php echo $productoDetallado['tipo'] ?>" />
                     <p class="help-block text-danger"></p>
                 </div>
+                <h6 class="text-primary font-weight-bold mb-2">Descripción</h6>
                 <div class="control-group">
                     <input type="text" class="form-control" name="descripcionEditada"
                         placeholder="<?php echo $productoDetallado['descripcion'] ?>" />
                     <p class="help-block text-danger"></p>
                 </div>
+                <h6 class="text-primary font-weight-bold mb-2">Stock disponible</h6>
                 <div class="control-group">
                     <input type="number" class="form-control" name="stockEditado"
                         placeholder="<?php echo $productoDetallado['stock'] ?>  paquete/s" />
                     <p class="help-block text-danger"></p>
                 </div>
+                <h6 class="text-primary font-weight-bold mb-2">Fecha de creación</h6>
                 <div class="control-group">
                     <input type="text" class="form-control" name="fechaEditada"
                         placeholder="<?php echo $productoDetallado['fecha_creacion'] ?>" />
                     <p class="help-block text-danger"></p>
                 </div>
+                <h6 class="text-primary font-weight-bold mb-2">Origen</h6>
                 <div class="control-group">
                     <input type="text" class="form-control" name="origenEditado"
                         placeholder="<?php echo $productoDetallado['origen'] ?>" />
