@@ -81,5 +81,5 @@ networks:
 
 # Volumen para almacenar los datos de MySQL
 volumes:
-  mysql-data:
+  mysql_data:
     driver: local
