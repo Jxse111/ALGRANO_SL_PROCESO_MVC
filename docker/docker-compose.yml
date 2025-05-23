@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # El contenedor de MySQL se basa en la imagen oficial de MySQL
   mysql:
     image: mysql:8
     container_name: mysql
@@ -17,6 +18,7 @@ services:
       - app-network
     restart: always
 
+  # El contenedor de PHP se basa en la imagen oficial de PHP con Apache
   php:
     build:
       context: .
@@ -29,6 +31,7 @@ services:
     networks:
       - app-network
 
+  # El contenedor de phpMyAdmin se basa en la imagen oficial de phpMyAdmin
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
@@ -42,6 +45,10 @@ services:
     depends_on:
       - mysql
 
+  # El contenedor de Tailscale se basa en la imagen oficial de Tailscale
+  # Este contenedor se conecta a la red de Tailscale y permite el acceso a los servicios
+  # a través de la red privada de Tailscale
+  # Se utiliza para acceder a los servicios de la aplicación de forma segura
   tailscale-nginx:
     image: tailscale/tailscale:latest
     hostname: tailscale-nginx
@@ -58,6 +65,9 @@ services:
       - net_admin
     restart: unless-stopped
 
+  # El contenedor de Nginx se basa en la imagen oficial de Nginx
+  # Este contenedor se utiliza como proxy inverso para enrutar el tráfico a los servicios
+  # de la aplicación a través de la red privada de Tailscale
   nginx:
     image: nginx
     depends_on:
@@ -69,6 +79,7 @@ networks:
   app-network:
     driver: bridge
 
+# Volumen para almacenar los datos de MySQL
 volumes:
-  mysql_data:
+  mysql-data:
     driver: local
