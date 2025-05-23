@@ -126,46 +126,55 @@ if (filter_has_var(INPUT_POST, 'añadirProducto')) {
             <h4 class="text-primary text-uppercase">PRODUCTO NUEVO</h4>
         </div>
         <form name="sentMessage" id="contactForm" novalidate="novalidate" method="POST">
+            <h6 class="text-primary font-weight-bold mb-2">Código del Producto</h6>
             <div class="control-group">
                 <input type="text" class="form-control" name="idAñadido"
-                    placeholder="Código del producto" />
+                    placeholder="PROD00X" />
                 <p class="help-block text-danger"></p>
             </div>
+            <h6 class="text-primary font-weight-bold mb-2">Nombre del producto</h6>
             <div class="control-group">
                 <input type="text" class="form-control" name="nombreAñadido"
                     placeholder="Nombre del producto" />
                 <p class="help-block text-danger"></p>
             </div>
+            <h6 class="text-primary font-weight-bold mb-2">Precio unitario</h6>
             <div class="control-group">
                 <input type="number" class="form-control" name="precioAñadido"
                     placeholder="Precio unitario" />
                 <p class="help-block text-danger"></p>
             </div>
+            <h6 class="text-primary font-weight-bold mb-2">Tipo de producto</h6>
             <div class="control-group">
                 <input type="text" class="form-control" name="tipoAñadido"
                     placeholder="tipo" />
                 <p class="help-block text-danger"></p>
             </div>
+            <h6 class="text-primary font-weight-bold mb-2">Descripción</h6>
             <div class="control-group">
                 <input type="text" class="form-control" name="descripcionAñadido"
                     placeholder="Descripcion" />
                 <p class="help-block text-danger"></p>
             </div>
+            <h6 class="text-primary font-weight-bold mb-2">Stock disponible</h6>
             <div class="control-group">
                 <input type="number" class="form-control" name="stockAñadido"
                     placeholder="Cantidad del producto" />
                 <p class="help-block text-danger"></p>
             </div>
+            <h6 class="text-primary font-weight-bold mb-2">Fecha de creación</h6>
             <div class="control-group">
                 <input type="text" class="form-control" name="fechaAñadido"
                     placeholder="Fecha de creación" />
                 <p class="help-block text-danger"></p>
             </div>
+            <h6 class="text-primary font-weight-bold mb-2">Origen</h6>
             <div class="control-group">
                 <input type="text" class="form-control" name="origenAñadido"
                     placeholder="Origen" />
                 <p class="help-block text-danger"></p>
             </div>
+            <h6 class="text-primary font-weight-bold mb-2">Ruta de la imagen</h6>
             <div class="control-group">
                 <input type="text" class="form-control" name="imagenAñadido"
                     placeholder="Ruta de la imagen (ej: ../img/Productos/cafe-arabica.jpg)" />

@@ -17,7 +17,7 @@ if (filter_has_var(INPUT_POST, 'modificarProducto')) {
     $idProductoDetallado = filter_input(INPUT_GET, 'id');
     $fechaCreacionProducto = filter_input(INPUT_POST, 'fechaEditada') ?: $productoDetalladoSinEditar[0]['fecha_creacion'];
     $origenProducto = filter_input(INPUT_POST, 'origenEditado') ?: $productoDetalladoSinEditar[0]['origen'];
-    $imagenProducto = filter_input(INPUT_POST, 'imagenAñadido') ?: $productoSinEditar[0]['imagen'];
+    $imagenProducto = filter_input(INPUT_POST, 'imagenEditada') ?: $productoSinEditar[0]['imagen'];
     $producto = new Producto($idProductoDetallado, $nombreProducto, $descripcionProducto, $fechaCreacionProducto, $origenProducto, $precioProducto, $imagenProducto, $stockProducto, $tipoProducto);
     $producto->crearProducto();
     header("location: ../Vista/areaEmpleado.php");
@@ -173,6 +173,12 @@ if (filter_has_var(INPUT_POST, 'modificarProducto')) {
                         placeholder="<?php echo $productoDetallado['origen'] ?>" />
                     <p class="help-block text-danger"></p>
                 </div>
+                <h6 class="text-primary font-weight-bold mb-2">Ruta de la imagen</h6>
+            <div class="control-group">
+                <input type="text" class="form-control" name="imagenEditada"
+                    placeholder="Ruta de la imagen (ej: ../img/Productos/cafe-arabica.jpg)" />
+                <p class="help-block text-danger"></p>
+            </div>
                 <div>
                     <button class="btn btn-primary font-weight-bold py-3 px-5" type="submit" id="entrar"
                         name="modificarProducto">Modificar producto</button>
